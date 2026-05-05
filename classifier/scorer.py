@@ -24,22 +24,28 @@ from swedish_parliament_policy_classifier.models.models import (
     ClassificationResult,
 )
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
+from swedish_parliament_policy_classifier.definitions.loader import load_verified_definitions
 
 LOG = logging.getLogger(__name__)
 
 
 def load_definitions(yaml_path: Union[str, Path, None] = None) -> Dict[str, CategoryDef]:
-    if yaml_path is None:
-        # package root is one level up from the classifier/ directory
-        yaml_path = Path(__file__).resolve().parents[1] / "definitions" / "political_spectrum.yaml"
+    """Load category definitions via the verified, immutable loader.
 
+    When yaml_path is None the bundled political_spectrum.yaml is used and
+    integrity is checked against its embedded checksum.  Passing an explicit
+    path skips the checksum check (useful in tests).
+    """
+    if yaml_path is None:
+        return load_verified_definitions()
+
+    # Explicit path: load directly without integrity check (caller's responsibility).
     with open(yaml_path, "r", encoding="utf-8") as f:
         raw = yaml.safe_load(f)
 
     categories: Dict[str, CategoryDef] = {}
     for entry in raw.get("categories", []):
-        # allow passing Pydantic-compatible dicts
-        cat = CategoryDef(**entry)
+        cat = CategoryDef(**{k: v for k, v in entry.items() if k in CategoryDef.model_fields})
         categories[cat.name] = cat
 
     return categories

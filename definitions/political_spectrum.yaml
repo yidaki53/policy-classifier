@@ -1,3 +1,17 @@
+# ============================================================
+# political_spectrum.yaml  —  IMMUTABLE CATEGORY DEFINITIONS
+# ============================================================
+# This file is the single source of truth for ideological categories.
+# Do NOT edit it without updating schema_version AND regenerating
+# the checksum (run: python -m definitions.loader --verify --recheck).
+#
+# schema_version: bumped on any structural change to categories list.
+# checksum: SHA-256 of this file with the checksum field set to "PLACEHOLDER".
+#   Recompute with: python -m definitions.loader --recheck
+# ============================================================
+schema_version: "1.0.0"
+checksum: "9d37ab570f3c279aaec1ae0625851f78cbbd6e935ca0c616b49c76cfb34a466e"
+
 categories:
   - name: far_right
     definition: "Extreme nationalist and anti-immigration positions; authoritarian tendencies."

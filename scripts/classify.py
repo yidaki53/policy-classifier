@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from swedish_parliament_policy_classifier.db.schema import init_db
+from swedish_parliament_policy_classifier.db.readers import fetch_unclassified_motions
 from swedish_parliament_policy_classifier.classifier.scorer import load_definitions, score_motion
 from swedish_parliament_policy_classifier.classifier.persist import record_lineage, persist_classification
 from swedish_parliament_policy_classifier.analysis.aggregate import compute_party_profiles
@@ -46,23 +47,14 @@ def classify(db_path: str = "data/swedish_parliament.db", limit: int | None = No
     normalize_and_insert(conn)
     defs = load_definitions()
 
-    cur = conn.cursor()
-    cur.execute(
-        """SELECT nm.id, nm.text FROM normalized_motions nm
-        LEFT JOIN classifications c ON nm.id = c.motion_id
-        WHERE c.id IS NULL"""
-    )
-
-    rows = cur.fetchall()
+    motions = fetch_unclassified_motions(conn)
     if limit:
-        rows = rows[:limit]
+        motions = motions[:limit]
 
     total = 0
-    for row in rows:
-        motion_id = row[0]
-        text = row[1] or ""
-        results = score_motion(motion_id, text, defs)
-        lineage_id = record_lineage(conn, "normalized_motions", motion_id, "classification_batch")
+    for motion in motions:
+        results = score_motion(motion.id, motion.text, defs)
+        lineage_id = record_lineage(conn, "normalized_motions", motion.id, "classification_batch")
         for r in results:
             persist_classification(conn, r, lineage_id)
         total += 1
