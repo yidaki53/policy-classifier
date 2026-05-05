@@ -1,47 +1,102 @@
-# swedish-parliament-policy-classifier
+# policy-classifier
 
-Prototype project to ingest Swedish Riksdag motions/proposals, classify them on a left–right spectrum,
-and produce reproducible analyses and publication-quality figures. This scaffold includes:
+![CI](https://github.com/yidaki53/policy-classifier/actions/workflows/ci.yml/badge.svg)
 
-- sqlite schema initialization
-- Pydantic models
-- Riksdag client skeleton (sample mode)
-- Deterministic scorer loading YAML definitions
-- Ingest script and a simple unit test
+Ingest Swedish Riksdag motions, classify them on a left–right ideological spectrum using deterministic YAML rules + semantic embeddings + a supervised fallback, and produce reproducible analyses and publication-quality figures. Includes an interactive web UI for human annotation.
 
-Usage (development):
+## Features
 
-```
-python3 -m swedish_parliament_policy_classifier.scripts.ingest --sample
-python3 -m pytest -q swedish_parliament_policy_classifier/tests/test_scoring.py
-```
+- **SQLite-backed pipeline** — all motions, classifications, lineage, and annotations stored in a single file.
+- **Three-stage classifier** — deterministic keyword rules → sentence-embedding similarity → TF-IDF + logistic regression fallback.
+- **Active learning queue** — export low-confidence motions for efficient labeling.
+- **Explainability** — per-motion JSON/HTML explanations identifying which stage fired and why.
+- **Web annotation UI** — FastAPI + plain HTML; annotate motions at `http://localhost:8000`.
+- **Publication figures** — party ideological profiles, heatmaps, and interactive Plotly charts.
 
-Generating visualisations:
-
-```
-python3 -m swedish_parliament_policy_classifier.scripts.ingest --db data/swedish_parliament.db
-python3 -m swedish_parliament_policy_classifier.scripts.classify --db data/swedish_parliament.db
-python3 -m swedish_parliament_policy_classifier.scripts.visualize --db data/swedish_parliament.db --out figures
-```
-
-Outputs:
-- `data/swedish_parliament.db` — sqlite database with `raw_motions`, `normalized_motions`, `classifications`, and `party_profiles`.
-- `figures/party_profiles.png`, `figures/party_profiles.pdf` — stacked-party profile figure.
-- `figures/party_profiles_final.png`, `figures/party_profiles_final.pdf` — combined ideological placement + heatmap (publication-ready).
-
-Optional dependencies
----------------------
-
-Some features are optional (heavy ML or language models). Install into the project venv when needed:
+## Installation
 
 ```bash
-# install base dev deps
+git clone https://github.com/yidaki53/policy-classifier.git
+cd policy-classifier
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
-# optional NLP and embedding features
-pip install spacy sentence-transformers
-# install Swedish spaCy model (optional - required for lemmatization)
-python -m spacy download sv_core_news_sm
 ```
 
-The codebase has safe fallbacks if `spaCy` or `sentence-transformers` are not installed; see `nlp/README.md` for details.
+Optional heavy dependencies (safe fallbacks exist without them):
+
+```bash
+pip install spacy sentence-transformers
+python -m spacy download sv_core_news_sm   # Swedish lemmatiser
+```
+
+See [nlp/README.md](nlp/README.md) for fallback behaviour details.
+
+## Quickstart
+
+```bash
+# 1. Ingest sample motions into SQLite
+python scripts/ingest.py --sample
+
+# 2. Classify motions
+python scripts/classify.py --db data/swedish_parliament.db
+
+# 3. Generate figures
+python scripts/visualize.py --db data/swedish_parliament.db --out figures
+
+# 4. (Optional) Pre-compute sentence embeddings for faster classification
+python scripts/precompute_category_embeddings.py
+
+# 5. (Optional) Train supervised fallback on labeled data
+python scripts/train_supervised.py
+
+# 6. (Optional) Start the annotation web UI
+uvicorn web.app:app --reload   # then open http://localhost:8000
+```
+
+## Outputs
+
+| Artifact | Description |
+|---|---|
+| `data/swedish_parliament.db` | SQLite DB (motions, classifications, annotations, lineage) |
+| `figures/party_profiles.png/.pdf` | Stacked party-profile figure |
+| `figures/party_profiles_final.png/.pdf` | Combined ideological placement + heatmap (publication-ready) |
+| `data/active_learning_queue.csv` | Low-confidence motions for human review |
+| `data/category_embeddings.pkl` | Pre-computed category embedding cache |
+
+## Running tests
+
+```bash
+pip install pytest
+pytest -q
+```
+
+## Project layout
+
+```
+classifier/   deterministic scorer and persistence helpers
+db/           SQLite schema and connection utilities
+definitions/  YAML political-spectrum definitions (immutable source of truth)
+fetch/        Riksdag API client
+manuscript/   Chapter sources (Markdown) and build Makefile
+nlp/          Text preprocessing, embeddings, and embedding cache
+scripts/      Orchestration scripts (ingest, classify, visualize, explain, …)
+tests/        Pytest test suite
+visualization/ Figure generation modules
+web/          FastAPI annotation UI + static HTML front-end
+```
+
+## Contributing
+
+1. Fork the repository and create a feature branch.
+2. Follow the deterministic-first principle: add or update YAML keyword rules in `definitions/political_spectrum.yaml` before reaching for ML.
+3. All new behaviour must be covered by a test in `tests/`.
+4. Run `pytest -q` and confirm it passes before opening a pull request.
+5. Do not commit generated artifacts (`data/*.db`, `data/*.pkl`, `models/*.joblib`, `figures/`).
+
+## Author
+
+Robin Öberg — robinoberg@live.com
+
+## License
+
+MIT
