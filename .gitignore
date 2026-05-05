@@ -1,0 +1,26 @@
+# Virtual environment
+.venv/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Data and artifacts
+data/*.db
+data/*.sqlite
+data/*.pkl
+data/*.joblib
+models/*.joblib
+output/
+results/
+figures/
+mlruns/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+
+# Logs
+*.log

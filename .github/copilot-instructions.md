@@ -1,0 +1,34 @@
+# Copilot Instructions for swedish_parliament_policy_classifier
+
+This repository ingests Swedish Riksdag motions, classifies them deterministically, and produces reproducible analyses and publication-ready figures. Follow these instructions when using Copilot/agents on this project.
+
+Project Ground Truth
+- Primary ingest entrypoint: `scripts/ingest.py` (sample & dev)
+- Incremental sync: `scripts/sync.py` (live Riksdag API)
+- Classification: `scripts/classify.py` (deterministic scorer)
+- Figure generation: `scripts/visualize.py`, `scripts/visualize_advanced.py`, `scripts/visualize_interactive.py`
+- DB schema and lineage: `db/schema.py`
+- Canonical definitions: `definitions/political_spectrum.yaml`
+- Manuscript source (TQRS): `manuscript/` (see `manuscript/TQRS_GUIDELINES.md`)
+
+Non-Negotiable Rules
+1. Do not edit generated artifacts in `data/`, `figures/`, or `output/`. Regenerate using the scripts.
+2. Pydantic models (`models/models.py`) are the source-of-truth for in-repo data shapes.
+3. Deterministic rules live in `definitions/political_spectrum.yaml`. Changes must be versioned and reviewed.
+4. All code that transforms or normalizes motions must create lineage entries in `lineage`.
+5. Manuscript drafts must follow the TQRS structure (Title, Question, Results, Significance). See `manuscript/TQRS_GUIDELINES.md`.
+
+Default Task Workflow
+1. Edit or add code under `scripts/`, `classifier/`, or `analysis/`.
+2. Run `scripts/sync.py` (live) or `scripts/ingest.py` (sample) to populate `data/swedish_parliament.db`.
+3. Run `scripts/classify.py` to produce `classifications` and party profiles.
+4. Generate figures with `scripts/visualize*`.
+5. Update manuscript sections in `manuscript/sections/` and build using `manuscript/Makefile`.
+6. Run tests (`pytest`) and ensure deterministic behavior; include new tests for new logic.
+
+Environment & Setup
+- Preferred: use `uv` if available to create the project venv (user policy). Example: `uv venv create .venv` (if your `uv` supports it).
+- Fallback: `python3 -m venv .venv && . .venv/bin/activate`
+- Install dependencies: `python -m pip install -r requirements.txt`.
+
+When generating manuscript text or claims, always tie claims to evidence, cite figures/tables and link to the exact script that produced them.

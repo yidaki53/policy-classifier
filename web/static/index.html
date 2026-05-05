@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Swedish Parliament - Labeling UI</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      .container { max-width: 900px; margin: auto; }
+      .motion { border: 1px solid #ddd; padding: 12px; margin-bottom: 12px; }
+      .controls { margin-top: 8px; }
+      .category { display: inline-block; margin: 4px 8px; }
+      .notes { width: 100%; height: 80px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Labeling UI</h1>
+      <div id="progress"></div>
+      <div id="motion_area"></div>
+      <div class="controls">
+        <label>Annotator name: <input id="annotator" value="human"></label>
+        <button id="save">Save</button>
+        <button id="skip">Skip</button>
+        <button id="next">Next</button>
+      </div>
+    </div>
+
+    <script>
+    const api = {
+      next: '/api/next',
+      annotate: '/api/annotate',
+      categories: '/api/categories',
+      progress: '/api/progress'
+    };
+
+    let current = null;
+
+    async function fetchCategories(){
+      const res = await fetch(api.categories);
+      const data = await res.json();
+      return data.map(d=>d.name);
+    }
+
+    function renderMotion(m){
+      current = m;
+      const area = document.getElementById('motion_area');
+      area.innerHTML = '';
+      if(!m || !m.found){ area.innerHTML = '<p>No more low-confidence motions.</p>'; return; }
+      const div = document.createElement('div'); div.className='motion';
+      div.innerHTML = `<h2>${m.motion_id} — ${m.title || ''}</h2><p><strong>Party:</strong> ${m.party || ''} <strong>Date:</strong> ${m.date || ''}</p><pre>${m.text}</pre>`;
+      area.appendChild(div);
+
+      const catDiv = document.createElement('div'); catDiv.id='cats';
+      area.appendChild(catDiv);
+
+      // fetch categories and render checkboxes
+      const cats = await fetchCategories();
+      for(const c of cats){
+        const cb = document.createElement('label'); cb.className='category';
+        cb.innerHTML = `<input type='checkbox' name='cat' value='${c}'> ${c}`;
+        catDiv.appendChild(cb);
+      }
+
+      const notes = document.createElement('textarea'); notes.id='notes'; notes.className='notes'; notes.placeholder='Notes...';
+      area.appendChild(notes);
+      updateProgress();
+    }
+
+    async function fetchNext(){
+      const res = await fetch(api.next);
+      const data = await res.json();
+      renderMotion(data);
+    }
+
+    async function saveAnnotation(status='annotated'){
+      if(!current || !current.found) return;
+      const annotator = document.getElementById('annotator').value || 'human';
+      const checkboxes = Array.from(document.querySelectorAll('input[name="cat"]:checked')).map(cb=>cb.value);
+      const notes = document.getElementById('notes').value || '';
+      const payload = { motion_id: current.motion_id, annotator, labels: checkboxes.map(c=>({category:c, label: c})), notes, status };
+      await fetch(api.annotate, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+      await fetchNext();
+    }
+
+    async function updateProgress(){
+      const res = await fetch(api.progress);
+      const data = await res.json();
+      document.getElementById('progress').innerText = `Low-confidence total: ${data.total_low_confidence} — labelled: ${data.labelled}`;
+    }
+
+    document.getElementById('save').addEventListener('click', ()=>saveAnnotation('annotated'));
+    document.getElementById('skip').addEventListener('click', ()=>saveAnnotation('skipped'));
+    document.getElementById('next').addEventListener('click', fetchNext);
+
+    // initial
+    fetchNext();
+    </script>
+  </body>
+</html>

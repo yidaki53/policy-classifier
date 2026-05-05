@@ -1,0 +1,16 @@
+pydantic==2.13.3
+PyYAML
+matplotlib
+scipy
+scikit-learn
+plotly
+requests
+pytest
+
+# Optional/advanced NLP (install in venv when needed)
+spacy
+sentence-transformers
+fastapi
+uvicorn
+jinja2
+aiofiles
