@@ -89,32 +89,80 @@ def classify_and_persist(*args, **kwargs):
 
 
 def record_lineage(*args, **kwargs):
-    impl = _lazy_attr("record_lineage", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "record_lineage",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
 def persist_classification(*args, **kwargs):
-    impl = _lazy_attr("persist_classification", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "persist_classification",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
 def persist_classifications_batch(*args, **kwargs):
-    impl = _lazy_attr("persist_classifications_batch", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "persist_classifications_batch",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
 def save_annotation(*args, **kwargs):
-    impl = _lazy_attr("save_annotation", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "save_annotation",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
 def get_annotation_by_motion(*args, **kwargs):
-    impl = _lazy_attr("get_annotation_by_motion", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "get_annotation_by_motion",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
 def get_next_unlabeled_motion(*args, **kwargs):
-    impl = _lazy_attr("get_next_unlabeled_motion", ["classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"])
+    impl = _lazy_attr(
+        "get_next_unlabeled_motion",
+        [
+            "classifier.persist",
+            "swedish_parliament_policy_classifier.classifier.persist",
+            "classifier.persist_parquet",
+            "swedish_parliament_policy_classifier.classifier.persist_parquet",
+        ],
+    )
     return impl(*args, **kwargs)
 
 
