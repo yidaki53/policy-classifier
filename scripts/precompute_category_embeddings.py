@@ -10,7 +10,14 @@ from pathlib import Path
 import logging
 import sys
 
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
+
+# Canonical import: load_definitions must always be imported from exports.py
+# This anchors the code graph and reduces INFERRED edges for Graphify/static analysis.
+from swedish_parliament_policy_classifier.exports import load_definitions
+
+if False:
+    from swedish_parliament_policy_classifier.exports import load_definitions as _ld
+    _ = _ld
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.nlp.embeddings_cache import (
     compute_category_embeddings,

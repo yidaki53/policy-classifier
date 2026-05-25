@@ -1,12 +1,8 @@
-"""Active learning exporter: select low-confidence motions for manual labeling.
+"""Export low-confidence motions for manual labeling (Parquet-first).
 
-This script queries the project's SQLite DB for motions whose top
-classification weight is below a threshold and writes them to a CSV for
-human review. It is intentionally read-only and portable so labels can be
-collected externally and imported later.
-
-Usage:
-    python -m swedish_parliament_policy_classifier.scripts.active_labeler --threshold 0.2 --limit 200
+Reads `data/parquet/normalized_motions.parquet` and `data/parquet/classifications.parquet`
+to select motions whose top classification weight is below a threshold and
+writes them to CSV for annotation.
 """
 
 from pathlib import Path
@@ -16,27 +12,47 @@ import json
 import logging
 from typing import Optional
 
-from swedish_parliament_policy_classifier.db.schema import get_connection
+import pandas as pd
 
 LOG = logging.getLogger(__name__)
 
 
-def fetch_low_confidence(conn, threshold: float = 0.2, limit: int = 100):
-    cur = conn.cursor()
-    sql = """
-    SELECT nm.id as motion_id, nm.title, nm.text, nm.party, nm.date,
-           c.category as top_category, c.normalized_weight as top_weight,
-           c.matched_rules, c.classifier_version
-    FROM normalized_motions nm
-    LEFT JOIN classifications c ON c.id = (
-        SELECT id FROM classifications WHERE motion_id = nm.id ORDER BY normalized_weight DESC LIMIT 1
-    )
-    WHERE COALESCE(c.normalized_weight, 0) < ?
-    ORDER BY nm.date DESC
-    LIMIT ?
-    """
-    cur.execute(sql, (threshold, limit))
-    rows = cur.fetchall()
+def fetch_low_confidence_parquet(normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet", classifications_parquet: str | Path = "data/parquet/classifications.parquet", threshold: float = 0.2, limit: int = 100):
+    nm_p = Path(normalized_parquet)
+    cls_p = Path(classifications_parquet)
+    if not nm_p.exists():
+        print("No normalized motions parquet found at", nm_p)
+        return []
+
+    nm = pd.read_parquet(nm_p)
+    if cls_p.exists():
+        cls = pd.read_parquet(cls_p)
+        # top category per motion
+        cls_sorted = cls.sort_values(["motion_id", "normalized_weight"], ascending=[True, False])
+        top = cls_sorted.groupby("motion_id", sort=False).first().reset_index()
+        top_map = {str(r.motion_id): (r.category, float(r.normalized_weight), r.matched_rules if "matched_rules" in r else None, r.classifier_version if "classifier_version" in r else None) for _, r in top.iterrows()}
+    else:
+        top_map = {}
+
+    rows = []
+    cnt = 0
+    for _, r in nm.sort_values("date", ascending=False).iterrows():
+        if limit and cnt >= limit:
+            break
+        mid = str(r.get("id"))
+        top_entry = top_map.get(mid)
+        top_weight = top_entry[1] if top_entry else 0.0
+        if float(top_weight) < float(threshold):
+            title = r.get("title") or ""
+            text = r.get("text") or ""
+            party = r.get("party") or ""
+            date = r.get("date") or ""
+            top_cat = top_entry[0] if top_entry else ""
+            matched_raw = top_entry[2] if top_entry else "[]"
+            classifier_version = top_entry[3] if top_entry else ""
+            rows.append((mid, title, text, party, date, top_cat, float(top_weight), matched_raw, classifier_version))
+            cnt += 1
+
     return rows
 
 
@@ -74,11 +90,10 @@ def write_csv(rows, out_path: Path):
             writer.writerow([mid, title, party, date, top_cat, float(top_w), matched_s, classifier_version, text])
 
 
-def main(db_path: Optional[str], threshold: float, limit: int, out_file: Optional[str], print_preview: bool):
-    if db_path is None:
-        db_path = Path(__file__).resolve().parents[2] / "data" / "swedish_parliament.db"
-    conn = get_connection(db_path)
-    rows = fetch_low_confidence(conn, threshold=threshold, limit=limit)
+def main(normalized_parquet: Optional[str], classifications_parquet: Optional[str], threshold: float, limit: int, out_file: Optional[str], print_preview: bool):
+    if normalized_parquet is None:
+        normalized_parquet = Path(__file__).resolve().parents[2] / "data" / "parquet" / "normalized_motions.parquet"
+    rows = fetch_low_confidence_parquet(normalized_parquet, classifications_parquet or "data/parquet/classifications.parquet", threshold=threshold, limit=limit)
     if not rows:
         print("No low-confidence motions found with the given threshold.")
         return
@@ -98,7 +113,8 @@ def main(db_path: Optional[str], threshold: float, limit: int, out_file: Optiona
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db", default=None, help="Path to sqlite DB")
+    parser.add_argument("--normalized", default=None, help="Path to normalized_motions.parquet")
+    parser.add_argument("--classifications", default=None, help="Path to classifications.parquet")
     parser.add_argument("--threshold", type=float, default=0.2, help="Max top-category weight threshold to select low-confidence items")
     parser.add_argument("--limit", type=int, default=200, help="Max number of motions to export")
     parser.add_argument("--out", default=None, help="CSV output file path")
@@ -106,4 +122,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO)
-    main(args.db, args.threshold, args.limit, args.out, args.preview)
+    main(args.normalized, args.classifications, args.threshold, args.limit, args.out, args.preview)

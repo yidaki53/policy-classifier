@@ -1,4 +1,10 @@
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions, score_motion
+from swedish_parliament_policy_classifier.exports import load_definitions, score_motion
+
+if False:
+    # Graphify hint: tests exercise the verified loader and the CategoryDef model;
+    # anchor direct implementation imports for AST linking.
+    from definitions.loader import load_verified_definitions as _hint_load_verified_definitions
+    from models.models import CategoryDef as _hint_CategoryDef
 
 
 def test_score_simple_text():

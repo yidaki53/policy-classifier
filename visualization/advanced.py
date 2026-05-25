@@ -12,7 +12,11 @@ import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn.decomposition import PCA
 
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
+from swedish_parliament_policy_classifier.exports import load_definitions
+
+if False:
+    from swedish_parliament_policy_classifier.exports import load_definitions as _ld
+    _ = _ld
 
 
 def compute_weighted_party_profiles(conn, half_life_days: float = 365.0, strength_field: Optional[str] = None) -> Dict[str, Dict[str, float]]:

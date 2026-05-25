@@ -18,28 +18,44 @@ from typing import Optional, List
 
 import joblib
 import numpy as np
+import pandas as pd
 
-from swedish_parliament_policy_classifier.db.schema import get_connection
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions, score_motion
+# Canonical import: load_definitions and score_motion must always be imported from exports.py
+# This anchors the code graph and reduces INFERRED edges for Graphify/static analysis.
+from swedish_parliament_policy_classifier.exports import load_definitions, classify_motion
+
+if False:
+    from swedish_parliament_policy_classifier.exports import load_definitions as _ld, classify_motion as _cm
+    _ = _ld, _cm
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 
 LOG = logging.getLogger(__name__)
 
 
-def load_motions(conn, motion_id: Optional[str] = None, limit: int = 200):
-    cur = conn.cursor()
+def load_motions_parquet(normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet", motion_id: Optional[str] = None, limit: int = 200):
+    p = Path(normalized_parquet)
+    if not p.exists():
+        return []
+    df = pd.read_parquet(p)
     if motion_id:
-        cur.execute("SELECT id, title, text, party, date FROM normalized_motions WHERE id = ?", (motion_id,))
+        row = df[df["id"].astype(str) == str(motion_id)]
+        if row.empty:
+            return []
+        r = row.iloc[0]
+        return [(str(r.get("id")), r.get("title"), r.get("text"), r.get("party"), r.get("date"))]
     else:
-        cur.execute("SELECT id, title, text, party, date FROM normalized_motions ORDER BY date DESC LIMIT ?", (limit,))
-    return cur.fetchall()
+        df_sorted = df.sort_values("date", ascending=False)
+        out = []
+        for _, r in df_sorted.head(limit).iterrows():
+            out.append((str(r.get("id")), r.get("title"), r.get("text"), r.get("party"), r.get("date")))
+        return out
 
 
 def explain_motion(motion_row, categories, embedding_matcher, supervised_pipeline, mlb, topk_features: int = 10):
     mid, title, text, party, date = motion_row
 
     # Deterministic scoring (keywords/regexes only)
-    det_results = score_motion(mid, text, categories, embedding_matcher=None, embedding_weight=0.0, use_supervised=False)
+    det_results = classify_motion(mid, text, categories, embedding_matcher=None, embedding_weight=0.0, use_supervised=False)
     det_map = {r.category: {"raw_score": r.raw_score, "normalized": r.normalized_weight, "matched_rules": r.matched_rules} for r in det_results}
 
     # Embedding matches (if matcher provided)
@@ -149,11 +165,7 @@ def write_html(out_path: Path, data: List[dict]):
         f.write("</body></html>")
 
 
-def main(db_path: Optional[str], motion_id: Optional[str], limit: int, out_json: str, out_html: Optional[str], model_dir: Optional[str], topk: int):
-    if db_path is None:
-        db_path = Path(__file__).resolve().parents[2] / "data" / "swedish_parliament.db"
-    conn = get_connection(db_path)
-
+def main(normalized_parquet: Optional[str], motion_id: Optional[str], limit: int, out_json: str, out_html: Optional[str], model_dir: Optional[str], topk: int):
     categories = load_definitions()
 
     embedding_matcher = EmbeddingMatcher()
@@ -173,7 +185,7 @@ def main(db_path: Optional[str], motion_id: Optional[str], limit: int, out_json:
     except Exception as e:
         LOG.warning("Failed to load supervised model: %s", e)
 
-    rows = load_motions(conn, motion_id=motion_id, limit=limit)
+    rows = load_motions_parquet(normalized_parquet or "data/parquet/normalized_motions.parquet", motion_id=motion_id, limit=limit)
     explanations = []
     for r in rows:
         ex = explain_motion(r, categories, embedding_matcher, supervised_pipeline, mlb, topk_features=topk)

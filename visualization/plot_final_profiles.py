@@ -6,7 +6,11 @@ from typing import Optional, Tuple
 import numpy as np
 import matplotlib.pyplot as plt
 
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
+from swedish_parliament_policy_classifier.exports import load_definitions
+
+if False:
+    from swedish_parliament_policy_classifier.exports import load_definitions as _ld
+    _ = _ld
 from swedish_parliament_policy_classifier.analysis.aggregate import compute_party_profiles, load_party_profiles
 
 

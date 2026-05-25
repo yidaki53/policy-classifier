@@ -1,4 +1,4 @@
-from swedish_parliament_policy_classifier.db.schema import init_db
+from swedish_parliament_policy_classifier.exports import init_db, ClassificationResult, record_lineage, persist_classification
 
 
 def test_init_db_and_persist(tmp_path):
@@ -14,8 +14,8 @@ def test_init_db_and_persist(tmp_path):
     cur.execute("INSERT INTO normalized_motions (id, title, text, party) VALUES (?, ?, ?, ?)", ("m1", "t", "txt", "TestParty"))
     conn.commit()
 
-    from swedish_parliament_policy_classifier.models.models import ClassificationResult
-    from swedish_parliament_policy_classifier.classifier.persist import record_lineage, persist_classification
+    # local imports (kept for test isolation if needed)
+    # use attribute-style calls so static analysis can find links
     from datetime import datetime
 
     cr = ClassificationResult(
@@ -30,6 +30,8 @@ def test_init_db_and_persist(tmp_path):
 
     lid = record_lineage(conn, "normalized_motions", "m1", "test")
     pid = persist_classification(conn, cr, lid)
+
+    # (removed Graphify import-hint)
 
     cur.execute("SELECT COUNT(*) FROM classifications WHERE motion_id = ?", ("m1",))
     cnt = cur.fetchone()[0]
