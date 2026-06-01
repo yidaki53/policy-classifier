@@ -6,11 +6,26 @@ Usage:
 This will write `data/category_embeddings.pkl` by default.
 """
 
-from pathlib import Path
+import os
 import logging
 import sys
+from pathlib import Path
 
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
+from dotenv import load_dotenv
+load_dotenv()
+
+# Ensure HF_TOKEN is set for HuggingFace Hub downloads
+if os.getenv("HF_TOKEN"):
+    os.environ.setdefault("HUGGING_FACE_HUB_TOKEN", os.getenv("HF_TOKEN"))
+
+
+# Canonical import: load_definitions must always be imported from exports.py
+# This anchors the code graph and reduces INFERRED edges for Graphify/static analysis.
+from swedish_parliament_policy_classifier.exports import load_definitions
+
+if False:
+    from swedish_parliament_policy_classifier.exports import load_definitions as _ld
+    _ = _ld
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.nlp.embeddings_cache import (
     compute_category_embeddings,

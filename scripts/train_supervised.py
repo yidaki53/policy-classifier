@@ -1,18 +1,12 @@
-"""Train a simple supervised multi-label classifier using deterministic labels.
+"""Train a simple supervised multi-label classifier using deterministic labels (Parquet-first).
 
-This script bootstraps a reproducible supervised fallback by using the
-deterministic rule labels stored in the `classifications` table as noisy
-training targets. It trains a `TfidfVectorizer` + `OneVsRestClassifier(LogisticRegression)`
-and saves the fitted model and label encoder into `models/`.
-
-Usage:
-    python -m swedish_parliament_policy_classifier.scripts.train_supervised
+Reads `data/parquet/normalized_motions.parquet` and `data/parquet/classifications.parquet`
+to assemble noisy training targets and saves the resulting model into `models/`.
 """
 
 from pathlib import Path
 import argparse
 import logging
-import sqlite3
 import json
 
 import joblib
@@ -22,27 +16,32 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.pipeline import Pipeline
 
-from swedish_parliament_policy_classifier.db.schema import init_db, get_connection
+import pandas as pd
 
 LOG = logging.getLogger(__name__)
 
 
-def load_training_data(conn: sqlite3.Connection, weight_threshold: float = 0.05):
-    cur = conn.cursor()
-    cur.execute("SELECT id, text, title FROM normalized_motions")
-    rows = cur.fetchall()
+def load_training_data_parquet(normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet", classifications_parquet: str | Path = "data/parquet/classifications.parquet", weight_threshold: float = 0.05):
+    nm_p = Path(normalized_parquet)
+    cls_p = Path(classifications_parquet)
+    if not nm_p.exists() or not cls_p.exists():
+        LOG.error("Missing normalized motions or classifications parquet files")
+        return [], []
+
+    nm = pd.read_parquet(nm_p)
+    cls = pd.read_parquet(cls_p)
 
     X = []
     y = []
-    for r in rows:
-        mid = r[0]
-        text = (r[2] or "") + "\n" + (r[1] or "")
-        # fetch categories for this motion that meet threshold
-        cur.execute(
-            "SELECT category, normalized_weight FROM classifications WHERE motion_id = ?",
-            (mid,),
-        )
-        cats = [cr[0] for cr in cur.fetchall() if cr[1] and cr[1] >= weight_threshold]
+    # group classifications by motion_id
+    cls_grouped = cls.groupby("motion_id")
+    for _, r in nm.iterrows():
+        mid = str(r.get("id"))
+        text = (r.get("title") or "") + "\n" + (r.get("text") or "")
+        if mid not in cls_grouped.groups:
+            continue
+        group = cls_grouped.get_group(mid)
+        cats = [str(c) for c in group.loc[group["normalized_weight"] >= weight_threshold, "category"].tolist()]
         if not cats:
             continue
         X.append(text)
@@ -51,8 +50,8 @@ def load_training_data(conn: sqlite3.Connection, weight_threshold: float = 0.05)
     return X, y
 
 
-def train_and_save(conn, out_dir: Path, weight_threshold: float = 0.05):
-    X, y = load_training_data(conn, weight_threshold=weight_threshold)
+def train_and_save_parquet(out_dir: Path, normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet", classifications_parquet: str | Path = "data/parquet/classifications.parquet", weight_threshold: float = 0.05):
+    X, y = load_training_data_parquet(normalized_parquet, classifications_parquet, weight_threshold=weight_threshold)
     if not X:
         LOG.error("No training data found (increase weight_threshold or run deterministic classifier)")
         return
@@ -76,14 +75,14 @@ def train_and_save(conn, out_dir: Path, weight_threshold: float = 0.05):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--db", default="data/swedish_parliament.db")
+    parser.add_argument("--normalized", default="data/parquet/normalized_motions.parquet")
+    parser.add_argument("--classifications", default="data/parquet/classifications.parquet")
     parser.add_argument("--out", default="models", help="Output directory for saved models")
     parser.add_argument("--threshold", type=float, default=0.05, help="Minimum normalized_weight to treat as positive")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO)
-    conn = init_db(args.db)
-    train_and_save(conn, Path(args.out), weight_threshold=args.threshold)
+    train_and_save_parquet(Path(args.out), normalized_parquet=args.normalized, classifications_parquet=args.classifications, weight_threshold=args.threshold)
 
 
 if __name__ == "__main__":

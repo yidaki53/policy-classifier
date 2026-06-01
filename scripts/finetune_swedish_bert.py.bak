@@ -1,0 +1,286 @@
+#!/usr/bin/env python3
+"""Fine-tune the best-performing base embedding model on gold labels.
+
+Base model: sentence-transformers/paraphrase-multilingual-mpnet-base-v2
+(benchmark winner: 41.3 % val accuracy).
+
+Trains multiple variants with early stopping (up to 3 epochs, keeps best
+validation checkpoint) and saves the winner:
+1. Baseline – no fine-tuning
+2. CosineSimilarityLoss – regression towards category-definition embeddings
+3. ContrastiveLoss – explicit (motion, definition) positives vs cross-category
+   negatives. This avoids party-contaminated negatives because negatives are
+   ideology definitions rather than other motions.
+
+Usage:
+    uv run python3 scripts/finetune_swedish_bert.py --db data/swedish_parliament.db
+"""
+
+import argparse
+import os
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+from typing import Dict, List, Tuple
+
+import numpy as np
+
+from dotenv import load_dotenv
+load_dotenv()
+
+if os.getenv("HF_TOKEN"):
+    os.environ.setdefault("HUGGING_FACE_HUB_TOKEN", os.getenv("HF_TOKEN"))
+
+from swedish_parliament_policy_classifier.db.schema import init_db
+from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
+
+from sentence_transformers import SentenceTransformer, InputExample
+from sentence_transformers.losses import CosineSimilarityLoss, ContrastiveLoss
+from sklearn.metrics.pairwise import cosine_similarity
+from torch.utils.data import DataLoader
+import torch
+
+BASE_MODEL = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+MAX_EPOCHS = 3
+
+
+def load_split_motions(conn, split: str):
+    """Return list of (motion_id, text, category) for a given split."""
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT a.motion_id, COALESCE(nm.text, a.text), a.category
+        FROM augmented_gold_labels a
+        LEFT JOIN normalized_motions nm ON a.motion_id = nm.id
+        WHERE a.split = ?
+          AND COALESCE(nm.text, a.text) IS NOT NULL
+          AND LENGTH(COALESCE(nm.text, a.text)) > 0
+    """,
+        (split,),
+    )
+    return cur.fetchall()
+
+
+def build_cosine_train_examples(train_rows: List[Tuple], categories) -> List[InputExample]:
+    """Build (motion_text, category_definition) pairs with target cosine=1.0."""
+    examples = []
+    for _, text, cat in train_rows:
+        cat_def = categories[cat].definition or ""
+        examples.append(InputExample(texts=[text[:1500], cat_def], label=1.0))
+    return examples
+
+
+def build_contrastive_train_examples(train_rows: List[Tuple], categories) -> List[InputExample]:
+    """Build explicit positive and negative (motion, definition) pairs.
+
+    For each motion we generate one positive (its own category definition)
+    and negatives from every OTHER category definition.  This keeps the
+    negatives party-neutral because they are abstract ideology descriptions
+    rather than other motions which may carry party-specific language.
+    """
+    examples = []
+    cat_names = list(categories.keys())
+    for _, text, cat in train_rows:
+        cat_def = categories[cat].definition or ""
+        examples.append(InputExample(texts=[text[:1500], cat_def], label=1.0))
+        for neg_cat in cat_names:
+            if neg_cat == cat:
+                continue
+            neg_def = categories[neg_cat].definition or ""
+            examples.append(InputExample(texts=[text[:1500], neg_def], label=0.0))
+    return examples
+
+
+def evaluate_model(model, val_rows: List[Tuple], categories) -> Tuple[float, float]:
+    """Compute validation accuracy and average cosine similarity.
+
+    Returns (accuracy, avg_cosine_score).
+    """
+    cat_defs = {cat: categories[cat].definition or "" for cat in categories}
+    cat_embs = {
+        cat: model.encode([d], show_progress_bar=False, convert_to_numpy=True)[0]
+        for cat, d in cat_defs.items()
+    }
+
+    total = 0
+    correct = 0
+    scores = []
+    for _, text, true_cat in val_rows:
+        q = model.encode([text[:1500]], show_progress_bar=False, convert_to_numpy=True)
+        best_cat = None
+        best_score = -2.0
+        for cat, emb in cat_embs.items():
+            s = cosine_similarity(q, emb.reshape(1, -1))[0, 0]
+            if s > best_score:
+                best_score = s
+                best_cat = cat
+        if best_cat == true_cat:
+            correct += 1
+        total += 1
+        scores.append(best_score)
+
+    acc = correct / total if total > 0 else 0.0
+    avg_score = float(np.mean(scores)) if scores else 0.0
+    print(f"  Val accuracy={acc:.3f}, avg_cosine={avg_score:.3f} (n={total})", file=sys.stderr)
+    return acc, avg_score
+
+
+def _fit_one_epoch(model, loader, loss, warmup_steps: int):
+    """Run one epoch with OOM retry at half batch size."""
+    try:
+        model.fit(
+            train_objectives=[(loader, loss)],
+            epochs=1,
+            warmup_steps=warmup_steps,
+            show_progress_bar=False,
+            use_amp=True,
+        )
+    except RuntimeError as e:
+        if "out of memory" in str(e).lower():
+            torch.cuda.empty_cache()
+            current_bs = loader.batch_size
+            new_bs = current_bs // 2
+            print(f"  OOM with batch_size={current_bs}, retrying with {new_bs}...", file=sys.stderr)
+            new_loader = DataLoader(loader.dataset, shuffle=True, batch_size=new_bs)
+            model.fit(
+                train_objectives=[(new_loader, loss)],
+                epochs=1,
+                warmup_steps=warmup_steps,
+                show_progress_bar=False,
+                use_amp=True,
+            )
+            return new_loader
+        else:
+            raise
+    return loader
+
+
+def train_with_early_stopping(
+    train_rows,
+    val_rows,
+    categories,
+    base_model_name: str,
+    build_examples_fn,
+    loss_cls,
+    epochs: int = MAX_EPOCHS,
+):
+    """Train a variant for up to `epochs` epochs, keeping the best validation checkpoint."""
+    model = SentenceTransformer(base_model_name)
+    examples = build_examples_fn(train_rows, categories)
+    if not examples:
+        print("  No training examples generated.", file=sys.stderr)
+        return None, 0.0
+
+    loader = DataLoader(examples, shuffle=True, batch_size=16)
+    loss = loss_cls(model)
+
+    best_acc = -1.0
+    best_model_dir = None
+
+    for epoch in range(1, epochs + 1):
+        print(f"  Epoch {epoch}/{epochs}...", file=sys.stderr)
+        loader = _fit_one_epoch(model, loader, loss, warmup_steps=100 if epoch == 1 else 0)
+        acc, _ = evaluate_model(model, val_rows, categories)
+        if acc > best_acc:
+            best_acc = acc
+            if best_model_dir and os.path.isdir(best_model_dir):
+                shutil.rmtree(best_model_dir, ignore_errors=True)
+            best_model_dir = tempfile.mkdtemp(prefix="finetuned_")
+            model.save(best_model_dir)
+            print(f"  -> New best checkpoint saved (acc={acc:.3f})", file=sys.stderr)
+
+    if best_model_dir:
+        best_model = SentenceTransformer(best_model_dir)
+        shutil.rmtree(best_model_dir, ignore_errors=True)
+        return best_model, best_acc
+    return model, best_acc
+
+
+def fine_tune_and_select(db_path: str = "data/swedish_parliament.db"):
+    conn = init_db(db_path)
+    defs = load_definitions()
+
+    train_rows = load_split_motions(conn, "train")
+    val_rows = load_split_motions(conn, "val")
+    print(
+        f"Loaded {len(train_rows)} train, {len(val_rows)} val motions.", file=sys.stderr
+    )
+
+    # Baseline – off-the-shelf model
+    print(f"\n[Baseline – {BASE_MODEL}]", file=sys.stderr)
+    baseline_model = SentenceTransformer(BASE_MODEL)
+    baseline_acc, _ = evaluate_model(baseline_model, val_rows, defs)
+
+    baseline_model_cpu = baseline_model.to("cpu")
+    del baseline_model
+    torch.cuda.empty_cache()
+    print("  Baseline model moved to CPU, cache cleared.", file=sys.stderr)
+
+    # CosineSimilarityLoss – 3 epochs with early stopping
+    print("\n[CosineSimilarity fine-tuning]", file=sys.stderr)
+    cosine_model, cosine_acc = train_with_early_stopping(
+        train_rows,
+        val_rows,
+        defs,
+        BASE_MODEL,
+        build_cosine_train_examples,
+        lambda m: CosineSimilarityLoss(model=m),
+        epochs=MAX_EPOCHS,
+    )
+    if cosine_model is not None:
+        cosine_model_cpu = cosine_model.to("cpu")
+        del cosine_model
+        torch.cuda.empty_cache()
+        print("  Cosine model moved to CPU, cache cleared.", file=sys.stderr)
+    else:
+        cosine_model_cpu = None
+        cosine_acc = 0.0
+
+    # ContrastiveLoss – 3 epochs with early stopping
+    print("\n[Contrastive fine-tuning]", file=sys.stderr)
+    contrastive_model, contrastive_acc = train_with_early_stopping(
+        train_rows,
+        val_rows,
+        defs,
+        BASE_MODEL,
+        build_contrastive_train_examples,
+        lambda m: ContrastiveLoss(model=m),
+        epochs=MAX_EPOCHS,
+    )
+    if contrastive_model is not None:
+        contrastive_model_cpu = contrastive_model.to("cpu")
+        del contrastive_model
+        torch.cuda.empty_cache()
+        print("  Contrastive model moved to CPU, cache cleared.", file=sys.stderr)
+    else:
+        contrastive_model_cpu = None
+        contrastive_acc = 0.0
+
+    # Pick best
+    results = [("baseline", baseline_acc, baseline_model_cpu)]
+    if cosine_model_cpu is not None:
+        results.append(("cosine", cosine_acc, cosine_model_cpu))
+    if contrastive_model_cpu is not None:
+        results.append(("contrastive", contrastive_acc, contrastive_model_cpu))
+
+    best_name, best_acc, best_model = max(results, key=lambda x: x[1])
+    print(f"\nBest model: {best_name} (val_acc={best_acc:.3f})", file=sys.stderr)
+
+    out_dir = Path(__file__).resolve().parents[1] / "models" / "finetuned_swedish_bert"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    best_model.save(str(out_dir))
+    print(f"Saved to {out_dir}", file=sys.stderr)
+
+    return best_name, best_acc, str(out_dir)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Fine-tune best base model on gold labels")
+    parser.add_argument("--db", default="data/swedish_parliament.db")
+    args = parser.parse_args()
+    fine_tune_and_select(db_path=args.db)
+
+
+if __name__ == "__main__":
+    main()

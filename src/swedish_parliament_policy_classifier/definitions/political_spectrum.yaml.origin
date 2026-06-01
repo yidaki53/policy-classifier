@@ -1,0 +1,78 @@
+categories:
+  - name: far_right
+    definition: "Extreme nationalist and anti-immigration positions; authoritarian tendencies."
+    keywords:
+      - "invandring"
+      - "begränsa invandring"
+      - "stäng gränser"
+      - "utvisning"
+      - "nationell"
+      - "nationell identitet"
+      - "gränsskydd"
+      - "asylpolitik"
+    regexes:
+      - "invandr.*"
+      - "gräns|gränsskydd|utvisn"
+
+  - name: right
+    definition: "Market-oriented, lower taxes, stronger law-and-order emphasis."
+    keywords:
+      - "sänka skatter"
+      - "privatisera"
+      - "marknad"
+      - "lag och ordning"
+      - "starkare polis"
+      - "tuffare straff"
+      - "sänkt skatt"
+    regexes: []
+
+  - name: centre_right
+    definition: "Moderate right-leaning policies that support markets but accept social programs."
+    keywords:
+      - "företag"
+      - "konkurrens"
+      - "liberalisering"
+      - "småföretag"
+      - "entreprenör"
+    regexes: []
+
+  - name: centre
+    definition: "Centrist policies focusing on balance and compromise."
+    keywords:
+      - "mitten"
+      - "balans"
+      - "neutral"
+      - "kompromiss"
+      - "konsensus"
+    regexes: []
+
+  - name: centre_left
+    definition: "Center-left policies supporting welfare state and redistributive measures."
+    keywords:
+      - "välfärd"
+      - "omsorg"
+      - "sociala tjänster"
+      - "utbildning"
+      - "hälso- och sjukvård"
+    regexes: []
+
+  - name: left
+    definition: "Left policies prioritizing redistribution, workers' rights, and public provision."
+    keywords:
+      - "omfördela"
+      - "progressiv beskattning"
+      - "arbetstagare"
+      - "fackförening"
+      - "kollektivavtal"
+      - "minimilön"
+    regexes: []
+
+  - name: far_left
+    definition: "Radical left positions oriented toward systemic redistribution or socialism."
+    keywords:
+      - "socialistisk"
+      - "revolution"
+      - "radikal omfördelning"
+      - "nationalisering"
+      - "arbetarnas makt"
+    regexes: []

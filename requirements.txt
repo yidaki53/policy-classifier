@@ -3,6 +3,7 @@ PyYAML
 matplotlib
 scipy
 scikit-learn
+statsmodels
 plotly
 requests
 pytest
@@ -14,3 +15,6 @@ fastapi
 uvicorn
 jinja2
 aiofiles
+zstandard
+pandas
+pyarrow

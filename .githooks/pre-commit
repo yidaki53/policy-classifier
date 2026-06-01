@@ -1,0 +1,34 @@
+#!/bin/sh
+# Enforce repository git identity for commits in this repo.
+# Exits non-zero if `git config user.name` or `git config user.email` do not
+# match the expected values.
+
+EXPECTED_EMAIL="robinoberg@live.com"
+EXPECTED_NAME="yidaki53"
+
+CURRENT_EMAIL=$(git config user.email || true)
+CURRENT_NAME=$(git config user.name || true)
+
+if [ "x$CURRENT_EMAIL" != "x$EXPECTED_EMAIL" ] || [ "x$CURRENT_NAME" != "x$EXPECTED_NAME" ]; then
+  cat >&2 <<EOF
+Error: Repository identity mismatch.
+
+This repository requires commits to use the following identity:
+  user.name  = $EXPECTED_NAME
+  user.email = $EXPECTED_EMAIL
+
+Found:
+  user.name  = $CURRENT_NAME
+  user.email = $CURRENT_EMAIL
+
+To fix locally, run:
+  git config user.name "$EXPECTED_NAME"
+  git config user.email "$EXPECTED_EMAIL"
+
+Or, to make a single commit with the correct identity:
+  git -c user.name="$EXPECTED_NAME" -c user.email="$EXPECTED_EMAIL" commit ...
+EOF
+  exit 1
+fi
+
+exit 0

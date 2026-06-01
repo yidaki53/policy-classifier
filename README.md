@@ -13,20 +13,25 @@ Ingest Swedish Riksdag motions, classify them on a left–right ideological spec
 - **Web annotation UI** — FastAPI + plain HTML; annotate motions at `http://localhost:8000`.
 - **Publication figures** — party ideological profiles, heatmaps, and interactive Plotly charts.
 
-## Installation
+## Installation (recommended)
+
+This project uses `uv` for virtualenv and package management. `uv` ensures
+commands run inside the project-managed environment and the recommended
+developer workflow mirrors CI.
 
 ```bash
 git clone https://github.com/yidaki53/policy-classifier.git
 cd policy-classifier
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+uv venv create .venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 Optional heavy dependencies (safe fallbacks exist without them):
 
 ```bash
-pip install spacy sentence-transformers
-python -m spacy download sv_core_news_sm   # Swedish lemmatiser
+uv pip add spacy sentence-transformers
+uv run python3 -m spacy download sv_core_news_sm   # Swedish lemmatiser
 ```
 
 See [nlp/README.md](nlp/README.md) for fallback behaviour details.
@@ -51,7 +56,22 @@ python scripts/train_supervised.py
 
 # 6. (Optional) Start the annotation web UI
 uvicorn web.app:app --reload   # then open http://localhost:8000
+
+## Reproducibility & CLI
+
+- Full reproduction steps and environment notes: [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)
+- Canonical CLI commands for zero-shot labeling and streaming runs: [docs/CLI_COMMANDS.md](docs/CLI_COMMANDS.md)
+
+- Graphify token-reduction tips: [docs/GRAPHIFY_TOKEN_TIPS.md](docs/GRAPHIFY_TOKEN_TIPS.md)
+- Pandoc usage for docs: [docs/PANDOC_USAGE.md](docs/PANDOC_USAGE.md)
+
 ```
+
+
+
+## Manuscript PDF and Figures
+
+This repository produces a manuscript PDF (`output/manuscript/manuscript.pdf`) and publication-ready figures as part of its reproducible pipeline. See `manuscript/README.md` and the new [README_MANUSCRIPT_NOTE.md](README_MANUSCRIPT_NOTE.md) for details on how the manuscript and figures are generated and how they relate to the codebase.
 
 ## Outputs
 
@@ -65,10 +85,17 @@ uvicorn web.app:app --reload   # then open http://localhost:8000
 
 ## Running tests
 
+Run tests inside the project environment using `uv`:
+
 ```bash
-pip install pytest
-pytest -q
+uv pip install -r requirements.txt
+uv run pytest -q
 ```
+
+CI note: the project's GitHub Actions uses an editable install and a smoke
+import before running the test suite: `uv pip install -e .` then a smoke
+import and `uv run pytest -q`. Ensure an editable install succeeds locally
+before opening a PR.
 
 ## Project layout
 
@@ -99,4 +126,8 @@ Robin Öberg — robinoberg@live.com
 
 ## License
 
-MIT
+- **Code:** MIT — see `LICENSE`.
+- **Data:** Many datasets used by this project are derived from the Swedish
+	Riksdag's open-data APIs (https://data.riksdagen.se). Riksdagens öppna data
+	may be used freely but requires attribution to Sveriges riksdag. See
+	`DATA_LICENSES.md` for provenance details and redistribution guidance.

@@ -11,6 +11,11 @@ data/*.sqlite
 data/*.pkl
 data/*.joblib
 models/*.joblib
+data/*.zst
+data/*.zstd
+!data/motion_topics.json.zst
+data/motion_topics.json
+data/parquet/
 output/
 results/
 figures/

@@ -1,53 +1,80 @@
 #!/usr/bin/env python3
-"""Incremental sync with the Riksdag open-data endpoint and idempotent insert into sqlite."""
+"""Incremental sync with the Riksdag open-data endpoint and idempotent insert into Parquet."""
 
 import argparse
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
+from pathlib import Path
+
+import pandas as pd
 
 from swedish_parliament_policy_classifier.fetch import fetch_recent_motions
-from swedish_parliament_policy_classifier.db.schema import init_db
-from swedish_parliament_policy_classifier.classifier.persist import record_lineage
 
 
-def sync(db_path: str = "data/swedish_parliament.db", limit: int = 100, dry_run: bool = False, query: Optional[str] = None):
-    conn = init_db(db_path)
-    cur = conn.cursor()
+def _append_lineage(lineage_out: str, table: str, subject_id: str, operation: str):
+    out_p = lineage_out
+    row = {"table": table, "subject_id": subject_id, "operation": operation, "timestamp": datetime.now(timezone.utc).isoformat()}
+    try:
+        prev = pd.read_parquet(out_p)
+        out_df = pd.concat([prev, pd.DataFrame([row])], ignore_index=True)
+    except Exception:
+        out_df = pd.DataFrame([row])
+    # write
+    out_df.to_parquet(out_p, index=False, compression="zstd")
+
+
+def sync_parquet(out_path: str = "data/parquet/raw_motions.parquet", lineage_out: str = "data/parquet/lineage.parquet", limit: int = 100, dry_run: bool = False, query: Optional[str] = None):
     motions = fetch_recent_motions(sample=False, limit=limit, query=query)
+    out_p = out_path
+    try:
+        prev = pd.read_parquet(out_p)
+        prev_ids = set(prev["id"].astype(str).unique()) if "id" in prev.columns else set()
+    except Exception:
+        prev = None
+        prev_ids = set()
+
     inserted = 0
+    rows = []
     for m in motions:
         mid = m.get("id")
         if not mid:
             continue
-        cur.execute("SELECT 1 FROM raw_motions WHERE id = ?", (mid,))
-        if cur.fetchone():
+        if str(mid) in prev_ids:
             continue
         if dry_run:
             print("[dry-run] would insert", mid)
             continue
         raw_json = json.dumps(m, ensure_ascii=False)
-        retrieved_at = datetime.utcnow().isoformat()
-        cur.execute(
-            "INSERT OR IGNORE INTO raw_motions (id, json, retrieved_at, checksum) VALUES (?, ?, ?, ?)",
-            (mid, raw_json, retrieved_at, None),
-        )
-        if cur.rowcount:
-            inserted += 1
-            record_lineage(conn, "raw_motions", mid, "sync")
+        retrieved_at = datetime.now(timezone.utc).isoformat()
+        rows.append({"id": mid, "json": raw_json, "retrieved_at": retrieved_at, "checksum": None})
+        inserted += 1
+        # record lineage row later
 
-    conn.commit()
-    print(f"Inserted {inserted} new raw motions into {db_path}")
+    if rows:
+        chunk = pd.DataFrame(rows)
+        out_dir = Path(out_p).parent
+        out_dir.mkdir(parents=True, exist_ok=True)
+        if prev is not None:
+            out_df = pd.concat([prev, chunk], ignore_index=True)
+        else:
+            out_df = chunk
+        out_df.to_parquet(out_p, index=False, compression="zstd")
+        for r in rows:
+            _append_lineage(lineage_out, "raw_motions", str(r["id"]), "sync")
+
+    print(f"Inserted {inserted} new raw motions into {out_path}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Sync recent Riksdag motions into sqlite")
-    parser.add_argument("--db", default="data/swedish_parliament.db")
+    parser = argparse.ArgumentParser(description="Sync recent Riksdag motions into Parquet")
+    parser.add_argument("--out", default="data/parquet/raw_motions.parquet")
+    parser.add_argument("--lineage-out", default="data/parquet/lineage.parquet")
     parser.add_argument("--limit", type=int, default=100)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--query", default=None)
     args = parser.parse_args()
-    sync(args.db, args.limit, args.dry_run, args.query)
+    sync_parquet(args.out, args.lineage_out, args.limit, args.dry_run, args.query)
 
 
 if __name__ == "__main__":
