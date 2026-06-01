@@ -29,3 +29,7 @@ mlruns/
 
 # Logs
 *.log
+
+# Keep oversized local optimizer checkpoints out of git/LFS
+models/mlm_adapted/checkpoint-2500/optimizer.pt
+models/mlm_adapted/checkpoint-5000/optimizer.pt

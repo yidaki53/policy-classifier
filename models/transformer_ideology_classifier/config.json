@@ -1,0 +1,42 @@
+{
+  "model_name": "KBLab/bert-base-swedish-cased-new",
+  "categories": [
+    "centre",
+    "centre_left",
+    "centre_right",
+    "far_left",
+    "far_right",
+    "left",
+    "right"
+  ],
+  "label2id": {
+    "centre": 0,
+    "centre_left": 1,
+    "centre_right": 2,
+    "far_left": 3,
+    "far_right": 4,
+    "left": 5,
+    "right": 6
+  },
+  "id2label": {
+    "0": "centre",
+    "1": "centre_left",
+    "2": "centre_right",
+    "3": "far_left",
+    "4": "far_right",
+    "5": "left",
+    "6": "right"
+  },
+  "max_len": 512,
+  "test_results": {
+    "eval_loss": 0.7771934270858765,
+    "eval_accuracy": 0.6970149253731344,
+    "eval_f1_macro": 0.7362585000929994,
+    "eval_precision_macro": 0.7785718540623032,
+    "eval_recall_macro": 0.7055502065594398,
+    "eval_runtime": 9.7984,
+    "eval_samples_per_second": 68.379,
+    "eval_steps_per_second": 8.573,
+    "epoch": 3.0
+  }
+}
