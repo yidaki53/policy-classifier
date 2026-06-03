@@ -1,0 +1,26 @@
+{
+  "params": {
+    "analysis_dir": "output/analysis",
+    "figures_dir": "output/manuscript/figures",
+    "cpu_fraction": "0.25",
+    "max_threads": "8",
+    "input_rows_ideological_gap_party": "30",
+    "input_rows_promise_fulfillment_party_summary": "9",
+    "input_rows_promise_fulfillment_party_topic_year": "403"
+  },
+  "metrics": [
+    {
+      "step": null,
+      "consistency_mean": 0.5299913893245237,
+      "parliament_action_slope_per_year": -0.04680907792676151,
+      "parliament_speech_slope_per_year": 0.05311920679449878,
+      "sd_mean_action_vs_parliament_median_t_plus_1": 0.19492595775225874,
+      "sd_mean_lead_shift_t_to_t1": -0.7829133992636185
+    }
+  ],
+  "artifacts": [
+    "output/analysis/consistency_trends_summary.json",
+    "output/manuscript/figures/figure_consistency_vs_fulfillment.png",
+    "output/manuscript/figures/figure_parliament_direction_over_time.png"
+  ]
+}

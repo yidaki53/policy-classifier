@@ -1,0 +1,13 @@
+{
+  "version": "speech-classifier-defs-8f777cb4d64e",
+  "created_at": "2026-05-31T00:50:01.301230+00:00",
+  "categories": [
+    "centre",
+    "centre_left",
+    "centre_right",
+    "far_left",
+    "far_right",
+    "left",
+    "right"
+  ]
+}

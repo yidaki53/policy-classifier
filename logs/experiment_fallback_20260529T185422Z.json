@@ -1,0 +1,390 @@
+{
+  "params": {
+    "base_links": "data/parquet/speech_action_links_nobalance.parquet",
+    "target_ratio_motion_to_vote": "9.45420238538949",
+    "total_motions": "202925",
+    "total_votes": "21464",
+    "population": "80",
+    "generations": "45",
+    "elite": "6",
+    "seed": "42",
+    "min_ratio_gain": "0.2",
+    "w_max_party_shift": "1.0",
+    "w_mean_party_shift": "0.6",
+    "w_ratio_error": "0.15"
+  },
+  "metrics": [
+    {
+      "step": 0,
+      "best_score": 0.8733595271516723,
+      "best_max_party_shift": 0.2418379685610641,
+      "best_mean_party_shift": 0.17627982329935024,
+      "best_ratio": 0.284061335340364,
+      "best_rebalanced_rows": 23190.0
+    },
+    {
+      "step": 1,
+      "best_score": 0.8733595271516723,
+      "best_max_party_shift": 0.2418379685610641,
+      "best_mean_party_shift": 0.17627982329935024,
+      "best_ratio": 0.284061335340364,
+      "best_rebalanced_rows": 23190.0
+    },
+    {
+      "step": 2,
+      "best_score": 0.8663204125467615,
+      "best_max_party_shift": 0.23380041254712286,
+      "best_mean_party_shift": 0.17119110870530135,
+      "best_ratio": 0.27649121541831556,
+      "best_rebalanced_rows": 22536.0
+    },
+    {
+      "step": 3,
+      "best_score": 0.8609723478322715,
+      "best_max_party_shift": 0.22832349384735756,
+      "best_mean_party_shift": 0.16795895344430584,
+      "best_ratio": 0.27270521197522984,
+      "best_rebalanced_rows": 22206.0
+    },
+    {
+      "step": 4,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 5,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 6,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 7,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 8,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 9,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 10,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 11,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 12,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 13,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 14,
+      "best_score": 0.8595990196591197,
+      "best_max_party_shift": 0.2269720463759869,
+      "best_mean_party_shift": 0.16632564866536798,
+      "best_ratio": 0.27096890005834046,
+      "best_rebalanced_rows": 22054.0
+    },
+    {
+      "step": 15,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 16,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 17,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 18,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 19,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 20,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 21,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 22,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 23,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 24,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 25,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 26,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 27,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 28,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 29,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 30,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 31,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 32,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 33,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 34,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 35,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 36,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 37,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 38,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 39,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 40,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 41,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 42,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 43,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": 44,
+      "best_score": 0.8522553538136763,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_ratio": 0.26222289570092794,
+      "best_rebalanced_rows": 21282.0
+    },
+    {
+      "step": null,
+      "best_score": 0.8522553538136763,
+      "best_ratio": 0.26222289570092794,
+      "best_max_party_shift": 0.21921900561917634,
+      "best_mean_party_shift": 0.15880564888238105,
+      "best_rebalanced_rows": 21282.0
+    }
+  ],
+  "artifacts": [
+    "output/analysis/link_rebalance_fair_ga_trials.parquet",
+    "output/analysis/link_rebalance_fair_ga_best.json"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "target_journal": "PLOS ONE",
+  "status": "ready",
+  "checks": [
+    {
+      "id": "has_abstract",
+      "status": "pass",
+      "detail": "Abstract section present in manuscript text"
+    },
+    {
+      "id": "has_data_availability",
+      "status": "pass",
+      "detail": "Data availability statement detected"
+    },
+    {
+      "id": "bibliography_seeded",
+      "status": "pass",
+      "detail": "15 bibliography entries in manuscript/bibliography/references.bib"
+    },
+    {
+      "id": "heading_depth",
+      "status": "pass",
+      "detail": "Maximum heading depth in sections: 2"
+    },
+    {
+      "id": "journal_profile_loaded",
+      "status": "pass",
+      "detail": "Journal profile loaded: PLOS ONE"
+    }
+  ]
+}

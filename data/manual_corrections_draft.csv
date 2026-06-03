@@ -1,0 +1,4 @@
+speech_id,speaker,party,current_truth,current_pred,corrected_category,annotator,notes
+"ddd5f69f-c239-e911-9116-901b0eac4c78","Jimmie Åkesson (SD)",SD,centre_right,far_left,far_right,robin,applied_via_apply_suggested
+"a53d279f-be8f-e611-9441-00262d0d7125","Ulla Andersson (V)",V,far_right,far_left,left,robin,applied_via_apply_suggested
+"db849221-b41d-e611-9437-00262d0d0c40","Ellen Juntti (M)",M,centre,far_left,centre_right,robin,applied_via_apply_suggested
