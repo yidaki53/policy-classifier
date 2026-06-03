@@ -113,7 +113,22 @@ def prepare_hybrid_data(
     )
 
     if bert_cls is not None:
-        # Concatenate BERT CLS features
+        # Ensure row-wise alignment between base features and BERT embeddings.
+        # Different text filters may yield slight split-size drift; keep the
+        # common prefix so training can proceed deterministically.
+        n_base = len(X_base)
+        n_bert = int(bert_cls.shape[0])
+        if n_base != n_bert:
+            n = min(n_base, n_bert)
+            warnings.warn(
+                f"Hybrid feature alignment mismatch for split '{split}': "
+                f"base_rows={n_base}, bert_rows={n_bert}. Truncating both to n={n}.",
+                RuntimeWarning,
+            )
+            X_base = X_base.iloc[:n].reset_index(drop=True)
+            y = y[:n]
+            bert_cls = bert_cls[:n]
+
         cls_df = pd.DataFrame(
             bert_cls,
             columns=[f"bert_cls_{i}" for i in range(bert_cls.shape[1])],
@@ -209,10 +224,10 @@ def train_hybrid_ensemble(
     else:
         output_model_path = Path(output_model_path)
 
-    train_meta_classifier(X_train, y_train, category_names, model_path=output_model_path)
+    model = train_meta_classifier(X_train, y_train, category_names, model_path=output_model_path)
 
-    # Evaluate
-    model = load_meta_classifier(model_path=output_model_path)
+    # Evaluate using the freshly trained in-memory classifier to avoid
+    # accidentally loading a stale uncompressed sibling artifact.
     clf = model["clf"]
 
     y_pred = clf.predict(X_test)
@@ -243,6 +258,24 @@ def train_hybrid_ensemble(
             scorer_func=score_motion, embedding_matcher=matcher, split="test",
         )
         y_test_baseline_enc = baseline_le.transform(y_test)
+
+        # Align base-only test features to the baseline model schema.
+        missing = [c for c in expected_names if c not in X_test_base.columns]
+        if missing:
+            for c in missing:
+                X_test_base[c] = 0.0
+        X_test_base = X_test_base[expected_names]
+
+        if len(X_test_base) != len(y_test_baseline_enc):
+            n = min(len(X_test_base), len(y_test_baseline_enc))
+            warnings.warn(
+                f"Baseline comparison length mismatch: X_test_base={len(X_test_base)}, "
+                f"y_test={len(y_test_baseline_enc)}. Truncating both to n={n}.",
+                RuntimeWarning,
+            )
+            X_test_base = X_test_base.iloc[:n].reset_index(drop=True)
+            y_test_baseline_enc = y_test_baseline_enc[:n]
+
         y_pred_base = baseline_clf.predict(X_test_base)
         base_acc = accuracy_score(y_test_baseline_enc, y_pred_base)
         print(f"\nBaseline LightGBM test accuracy: {base_acc:.3f}", file=sys.stderr)

@@ -73,7 +73,17 @@ def evaluate(db_path: str = "data/swedish_parliament.db"):
         expected_names = _build_feature_names(category_names)
 
     import pandas as pd
-    X_test = pd.DataFrame(np.asarray(X_test, dtype=np.float32), columns=expected_names) if not hasattr(X_test, "columns") else X_test
+    if not hasattr(X_test, "columns"):
+        X_test = pd.DataFrame(np.asarray(X_test, dtype=np.float32), columns=expected_names)
+    else:
+        X_test = X_test.copy()
+        missing = [c for c in expected_names if c not in X_test.columns]
+        if missing:
+            for c in missing:
+                X_test[c] = 0.0
+        # Drop any unexpected extra columns and enforce training-time order.
+        X_test = X_test[expected_names]
+
     y_pred = clf.predict(X_test)
 
     acc = accuracy_score(y_test_enc, y_pred)

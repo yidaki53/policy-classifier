@@ -9,6 +9,7 @@ from typing import List, Optional, Dict
 import re
 import logging
 import unicodedata
+import html
 
 LOG = logging.getLogger(__name__)
 
@@ -85,6 +86,29 @@ def _normalize_text(text: str) -> str:
     return t.strip()
 
 
+def extract_plain_text_from_html(raw_text: str) -> str:
+    """Convert HTML-ish content to plain text with lightweight fallbacks."""
+    if not raw_text:
+        return ""
+
+    text = str(raw_text)
+
+    try:
+        from bs4 import BeautifulSoup  # type: ignore
+
+        soup = BeautifulSoup(text, "html.parser")
+        text = soup.get_text(" ")
+    except Exception:
+        # Fallback when bs4 is unavailable: strip common HTML patterns.
+        text = re.sub(r"<script[^>]*>.*?</script>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r"<style[^>]*>.*?</style>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r"<[^>]+>", " ", text)
+
+    text = html.unescape(text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
 def _merge_stopwords(nlp) -> set:
     sw = set(_SW_STOPWORDS)
     if nlp is not None and hasattr(nlp, "Defaults"):
@@ -143,4 +167,4 @@ def preprocess_text(
     return {"text": text_norm.lower(), "tokens": tokens, "lemmas": lemmas}
 
 
-__all__ = ["preprocess_text", "init_spacy"]
+__all__ = ["preprocess_text", "init_spacy", "extract_plain_text_from_html"]
