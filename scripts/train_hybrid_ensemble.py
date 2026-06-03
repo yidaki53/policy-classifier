@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Hybrid ensemble: LightGBM meta-classifier augmented with BERT [CLS] embeddings.
+"""Hybrid ensemble: LightGBM meta-classifier augmented with BERT [CLS],
+zero-shot, and transformer features.
 
 Extracts [CLS] token embeddings from the fine-tuned KBLab Swedish BERT classifier
 and concatenates them with the existing keyword/embedding/topic/metadata features.
@@ -100,6 +101,8 @@ def prepare_hybrid_data(
     embedding_matcher,
     split: str,
     bert_cls: Optional[np.ndarray] = None,
+    zero_shot_func=None,
+    bert_cls_func=None,
     bert_dim: int = 768,
 ) -> Tuple[pd.DataFrame, np.ndarray, List[str]]:
     """Prepare feature matrix with optional BERT [CLS] concatenation."""
@@ -110,6 +113,8 @@ def prepare_hybrid_data(
         scorer_func=scorer_func,
         embedding_matcher=embedding_matcher,
         split=split,
+        zero_shot_func=zero_shot_func,
+        bert_cls_func=bert_cls_func,
     )
 
     if bert_cls is not None:
@@ -162,6 +167,24 @@ def train_hybrid_ensemble(
     except Exception as e:
         print(f"Embedding matcher unavailable: {e}", file=sys.stderr)
 
+    zero_shot_func = None
+    try:
+        from swedish_parliament_policy_classifier.nlp.zero_shot_values import zero_shot_score
+
+        zero_shot_func = zero_shot_score
+        print("Zero-shot NLI features will be used for hybrid training.", file=sys.stderr)
+    except Exception as e:
+        print(f"Zero-shot unavailable: {e}", file=sys.stderr)
+
+    bert_cls_func = None
+    try:
+        from swedish_parliament_policy_classifier.classifier.transformer_predict import predict_proba
+
+        bert_cls_func = predict_proba
+        print("Transformer classifier probability features will be used for hybrid training.", file=sys.stderr)
+    except Exception as e:
+        print(f"Transformer classifier unavailable: {e}", file=sys.stderr)
+
     # Load texts for BERT CLS extraction
     def _load_texts_for_split(split: str) -> List[str]:
         cur = conn.cursor()
@@ -199,13 +222,37 @@ def train_hybrid_ensemble(
     # Prepare base + BERT features
     print("Preparing hybrid feature matrices...", file=sys.stderr)
     X_train, y_train, _ = prepare_hybrid_data(
-        conn, topic_dists, defs, score_motion, matcher, "train", bert_cls=train_cls
+        conn,
+        topic_dists,
+        defs,
+        score_motion,
+        matcher,
+        "train",
+        bert_cls=train_cls,
+        zero_shot_func=zero_shot_func,
+        bert_cls_func=bert_cls_func,
     )
     X_val, y_val, _ = prepare_hybrid_data(
-        conn, topic_dists, defs, score_motion, matcher, "val", bert_cls=val_cls
+        conn,
+        topic_dists,
+        defs,
+        score_motion,
+        matcher,
+        "val",
+        bert_cls=val_cls,
+        zero_shot_func=zero_shot_func,
+        bert_cls_func=bert_cls_func,
     )
     X_test, y_test, _ = prepare_hybrid_data(
-        conn, topic_dists, defs, score_motion, matcher, "test", bert_cls=test_cls
+        conn,
+        topic_dists,
+        defs,
+        score_motion,
+        matcher,
+        "test",
+        bert_cls=test_cls,
+        zero_shot_func=zero_shot_func,
+        bert_cls_func=bert_cls_func,
     )
 
     print(f"Hybrid feature dims: train={X_train.shape}, val={X_val.shape}, test={X_test.shape}", file=sys.stderr)

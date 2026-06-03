@@ -61,20 +61,25 @@ Execution log:
 - Initial Stage 2 window UTC: `2026-06-03T12:39:08Z` to `2026-06-03T12:41:25Z`
 - Remediation window UTC: `2026-06-03T12:50:09Z` to `2026-06-03T13:13:30Z`
 - Calibration command: `uv run python3 scripts/run_calibration_checks.py`
-- Calibration result: `SUCCESS`
-- Calibration metrics (from `scripts/run_calibration_checks.py`):
-	- Baseline accuracy: `0.3806475903614458`
-	- Baseline NLL: `1.6967861352760023`
+- Calibration result: `SUCCESS` (fresh recheck UTC `2026-06-03T20:22:45Z` to `2026-06-03T20:22:47Z`)
+- Calibration metrics (from latest `scripts/run_calibration_checks.py` run):
+	- Baseline accuracy: `0.3821536144578313`
+	- Baseline NLL: `1.675068698802146`
 	- Temp-scaled best temperature: `0.9808`
-	- Temp-scaled NLL: `1.6968088189581991`
-	- Isotonic accuracy: `0.3821536144578313`
-	- Isotonic NLL: `1.675068698802146`
+	- Temp-scaled NLL: `1.675070141325106`
+	- Isotonic accuracy: `0.3859186746987952`
+	- Isotonic NLL: `1.6536992439183622`
 - Retrain command: `uv run python scripts/train_hybrid_ensemble.py --db data/swedish_parliament.db`
 - Retrain result: `SUCCESS` (latest exit code `0`)
 - Hybrid retrain metrics (test split after alignment):
-	- Accuracy: `0.707`
-	- Baseline LightGBM reference accuracy: `0.222`
-	- Hybrid improvement: `+0.485`
+	- Initial accuracy: `0.707`
+	- Initial baseline LightGBM reference accuracy: `0.222`
+	- Initial hybrid improvement: `+0.485`
+	- Post-active-learning accuracy: `0.784`
+	- Post-active-learning baseline LightGBM reference accuracy: `0.222`
+	- Post-active-learning hybrid improvement: `+0.562`
+- Active-learning expansion command: `OLLAMA_NUM_PARALLEL=1 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 nice -n 10 uv run python scripts/active_learning.py --db data/swedish_parliament.db --select 60 --pool-size 1000 --label-model llama3.1:8b --confidence-threshold 7.5`
+- Active-learning expansion result: `SUCCESS` (`60` new labels inserted into `augmented_gold_labels`; thermal-safe run)
 - Evaluation command: `uv run python scripts/evaluate_ensemble.py --db data/swedish_parliament.db`
 - Evaluation result: `SUCCESS` (feature-schema alignment fix applied)
 - Final evaluation snapshot (test split):
@@ -84,7 +89,10 @@ Execution log:
 - Output artifacts:
 	- `manuscript/build/stage2_retrain_hybrid_ensemble.log` (updated, mtime UTC `2026-06-03T13:13:30Z`)
 	- `manuscript/build/stage2_evaluate_ensemble_after_retrain.log` (updated, mtime UTC `2026-06-03T13:00:48Z`)
+	- `manuscript/build/calibration_recheck_20260603.log`
 	- `manuscript/build/stage2_calibration_checks.log`
+	- `manuscript/build/active_learning_llama31_8b_20260603.log`
+	- `manuscript/build/hybrid_retrain_after_active_learning_20260603.log`
 	- `figures/calibration_confusion_baseline_20260603T124123Z.png`
 	- `figures/calibration_confusion_temp_20260603T124123Z.png`
 	- `figures/calibration_confusion_iso_20260603T124123Z.png`
@@ -93,6 +101,14 @@ Execution log:
 	- `figures/calibration_reliability_iso_20260603T124123Z.png`
 	- `logs/speech_eval_preds_tempcal_20260603T124123Z.parquet`
 	- `logs/speech_eval_preds_isotonic_20260603T124123Z.parquet`
+	- `figures/calibration_confusion_baseline_20260603T202245Z.png`
+	- `figures/calibration_confusion_temp_20260603T202245Z.png`
+	- `figures/calibration_confusion_iso_20260603T202245Z.png`
+	- `figures/calibration_reliability_baseline_20260603T202245Z.png`
+	- `figures/calibration_reliability_temp_20260603T202245Z.png`
+	- `figures/calibration_reliability_iso_20260603T202245Z.png`
+	- `logs/speech_eval_preds_tempcal_20260603T202245Z.parquet`
+	- `logs/speech_eval_preds_isotonic_20260603T202245Z.parquet`
 - Caveat for manuscript claims: the final baseline `evaluate_ensemble.py` snapshot remains low-quality (`accuracy=0.21`), so manuscript language should remain conservative and calibration-focused.
 
 ### Stage 3 - Error analysis and data quality hardening
@@ -214,6 +230,11 @@ Execution log:
 - `make pdf`: `SUCCESS` (log: `manuscript/build/stage5_make_pdf.log`, output: `manuscript/build/manuscript.pdf`)
 - `make journal-check`: `SUCCESS` (log: `manuscript/build/stage5_make_journal_check.log`)
 - Journal gate result: `ready` in `manuscript/build/journal_requirements_report.json`.
+- Post-refresh rerun UTC: `2026-06-03T21:56:44Z` to `2026-06-03T21:57:45Z`
+- Post-refresh `make render`: `SUCCESS` (log: `manuscript/build/render_after_todo_refresh_20260603.log`)
+- Post-refresh `make combined`: `SUCCESS` (log: `manuscript/build/combined_after_todo_refresh_20260603.log`)
+- Post-refresh `make pdf`: `SUCCESS` (log: `manuscript/build/pdf_after_todo_refresh_20260603.log`, output: `manuscript/build/manuscript.pdf`)
+- Post-refresh `make journal-check`: `SUCCESS` (log: `manuscript/build/journal_check_after_todo_refresh_20260603.log`)
 
 ### Stage 6 - Claim reconciliation and provenance verification
 
@@ -317,6 +338,12 @@ Execution log:
 - [x] Cross-section metric synchronization audit passed for key anchors across rendered abstract/results/conclusion (corpus counts, evaluation N, accuracy, and NLL metrics).
 - [x] Count semantics clarified: manuscript now distinguishes speech-category rows (`n=991235`) from unique speeches (`n=141605`).
 - [x] Linkage confidence composition clarified with all strata (graph-signatory, existing-reference, heuristic fallback, structural-high) and rounded reporting policy.
+- [x] Post-active-learning say-do refresh completed with explicit script-level provenance:
+	- `scripts/score_say_vs_do_contradiction.py` -> `output/analysis/speech_action_contradiction_edges.parquet`, `output/analysis/speech_action_expected_contradiction_party_topic_year.parquet` (`2026-06-03T21:53:35Z` to `2026-06-03T21:53:44Z`)
+	- `scripts/compute_link_confidence_strata.py` -> `output/analysis/speech_action_link_confidence_strata.parquet`, `output/analysis/speech_action_link_confidence_summary.json`
+	- `scripts/analyze_link_strata_stability.py` -> `output/analysis/link_strata_stability_party.parquet`, `output/analysis/link_strata_stability_summary.json`
+	- `scripts/analyze_consistency_trends.py` -> `output/analysis/consistency_score_party.parquet`, `output/analysis/lead_lag_speech_to_action_party_year.parquet`, `output/analysis/parliament_direction_over_time.parquet`, `output/analysis/consistency_fulfillment_party_year.parquet`, `output/analysis/consistency_fulfillment_vs_benchmark_party_year.parquet`, and refreshed manuscript figures under `output/manuscript/figures/`
+	- `scripts/analyze_recency_weighted_trends.py` -> `output/analysis/recency_weighted_party_scores.parquet`, `output/analysis/recency_weighted_parliament_timeseries.parquet`, `output/analysis/recency_weighted_summary.json`
 
 ## Methods and interpretation hardening
 

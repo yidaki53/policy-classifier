@@ -112,9 +112,9 @@ def main():
     p.print_help()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] in {'export', 'ingest'}:
     logging.basicConfig(level=logging.INFO)
-    main()
+    raise SystemExit(main())
 #!/usr/bin/env python3
 """Active learning pipeline for parliamentary motion classification.
 
@@ -173,9 +173,9 @@ def _keyword_scores_for_text(text: str, kw_index: Dict) -> Dict[str, float]:
 
 
 def _build_kw_index(categories):
-    import spacy
     index: Dict[str, List[Tuple[str, str]]] = {}
     try:
+        import spacy
         nlp = spacy.load("sv_core_news_sm", disable=["parser", "ner"])
     except Exception:
         return {}
@@ -336,6 +336,9 @@ def active_learning(
 
     clf = model["clf"]
     category_names = sorted(defs.keys())
+    expected_names = model.get("_feature_names")
+    if expected_names is None:
+        expected_names = _build_feature_names(category_names)
     kw_index = _build_kw_index(defs)
 
     matcher = None
@@ -391,6 +394,11 @@ def active_learning(
                 vecs.append(vec)
 
             X_batch = pd.concat(vecs, ignore_index=True)
+            missing = [c for c in expected_names if c not in X_batch.columns]
+            if missing:
+                for c in missing:
+                    X_batch[c] = 0.0
+            X_batch = X_batch[expected_names]
             probs_batch = clf.predict_proba(X_batch)
 
             for j, (motion_id, text) in enumerate(batch):
