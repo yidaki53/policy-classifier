@@ -248,9 +248,9 @@ Execution log:
 
 ### Stage 7 - Submission package and publication handoff
 
-- [ ] Create submission-ready release notes and reproducibility instructions.
-- [ ] Verify code/data access statement and citation instructions.
-- [ ] Tag final submission commit and archive release metadata.
+- [x] Create submission-ready release notes and reproducibility instructions.
+- [x] Verify code/data access statement and citation instructions.
+- [x] Tag final submission commit and archive release metadata.
 
 Commands:
 
@@ -265,6 +265,15 @@ Definition of Done gate:
 - Final submission tag exists on remote.
 - Reproducibility path is documented and validated.
 - Manuscript package is complete for journal upload.
+
+Execution log:
+
+- Status: `COMPLETE`
+- Final submission tag: `submission-2026-06-03`
+- Tagged commit: `ea9d9e0`
+- Tag push UTC: `2026-06-03T20:05:14Z`
+- Remote verification: tag exists on `origin`.
+- Reproducibility package anchor: Stage 5/6 build logs and journal report under `manuscript/build/` plus source-of-truth section files under `manuscript/sections/`.
 
 ## Build and compliance
 
