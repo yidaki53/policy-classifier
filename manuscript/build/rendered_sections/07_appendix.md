@@ -67,6 +67,6 @@ These figures capture intermediate diagnostics and process-level checks that sup
 
 ![Voting Cohesion Time Series (updated 2026-05-31T21:42:18Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
 
-![Three-way Divergence (updated 2026-05-31T21:41:42Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
+![Three-way Divergence (updated 2026-06-03T13:16:17Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
 
 ![Speech Profiles Heatmap (updated 2026-05-31T21:41:32Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }

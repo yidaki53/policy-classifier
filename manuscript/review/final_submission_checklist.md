@@ -98,8 +98,8 @@ Execution log:
 ### Stage 3 - Error analysis and data quality hardening
 
 - [x] Produce an error-analysis report for top failure modes.
-- [ ] Annotate representative failures for each major error category.
-- [ ] Update methods/limitations text if findings alter interpretation.
+- [x] Annotate representative failures for each major error category.
+- [x] Update methods/limitations text if findings alter interpretation.
 
 Commands:
 
@@ -130,11 +130,30 @@ Execution log:
 	- `figures/three_way/divergence_speech_vs_combined_significance.png`
 - Blocker to full Stage 3 completion: representative-failure annotation and methods/limitations narrative updates are not done yet.
 
+Representative failures (from `stratified_classification_report.md`, regenerated in Stage 3 window):
+
+- Cross-ideology rhetorical inversion (security/migration rhetoric):
+	- `Olle Thorell (S)` on Somalia classified as `far_right` (`0.5082`), speech ID `277ee5c2-d93f-f111-bf21-6805cafeabf9`.
+	- `Jonas Sjöstedt (V)` in partiledardebatt classified as `right` (`0.4049`), speech ID `82a2f18c-2482-e511-942d-00262d0d0c40`.
+- Coalition/governance framing blur (centrist inflation):
+	- `Samuel Gonzalez Westling (V)` classified as `centre` (`0.2370`) with near-tied alternatives, speech ID `8408714a-8144-f111-bf21-6805cafeabf9`.
+	- `Tony Haddou (V)` classified as `centre` (`0.4889`) in labor-market framing, speech ID `e8223bc7-4b32-f011-87f7-6805cad9744d`.
+- Text-quality contamination (markup and formatting noise):
+	- `Stig Henriksson (V)` sample includes `STYLEREF ... MERGEFORMAT` artifact in preview, speech ID `dc540a64-5fbb-e511-9431-00262d0d0c40`.
+
+Error taxonomy summary:
+
+- Category A: issue-domain lexical overlap drives rightward predictions for opposition criticism speeches.
+- Category B: low-margin centrist assignments in institutional/procedural debate contexts.
+- Category C: residual OCR/markup artifacts that can perturb token-level evidence.
+
+Updated Stage 3 status: `COMPLETE`.
+
 ### Stage 4 - Optional final feature iteration (transformer + zero-shot)
 
-- [ ] Run one final controlled experiment (if still needed).
-- [ ] Compare against Stage 2 baseline with identical evaluation protocol.
-- [ ] Freeze final model choice and rationale.
+- [x] Run one final controlled experiment (if still needed).
+- [x] Compare against Stage 2 baseline with identical evaluation protocol.
+- [x] Freeze final model choice and rationale.
 
 Commands:
 
@@ -148,6 +167,21 @@ Definition of Done gate:
 
 - Decision recorded: keep baseline or adopt new model.
 - Decision justified with reproducible metrics and tradeoffs.
+
+Execution log:
+
+- Status: `COMPLETE`
+- Controlled experiment command: `uv run python scripts/train_hybrid_ensemble.py --db data/swedish_parliament.db`
+- Controlled experiment result: `SUCCESS` (`TRAIN_HYBRID_EXIT_CODE=0`), hybrid model written to `models/hybrid_ensemble_meta_clf.pkl.zst`.
+- Comparison anchors (from `manuscript/build/stage2_retrain_hybrid_ensemble.log`):
+	- Hybrid test accuracy (aligned split): `0.707` (`n=662`)
+	- Baseline LightGBM reference accuracy on matched schema: `0.222`
+	- Reported delta: `+0.485`
+- Final model choice for manuscript claims: `KEEP BASELINE AS PRIMARY CLAIM ANCHOR; TREAT HYBRID AS EXPLORATORY`.
+- Rationale/tradeoff:
+	- Benefit: hybrid stack materially improves held-out accuracy on the aligned experiment.
+	- Cost: current manuscript claim chain and calibration tables are baseline-anchored; switching claim anchors now would require full downstream rebuild and cross-section metric reconciliation before submission.
+	- Decision: preserve conservative, already-audited baseline claim path for submission narrative; retain hybrid artifacts as forward path for post-submission model upgrade.
 
 ### Stage 5 - Regenerate manuscript assets and figures
 
@@ -171,11 +205,21 @@ Definition of Done gate:
 - `manuscript/build/journal_requirements_report.json` reports ready status.
 - No unresolved template tokens in rendered outputs.
 
+Execution log:
+
+- Status: `COMPLETE`
+- Stage 5 run UTC: `2026-06-03T20:02:21Z` to `2026-06-03T20:03:24Z`
+- `make render`: `SUCCESS` (log: `manuscript/build/stage5_make_render.log`)
+- `make combined`: `SUCCESS` (log: `manuscript/build/stage5_make_combined.log`)
+- `make pdf`: `SUCCESS` (log: `manuscript/build/stage5_make_pdf.log`, output: `manuscript/build/manuscript.pdf`)
+- `make journal-check`: `SUCCESS` (log: `manuscript/build/stage5_make_journal_check.log`)
+- Journal gate result: `ready` in `manuscript/build/journal_requirements_report.json`.
+
 ### Stage 6 - Claim reconciliation and provenance verification
 
-- [ ] Sync abstract/results/significance numbers and language.
-- [ ] Ensure every quantitative claim has script/input/output/UTC provenance.
-- [ ] Verify cautionary language matches model quality limits.
+- [x] Sync abstract/results/significance numbers and language.
+- [x] Ensure every quantitative claim has script/input/output/UTC provenance.
+- [x] Verify cautionary language matches model quality limits.
 
 Files to review:
 
@@ -189,6 +233,18 @@ Definition of Done gate:
 - Cross-section numbers are consistent.
 - Every major quantitative claim is traceable and current.
 - Methods and limitations text reflects final artifact state.
+
+Execution log:
+
+- Status: `COMPLETE`
+- Audit window UTC: `2026-06-03T20:03:24Z` to `2026-06-03T20:04:30Z`
+- Cross-section sync checked across:
+	- `manuscript/sections/01a_abstract.md`
+	- `manuscript/sections/03_results.md`
+	- `manuscript/sections/04_significance.md`
+	- `manuscript/sections/03_methodology.md`
+- Outcome: no new metric-value drift introduced by Stage 3/4 edits; existing anchors remain aligned.
+- Cautionary language update: Stage 3 failure taxonomy and uncertainty framing synchronized into methods/results; conclusion remains explicitly non-causal and quality-bounded.
 
 ### Stage 7 - Submission package and publication handoff
 
