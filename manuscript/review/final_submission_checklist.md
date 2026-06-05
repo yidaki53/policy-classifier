@@ -132,7 +132,7 @@ Definition of Done gate:
 
 Execution log:
 
-- Status: `PARTIAL (COMMANDS SUCCESSFUL; ANNOTATION/NARRATIVE SYNC PENDING)`
+- Status: `COMPLETE`
 - Stage 3 retry UTC: `2026-06-03T13:15:06Z` to `2026-06-03T13:16:17Z`
 - `uv run python scripts/run_stratified_sample.py`: `SUCCESS`
 - `uv run python scripts/speeches_analysis.py`: `SUCCESS`
@@ -144,7 +144,7 @@ Execution log:
 	- `figures/three_way/divergence_heatmap.png`
 	- `figures/three_way/effect_size_table.parquet`
 	- `figures/three_way/divergence_speech_vs_combined_significance.png`
-- Blocker to full Stage 3 completion: representative-failure annotation and methods/limitations narrative updates are not done yet.
+- Prior blocker resolved: representative-failure annotation and methods/limitations narrative synchronization completed.
 
 Representative failures (from `stratified_classification_report.md`, regenerated in Stage 3 window):
 
@@ -201,9 +201,9 @@ Execution log:
 
 ### Stage 5 - Regenerate manuscript assets and figures
 
-- [ ] Rebuild figures from scripts only.
-- [ ] Render manuscript context and combined markdown.
-- [ ] Rebuild PDF and run journal compliance checks.
+- [x] Rebuild figures from scripts only.
+- [x] Render manuscript context and combined markdown.
+- [x] Rebuild PDF and run journal compliance checks.
 
 Commands:
 
