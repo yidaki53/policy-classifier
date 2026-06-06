@@ -290,10 +290,10 @@ Definition of Done gate:
 Execution log:
 
 - Status: `COMPLETE`
-- Final submission tag: `submission-2026-06-06-r2`
+- Final submission tag: `submission-2026-06-06-r3`
 - Remote verification: tag exists on `origin`.
 - Reproducibility package anchor: Stage 5/6 build logs and journal report under `manuscript/build/` plus source-of-truth section files under `manuscript/sections/`.
-- Snapshot freshness: `CURRENT` when `submission-2026-06-06-r2` points to the latest submission commit.
+- Snapshot freshness: `CURRENT` when `submission-2026-06-06-r3` points to the latest submission commit.
 
 ## Build and compliance
 
@@ -365,6 +365,7 @@ Execution log:
 - [ ] Mint persistent archival DOI for the exact submission snapshot (for example via Zenodo-linked release) and add DOI citation to Data Availability text.
 - [x] Create and push a superseding final submission tag on latest commit, then update Stage 7 metadata (tag, SHA, UTC, DOI link).
 - [x] Publish GitHub release for `submission-2026-06-06-r2` to trigger Zenodo ingestion: https://github.com/yidaki53/policy-classifier/releases/tag/submission-2026-06-06-r2
+- [x] Re-trigger Zenodo ingestion after integration enablement by publishing fresh release `submission-2026-06-06-r3`.
 
 ## Commit scope recommendation (manuscript-only)
 
