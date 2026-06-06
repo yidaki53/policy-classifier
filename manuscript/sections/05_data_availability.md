@@ -31,6 +31,8 @@ No participant-level restricted data are introduced by this project; all primary
 
 The full reproducible project is publicly accessible at `https://github.com/yidaki53/policy-classifier`. Submission and production versions should cite the exact release tag and commit hash used for manuscript generation.
 
+Archival DOI for the submission snapshot (`submission-2026-06-06-r3`): `https://doi.org/10.5281/zenodo.20572644`.
+
 For production handoff, the recommended archival path is to create a versioned release snapshot and archive it in a long-term repository service (for example, a Zenodo-linked GitHub release). This preserves the exact manuscript-state code and artifacts and provides a persistent accession identifier for citation without changing the underlying access pathway described above. The archived record should include the release tag, commit hash, artifact directory inventory, and manuscript build timestamp used in the submitted version.
 
 Numeric reporting policy: JSON artifacts in `output/analysis/` preserve machine-precision float values (IEEE754). In manuscript prose and figure captions, percentages are rounded for readability (typically to one decimal place unless otherwise stated). Where rounded text differs from full-precision values, the full-precision artifact is the reproducible reference.
