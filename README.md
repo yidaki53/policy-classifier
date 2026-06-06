@@ -97,6 +97,23 @@ import before running the test suite: `uv pip install -e .` then a smoke
 import and `uv run pytest -q`. Ensure an editable install succeeds locally
 before opening a PR.
 
+## Zenodo DOI Automation
+
+After publishing a submission release tag, you can automatically pull the minted
+Zenodo DOI and update manuscript submission files:
+
+```bash
+uv run python scripts/sync_zenodo_doi.py --tag submission-2026-06-06-r3 --repo yidaki53/policy-classifier
+```
+
+Optional mode if you already know the DOI:
+
+```bash
+uv run python scripts/sync_zenodo_doi.py --tag submission-2026-06-06-r3 --doi-url https://doi.org/10.5281/zenodo.20572644
+```
+
+Use `--dry-run` to preview changes before writing files.
+
 ## Project layout
 
 ```
