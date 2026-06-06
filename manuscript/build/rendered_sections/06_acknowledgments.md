@@ -17,6 +17,12 @@ last_updated_utc: "2026-05-29T00:00:00Z"
 
 The authors thank the Swedish Parliament (Riksdagen) for providing open-access data through the Riksdag Open Data API, which underpins all corpus materials used in this analysis.
 
+## Author Contributions (CRediT)
+
+Robin Oberg: Conceptualization, Methodology, Software, Data Curation, Formal Analysis, Visualization, Validation, Writing - Original Draft, Writing - Review and Editing.
+
+This manuscript reports a single-author study. Contributor roles are declared using the CRediT taxonomy for submission metadata alignment.
+
 No external funding was received for this study. The authors received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
 The authors declare no competing interests.
