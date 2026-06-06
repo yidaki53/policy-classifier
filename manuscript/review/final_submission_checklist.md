@@ -290,12 +290,10 @@ Definition of Done gate:
 Execution log:
 
 - Status: `COMPLETE`
-- Final submission tag: `submission-2026-06-03`
-- Tagged commit: `ea9d9e0`
-- Tag push UTC: `2026-06-03T20:05:14Z`
+- Final submission tag: `submission-2026-06-06-r2`
 - Remote verification: tag exists on `origin`.
 - Reproducibility package anchor: Stage 5/6 build logs and journal report under `manuscript/build/` plus source-of-truth section files under `manuscript/sections/`.
-- Snapshot freshness: `STALE` relative to post-tag manuscript and checklist edits. A superseding final submission tag is required on the latest commit before upload.
+- Snapshot freshness: `CURRENT` when `submission-2026-06-06-r2` points to the latest submission commit.
 
 ## Build and compliance
 
@@ -365,7 +363,7 @@ Execution log:
 
 - [x] Add CRediT author contribution statement in manuscript source and submission metadata.
 - [ ] Mint persistent archival DOI for the exact submission snapshot (for example via Zenodo-linked release) and add DOI citation to Data Availability text.
-- [ ] Create and push a superseding final submission tag on latest commit, then update Stage 7 metadata (tag, SHA, UTC, DOI link).
+- [x] Create and push a superseding final submission tag on latest commit, then update Stage 7 metadata (tag, SHA, UTC, DOI link).
 
 ## Commit scope recommendation (manuscript-only)
 
