@@ -4,14 +4,17 @@ SECTIONS=sections/01_title.md sections/01a_abstract.md sections/02_question.md s
 RENDERED_DIR=$(OUTPUT_DIR)/rendered_sections
 RENDERED_SECTIONS=$(RENDERED_DIR)/01_title.md $(RENDERED_DIR)/01a_abstract.md $(RENDERED_DIR)/02_question.md $(RENDERED_DIR)/03_methodology.md $(RENDERED_DIR)/03_results.md $(RENDERED_DIR)/04_significance.md $(RENDERED_DIR)/07_appendix.md $(RENDERED_DIR)/05_data_availability.md $(RENDERED_DIR)/06_acknowledgments.md
 COMBINED=$(OUTPUT_DIR)/combined.md
+ANON_COMBINED=$(OUTPUT_DIR)/combined_anonymized.md
 MANUSCRIPT_MD=$(ROOT)/manuscript.md
+ANON_MANUSCRIPT_MD=$(ROOT)/manuscript_anonymized.md
 MANUSCRIPT_PDF=$(ROOT)/manuscript.pdf
+ANON_MANUSCRIPT_PDF=$(ROOT)/manuscript_anonymized.pdf
 BIB=$(ROOT)/manuscript/bibliography/references.bib
 CSL=$(ROOT)/manuscript/bibliography/vancouver.csl
 
 PANDOC_OPTS=--standalone --citeproc --bibliography=$(BIB) --csl=$(CSL)
 
-.PHONY: all figures manuscript pdf docx html combined check-frontmatter render journal-check stats clean
+.PHONY: all figures manuscript pdf docx html combined anonymized anonymized-pdf check-frontmatter render journal-check stats clean
 
 all: figures manuscript
 
@@ -71,6 +74,19 @@ html: render combined
 		echo "pandoc not found; skipping HTML build"; \
 	fi
 
+anonymized: render combined
+	uv run python $(ROOT)/scripts/create_anonymized_manuscript.py --in $(COMBINED) --out $(ANON_COMBINED)
+	@cp $(ANON_COMBINED) $(ANON_MANUSCRIPT_MD)
+
+anonymized-pdf: anonymized
+	@if command -v pandoc >/dev/null 2>&1; then \
+		pandoc $(ANON_COMBINED) $(PANDOC_OPTS) -o $(OUTPUT_DIR)/manuscript_anonymized.pdf && \
+		cp $(OUTPUT_DIR)/manuscript_anonymized.pdf $(ANON_MANUSCRIPT_PDF) && \
+		echo "Anonymized PDF created: $(OUTPUT_DIR)/manuscript_anonymized.pdf"; \
+	else \
+		echo "pandoc not found; skipping anonymized PDF build"; \
+	fi
+
 manuscript: pdf
 
 check-frontmatter:
@@ -93,4 +109,4 @@ stats: combined
 	@wc -w $(COMBINED)
 
 clean:
-	rm -rf $(OUTPUT_DIR) $(MANUSCRIPT_MD) $(MANUSCRIPT_PDF)
+	rm -rf $(OUTPUT_DIR) $(MANUSCRIPT_MD) $(MANUSCRIPT_PDF) $(ANON_MANUSCRIPT_MD) $(ANON_MANUSCRIPT_PDF)

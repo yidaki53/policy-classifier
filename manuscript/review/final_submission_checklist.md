@@ -109,7 +109,7 @@ Execution log:
 	- `figures/calibration_reliability_iso_20260603T202245Z.png`
 	- `logs/speech_eval_preds_tempcal_20260603T202245Z.parquet`
 	- `logs/speech_eval_preds_isotonic_20260603T202245Z.parquet`
-- Caveat for manuscript claims: the final baseline `evaluate_ensemble.py` snapshot remains low-quality (`accuracy=0.21`), so manuscript language should remain conservative and calibration-focused.
+- Caveat for manuscript claims: `accuracy=0.21` refers to the baseline `evaluate_ensemble.py` path (default `models/ensemble_meta_clf.pkl`). The integrated hybrid stack (zero-shot + transformer probabilities + BERT CLS; `models/hybrid_ensemble_meta_clf.pkl.zst`) reached materially higher post-active-learning test accuracy (`0.784`), so interpretation should distinguish baseline-anchor claims from full-ensemble performance.
 
 ### Stage 3 - Error analysis and data quality hardening
 
@@ -295,6 +295,7 @@ Execution log:
 - Tag push UTC: `2026-06-03T20:05:14Z`
 - Remote verification: tag exists on `origin`.
 - Reproducibility package anchor: Stage 5/6 build logs and journal report under `manuscript/build/` plus source-of-truth section files under `manuscript/sections/`.
+- Snapshot freshness: `STALE` relative to post-tag manuscript and checklist edits. A superseding final submission tag is required on the latest commit before upload.
 
 ## Build and compliance
 
@@ -324,6 +325,7 @@ Execution log:
 - [x] Appendix Figure 8 regenerated with excluded-party policy aligned to overlay rules (`Unknown`, `Moderaterna`, `Vänsterpartiet`, `X`).
 - [x] Post-remediation visual QA rerun completed on updated PDF pages (through appendix and references).
 - [x] Residual resolved: appendix figure legibility improved after source-level plot tightening (`scripts/analyze_consistency_trends.py`) and expanded renderer width overrides (`scripts/render_manuscript_jinja.py`) for benchmark, modality overlay, voting cohesion, three-way divergence, and speech-heatmap figures; post-fix PDF visual QA confirms acceptable readability.
+- [x] Latest PDF visual QA completed on rebuilt manuscript pages (`1`, `2`, `10`, `13`, `20`, `21`, `22`, `23`); the abstract, methods, results, conclusion, and data-availability pages visibly distinguish the baseline evaluation path from the stronger exploratory hybrid ensemble, and no new layout regressions were observed.
 
 ## Reproducibility and provenance
 
@@ -357,6 +359,13 @@ Execution log:
 
 - [x] Data Availability statement now includes concrete public repository access and release/commit citation instructions.
 - [x] Figure 8 regenerated and visually verified under aligned excluded-party policy.
+- [x] An anonymized peer-review manuscript build path is available (`make anonymized` / `make anonymized-pdf`) and produces blinded outputs for reviewer-facing submission files.
+
+## Outstanding PLOS Submission Tasks
+
+- [x] Add CRediT author contribution statement in manuscript source and submission metadata.
+- [ ] Mint persistent archival DOI for the exact submission snapshot (for example via Zenodo-linked release) and add DOI citation to Data Availability text.
+- [ ] Create and push a superseding final submission tag on latest commit, then update Stage 7 metadata (tag, SHA, UTC, DOI link).
 
 ## Commit scope recommendation (manuscript-only)
 
