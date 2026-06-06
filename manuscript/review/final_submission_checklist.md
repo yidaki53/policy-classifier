@@ -364,6 +364,7 @@ Execution log:
 - [x] Add CRediT author contribution statement in manuscript source and submission metadata.
 - [ ] Mint persistent archival DOI for the exact submission snapshot (for example via Zenodo-linked release) and add DOI citation to Data Availability text.
 - [x] Create and push a superseding final submission tag on latest commit, then update Stage 7 metadata (tag, SHA, UTC, DOI link).
+- [x] Publish GitHub release for `submission-2026-06-06-r2` to trigger Zenodo ingestion: https://github.com/yidaki53/policy-classifier/releases/tag/submission-2026-06-06-r2
 
 ## Commit scope recommendation (manuscript-only)
 
