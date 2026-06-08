@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "DATA_LICENSES"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 Data provenance and licensing
 ----------------------------
 

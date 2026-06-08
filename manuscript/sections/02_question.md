@@ -3,19 +3,19 @@ section_id: "02_question"
 section_title: "Question"
 objective: "Define the central research question, units, and comparative frame for the analysis chain."
 required_inputs:
-	- "Current modality coverage and outputs from analysis pipeline."
-	- "Current definition of comparative targets (parties, topics, years, modalities)."
+  - "Current modality coverage and outputs from analysis pipeline."
+  - "Current definition of comparative targets (parties, topics, years, modalities)."
 required_outputs:
-	- "Primary research question text aligned to implemented methods and outputs."
+  - "Primary research question text aligned to implemented methods and outputs."
 required_metrics:
-	- "none"
+  - "none"
 required_figures_tables:
-	- "none"
+  - "none"
 provenance_requirements:
-	- "Question wording must be compatible with reported result artifacts and metrics."
+  - "Question wording must be compatible with reported result artifacts and metrics."
 update_triggers:
-	- "Change in analytical objectives or target comparisons."
-	- "Addition/removal of major modalities or tasks."
+  - "Change in analytical objectives or target comparisons."
+  - "Addition/removal of major modalities or tasks."
 owner: "manuscript-agent"
 status: "active"
 last_updated_utc: "2026-05-29T08:05:00Z"

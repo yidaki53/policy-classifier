@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "README"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # policy-classifier
 
 ![CI](https://github.com/yidaki53/policy-classifier/actions/workflows/ci.yml/badge.svg)

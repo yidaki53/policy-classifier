@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 
 # From parliamentary claims to parliamentary conduct: multimodal estimation of Swedish party policy profiles from motions, speeches, and votes
 

@@ -3,20 +3,20 @@ section_id: "04_significance"
 section_title: "Conclusion"
 objective: "Explain why the results matter, what is reproducibly established, and what limitations or next checks remain."
 required_inputs:
-	- "manuscript/sections/03_results.md"
-	- "Latest consistency/recency/SARIMAX summaries under output/analysis/."
+  - "manuscript/sections/03_results.md"
+  - "Latest consistency/recency/SARIMAX summaries under output/analysis/."
 required_outputs:
-	- "Concise significance interpretation tied to current evidence."
-	- "Explicit caveats tied to linkage coverage, windows, and model assumptions."
+  - "Concise significance interpretation tied to current evidence."
+  - "Explicit caveats tied to linkage coverage, windows, and model assumptions."
 required_metrics:
-	- "Reference to key summary metrics from results where relevant."
+  - "Reference to key summary metrics from results where relevant."
 required_figures_tables:
-	- "none (may reference figures produced in results section)"
+  - "none (may reference figures produced in results section)"
 provenance_requirements:
-	- "Claims must only generalize beyond what current reproducible metrics support."
+  - "Claims must only generalize beyond what current reproducible metrics support."
 update_triggers:
-	- "Any material change in core findings or uncertainty bounds."
-	- "Any major methodology revision."
+  - "Any material change in core findings or uncertainty bounds."
+  - "Any major methodology revision."
 owner: "manuscript-agent"
 status: "active"
 last_updated_utc: "2026-05-29T08:05:00Z"

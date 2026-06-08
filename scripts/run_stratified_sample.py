@@ -8,11 +8,13 @@ from pathlib import Path
 import pandas as pd
 import re
 
-from swedish_parliament_policy_classifier.classifier.scorer import load_definitions, score_motion
+from swedish_parliament_policy_classifier.exports import load_definitions
+from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 from swedish_parliament_policy_classifier.classifier.ensemble import load_meta_classifier
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.nlp.topic_modeler import load_topic_distributions
 from swedish_parliament_policy_classifier.nlp.preprocess import extract_plain_text_from_html
+from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
 
 
 def main():
@@ -27,8 +29,14 @@ def main():
         matcher = None
 
     topic_dists = load_topic_distributions()
+    meta_clf = None
     try:
-        meta_clf = load_meta_classifier()
+        speech_model = Path("models/speech_meta_clf.pkl")
+        if speech_model.exists():
+            meta_clf = load_meta_classifier(model_path=speech_model)
+            print(f"Using speech-specific meta-classifier: {speech_model}")
+        else:
+            print("No speech-specific meta-classifier found; skipping meta-classifier for speech validation")
     except Exception as e:
         print(f"Meta-classifier not loaded: {e}")
         meta_clf = None
@@ -41,8 +49,22 @@ def main():
     all_speeches = pd.concat(speeches, ignore_index=True)
     sample_df = all_speeches[all_speeches["anforande_id"].isin(sample_ids)]
 
+    report_header = ensure_frontmatter(
+        "# Stratified Speech Classification Report\n\n",
+        {
+            "_agent_frontmatter": {
+                "id": "reports.stratified_classification",
+                "purpose": "Generated review report for stratified speech classification sample.",
+                "steward": "classifier",
+                "edit_policy": "generated_do_not_edit",
+                "generator": "scripts/run_stratified_sample.py",
+            },
+            "source_ids": "stratified_sample_ids.txt",
+        },
+    )
+
     with open("stratified_classification_report.md", "w", encoding="utf-8") as out:
-        out.write("# Stratified Speech Classification Report\n\n")
+        out.write(report_header)
 
         for _, row in sample_df.iterrows():
             text = row["anforandetext"] or ""
@@ -61,7 +83,7 @@ def main():
                 skip_policy_extraction=True,
                 use_speech_preprocessing=True,
                 use_ollama=True,
-                ollama_weight=0.55,
+                ollama_weight=0.60,
             )
 
             # Sort by normalized_weight descending
@@ -72,7 +94,13 @@ def main():
             out.write(f"**Title:** {row['avsnittsrubrik']}\n")
             out.write(f"**Date:** {row['datum']}\n")
             out.write(f"**Top category:** {top.category} ({top.normalized_weight:.4f})\n")
+            out.write(f"**Classifier version:** {top.classifier_version}\n")
             out.write(f"**ID:** {row['anforande_id']}\n\n")
+            out.write("### Matched rules\n")
+            for r in result:
+                if r.matched_rules:
+                    out.write(f"- {r.category}: {', '.join(r.matched_rules[:5])}\n")
+            out.write("\n")
 
             out.write("### All category scores\n")
             for r in result:

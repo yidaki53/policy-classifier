@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "Add zero-shot + transformer features to meta-classifier"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Problem
 The LightGBM meta-classifier currently only uses keyword counts + embedding cosine similarities as features (plus topic/metadata). This yields 10.7% test accuracy because these signals are too weak alone.
 # Available signal sources not yet in the feature vector

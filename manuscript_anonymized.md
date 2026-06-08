@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript_anonymized"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 > **Blinded peer-review version**
 > Identifying author and repository metadata are redacted in this file.
 

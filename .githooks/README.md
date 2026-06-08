@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: ".githooks/README"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 Repository git-hooks
 ===================
 

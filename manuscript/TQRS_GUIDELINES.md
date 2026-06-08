@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/TQRS_GUIDELINES"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # TQRS Guidelines (Title — Question — Results — Significance)
 
 This project adopts the TQRS structure to keep manuscripts concise, evidence-focused, and reproducible. Use these rules when drafting in `manuscript/sections/`.

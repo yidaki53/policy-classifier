@@ -11,6 +11,7 @@ import pandas as pd
 from swedish_parliament_policy_classifier.analysis.ideological_gap import build_modality_profiles, run_ideological_gap_analysis
 from swedish_parliament_policy_classifier.analysis.promise_fulfillment import run_promise_fulfillment_analysis
 from swedish_parliament_policy_classifier.analysis.speech_visualizations import IDEOLOGY_ORDER
+from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
 
 
 EXCLUDED_OVERLAY_PARTIES = {"Unknown", "Moderaterna", "Vänsterpartiet", "X"}
@@ -40,7 +41,20 @@ def _write_table(df: pd.DataFrame, out_dir: Path, stem: str) -> dict:
     tex_p = out_dir / f"{stem}.tex"
 
     df.to_parquet(pq_p, index=False, compression="zstd")
-    md_p.write_text(_markdown_table(df), encoding="utf-8")
+    md_text = ensure_frontmatter(
+        _markdown_table(df),
+        {
+            "_agent_frontmatter": {
+                "id": f"manuscript.table.{stem}",
+                "purpose": "Generated manuscript table export in Markdown format.",
+                "steward": "analysis",
+                "edit_policy": "generated_do_not_edit",
+                "generator": "swedish_parliament_policy_classifier.analysis.manuscript_exports",
+            },
+            "table_stem": stem,
+        },
+    )
+    md_p.write_text(md_text, encoding="utf-8")
     tex_p.write_text(df.to_latex(index=False, escape=True, float_format=lambda x: f"{x:.4f}"), encoding="utf-8")
 
     return {"parquet": str(pq_p), "md": str(md_p), "tex": str(tex_p)}

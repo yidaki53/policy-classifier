@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "HISTORY_CLEANUP"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 History cleanup guide — remove large blobs from repo history
 
 Warning: Rewriting git history is destructive. Back up the repository (mirror clone)

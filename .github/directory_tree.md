@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: ".github/directory_tree"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Repository directory tree — quick reference
 
 This file is a concise map of the repository and recommended layout. Agents should consult

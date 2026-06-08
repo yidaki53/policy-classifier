@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "CONTRIBUTING"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 ## Contributing — How to run and test locally
 
 This project uses `uv` for virtual environment and package management. The

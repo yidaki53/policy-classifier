@@ -27,6 +27,58 @@ stack:
 - Update the graph after substantial edits with `graphify update .`.
 - Use Graphify in AST-only mode for repo graph updates; do not use semantic extraction in this repository workflow.
 
+## Fast Path: Save Tokens And Time
+
+Use this order for almost every task:
+
+1. Ask Graphify first.
+2. Read only the smallest set of source files needed to edit.
+3. Keep generated docs/data machine-readable with valid frontmatter.
+4. Run the narrowest validation command first, then widen only if needed.
+
+### Graphify-first workflow (required for architecture/navigation questions)
+
+- Start with one of:
+  - `graphify query "<question>"` for broad understanding.
+  - `graphify explain "<file-or-concept>"` for one anchor.
+  - `graphify path "<A>" "<B>"` for dependency chains.
+- Only fall back to broad `rg`/multi-file reads if graph output is insufficient for an exact edit.
+- Prefer scoped graph queries over opening `graphify-out/GRAPH_REPORT.md`.
+
+### Frontmatter rules for generated files (required)
+
+- Any generated Markdown file must begin with valid YAML frontmatter.
+- Any generated YAML/Markdown metadata blocks must be valid YAML 1.2: use spaces (no tabs), consistent indentation, and simple scalar values.
+- Keep frontmatter compact: include only keys needed for routing/automation.
+- Prefer a stable `_agent_frontmatter` object with at least: `id`, `purpose`, `steward`, `edit_policy`, and `generator` for generated artifacts.
+- If a generator updates a file that already has frontmatter, preserve existing fields unless there is an explicit migration.
+
+### Minimal templates
+
+Markdown:
+
+```yaml
+---
+_agent_frontmatter:
+  id: "<doc.id>"
+  purpose: "<what this file is for>"
+  steward: "<team-or-module>"
+  edit_policy: "manual|generated_do_not_edit"
+  generator: "<script path if generated>"
+---
+```
+
+YAML:
+
+```yaml
+_agent_frontmatter:
+  id: "<config.id>"
+  purpose: "<what this file is for>"
+  steward: "<team-or-module>"
+  edit_policy: "manual|generated_do_not_edit"
+  generator: "<script path if generated>"
+```
+
 ## Using graphify to save tokens (MANDATORY for architecture questions)
 
 Before reading multiple source files to understand the codebase, **always** try graphify queries first:

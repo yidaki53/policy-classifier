@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/RUN_LOG_20260528_RECENCY_WEIGHTED"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Run Log: Full-Corpus Recency-Weighted Analysis
 
 ## Metadata

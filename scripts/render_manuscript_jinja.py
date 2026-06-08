@@ -11,6 +11,7 @@ from typing import Any
 from jinja2 import Environment
 
 from swedish_parliament_policy_classifier.analysis.manuscript_exports import EXCLUDED_OVERLAY_PARTIES
+from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
 
 EXCLUDED_COMPARISON_PARTIES = set(EXCLUDED_OVERLAY_PARTIES)
 
@@ -738,6 +739,20 @@ def _render_sections(sections_dir: Path, out_dir: Path, context: dict) -> list[d
     for src in sorted(sections_dir.glob("*.md")):
         template = env.from_string(src.read_text(encoding="utf-8"))
         body = template.render(**context)
+        body = ensure_frontmatter(
+            body,
+            {
+                "_agent_frontmatter": {
+                    "id": f"manuscript.rendered.{src.stem}",
+                    "purpose": "Rendered manuscript section output.",
+                    "steward": "manuscript",
+                    "edit_policy": "generated_do_not_edit",
+                    "generator": "scripts/render_manuscript_jinja.py",
+                },
+                "generated_utc": context.get("generated_utc", _utc_now()),
+                "source_section": str(src),
+            },
+        )
         dst = out_dir / src.name
         dst.write_text(body, encoding="utf-8")
         rendered.append({"source": str(src), "rendered": str(dst)})

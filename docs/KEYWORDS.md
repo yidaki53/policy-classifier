@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/KEYWORDS"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Keywords for PLOS ONE Submission
 
 Last updated: 2026-05-29

@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/PANDOC_USAGE"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Pandoc Usage
 
 This project uses Pandoc to build a manuscript PDF from Markdown sections.

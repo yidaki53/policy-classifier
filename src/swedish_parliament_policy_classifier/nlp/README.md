@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "src/swedish_parliament_policy_classifier/nlp/README"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # NLP Improvements and roadmap
 
 This folder describes prioritized improvements to the project's NLP pipeline and how to enable optional features.

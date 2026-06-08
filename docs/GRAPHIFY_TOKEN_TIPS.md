@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/GRAPHIFY_TOKEN_TIPS"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Graphify Token Tips
 
 Use Graphify before broad source-file exploration whenever the question is about structure, ownership, or relationships across modules.

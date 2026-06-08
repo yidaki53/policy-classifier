@@ -41,6 +41,7 @@ from swedish_parliament_policy_classifier.visualization.style_config import (
     add_figure_credits,
     query_summary_stats,
 )
+from swedish_parliament_policy_classifier.provenance import write_run_provenance
 
 
 def load_classifications(conn: sqlite3.Connection) -> List[Tuple]:
@@ -300,6 +301,25 @@ def generate_all_figures(db_path: str, out_dir: str):
     plot_party_motions(data, stats, out_path, normalized=True)
     plot_ideology_timeline(data, stats, out_path)
     plot_party_ideology_heatmap(data, stats, out_path)
+
+    provenance_path = write_run_provenance(
+        script="scripts/generate_figures.py",
+        inputs={"db": db_path},
+        outputs=[
+            str(out_path / "pie_chart_categories.png"),
+            str(out_path / "party_motions_stacked.png"),
+            str(out_path / "party_motions_stacked_normalized.png"),
+            str(out_path / "ideology_timeline.png"),
+            str(out_path / "party_ideology_heatmap.png"),
+        ],
+        output_dir=out_path,
+        metadata={
+            "n_classified_motions": data["total"],
+            "n_parties": stats.get("n_parties"),
+            "date_range": stats.get("date_range"),
+        },
+    )
+    print(f"Saved provenance: {provenance_path}", file=sys.stderr)
 
     print(f"\nAll figures saved to {out_path}")
     conn.close()

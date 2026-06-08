@@ -3,19 +3,19 @@ section_id: "01a_abstract"
 section_title: "Abstract"
 objective: "Provide a concise structured summary aligned with target-journal constraints and current reproducible outputs."
 required_inputs:
-	- "Current full-chain results from manuscript/sections/03_results.md"
-	- "Current methods scope across motions, speeches, and votes"
+  - "Current full-chain results from manuscript/sections/03_results.md"
+  - "Current methods scope across motions, speeches, and votes"
 required_outputs:
-	- "A <=300-word abstract that states objective, methods, key results, and conclusion"
+  - "A <=300-word abstract that states objective, methods, key results, and conclusion"
 required_metrics:
-	- "At least one anchor metric with n and/or key performance indicators"
+  - "At least one anchor metric with n and/or key performance indicators"
 required_figures_tables:
-	- "none"
+  - "none"
 provenance_requirements:
-	- "All quantitative claims must be traceable to current analysis artifacts"
+  - "All quantitative claims must be traceable to current analysis artifacts"
 update_triggers:
-	- "Any material result refresh"
-	- "Any major methods change"
+  - "Any material result refresh"
+  - "Any major methods change"
 owner: "manuscript-agent"
 status: "active"
 last_updated_utc: "2026-05-29T00:00:00Z"

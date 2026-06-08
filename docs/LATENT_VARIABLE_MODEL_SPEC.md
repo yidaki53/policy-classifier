@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/LATENT_VARIABLE_MODEL_SPEC"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Latent Variable Model Specification (Party Ideology)
 
 ## Purpose

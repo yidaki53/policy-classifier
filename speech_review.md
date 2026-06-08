@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "speech_review"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 
 ## FAR_RIGHT (0 speeches)
 

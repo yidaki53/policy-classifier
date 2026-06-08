@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/README"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 This directory contains the manuscript source files following the TQRS structure (Title, Question, Results, Significance).
 
 Use the Makefile to regenerate figures and assemble the manuscript:

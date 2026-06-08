@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/DEFINITION_OF_DONE"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Definition of Done — PLOS ONE Submission Readiness
 
 Last updated: 2026-05-29

@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: ".github/agent_plan"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Agent Plan: Swedish Parliament Policy Classifier
 
 This document is the initial, high-level plan for an autonomous agent (and the developer workflow)

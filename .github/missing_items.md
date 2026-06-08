@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: ".github/missing_items"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Gap analysis — missing items to complete project
 
 This document summarises what remains to be done for a fully reproducible, packaged,

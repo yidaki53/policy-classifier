@@ -11,6 +11,8 @@ import argparse
 import re
 from pathlib import Path
 
+from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
+
 
 ANON_DATA_AVAILABILITY = """# Data Availability
 
@@ -109,6 +111,18 @@ def anonymize_markdown(text: str) -> str:
     blinded = anonymize_sections(text)
     blinded = redact_identifiers(blinded)
     blinded = add_blinding_notice(blinded)
+    blinded = ensure_frontmatter(
+        blinded,
+        {
+            "_agent_frontmatter": {
+                "id": "manuscript.anonymized",
+                "purpose": "Blinded manuscript artifact for peer review.",
+                "steward": "manuscript",
+                "edit_policy": "generated_do_not_edit",
+                "generator": "scripts/create_anonymized_manuscript.py",
+            },
+        },
+    )
     return blinded
 
 

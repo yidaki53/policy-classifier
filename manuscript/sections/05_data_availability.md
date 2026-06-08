@@ -3,19 +3,19 @@ section_id: "05_data_availability"
 section_title: "Data Availability"
 objective: "Provide a formal Data Availability statement aligned with PLOS ONE policy language."
 required_inputs:
-	- "Current data and output artifact locations"
-	- "Current repository paths for scripts and reproducibility metadata"
+  - "Current data and output artifact locations"
+  - "Current repository paths for scripts and reproducibility metadata"
 required_outputs:
-	- "Formal data availability statement ready for manuscript submission"
+  - "Formal data availability statement ready for manuscript submission"
 required_metrics:
-	- "none"
+  - "none"
 required_figures_tables:
-	- "none"
+  - "none"
 provenance_requirements:
-	- "Statement must identify where underlying data and generated artifacts are accessible"
+  - "Statement must identify where underlying data and generated artifacts are accessible"
 update_triggers:
-	- "Changes in repository layout or data-sharing mechanism"
-	- "Changes in public archive/deposit details"
+  - "Changes in repository layout or data-sharing mechanism"
+  - "Changes in public archive/deposit details"
 owner: "manuscript-agent"
 status: "active"
 last_updated_utc: "2026-05-29T00:00:00Z"

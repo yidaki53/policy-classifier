@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "graphify-out/GRAPH_REPORT"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Graph Report - swedish_parliament_policy_classifier  (2026-05-30)
 
 ## Corpus Check

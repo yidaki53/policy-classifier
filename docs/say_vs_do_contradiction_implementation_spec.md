@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/say_vs_do_contradiction_implementation_spec"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Say-vs-Do Contradiction Stack: Implementation Specification
 
 Status: Draft for implementation

@@ -3,14 +3,24 @@
 # ============================================================
 # This file is the single source of truth for ideological categories.
 # Do NOT edit it without updating schema_version AND regenerating
-# the checksum (run: python -m definitions.loader --verify --recheck).
+# the checksum (run: python -m swedish_parliament_policy_classifier.definitions.loader --verify --recheck).
 #
 # schema_version: bumped on any structural change to categories list.
 # checksum: SHA-256 of this file with the checksum field set to "PLACEHOLDER".
-#   Recompute with: python -m definitions.loader --recheck
+#   Recompute with: python -m swedish_parliament_policy_classifier.definitions.loader --recheck
 # ============================================================
 schema_version: "2.0.0"
-checksum: "a63d943ed16f9509eacd8f554140514696b4350eed5fd07819b2c18edda91f54"
+checksum: "fb96649483b48207934c3ab7a007b8ce2f9b4538d0890d31717ec30073b204ee"
+_agent_frontmatter:
+  id: "definitions.political_spectrum"
+  purpose: "Canonical deterministic ideology taxonomy used by classifier/scoring pipelines."
+  steward: "definitions"
+  edit_policy: "immutable_without_checksum_recheck"
+  consumers:
+    - "swedish_parliament_policy_classifier.definitions.loader"
+    - "scripts/classify.py"
+    - "scripts/classify_speeches.py"
+  notes: "If categories or structure change, run: uv run python -m swedish_parliament_policy_classifier.definitions.loader --recheck --file src/swedish_parliament_policy_classifier/definitions/political_spectrum.yaml"
 
 categories:
   - name: far_left

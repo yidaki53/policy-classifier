@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/AGENTS"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # manuscript/AGENTS.md
 
 Scope: `manuscript/` and all nested files.

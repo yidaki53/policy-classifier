@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/agents"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # agents.md
 
 Use `manuscript-agent` for all manuscript work.

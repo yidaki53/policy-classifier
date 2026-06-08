@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: ".github/copilot-instructions"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Copilot Instructions for swedish_parliament_policy_classifier
 
 This repository ingests Swedish Riksdag motions, classifies them deterministically, and produces reproducible analyses and publication-ready figures. Follow these instructions when using Copilot/agents on this project.
@@ -56,6 +64,53 @@ When generating manuscript text or claims, always tie claims to evidence, cite f
 - Use explicit graph paths when referencing context: `graphify-out/graph.json` and `graphify-out/GRAPH_REPORT.md`.
 - If graphify output is missing, run `graphify update .` before cross-repo or architecture questions.
 - Use Graphify in AST-only mode for this repository workflow. Do not use semantic extraction.
+
+### Quick efficiency protocol (token-saving default)
+
+Follow this sequence unless the task is trivial:
+
+1. Graphify first (`query`, `explain`, or `path`).
+2. Open only files needed for the concrete edit.
+3. Keep generated YAML/Markdown machine-readable via valid frontmatter.
+4. Validate with the narrowest command first.
+
+Preferred Graphify command map:
+
+- Architecture/question answering: `graphify query "<question>"`
+- One module/symbol: `graphify explain "<target>"`
+- Relationship tracing: `graphify path "<A>" "<B>"`
+
+Fallback rule:
+
+- Use broad repo search only when graph output is incomplete for an exact code change.
+
+## Frontmatter Policy (YAML and Markdown)
+
+- Markdown files should begin with YAML frontmatter (`---` block at top of file).
+- Generated Markdown and YAML artifacts should include `_agent_frontmatter` for automation and routing.
+- Frontmatter MUST be valid YAML 1.2: spaces only (no tab indentation), stable keys, simple scalar values where possible.
+- Keep frontmatter minimal and high-signal; avoid large prose blocks in metadata.
+
+Recommended fields:
+
+- `id`: stable logical identifier.
+- `purpose`: short machine/human summary.
+- `steward`: owning area.
+- `edit_policy`: `manual` or `generated_do_not_edit`.
+- `generator`: source script/module for generated files.
+
+Suggested markdown frontmatter template:
+
+```yaml
+---
+_agent_frontmatter:
+	id: "<doc.id>"
+	purpose: "<what this file is for>"
+	steward: "<team-or-module>"
+	edit_policy: "manual|generated_do_not_edit"
+	generator: "<script path if generated>"
+---
+```
 
 ## CUDA & NVSHMEM (GPU) notes
 

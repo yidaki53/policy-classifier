@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/say_vs_do_execution_plan"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Say-vs-Do Contradiction: Execution Plan
 
 Status date: 2026-05-29

@@ -102,3 +102,22 @@ def test_renderer_exclusion_policy_matches_overlay_policy():
     module = _load_render_module()
 
     assert module.EXCLUDED_COMPARISON_PARTIES == {"Unknown", "Moderaterna", "Vänsterpartiet", "X"}
+
+
+def test_render_sections_injects_frontmatter_when_source_missing(tmp_path):
+    module = _load_render_module()
+
+    sections_dir = tmp_path / "sections"
+    sections_dir.mkdir(parents=True)
+    (sections_dir / "99_generated.md").write_text("# Example\n\nRendered body.\n", encoding="utf-8")
+
+    out_dir = tmp_path / "rendered"
+    rendered = module._render_sections(sections_dir=sections_dir, out_dir=out_dir, context={"generated_utc": "2026-06-08T00:00:00Z"})
+
+    assert len(rendered) == 1
+    rendered_path = Path(rendered[0]["rendered"])
+    text = rendered_path.read_text(encoding="utf-8")
+    assert text.startswith("---\n")
+    assert "_agent_frontmatter:" in text
+    assert "source_section:" in text
+    assert "# Example" in text

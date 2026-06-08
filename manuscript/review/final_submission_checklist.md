@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/review/final_submission_checklist"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Final Submission Checklist (2026-05-31)
 
 ## Publication Execution Checklist (Active)

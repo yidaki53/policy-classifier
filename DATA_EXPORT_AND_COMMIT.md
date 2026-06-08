@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "DATA_EXPORT_AND_COMMIT"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 Short guide: export DB tables to Parquet, compress artifacts, and prepare for commit/push
 
 Prerequisites

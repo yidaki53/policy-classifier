@@ -30,6 +30,7 @@ from swedish_parliament_policy_classifier.visualization.style_config import (
     add_figure_credits,
     query_summary_stats,
 )
+from swedish_parliament_policy_classifier.provenance import write_run_provenance
 
 PARTY_COLORS = {
     "S":  "#CC3333",
@@ -323,6 +324,33 @@ def generate_all(votering_parquet_dir: str, out_dir: str, db_path: str):
     plot_vote_distribution(df, out)
     plot_motions_vs_votes_timeline(df, out, db_path)
     plot_committee_distribution(df, out)
+
+    provenance_path = write_run_provenance(
+        script="scripts/visualize_voting.py",
+        inputs={
+            "votering_parquet": votering_parquet_dir,
+            "db": db_path,
+        },
+        outputs=[
+            str(out / "party_cohesion_timeseries.pdf"),
+            str(out / "party_cohesion_timeseries.png"),
+            str(out / "cross_party_agreement.pdf"),
+            str(out / "cross_party_agreement.png"),
+            str(out / "vote_distribution_by_party.pdf"),
+            str(out / "vote_distribution_by_party.png"),
+            str(out / "motions_vs_votes_timeline.pdf"),
+            str(out / "motions_vs_votes_timeline.png"),
+            str(out / "committee_vote_distribution.pdf"),
+            str(out / "committee_vote_distribution.png"),
+        ],
+        output_dir=out,
+        metadata={
+            "n_vote_rows": int(len(df)),
+            "year_min": int(pd.to_numeric(df["year"], errors="coerce").dropna().min()),
+            "year_max": int(pd.to_numeric(df["year"], errors="coerce").dropna().max()),
+        },
+    )
+    print(f"Saved provenance: {provenance_path}", file=sys.stderr)
 
     print(f"\nAll figures written to {out}", file=sys.stderr)
 

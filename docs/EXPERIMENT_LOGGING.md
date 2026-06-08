@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "docs/EXPERIMENT_LOGGING"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Experiment Logging Template
 
 Use this template for every training/evaluation/analysis run.

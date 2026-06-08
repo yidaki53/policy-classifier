@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/review/reviewer2_remediation_plan"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Reviewer #2 Remediation Plan
 
 ## Objective

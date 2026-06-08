@@ -1,3 +1,11 @@
+---
+_agent_frontmatter:
+  id: "manuscript/review/reviewer2_critique"
+  purpose: "Repository markdown document."
+  steward: "repo"
+  edit_policy: "manual"
+---
+
 # Reviewer #2 Critique (Major Revision)
 
 ## Overall recommendation
