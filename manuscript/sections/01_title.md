@@ -18,7 +18,7 @@ update_triggers:
   - "Major manuscript reframing."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T08:05:00Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # From parliamentary claims to parliamentary conduct: multimodal estimation of Swedish party policy profiles from motions, speeches, and votes

@@ -1,0 +1,13 @@
+{
+  "edge_summary": {
+    "output": "output/analysis/speech_action_contradiction_edges.parquet",
+    "rows": 141605,
+    "mean_contradiction_score_raw": 0.4533800543652234,
+    "mean_edge_confidence_raw": 0.5222143285900922
+  },
+  "expected_summary": {
+    "output": "output/analysis/speech_action_expected_contradiction_party_topic_year.parquet",
+    "rows": 814,
+    "mean_expected_contradiction": 0.5212217993312233
+  }
+}

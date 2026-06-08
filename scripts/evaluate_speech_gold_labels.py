@@ -16,9 +16,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from swedish_parliament_policy_classifier.classifier.scorer import (
-    load_definitions,
-)
+from swedish_parliament_policy_classifier.exports import load_definitions
 from swedish_parliament_policy_classifier.classifier.deep_scoring_service import DeepScoringService
 from swedish_parliament_policy_classifier.nlp.topic_modeler import load_topic_distributions
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher

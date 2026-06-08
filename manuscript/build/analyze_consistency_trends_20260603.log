@@ -1,0 +1,26 @@
+{
+  "inputs": {
+    "ideological_gap_party": "output/analysis/ideological_gap_party.parquet",
+    "promise_fulfillment_party_summary": "output/analysis/promise_fulfillment_party_summary.parquet",
+    "party_ideology_drift_by_modality_year": "output/analysis/party_ideology_drift_by_modality_year.parquet",
+    "promise_fulfillment_party_topic_year": "output/analysis/promise_fulfillment_party_topic_year.parquet"
+  },
+  "outputs": {
+    "consistency_score_party": "output/analysis/consistency_score_party.parquet",
+    "lead_lag_speech_to_action_party_year": "output/analysis/lead_lag_speech_to_action_party_year.parquet",
+    "parliament_direction_over_time": "output/analysis/parliament_direction_over_time.parquet",
+    "figure_consistency_vs_fulfillment": "output/manuscript/figures/figure_consistency_vs_fulfillment.png",
+    "figure_parliament_direction_over_time": "output/manuscript/figures/figure_parliament_direction_over_time.png",
+    "figure_consistency_fulfillment_vs_benchmark_party_year": "output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png",
+    "consistency_fulfillment_party_year": "output/analysis/consistency_fulfillment_party_year.parquet",
+    "consistency_fulfillment_vs_benchmark_party_year": "output/analysis/consistency_fulfillment_vs_benchmark_party_year.parquet"
+  },
+  "summary_metrics": {
+    "consistency_mean": 0.5072301707413178,
+    "consistency_top_party": "SD",
+    "parliament_action_slope_per_year": -0.04680907792676151,
+    "parliament_speech_slope_per_year": 0.05311920679449878,
+    "sd_mean_action_vs_parliament_median_t_plus_1": 0.19492595775225874,
+    "sd_mean_lead_shift_t_to_t1": -0.7829133992636185
+  }
+}

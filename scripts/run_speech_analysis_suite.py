@@ -18,7 +18,7 @@ def main() -> None:
     parser.add_argument("--db", default="data/swedish_parliament.db", help="Path to SQLite database")
     parser.add_argument(
         "--speech-classifications",
-        default="data/parquet/speech_classifications_with_rhetoric_full.parquet",
+        default="data/parquet/speech_classifications_rhetorical_adjusted.parquet",
         help="Path to speech classification parquet",
     )
     parser.add_argument(
@@ -27,7 +27,7 @@ def main() -> None:
         help="Directory with speech parquet files",
     )
     parser.add_argument("--fig-out", default="figures/speeches", help="Speech figure output directory")
-    parser.add_argument("--analysis-out", default="output/analysis", help="Analysis output directory")
+    parser.add_argument("--analysis-out", default="output/analysis_rhetorical", help="Analysis output directory")
     parser.add_argument("--cpu-fraction", type=float, default=0.25)
     parser.add_argument("--run-consistency", action="store_true")
     parser.add_argument("--run-recency", action="store_true")
@@ -104,6 +104,12 @@ def main() -> None:
         cmd = [
             sys.executable,
             str(script_dir / "score_say_vs_do_contradiction.py"),
+            "--axis-scores",
+            str(Path(args.analysis_out) / "speech_action_axis_scores.parquet"),
+            "--edge-out",
+            str(Path(args.analysis_out) / "speech_action_contradiction_edges.parquet"),
+            "--expected-out",
+            str(Path(args.analysis_out) / "speech_action_expected_contradiction_party_topic_year.parquet"),
         ]
         proc = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
         contradiction_out = proc.stdout
@@ -137,6 +143,24 @@ def main() -> None:
         ]
         proc = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
         uncertainty_out = proc.stdout
+
+    if args.run_consistency:
+        cmd = [
+            sys.executable,
+            str(script_dir / "analyze_consistency_trends.py"),
+            "--analysis-dir",
+            args.analysis_out,
+            "--figures-dir",
+            "output/manuscript/figures",
+            "--cpu-fraction",
+            str(args.cpu_fraction),
+        ]
+        if args.mlflow:
+            cmd.extend(["--mlflow", "--mlflow-experiment", f"{args.mlflow_experiment}-consistency"])
+            if args.mlflow_tracking_uri:
+                cmd.extend(["--mlflow-tracking-uri", args.mlflow_tracking_uri])
+        proc = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
+        consistency_out = proc.stdout
 
     if args.run_link_stability:
         cmd = [
@@ -194,24 +218,6 @@ def main() -> None:
         ]
         proc = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
         benchmark_validation_out = proc.stdout
-
-    if args.run_consistency:
-        cmd = [
-            sys.executable,
-            str(script_dir / "analyze_consistency_trends.py"),
-            "--analysis-dir",
-            args.analysis_out,
-            "--figures-dir",
-            "output/manuscript/figures",
-            "--cpu-fraction",
-            str(args.cpu_fraction),
-        ]
-        if args.mlflow:
-            cmd.extend(["--mlflow", "--mlflow-experiment", f"{args.mlflow_experiment}-consistency"])
-            if args.mlflow_tracking_uri:
-                cmd.extend(["--mlflow-tracking-uri", args.mlflow_tracking_uri])
-        proc = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
-        consistency_out = proc.stdout
 
     if args.run_recency:
         cmd = [

@@ -1,0 +1,310 @@
+{
+  "summary": {
+    "n": 10,
+    "mean_mse": 0.05140559291911636,
+    "mean_js": 0.245521140697642,
+    "top1_accuracy": 0.3
+  },
+  "results": [
+    {
+      "speech_id": "1109ecf0-b09c-e411-9412-00262d0d7125",
+      "speaker": "Magnus Persson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.15,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.115,
+        "js": 0.4228104552401625,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8c9e10aa-c5c7-e411-941e-00262d0d0c40",
+      "speaker": "Rickard Nordin (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 1.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.145,
+        "js": 0.5255973270178644,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7ccf77a3-e8e1-e511-9433-00262d0d0c40",
+      "speaker": "Jörgen Warborn (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5420213157283948,
+        "centre_right": 0.16137317941489682,
+        "right": 0.0,
+        "far_right": 0.2966055048567084
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.11111111111111112,
+        "centre_left": 0.4444444444444445,
+        "centre": 0.3333333333333333,
+        "centre_right": 0.11111111111111112,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04913261688963934,
+        "js": 0.3102262555629232,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "63a891a8-413a-e711-9452-00262d0d0c40",
+      "speaker": "Hans Linde (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.007241700724026677,
+        "left": 0.09493908721579425,
+        "centre_left": 0.3413816835593615,
+        "centre": 0.20149210719342187,
+        "centre_right": 0.16288132005013659,
+        "right": 0.061618468567772144,
+        "far_right": 0.130445632689487
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.1,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.010484355345332414,
+        "js": 0.073121092988965,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "bee496f0-398e-e711-9457-00262d0d7125",
+      "speaker": "Försvarsministern Peter Hultqvist (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5295136881040974,
+        "centre": 0.4704863118959026,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.015377836170261625,
+        "js": 0.12148527787461466,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "fbcc08fd-5909-e711-944e-00262d0d0c40",
+      "speaker": "Annika Hirvonen Falk (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.042137456577752,
+        "centre_left": 0.2450282391107163,
+        "centre": 0.5442844780005236,
+        "centre_right": 0.042137456577752,
+        "right": 0.0,
+        "far_right": 0.126412369733256
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.3,
+        "centre_left": 0.2,
+        "centre": 0.1,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.1
+      },
+      "metrics": {
+        "mse": 0.04142214545943116,
+        "js": 0.21627028104392776,
+        "top_pred": "centre",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e3d5f22d-016d-e911-911b-901b0eac4c78",
+      "speaker": "Statsrådet Mikael Damberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.9117660357468543,
+        "centre_right": 0.08823396425314559,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04777087458437396,
+        "js": 0.20101810313217375,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "7a75c7f0-3216-ec11-9160-901b0e9b71a0",
+      "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0834459985458545,
+        "centre": 0.4311447861211741,
+        "centre_right": 0.0,
+        "right": 0.19470224476497325,
+        "far_right": 0.2907069705679981
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.02464344504776454,
+        "js": 0.2575438649930938,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "6032e588-b57d-eb11-914b-901b0eac4c70",
+      "speaker": "Ebba Busch (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0783190302901021,
+        "centre_left": 0.6867238788395916,
+        "centre": 0.1566380605802042,
+        "centre_right": 0.0,
+        "right": 0.0783190302901021,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.046603544547285124,
+        "js": 0.2056111700924756,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "c6771c4a-c5d4-ee11-b1e0-6805cad971a9",
+      "speaker": "Kadir Kasirga (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.26812015098789505,
+        "centre": 0.11911576963659909,
+        "centre_right": 0.46610358176347916,
+        "right": 0.0,
+        "far_right": 0.1466604976120267
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.1
+      },
+      "metrics": {
+        "mse": 0.01862111114707544,
+        "js": 0.12152757903021985,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    }
+  ]
+}

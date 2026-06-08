@@ -10,7 +10,7 @@ required_outputs:
   - "Data access acknowledgment"
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T00:00:00Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # Acknowledgments

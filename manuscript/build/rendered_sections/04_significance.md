@@ -3,23 +3,23 @@ section_id: "04_significance"
 section_title: "Conclusion"
 objective: "Explain why the results matter, what is reproducibly established, and what limitations or next checks remain."
 required_inputs:
-	- "manuscript/sections/03_results.md"
-	- "Latest consistency/recency/SARIMAX summaries under output/analysis/."
+  - "manuscript/sections/03_results.md"
+  - "Latest consistency/recency/SARIMAX summaries under output/analysis_rhetorical/."
 required_outputs:
-	- "Concise significance interpretation tied to current evidence."
-	- "Explicit caveats tied to linkage coverage, windows, and model assumptions."
+  - "Concise significance interpretation tied to current evidence."
+  - "Explicit caveats tied to linkage coverage, windows, and model assumptions."
 required_metrics:
-	- "Reference to key summary metrics from results where relevant."
+  - "Reference to key summary metrics from results where relevant."
 required_figures_tables:
-	- "none (may reference figures produced in results section)"
+  - "none (may reference figures produced in results section)"
 provenance_requirements:
-	- "Claims must only generalize beyond what current reproducible metrics support."
+  - "Claims must only generalize beyond what current reproducible metrics support."
 update_triggers:
-	- "Any material change in core findings or uncertainty bounds."
-	- "Any major methodology revision."
+  - "Any material change in core findings or uncertainty bounds."
+  - "Any major methodology revision."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T08:05:00Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # Conclusion
@@ -36,13 +36,13 @@ The results provide descriptive evidence consistent with all three hypotheses un
 
 The empirical value is cumulative rather than singular. We do not interpret any single figure or score as definitive. Instead, confidence comes from convergence across modalities, stability under sensitivity checks, and traceability in the artifact chain. Where those conditions are weaker, the manuscript states reduced confidence and narrows interpretation accordingly.
 
-These estimates describe political text-action alignment and are not interpreted causally. Baseline speech-classifier accuracy (`0.2033`) remains below ceiling, so readers should treat modality-level contrasts as exploratory measurement outputs rather than definitive classifications. The stronger integrated hybrid ensemble is reported separately and does not replace the baseline anchor used for manuscript claims. Label-space metrics benchmarked to Britannica-based categories do not, by themselves, validate an external latent-ideology criterion. We therefore interpret external benchmark disagreement cautiously, because statement-based references (including manifesto-oriented sources) can diverge systematically from observed parliamentary conduct.
+These estimates describe political text-action alignment and are not interpreted causally. The conservative motion baseline speech-classifier accuracy (`0.2033`) remains below ceiling, so readers should treat modality-level contrasts as exploratory measurement outputs rather than definitive classifications. The speech-side pipeline with rhetorical pattern adjustment and ollama teacher weighting achieves materially higher exploratory accuracy (`0.94` on a 532-sample speech-specific meta-classifier evaluation), but this path remains reported as exploratory rather than replacing the conservative baseline anchor used for manuscript claims. The integrated hybrid ensemble (`0.784` post-active-learning test accuracy) is similarly reported as an exploratory comparison. Label-space metrics benchmarked to Britannica-based categories do not, by themselves, validate an external latent-ideology criterion. We therefore interpret external benchmark disagreement cautiously, because statement-based references (including manifesto-oriented sources) can diverge systematically from observed parliamentary conduct.
 
-Uncertainty is also inherited from upstream linkage and classification. Current artifacts (`output/analysis/speech_action_link_confidence_summary.json`) report full linkage coverage and confidence stratification. Although the latest run is no longer mainly fallback-driven, confidence strata still vary by party. Dictionary design, model-family weighting, and linkage rebalance choices can shift magnitudes, so substantive interpretation should remain tied to sensitivity checks. Forecast components function as model-fit diagnostics for trend characterization, not as validated policy-outcome prediction tools.
+Uncertainty is also inherited from upstream linkage and classification. Current artifacts (`output/analysis_rhetorical/speech_action_link_confidence_summary.json`) report full linkage coverage and confidence stratification. Although the latest run is no longer mainly fallback-driven, confidence strata still vary by party. Dictionary design, model-family weighting, and linkage rebalance choices can shift magnitudes, so substantive interpretation should remain tied to sensitivity checks. Forecast components function as model-fit diagnostics for trend characterization, not as validated policy-outcome prediction tools.
 
 These caveats are not a weakness of the study design. They are a methodological safeguard. Parliamentary language and action records are complex social data, and explicit uncertainty treatment is necessary to keep claims scientifically proportional to evidence quality. The manuscript therefore treats uncertainty reporting as part of the contribution, not merely as a limitations paragraph.
 
-If substantive conclusions remain stable across linkage-confidence strata, model-family variants, and uncertainty intervals, confidence in the latent-ideology operationalization increases. In the current refresh, structural-vs-all stability still shows measurable drift (abs max delta 0.048 in `output/analysis/link_strata_stability_summary.json`). We therefore interpret outputs as comparative diagnostics under explicit modeling assumptions, not as a fully validated single latent-trait estimate.
+If substantive conclusions remain stable across linkage-confidence strata, model-family variants, and uncertainty intervals, confidence in the latent-ideology operationalization increases. In the current refresh, structural-vs-all stability still shows measurable drift (abs max delta 0.048 in `output/analysis_rhetorical/link_strata_stability_summary.json`). We therefore interpret outputs as comparative diagnostics under explicit modeling assumptions, not as a fully validated single latent-trait estimate.
 
 Taken together, the manuscript supports a bounded claim. Multimodal parliamentary evidence can produce auditable, updateable, and policy-relevant ideology estimates when each modeling choice is justified and each interpretation is tied to reproducible artifacts.
 

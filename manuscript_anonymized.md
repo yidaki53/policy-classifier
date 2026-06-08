@@ -1,9 +1,10 @@
 ---
 _agent_frontmatter:
-  id: "manuscript_anonymized"
-  purpose: "Repository markdown document."
-  steward: "repo"
-  edit_policy: "manual"
+  id: manuscript.anonymized
+  purpose: Blinded manuscript artifact for peer review.
+  steward: manuscript
+  edit_policy: generated_do_not_edit
+  generator: scripts/create_anonymized_manuscript.py
 ---
 
 > **Blinded peer-review version**

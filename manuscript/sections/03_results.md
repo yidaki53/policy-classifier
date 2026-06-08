@@ -3,20 +3,20 @@ section_id: "03_results"
 section_title: "Results"
 objective: "Report reproducible empirical findings with explicit metrics, grounded examples, and provenance boundaries."
 required_inputs:
-  - "output/analysis/ideological_gap_party.parquet"
-  - "output/analysis/promise_fulfillment_party_topic_year.parquet"
-  - "output/analysis/promise_fulfillment_party_summary.parquet"
-  - "output/analysis/party_ideology_drift_by_modality_year.parquet"
-  - "output/analysis/consistency_score_party.parquet"
-  - "output/analysis/lead_lag_speech_to_action_party_year.parquet"
-  - "output/analysis/parliament_direction_over_time.parquet"
-  - "output/analysis/recency_weighted_party_scores.parquet"
-  - "output/analysis/recency_weighted_parliament_timeseries.parquet"
-  - "output/analysis/recency_weighted_summary.json"
-  - "output/analysis/sarimax_monthly_series.parquet"
-  - "output/analysis/sarimax_hyperparam_trials.parquet"
-  - "output/analysis/sarimax_best_models.parquet"
-  - "output/analysis/sarimax_fitted_series.parquet"
+  - "output/analysis_rhetorical/ideological_gap_party.parquet"
+  - "output/analysis_rhetorical/promise_fulfillment_party_topic_year.parquet"
+  - "output/analysis_rhetorical/promise_fulfillment_party_summary.parquet"
+  - "output/analysis_rhetorical/party_ideology_drift_by_modality_year.parquet"
+  - "output/analysis_rhetorical/consistency_score_party.parquet"
+  - "output/analysis_rhetorical/lead_lag_speech_to_action_party_year.parquet"
+  - "output/analysis_rhetorical/parliament_direction_over_time.parquet"
+  - "output/analysis_rhetorical/recency_weighted_party_scores.parquet"
+  - "output/analysis_rhetorical/recency_weighted_parliament_timeseries.parquet"
+  - "output/analysis_rhetorical/recency_weighted_summary.json"
+  - "output/analysis_rhetorical/sarimax_monthly_series.parquet"
+  - "output/analysis_rhetorical/sarimax_hyperparam_trials.parquet"
+  - "output/analysis_rhetorical/sarimax_best_models.parquet"
+  - "output/analysis_rhetorical/sarimax_fitted_series.parquet"
 required_outputs:
   - "Narrative summary of validated results and interpretation limits."
   - "Run provenance block with scripts, inputs, outputs, and timestamp."
@@ -37,7 +37,7 @@ update_triggers:
   - "Any change in classifier/ensemble methodology."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T20:03:40Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # Results
@@ -57,7 +57,7 @@ We moved intermediate, process-oriented figures to the appendix to keep the Resu
 
 ## Corpus Coverage and Model Quality
 
-On the current full corpus, the workflow covers `n=202925` motions (1971-2024), `n=991235` speech-category rows corresponding to `n=141605` unique speeches (2014-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), baseline accuracy is `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
+On the current full corpus, the workflow covers `n=202925` motions (1971-2024), `n=991235` speech-category rows corresponding to `n=141605` unique speeches (2014-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), the conservative motion baseline evaluation path yields accuracy `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). The speech-side pipeline with rhetorical pattern adjustment (7-dimension Britannica-derived signals) and ollama teacher weighting (0.60) achieves materially higher signal quality on a 532-sample speech-specific evaluation (accuracy `0.94` via the speech-specific meta-classifier `models/speech_meta_clf_parquet.pkl`). This is retained as the exploratory higher-performance path, while the conservative motion baseline remains the primary sensitivity check for manuscript claims. Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
 
 These figures indicate informative but uncertain signal. The baseline evaluation path remains intentionally conservative for manuscript claims, while the integrated hybrid ensemble is materially stronger on held-out test data and is retained as an exploratory comparison rather than the anchor for the manuscript's core quantitative claims. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value.
 
@@ -75,11 +75,11 @@ This example is included for transparency, not anecdotal persuasion. It demonstr
 
 (See Figure 8, Three-way Divergence, generated by `scripts/speeches_analysis.py`.)
 
-Promise-fulfillment contrasts are substantively visible in the current summary table. In `output/analysis/promise_fulfillment_party_summary.parquet`, `SD` has `pct_speech_motion_vote = 0.3526` while `V` has `0.1787`; `V` shows `pct_speech_motion_no_vote = 0.0921`. These differences illustrate why fulfillment diagnostics are retained as a separate axis instead of being collapsed into one aggregate consistency score.
+Promise-fulfillment contrasts are substantively visible in the current summary table. In `output/analysis_rhetorical/promise_fulfillment_party_summary.parquet`, `SD` has `pct_speech_motion_vote = 0.3526` while `V` has `0.1787`; `V` shows `pct_speech_motion_no_vote = 0.0921`. These differences illustrate why fulfillment diagnostics are retained as a separate axis instead of being collapsed into one aggregate consistency score.
 
 We interpret the fulfillment contrast as a pathway diagnostic. It asks whether issue emphasis in speech is followed by linked formal action at different rates across parties and issue domains. This pattern does not imply direct legislative causation from speech to votes. Instead, it quantifies how often speech-side attention appears in pathways that continue toward action records.
 
-Consistency contrasts remain modest in absolute spread but informative for ranking and comparison. In `output/analysis/consistency_score_party.parquet`, `M` records `consistency_score = 0.5454` and `motion_pathway_fulfillment = 0.8882`, while `L` records `consistency_score = 0.5112` and `motion_pathway_fulfillment = 0.5804`. The ranking difference is interpreted as descriptive signal under linkage and calibration assumptions, not as evidence of causal party effects.
+Consistency contrasts remain modest in absolute spread but informative for ranking and comparison. In `output/analysis_rhetorical/consistency_score_party.parquet`, `SD` records `consistency_score = 0.5654` and `motion_pathway_fulfillment = 0.9923`, while `C` records `consistency_score = 0.5176` and `motion_pathway_fulfillment = 0.9032`. The ranking difference is interpreted as descriptive signal under linkage and calibration assumptions, not as evidence of causal party effects.
 
 The consistency contrast complements fulfillment by focusing on agreement structure rather than endpoint rates. Two parties may display similar aggregate consistency while differing sharply in where that consistency comes from. For example, one party may show stable vote alignment but variable speech framing. For this reason, we interpret consistency and fulfillment jointly. Consistency indicates coherence across channels, while fulfillment indicates pathway continuation from speech-linked records into action-linked records.
 
@@ -89,7 +89,7 @@ We keep classifier quality and substantive interpretation separate throughout. W
 
 This separation between model quality and substantive claim strength is central to the manuscript's inferential stance. Better classifier metrics increase confidence that labels are coherent under the chosen category system, but they do not automatically justify stronger causal claims about party intent or policy consequences. Conversely, modest classifier performance does not invalidate all comparative diagnostics if uncertainty is explicitly modeled and interpretation remains bounded.
 
-Recency-weighted party and parliament summaries continue to support the same interpretation boundary and are exported to `output/analysis/recency_weighted_party_scores.parquet`, `output/analysis/recency_weighted_parliament_timeseries.parquet`, and `output/analysis/recency_weighted_summary.json`.
+Recency-weighted party and parliament summaries continue to support the same interpretation boundary and are exported to `output/analysis_rhetorical/recency_weighted_party_scores.parquet`, `output/analysis_rhetorical/recency_weighted_parliament_timeseries.parquet`, and `output/analysis_rhetorical/recency_weighted_summary.json`.
 
 We use recency weighting to answer a specific temporal question. Do contemporary party positions reflect information that is closer in time to current parliamentary behavior, rather than an equal average of distant historical periods? This improves interpretability for present-facing comparisons. It also introduces an explicit tradeoff. Short-term volatility can carry more influence than long-run structural stability.
 
@@ -97,7 +97,7 @@ We use recency weighting to answer a specific temporal question. Do contemporary
 
 ## Robustness and Interpretation Limits
 
-The speech-to-motion linkage uses rel_dok_id-to-betankande bridging with graph-direct and fallback strategies. Full linkage coverage is achieved by design: `n=141605` speeches are assigned a motion or vote-side candidate (`coverage=1.0000`). Evidence quality is therefore interpreted through confidence composition rather than raw coverage alone. In `output/analysis/speech_action_link_confidence_summary.json`, `n=95822` links (`67.7%`) are graph-signatory, `n=20841` (`14.7%`) are existing-reference links, `n=12576` (`8.9%`) are heuristic fallback links, and `n=12366` (`8.7%`) are structural-high links. Benchmarks are used for directional triangulation only, and election-runup summaries are treated as descriptive trend diagnostics rather than outcome forecasts.
+The speech-to-motion linkage uses rel_dok_id-to-betankande bridging with graph-direct and fallback strategies. Full linkage coverage is achieved by design: `n=141605` speeches are assigned a motion or vote-side candidate (`coverage=1.0000`). Evidence quality is therefore interpreted through confidence composition rather than raw coverage alone. In `output/analysis_rhetorical/speech_action_link_confidence_summary.json`, `n=95822` links (`67.7%`) are graph-signatory, `n=20841` (`14.7%`) are existing-reference links, `n=12576` (`8.9%`) are heuristic fallback links, and `n=12366` (`8.7%`) are structural-high links. Benchmarks are used for directional triangulation only, and election-runup summaries are treated as descriptive trend diagnostics rather than outcome forecasts.
 
 The linkage diagnostics clarify how much of the speech corpus enters cross-modality comparison at different confidence levels. Higher-coverage linkage increases representativeness, while confidence-level splits provide a direct view of robustness under stricter versus looser matching criteria. Readers can then evaluate whether key comparisons are stable only in permissive linkage settings or remain visible under stricter thresholds.
 
@@ -115,6 +115,6 @@ A final synthesis helps bound interpretation. Robust findings are those that per
 
 For first-time readers, see the compact plain-language guide in the Appendix section "How to read the metrics."
 
-Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-05-31T20:47:30Z` and outputs are written under `output/analysis/`.
+Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-05-31T20:47:30Z` and outputs are written under `output/analysis_rhetorical/`.
 
 These findings establish the empirical basis for the manuscript and motivate the final conclusion on what this framework can and cannot claim.

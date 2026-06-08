@@ -69,4 +69,4 @@ These figures capture intermediate diagnostics and process-level checks that sup
 
 ![Three-way Divergence (updated 2026-06-03T13:16:17Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
 
-![Speech Profiles Heatmap (updated 2026-06-03T21:51:00Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
+![Speech Profiles Heatmap (updated 2026-06-08T16:51:25Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }

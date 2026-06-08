@@ -591,6 +591,10 @@ def main() -> None:
             .mean()
             .fillna({"expected_contradiction": 0.0, "expected_uphold": 1.0})
         )
+        # Handle duplicate columns if promise_fulfillment_party_summary already contains them
+        for col in ["expected_contradiction", "expected_uphold"]:
+            if col in consistency.columns:
+                consistency = consistency.drop(columns=[col])
         consistency = consistency.merge(exp_party, on="party", how="left")
         consistency["expected_contradiction"] = pd.to_numeric(
             consistency["expected_contradiction"], errors="coerce"

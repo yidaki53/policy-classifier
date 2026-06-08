@@ -1,0 +1,35 @@
+{
+  "inputs": {
+    "topic_year": "output/analysis/promise_fulfillment_party_topic_year.parquet"
+  },
+  "outputs": {
+    "party_scores": "output/analysis/recency_weighted_party_scores.parquet",
+    "parliament_timeseries": "output/analysis/recency_weighted_parliament_timeseries.parquet",
+    "summary": "output/analysis/recency_weighted_summary.json"
+  },
+  "summary": {
+    "half_life_years": 3.0,
+    "max_year": 2018,
+    "election_cadence_years": 4,
+    "election_anchor_year": 2010,
+    "runup_years": 1,
+    "election_years_used": [
+      2014,
+      2018
+    ],
+    "parliament_weighted_speech_idx": 3.627856243110352,
+    "parliament_weighted_action_idx": 2.9340407552950536,
+    "parliament_runup_weighted_speech_idx": 3.60598693133196,
+    "parliament_runup_weighted_action_idx": 2.9243839574347774,
+    "parliament_nonrunup_weighted_speech_idx": 3.6702522712129686,
+    "parliament_nonrunup_weighted_action_idx": 2.9527615032369283,
+    "top_party_weighted_action": "M",
+    "sd_weighted_action_idx": 3.180025469765774,
+    "m_weighted_action_idx": 3.2403953604860325,
+    "runup_minus_nonrunup_action_idx": -0.028377545802150905,
+    "outputs": {
+      "party_scores": "output/analysis/recency_weighted_party_scores.parquet",
+      "parliament_timeseries": "output/analysis/recency_weighted_parliament_timeseries.parquet"
+    }
+  }
+}

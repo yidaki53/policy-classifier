@@ -1,0 +1,2 @@
+{"paired_tests": "figures/three_way/paired_tests.parquet", "heatmap": "figures/three_way/divergence_heatmap.png"}
+{"effect_table": "figures/three_way/effect_size_table.parquet", "annotated_heatmap": "figures/three_way/divergence_speech_vs_combined_significance.png"}

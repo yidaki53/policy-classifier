@@ -1,0 +1,3002 @@
+[
+  {
+    "speech_id": "36e284c2-7645-e511-9422-00262d0d7125",
+    "speaker": "Sofia Damm (KD)",
+    "party": "KD",
+    "title": "FN och mänskliga rättigheter i svensk utrikespolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8705c1cc-be14-e511-9420-00262d0d7125",
+    "speaker": "Finansministern Magdalena Andersson (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2014/15:515 om uteblivna skatteintäkter från kilometerskatten",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "aa2ee58b-b44c-e511-9427-00262d0d0c40",
+    "speaker": "Jimmie Åkesson (SD)",
+    "party": "SD",
+    "title": "Partiledardebatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.15,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "714beac1-b44c-e511-9427-00262d0d0c40",
+    "speaker": "TREDJE VICE TALMANNEN",
+    "party": NaN,
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8ba90f61-9886-e411-9414-00262d0d0c40",
+    "speaker": "Janine Alm Ericson (MP)",
+    "party": "MP",
+    "title": "Debatt med anledning av budgetpropositionens avlämnande",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.45,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "cabeec11-5987-e411-9414-00262d0d0c40",
+    "speaker": "Statsrådet Anders Ygeman (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2014/15:127 om polisens arbetsmetoder vid våldtäktsutredningar",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "0d372781-619a-e411-9412-00262d0d7125",
+    "speaker": "Johan Löfstrand (S)",
+    "party": "S",
+    "title": "Samhällsplanering, bostadsförsörjning och byggande samt konsumentpolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.4,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "1109ecf0-b09c-e411-9412-00262d0d7125",
+    "speaker": "Magnus Persson (SD)",
+    "party": "SD",
+    "title": "Arbetsmarknad och arbetsliv",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "5ffcc8ef-c5a6-e411-9415-00262d0d0c40",
+    "speaker": "Hillevi Engström (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2014/15:195 om genomförande av budgeten för utgiftsområde 7 Internationellt bistånd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "41b0174f-b7c1-e411-941e-00262d0d0c40",
+    "speaker": "Margareta Cederfelt (M)",
+    "party": "M",
+    "title": "Utrikespolitisk debatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "cad1a054-45c2-e411-941e-00262d0d0c40",
+    "speaker": "Nooshi Dadgostar (V)",
+    "party": "V",
+    "title": "Svar på interpellation 2014/15:259 om höga andrahandshyror",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8c9e10aa-c5c7-e411-941e-00262d0d0c40",
+    "speaker": "Rickard Nordin (C)",
+    "party": "C",
+    "title": "Energipolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "5b9e10aa-c5c7-e411-941e-00262d0d0c40",
+    "speaker": "Kultur- och demokratiministern Alice Bah Kuhnke (MP)",
+    "party": "MP",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.4,
+      "centre": 0.25,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0b7429aa-16f3-e411-9421-00262d0d0c40",
+    "speaker": "Ulla Andersson (V)",
+    "party": "V",
+    "title": "Debatt med anledning av vårpropositionens och vårändringsbudgetens avlämnande",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b472e93e-18fe-e411-941d-00262d0d7125",
+    "speaker": "Helena Lindahl (C)",
+    "party": "C",
+    "title": "Mineralpolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e370756e-19fe-e411-941d-00262d0d7125",
+    "speaker": "Maria Malmer Stenergard (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2014/15:381 om marginalskatten",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "aa7199bb-d473-e511-9426-00262d0d7125",
+    "speaker": "Lars Tysklind (FP)",
+    "party": "L",
+    "title": "Svar på interpellation 2015/16:11 om hur hela Sverige ska leva",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "618a9686-5438-e611-9437-00262d0d7125",
+    "speaker": "Cecilia Magnusson (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:635 om verktyg för barn och unga att kritiskt kunna granska rörliga bilder",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "ad5bd19c-b06a-e611-9441-00262d0d0c40",
+    "speaker": "Jonas Millard (SD)",
+    "party": "SD",
+    "title": "Övergångsstyre och utjämning vid ändrad kommun- och landstingsindelning",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "746bbe19-b16a-e611-9441-00262d0d0c40",
+    "speaker": "Håkan Svenneling (V)",
+    "party": "V",
+    "title": "Norden",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "224397c2-3686-e611-9441-00262d0d7125",
+    "speaker": "Alexandra Anstrell (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:751 om personalpolitiken inom polisen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0639af3c-2582-e511-942d-00262d0d0c40",
+    "speaker": "Lotta Finstorp (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:37 om utvecklingen av privat sjukförsäkring",
+    "scores": {
+      "far_left": 0.047619047619047616,
+      "left": 0.14285714285714285,
+      "centre_left": 0.23809523809523808,
+      "centre": 0.3333333333333333,
+      "centre_right": 0.14285714285714285,
+      "right": 0.047619047619047616,
+      "far_right": 0.047619047619047616
+    }
+  },
+  {
+    "speech_id": "d199bac2-a392-e511-942b-00262d0d7125",
+    "speaker": "Emma Wallrup (V)",
+    "party": "V",
+    "title": "Svar på interpellation 2015/16:129 om järnvägsunderhåll i hela Sverige",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "693b6f25-dd94-e511-942b-00262d0d7125",
+    "speaker": "Finansministern Magdalena Andersson (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2015/16:124 om regeringens satsningar på vård, skola och omsorg",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.45,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "7096544f-5d9a-e511-942b-00262d0d7125",
+    "speaker": "Justitie- och migrationsministern Morgan Johansson (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "1150438c-5d9a-e511-942b-00262d0d7125",
+    "speaker": "Jenny Petersson (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:155 om 90-dagarsgarantin",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "14ebac59-cba3-e511-9431-00262d0d0c40",
+    "speaker": "Anette Åkesson (M)",
+    "party": "M",
+    "title": "Svar på interpellationerna 2015/16:184 och 189 om en Sifoundersökning om RUT-avdraget",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "35ebac59-cba3-e511-9431-00262d0d0c40",
+    "speaker": "Statsrådet Per Bolund (MP)",
+    "party": "MP",
+    "title": "Svar på interpellation 2015/16:185 om optimala skattemässiga förutsättningar för delningsekonomin",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "5e99eb8c-cba3-e511-9431-00262d0d0c40",
+    "speaker": "Finansministern Magdalena Andersson (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2015/16:201 om försämring av RUT-avdraget med anledning av obefintlig poolrengöring",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "7f96bd30-4cbf-e511-9431-00262d0d0c40",
+    "speaker": "Ulf Berg (M)",
+    "party": "M",
+    "title": "Areella näringar, landsbygd och livsmedel",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.15,
+      "right": 0.1,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "8996bd30-4cbf-e511-9431-00262d0d0c40",
+    "speaker": "Eskil Erlandsson (C)",
+    "party": "C",
+    "title": "Areella näringar, landsbygd och livsmedel",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "a6a7a479-4cbf-e511-9431-00262d0d0c40",
+    "speaker": "Försvarsministern Peter Hultqvist (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2015/16:252 om försvarsmaktsresurser till polisen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "88577c0c-60dc-e511-9433-00262d0d0c40",
+    "speaker": "Utbildningsministern Gustav Fridolin (MP)",
+    "party": "MP",
+    "title": "Kommissionens arbetsprogram 2016",
+    "scores": {
+      "far_left": 0.045454545454545456,
+      "left": 0.09090909090909091,
+      "centre_left": 0.18181818181818182,
+      "centre": 0.36363636363636365,
+      "centre_right": 0.18181818181818182,
+      "right": 0.09090909090909091,
+      "far_right": 0.045454545454545456
+    }
+  },
+  {
+    "speech_id": "7ccf77a3-e8e1-e511-9433-00262d0d0c40",
+    "speaker": "Jörgen Warborn (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:363 om mål och medel för att bekämpa upphovsrättsbrott",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "fdf569fb-dfec-e511-9433-00262d0d7125",
+    "speaker": "Leif Nysmed (S)",
+    "party": "S",
+    "title": "En kortare instanskedja för detaljplaner och områdesbestämmelser",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.45,
+      "centre_right": 0.15,
+      "right": 0.03,
+      "far_right": 0.02
+    }
+  },
+  {
+    "speech_id": "5cc87008-30fb-e511-9433-00262d0d7125",
+    "speaker": "Kultur- och demokratiministern Alice Bah Kuhnke (MP)",
+    "party": "MP",
+    "title": "Svar på interpellation 2015/16:447 om åtgärder mot handel med stulna kulturföremål",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.25,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e43dcda2-30fb-e511-9433-00262d0d7125",
+    "speaker": "Jens Holm (V)",
+    "party": "V",
+    "title": "Skogspolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "c094faeb-30fb-e511-9433-00262d0d7125",
+    "speaker": "Gunilla Svantorp (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.3,
+      "centre_right": 0.05,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "98e11c96-a50b-e611-9437-00262d0d0c40",
+    "speaker": "Isak From (S)",
+    "party": "S",
+    "title": "Svar på interpellationerna 2015/16:427, 496 och 518 om villkoren för svenska mjölkbönder",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "443dd634-a60b-e611-9437-00262d0d0c40",
+    "speaker": "Adam Marttinen (SD)",
+    "party": "SD",
+    "title": "Processrättsliga frågor",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.1,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "e6ee13ca-3518-e611-9437-00262d0d0c40",
+    "speaker": "Carl Schlyter (MP)",
+    "party": "MP",
+    "title": "Djurskydd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "12d5f233-e195-e611-9441-00262d0d7125",
+    "speaker": "Raimo Pärssinen (S)",
+    "party": "S",
+    "title": "Regional anpassning av arbetsmarknadsutbildning",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "63a891a8-413a-e711-9452-00262d0d0c40",
+    "speaker": "Hans Linde (V)",
+    "party": "V",
+    "title": "Policyramverk för svenskt utvecklingssamarbete och humanitärt bistånd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "f04c815c-f945-e711-9450-00262d0d7125",
+    "speaker": "Barbro Westerholm (L)",
+    "party": "L",
+    "title": "Hälso- och sjukvårdsfrågor",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "b721700a-8052-e711-9455-00262d0d0c40",
+    "speaker": "Lena Emilsson (S)",
+    "party": "S",
+    "title": "Studiestartsstöd - ett nytt rekryterande studiestöd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "bee496f0-398e-e711-9457-00262d0d7125",
+    "speaker": "Försvarsministern Peter Hultqvist (S)",
+    "party": "S",
+    "title": "Svenskt deltagande i Förenta nationernas stabiliseringsinsats i Mali",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "f5e496f0-398e-e711-9457-00262d0d7125",
+    "speaker": "Kristina Nilsson (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e10d626d-3a8e-e711-9457-00262d0d7125",
+    "speaker": "Maria Ferm (MP)",
+    "party": "MP",
+    "title": "Ett sammanhållet mottagande med tidsbegränsade uppehållstillstånd",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.16666666666666666,
+      "centre_left": 0.25,
+      "centre": 0.20833333333333334,
+      "centre_right": 0.08333333333333333,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "07937811-3c8e-e711-9457-00262d0d7125",
+    "speaker": "Agneta Börjesson (MP)",
+    "party": "MP",
+    "title": "Ny kommunallag och Kommunala och regionala frågor",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "ca52fc01-62bc-e611-9445-00262d0d7125",
+    "speaker": "Carina Herrstedt (SD)",
+    "party": "SD",
+    "title": "Ett reformerat bilstöd",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "db44a595-49d7-e611-9448-00262d0d7125",
+    "speaker": "Jörgen Hellman (S)",
+    "party": "S",
+    "title": "Skatt, tull och exekution",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a6512aa2-12d8-e611-9448-00262d0d7125",
+    "speaker": "Annika Hirvonen Falk (MP)",
+    "party": "MP",
+    "title": "Rättsväsendet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.1,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "60fb963d-6cdd-e611-9448-00262d0d7125",
+    "speaker": "Lena Hallengren (S)",
+    "party": "S",
+    "title": "Utbildning och universitetsforskning",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0493eb53-6ce1-e611-9448-00262d0d7125",
+    "speaker": "Statsrådet Ardalan Shekarabi (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2016/17:173 om statliga servicekontor",
+    "scores": {
+      "far_left": 0.0,
+      "left": 0.0,
+      "centre_left": 0.0,
+      "centre": 1.0,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "dd98730d-bf8f-e611-9441-00262d0d7125",
+    "speaker": "Miljöministern Karolina Skog (MP)",
+    "party": "MP",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "fbcc08fd-5909-e711-944e-00262d0d0c40",
+    "speaker": "Annika Hirvonen Falk (MP)",
+    "party": "MP",
+    "title": "Makt, mål och myndighet - feministisk politik för en jämställd framtid m.m.",
+    "scores": {
+      "far_left": 0.2,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "dbcc08fd-5909-e711-944e-00262d0d0c40",
+    "speaker": "Rossana Dinamarca (V)",
+    "party": "V",
+    "title": "Makt, mål och myndighet - feministisk politik för en jämställd framtid m.m.",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "e1a8bb31-bf8f-e611-9441-00262d0d7125",
+    "speaker": "Maria Malmer Stenergard (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2015/16:772 om information till skatteutskottet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.3,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "6395c724-e859-e811-9108-901b0e9b71a8",
+    "speaker": "Kerstin Lundgren (C)",
+    "party": "C",
+    "title": "Mellanöstern och Nordafrika",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "6495c724-e859-e811-9108-901b0e9b71a8",
+    "speaker": "Lotta Johnsson Fornarve (V)",
+    "party": "V",
+    "title": "Mellanöstern och Nordafrika",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8c1b14b7-816a-e811-910a-901b0e9b71a8",
+    "speaker": "Arbetsmarknads- och etableringsministern Ylva Johansson (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.4,
+      "centre": 0.3,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "2026ee37-ed72-e811-910a-901b0e9b71a8",
+    "speaker": "Statsrådet Per Bolund (MP)",
+    "party": "MP",
+    "title": "Svar på interpellation 2017/18:538 om amorteringskrav och fallande nyproduktion på bostadsmarknaden",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b08c5a72-9578-e811-9109-901b0eac4c70",
+    "speaker": "Mathias Sundin (L)",
+    "party": "L",
+    "title": "Ökade tillståndskrav och särskilda regler för upphandling inom välfärden",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "80d60a4d-4179-e811-9109-901b0eac4c70",
+    "speaker": "Peter Helander (C)",
+    "party": "C",
+    "title": "En sammanhållen politik för Sveriges landsbygder",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "6e384806-c69b-e811-910e-901b0e9b71a0",
+    "speaker": "Penilla Gunther (KD)",
+    "party": "KD",
+    "title": "Riksrevisionens rapport om statligt ägda bolag med samhällsuppdrag",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "adcb081b-c89b-e811-910e-901b0e9b71a0",
+    "speaker": "Statsministern Stefan Löfven (S)",
+    "party": "S",
+    "title": "Statsministerns frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "7e94260a-c99b-e811-910e-901b0e9b71a0",
+    "speaker": "Andreas Norlén (M)",
+    "party": "M",
+    "title": "Val till Nämnden för prövning av statsråds och statssekreterares övergångsrestriktioner",
+    "scores": {
+      "far_left": 0.045454545454545456,
+      "left": 0.09090909090909091,
+      "centre_left": 0.18181818181818182,
+      "centre": 0.36363636363636365,
+      "centre_right": 0.18181818181818182,
+      "right": 0.09090909090909091,
+      "far_right": 0.045454545454545456
+    }
+  },
+  {
+    "speech_id": "ae9a1b3b-cd9b-e811-910e-901b0e9b71a0",
+    "speaker": "Richard Jomshof (SD)",
+    "party": "SD",
+    "title": "Svar på interpellation 2017/18:592 om utländsk finansiering av moskéer",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "1932e3e4-32df-e711-90fb-901b0eac4c70",
+    "speaker": "Statsrådet Åsa Regnér (S)",
+    "party": "S",
+    "title": "Aktuell debatt om personlig assistans",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "dbcbbe7f-b905-e811-9102-901b0e9b71a8",
+    "speaker": "Désirée Pethrus (KD)",
+    "party": "KD",
+    "title": "Arbetsmarknad och arbetsliv och Arbetsmarknadspolitik och arbetslöshetsförsäkringen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "44dd40e1-f02c-e811-9101-901b0eac4c70",
+    "speaker": "Carl Schlyter (MP)",
+    "party": "MP",
+    "title": "Vattenvård",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "113874d5-d33c-e811-9106-901b0e9b71a0",
+    "speaker": "Karin Rågsjö (V)",
+    "party": "V",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.35,
+      "centre_right": 0.1,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0ea04b2d-45ca-e911-9123-901b0eac4c78",
+    "speaker": "Karolina Skog (MP)",
+    "party": "MP",
+    "title": "Aktuell debatt om Försvarsberedningens förslag",
+    "scores": {
+      "far_left": 0.01,
+      "left": 0.05,
+      "centre_left": 0.1,
+      "centre": 0.6,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.04
+    }
+  },
+  {
+    "speech_id": "20a04b2d-45ca-e911-9123-901b0eac4c78",
+    "speaker": "John Widegren (M)",
+    "party": "M",
+    "title": "Aktuell debatt om landsbygdens förutsättningar",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "fd69111d-47ca-e911-9123-901b0eac4c78",
+    "speaker": "Malin Larsson (S)",
+    "party": "S",
+    "title": "Riksrevisionens rapport om Landsbygdsprogrammet 2014-2020",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "e6f7457f-0723-e911-9118-901b0e9b71a0",
+    "speaker": "Camilla Waltersson Grönvall (M)",
+    "party": "M",
+    "title": "Hälsovård, sjukvård och social omsorg",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "381874f8-c239-e911-9116-901b0eac4c78",
+    "speaker": "Gustaf Lantz (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "6f7fe1f3-473f-e911-9116-901b0eac4c78",
+    "speaker": "Statsrådet Ardalan Shekarabi (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2018/19:36 om tillsatt utredning om vinstförbud i välfärden",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "c2ffc269-2f40-e911-9116-901b0eac4c78",
+    "speaker": "Hans Wallmark (M)",
+    "party": "M",
+    "title": "Utrikespolitisk debatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "7cd5362f-e14f-e911-911c-0090facf175a",
+    "speaker": "Mattias Bäckström Johansson (SD)",
+    "party": "SD",
+    "title": "Statliga företag",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0f949111-e24f-e911-911c-0090facf175a",
+    "speaker": "Socialministern Lena Hallengren (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2018/19:67 om läkemedelsstatistik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "b41af306-e465-e911-911b-901b0eac4c78",
+    "speaker": "Alireza Akhondi (C)",
+    "party": "C",
+    "title": "Integration",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "5ccd2959-e565-e911-911b-901b0eac4c78",
+    "speaker": "Statsrådet Annika Strandhäll (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "6b9f6f9f-bce1-e811-910f-901b0eac4c70",
+    "speaker": "Emma Hult (MP)",
+    "party": "MP",
+    "title": "(forts.) Allmänpolitisk debatt",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "74623beb-e565-e911-911b-901b0eac4c78",
+    "speaker": "Statsrådet Per Bolund (MP)",
+    "party": "MP",
+    "title": "Svar på interpellation 2018/19:133 om lantmäteriernas funktion",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "988c39ea-ac66-e911-911b-901b0eac4c78",
+    "speaker": "Jens Holm (V)",
+    "party": "V",
+    "title": "(forts. från § 15) Naturvård och biologisk mångfald (forts. MJU9)",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.1,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e3d5f22d-016d-e911-911b-901b0eac4c78",
+    "speaker": "Statsrådet Mikael Damberg (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "d0f5e8cf-9ce2-e811-910f-901b0eac4c70",
+    "speaker": "Malin Larsson (S)",
+    "party": "S",
+    "title": "Allmänpolitisk debatt (forts. från prot. 7)",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.45,
+      "centre": 0.25,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "996e952a-9b80-e911-9121-901b0e9b71a0",
+    "speaker": "Martin Ådahl (C)",
+    "party": "C",
+    "title": "Aktuell debatt om Arbetsförmedlingens organisationsförändring",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "992f24ec-2982-e911-9121-901b0e9b71a0",
+    "speaker": "Ebba Busch Thor (KD)",
+    "party": "KD",
+    "title": "Partiledardebatt med anledning av val till Europaparlamentet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "b32f24ec-2982-e911-9121-901b0e9b71a0",
+    "speaker": "Jonas Sjöstedt (V)",
+    "party": "V",
+    "title": "Partiledardebatt med anledning av val till Europaparlamentet",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "ab56a4a9-0d86-e911-9121-901b0e9b71a0",
+    "speaker": "Lars Thomsson (C)",
+    "party": "C",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.045454545454545456,
+      "left": 0.09090909090909091,
+      "centre_left": 0.18181818181818182,
+      "centre": 0.36363636363636365,
+      "centre_right": 0.18181818181818182,
+      "right": 0.09090909090909091,
+      "far_right": 0.045454545454545456
+    }
+  },
+  {
+    "speech_id": "2e4124bf-868b-e911-9121-901b0e9b71a0",
+    "speaker": "Dag Larsson (S)",
+    "party": "S",
+    "title": "(forts. från § 4) Hälso- och sjukvårdsfrågor (forts. SoU8)",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e5bbd4a7-e591-e911-9121-901b0e9b71a0",
+    "speaker": "Niklas Wykman (M)",
+    "party": "M",
+    "title": "Befrielse från koldioxid- och energiskatt och förändrad omräkning av skatt för diesel och bensin",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.3,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "4d1e9bed-ace0-eb11-9153-901b0eac4c78",
+    "speaker": "Daniel Riazat (V)",
+    "party": "V",
+    "title": "(forts. från § 11) Grundläggande om utbildning (forts. UbU12)",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "6118b480-7506-ec11-9160-901b0e9b71a0",
+    "speaker": "Statsrådet Mikael Damberg (S)",
+    "party": "S",
+    "title": "(forts.) Svar på interpellation 2020/21:623 om ökande säkerhetshot mot Sverige",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "2a48d815-7706-ec11-9160-901b0e9b71a0",
+    "speaker": "Infrastrukturministern Tomas Eneroth (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "562aaf21-3a0b-ec11-9160-901b0e9b71a0",
+    "speaker": "Utrikesministern Ann Linde (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2020/21:658 om folkmord på den uiguriska folkgruppen i Xinjiang",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "da75c7f0-3216-ec11-9160-901b0e9b71a0",
+    "speaker": "Ali Esbati (V)",
+    "party": "V",
+    "title": "Svar på interpellation 2020/21:687 om reformeringen av Arbetsförmedlingen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "7a75c7f0-3216-ec11-9160-901b0e9b71a0",
+    "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+    "party": "MP",
+    "title": "Svar på interpellationerna 2020/21:689 och 695 om tävlingsverksamhet för idrotter med högt smittskydd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "9151d933-3416-ec11-9160-901b0e9b71a0",
+    "speaker": "Infrastrukturministern Tomas Eneroth (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2020/21:726 om medel till underhåll",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.03,
+      "far_right": 0.02
+    }
+  },
+  {
+    "speech_id": "61a28ea4-3516-ec11-9160-901b0e9b71a0",
+    "speaker": "Eric Palmqvist (SD)",
+    "party": "SD",
+    "title": "Svar på interpellation 2020/21:699 om marknadshandlarnas situation och pandemilagstiftningen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "d7184259-3c1d-ec11-915b-901b0eac4c78",
+    "speaker": "Utrikesministern Ann Linde (S)",
+    "party": "S",
+    "title": "(forts. från § 12) Organisationen för säkerhet och samarbete i Europa (OSSE) (forts. UU12)",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a15c2d87-3d36-eb11-914a-901b0e9b71a8",
+    "speaker": "Johan Hultberg (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2020/21:107 om digitala arbetssätt för vårdens medarbetare",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "8e6a3d5e-083b-eb11-914a-901b0e9b71a8",
+    "speaker": "Daniel Riazat (V)",
+    "party": "V",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "f36dfcf1-df3e-eb11-914a-901b0e9b71a8",
+    "speaker": "Statsrådet Mikael Damberg (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2020/21:84 om tidsgränser för häktning",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "2021258c-cd3f-eb11-914a-901b0e9b71a8",
+    "speaker": "Rickard Nordin (C)",
+    "party": "C",
+    "title": "Statens budget 2021 - rambeslutet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "4a21258c-cd3f-eb11-914a-901b0e9b71a8",
+    "speaker": "Mats Persson (L)",
+    "party": "L",
+    "title": "Statens budget 2021 - rambeslutet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0a5e4e26-4157-eb11-9147-901b0eac4c70",
+    "speaker": "Emma Hult (MP)",
+    "party": "MP",
+    "title": "Samhällsplanering, bostadsförsörjning och byggande samt konsumentpolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "0ec05bc4-4157-eb11-9147-901b0eac4c70",
+    "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+    "party": "MP",
+    "title": "(forts. från § 5) Kultur, medier, trossamfund och fritid (forts. KrU1)",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "81947aea-2f62-eb11-914e-901b0e9b71a0",
+    "speaker": "Tobias Andersson (SD)",
+    "party": "SD",
+    "title": "Svar på interpellation 2020/21:169 om tidsbegränsade utvisningar",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "93af6c2c-c567-eb11-914e-901b0e9b71a0",
+    "speaker": "Teres Lindberg (S)",
+    "party": "S",
+    "title": "Kommunikationer",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "6032e588-b57d-eb11-914b-901b0eac4c70",
+    "speaker": "Ebba Busch (KD)",
+    "party": "KD",
+    "title": "Partiledardebatt",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b29e5c80-3987-eb11-914b-901b0eac4c70",
+    "speaker": "Socialministern Lena Hallengren (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2020/21:278 om Äldreutredningen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "369c9728-c58c-eb11-9152-901b0e9b71a8",
+    "speaker": "Marléne Lund Kopparklint (M)",
+    "party": "M",
+    "title": "Svar på interpellationerna 2020/21:135 och 138 om vargstammens storlek",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "6a9c9728-c58c-eb11-9152-901b0e9b71a8",
+    "speaker": "Statsrådet Mikael Damberg (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2020/21:237 om brottsprovokation",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "226ef16d-620d-eb11-9146-901b0e9b71a8",
+    "speaker": "Arbetsmarknadsministern Eva Nordmark (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2019/20:467 om januariöverenskommelsens del om a-kassan",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.45,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "b05693c4-64bd-eb11-9156-901b0e9b71a8",
+    "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+    "party": "MP",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "3a0d7667-bb23-ed11-9178-901b0e9b71a8",
+    "speaker": "Larry Söder (KD)",
+    "party": "KD",
+    "title": "Hyresrätt m.m.",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.4,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a90c7667-bb23-ed11-9178-901b0e9b71a8",
+    "speaker": "Edward Riedl (M)",
+    "party": "M",
+    "title": "Extra ändringsbudget för 2022 - Tillfälligt sänkt skatt på bensin och diesel samt hantering av överskott av vaccindoser",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.3,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "78851f8f-a231-ec11-915b-901b0eac4c78",
+    "speaker": "Eric Westroth (SD)",
+    "party": "SD",
+    "title": "Pausad BNP-indexering av skatten på bensin och diesel för 2022",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8aa850f7-7b40-ec11-9164-0090facf175a",
+    "speaker": "Alexandra Anstrell (M)",
+    "party": "M",
+    "title": "(forts.) Svar på interpellation 2020/21:899 om den skenande gängkriminaliteten",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "ca9c9294-3e5f-ec11-915f-901b0eac4c70",
+    "speaker": "Oscar Sjöstedt (SD)",
+    "party": "SD",
+    "title": "Statens budget 2022 - Rambeslutet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "1a84c086-cf85-ec11-9163-901b0eac4c70",
+    "speaker": "Daniel Bäckström (C)",
+    "party": "C",
+    "title": "Areella näringar, landsbygd och livsmedel",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "999653a2-d085-ec11-9163-901b0eac4c70",
+    "speaker": "Maria Gardfjell (MP)",
+    "party": "MP",
+    "title": "Kommissionens meddelande om en ny EU-skogsstrategi för 2030",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.25,
+      "centre": 0.3,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "89ebd02a-f6bf-ec11-9167-901b0eac4c78",
+    "speaker": "Roza Güclü Hedin (S)",
+    "party": "S",
+    "title": "Riksrevisionens rapport om urvalet av elever till Pisaundersökningen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.45,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "a8ebd02a-f6bf-ec11-9167-901b0eac4c78",
+    "speaker": "Annika Hirvonen (MP)",
+    "party": "MP",
+    "title": "En sammanhållen utbildning för nyanlända som har utbildningsplikt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "74649a50-80d0-ec11-9170-0090facf175a",
+    "speaker": "Magnus Ek (C)",
+    "party": "C",
+    "title": "Cirkulär ekonomi",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b389ee29-2bf6-ec11-916f-901b0eac4c70",
+    "speaker": "Patrick Reslow (SD)",
+    "party": "SD",
+    "title": "Ökade möjligheter till grundläggande behörighet för elever på gymnasieskolans yrkesprogram",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "a5d97b48-d9fe-ec11-9174-901b0e9b71a0",
+    "speaker": "Elisabeth Svantesson (M)",
+    "party": "M",
+    "title": "Debatt med anledning av vårpropositionens avlämnande",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.3,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "34a1012e-8e16-ee11-b1cd-6805cad971a9",
+    "speaker": "Nima Gholam Ali Pour (SD)",
+    "party": "SD",
+    "title": "Arbetskraftsinvandring",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "48a1012e-8e16-ee11-b1cd-6805cad971a9",
+    "speaker": "Kerstin Lundgren (C)",
+    "party": "C",
+    "title": "Mänskliga rättigheter",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "2806a3cd-6fc6-ee11-87d6-6805cad9744d",
+    "speaker": "Eva Lindh (S)",
+    "party": "S",
+    "title": "Allmänpolitisk debatt",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.7,
+      "centre_left": 0.2,
+      "centre": 0.0,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "513e4bcf-8b66-ed11-917b-901b0eac4c70",
+    "speaker": "Anna-Caren Sätherberg (S)",
+    "party": "S",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8f5232c9-7975-ed11-917b-901b0eac4c70",
+    "speaker": "Statsrådet Acko Ankarberg Johansson (KD)",
+    "party": "KD",
+    "title": "Svar på interpellation 2022/23:13 om angelägna reformer för trans- och intersexpersoner",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.45,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "335f98c6-b995-ed11-9180-901b0e9b71a0",
+    "speaker": "Linus Sköld (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2022/23:54 om folkbildningens framtid",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "91554483-c098-ed11-917f-901b0eac4c70",
+    "speaker": "Fredrik Lundh Sammeli (S)",
+    "party": "S",
+    "title": "Hälsovård, sjukvård och social omsorg",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.4,
+      "centre_left": 0.3,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "04eef305-c198-ed11-917f-901b0eac4c70",
+    "speaker": "Camilla Rinaldo Miller (KD)",
+    "party": "KD",
+    "title": "Ekonomisk trygghet för familjer och barn",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.3,
+      "centre_right": 0.05,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "3ad7d288-ff9b-ed11-917f-901b0eac4c70",
+    "speaker": "Ida Gabrielsson (V)",
+    "party": "V",
+    "title": "Ekonomisk trygghet vid sjukdom och funktionsnedsättning",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "5767caa4-97a1-ed11-917f-901b0eac4c70",
+    "speaker": "Ilona Szatmári Waldau (V)",
+    "party": "V",
+    "title": "Allmänna bidrag till kommuner",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "39dc5a53-79c1-ed11-b1c5-6805cad971a9",
+    "speaker": "Jytte Guteland (S)",
+    "party": "S",
+    "title": "Utrikespolitisk debatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "f1bec2a9-91cc-ed11-87bf-6805cad9744d",
+    "speaker": "Statsrådet Erik Slottner (KD)",
+    "party": "KD",
+    "title": "Särskild debatt om arbetet mot korruption i Sverige",
+    "scores": {
+      "far_left": 0.045454545454545456,
+      "left": 0.09090909090909091,
+      "centre_left": 0.18181818181818182,
+      "centre": 0.2727272727272727,
+      "centre_right": 0.22727272727272727,
+      "right": 0.13636363636363635,
+      "far_right": 0.045454545454545456
+    }
+  },
+  {
+    "speech_id": "9c71f1cb-7dcd-ed11-87bf-6805cad9744d",
+    "speaker": "Teresa Carvalho (S)",
+    "party": "S",
+    "title": "Svar på interpellationerna 2022/23:186 och 191 om grön omställning, social hållbarhet och kompetensförsörjning",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.45,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.03,
+      "far_right": 0.02
+    }
+  },
+  {
+    "speech_id": "c74746e0-7ae3-ed11-b1c9-6805cad971a9",
+    "speaker": "Statsministern Ulf Kristersson (M)",
+    "party": "M",
+    "title": "Återrapportering från Europeiska rådets möte den 23-24 mars",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.25,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "16c3c89d-75ee-ed11-b1c9-6805cad971a9",
+    "speaker": "Marcus Andersson (S)",
+    "party": "S",
+    "title": "Samhällets krisberedskap",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e9c2c89d-75ee-ed11-b1c9-6805cad971a9",
+    "speaker": "Statsrådet Lotta Edholm (L)",
+    "party": "L",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "a38c19ed-35ef-ed11-b1c9-6805cad971a9",
+    "speaker": "Cecilia Rönn (L)",
+    "party": "L",
+    "title": "Särskild debatt om hushållens ekonomi",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "7476ce7e-b2f8-ed11-b1c9-6805cad971a9",
+    "speaker": "Juno Blom (L)",
+    "party": "L",
+    "title": "Familjerätt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "86439680-3605-ee11-87c3-6805cad9744d",
+    "speaker": "Statsrådet Carl-Oskar Bohlin (M)",
+    "party": "M",
+    "title": "Svar på interpellation 2022/23:298 om statligt stöd till räddningstjänster",
+    "scores": {
+      "far_left": 0.02,
+      "left": 0.05,
+      "centre_left": 0.1,
+      "centre": 0.6,
+      "centre_right": 0.15,
+      "right": 0.03,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "5a0f0b93-7318-ef11-87dd-6805cad9744d",
+    "speaker": "Arbetsmarknads- och integrationsministern Johan Pehrson (L)",
+    "party": "L",
+    "title": "Partiledardebatt med anledning av val till Europaparlamentet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a08c458b-581f-ef11-b1e6-6805cad971a9",
+    "speaker": "Statsrådet Andreas Carlson (KD)",
+    "party": "KD",
+    "title": "Svar på interpellation 2023/24:768 om radartäckning vid flygplatser",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "5087dd33-7827-ef11-b1e6-6805cad971a9",
+    "speaker": "Susanne Nordström (M)",
+    "party": "M",
+    "title": "Tydligare regler för val till Sametinget",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.25,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.03,
+      "far_right": 0.02
+    }
+  },
+  {
+    "speech_id": "1adfc965-392b-ef11-b1e6-6805cad971a9",
+    "speaker": "Thomas Ragnarsson (M)",
+    "party": "M",
+    "title": "Hälso- och sjukvårdens organisation",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "3b5c0788-5690-ee11-b1d9-6805cad971a9",
+    "speaker": "Lotta Johnsson Fornarve (V)",
+    "party": "V",
+    "title": "Svar på interpellation 2023/24:78 om effekter av omläggningen av svenskt bistånd",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.4,
+      "centre_left": 0.3,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "aa8e9c44-cca0-ee11-87d4-6805cad9744d",
+    "speaker": "Leonid Yurkovskiy (SD)",
+    "party": "SD",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.03,
+      "right": 0.01,
+      "far_right": 0.01
+    }
+  },
+  {
+    "speech_id": "892c94d4-5dd2-ee11-b1e0-6805cad971a9",
+    "speaker": "Yasmine Eriksson (SD)",
+    "party": "SD",
+    "title": "Internationellt bistånd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "c6771c4a-c5d4-ee11-b1e0-6805cad971a9",
+    "speaker": "Kadir Kasirga (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2023/24:157 om konsekvenser av marknaden inom järnvägssystemet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "11771c4a-c5d4-ee11-b1e0-6805cad971a9",
+    "speaker": "Adam Reuterskiöld (M)",
+    "party": "M",
+    "title": "Allmänna bidrag till kommuner",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "a899f199-d9d7-ee11-b1e0-6805cad971a9",
+    "speaker": "Patrick Reslow (SD)",
+    "party": "SD",
+    "title": "Särskild debatt med anledning av resultatet i den senaste Pisaundersökningen",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "5339f36d-60dd-ee11-b1e0-6805cad971a9",
+    "speaker": "Magnus Jacobsson (KD)",
+    "party": "KD",
+    "title": "Särskild debatt med anledning av det höga antalet dödsolyckor i arbetslivet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.35,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0839f36d-60dd-ee11-b1e0-6805cad971a9",
+    "speaker": "Energi- och näringsministern Ebba Busch (KD)",
+    "party": "KD",
+    "title": "Partiledardebatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "85fc3686-7d0c-ef11-87dd-6805cad9744d",
+    "speaker": "Elin Nilsson (L)",
+    "party": "L",
+    "title": "Återrapportering från Europeiska rådets möte den 1 februari",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0c8cbe12-3e1c-ef11-b1e6-6805cad971a9",
+    "speaker": "Håkan Svenneling (V)",
+    "party": "V",
+    "title": "Utrikespolitisk debatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.15,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "7551b22c-886e-ee11-87d0-6805cad9744d",
+    "speaker": "Eva Lindh (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2023/24:2 om åtgärder mot arbetslivskriminalitet",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "6bd3166a-cc3a-ef11-87e1-6805cad9744d",
+    "speaker": "Gunilla Svantorp (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2023/24:490 om stöd för kommersiell service på landsbygden",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.45,
+      "centre": 0.25,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "6f6bf767-62b9-ef11-b1f2-6805cad971a9",
+    "speaker": "Statsrådet Romina Pourmokhtari (L)",
+    "party": "L",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.1,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0d73d666-d68f-f011-87ff-6805cad9744d",
+    "speaker": "Adam Marttinen (SD)",
+    "party": "SD",
+    "title": "Vapenfrågor",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8e9770df-5695-f011-b207-6805cad971a9",
+    "speaker": "Katja Nyberg (SD)",
+    "party": "SD",
+    "title": "Kontaktförbud - ett utökat skydd för utsatta personer",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e922e4b8-d79a-f011-b207-6805cad971a9",
+    "speaker": "Sara-Lena Bjälkö (SD)",
+    "party": "SD",
+    "title": "Luftfartsfrågor",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e7fe8c33-63b9-ef11-b1f2-6805cad971a9",
+    "speaker": "Ola Möller (S)",
+    "party": "S",
+    "title": "Förbättrade levnadsvillkor för utlänningar med tillfälligt skydd",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.2,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "78c1d311-d8b0-f011-b208-6805cad971a9",
+    "speaker": "Energi- och näringsministern Ebba Busch (KD)",
+    "party": "KD",
+    "title": "Partiledardebatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.1,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "52b0b21a-dfbe-ef11-87ed-6805cad9744d",
+    "speaker": "Malcolm Momodou Jallow (V)",
+    "party": "V",
+    "title": "Svar på interpellation 2023/24:795 om utökade rättigheter för Palestina i FN",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "e946f945-61da-ef11-87ef-6805cad9744d",
+    "speaker": "Johanna Haraldsson (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2024/25:124 om tillgång till företagshälsovård",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.25,
+      "centre_left": 0.4,
+      "centre": 0.15,
+      "centre_right": 0.1,
+      "right": 0.03,
+      "far_right": 0.02
+    }
+  },
+  {
+    "speech_id": "9592251c-55ae-ef11-b1f2-6805cad971a9",
+    "speaker": "Amanda Lind (MP)",
+    "party": "MP",
+    "title": "Partiledardebatt",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.2,
+      "centre_left": 0.3,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0a5c3267-d9f5-ef11-b1f8-6805cad971a9",
+    "speaker": "Jonas Andersson (SD)",
+    "party": "SD",
+    "title": "Kultur, medier, trossamfund och fritid",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.20833333333333334,
+      "far_right": 0.041666666666666664
+    }
+  },
+  {
+    "speech_id": "bd5b3267-d9f5-ef11-b1f8-6805cad971a9",
+    "speaker": "Margareta Cederfelt (M)",
+    "party": "M",
+    "title": "Internationell samverkan",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b8322954-9dfa-ef11-b1f8-6805cad971a9",
+    "speaker": "Ulrika Heie (C)",
+    "party": "C",
+    "title": "Infrastrukturfrågor",
+    "scores": {
+      "far_left": 0.0,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.0,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "81a25606-ddb3-ef11-b1f2-6805cad971a9",
+    "speaker": "Cecilia Rönn (L)",
+    "party": "L",
+    "title": "Debatt med anledning av budgetpropositionens avlämnande",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "adb62c6f-d516-f011-b1fb-6805cad971a9",
+    "speaker": "Mikael Oscarsson (KD)",
+    "party": "KD",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "ca223bc7-4b32-f011-87f7-6805cad9744d",
+    "speaker": "Magnus Jacobsson (KD)",
+    "party": "KD",
+    "title": "Riksrevisionens rapport om bildandet av Svevia och Infranord",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "ce802011-5348-f011-b1ff-6805cad971a9",
+    "speaker": "Kjell-Arne Ottosson (KD)",
+    "party": "KD",
+    "title": "Skogspolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a7de6333-eed1-f011-b214-6805cad971a9",
+    "speaker": "Oscar Sjöstedt (SD)",
+    "party": "SD",
+    "title": "Debatt med anledning av budgetpropositionens avlämnande",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "0b5f62e7-8a37-f111-8812-6805cad9744d",
+    "speaker": "Finansministern Elisabeth Svantesson (M)",
+    "party": "M",
+    "title": "Debatt med anledning av vårpropositionens avlämnande",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.25,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "b5c6877f-4d4a-f111-bf21-6805cafeabf9",
+    "speaker": "Infrastruktur- och bostadsministern Andreas Carlson (KD)",
+    "party": "KD",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.4,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "174b8a97-a7ec-f011-880a-6805cad9744d",
+    "speaker": "Jan Riise (MP)",
+    "party": "MP",
+    "title": "Prövning av yrkande om folkomröstning om det vilande grundlagsförslag som antogs av riksdagen genom beslut om betänkande 2025/26:KU2 den 1 oktober 2025",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.4,
+      "centre": 0.2,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "c8c3d21b-a8ec-f011-880a-6805cad9744d",
+    "speaker": "Mikael Eskilandersson (SD)",
+    "party": "SD",
+    "title": "Ett nytt regelverk för bygglov",
+    "scores": {
+      "far_left": 0.02,
+      "left": 0.15,
+      "centre_left": 0.4,
+      "centre": 0.3,
+      "centre_right": 0.1,
+      "right": 0.02,
+      "far_right": 0.01
+    }
+  },
+  {
+    "speech_id": "2edd0942-ecf2-f011-880a-6805cad9744d",
+    "speaker": "Eric Palmqvist (SD)",
+    "party": "SD",
+    "title": "Förbudet mot utvinning av uran tas bort",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "a7241652-660e-f111-880e-6805cad9744d",
+    "speaker": "Mauricio Rojas (L)",
+    "party": "L",
+    "title": "Stärkt konstitutionell beredskap",
+    "scores": {
+      "far_left": 0.02,
+      "left": 0.05,
+      "centre_left": 0.1,
+      "centre": 0.4,
+      "centre_right": 0.3,
+      "right": 0.1,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "b9523a04-cf22-f111-b21a-6805cad971a9",
+    "speaker": "Christofer Bergenblock (C)",
+    "party": "C",
+    "title": "Hälsovård, sjukvård och social omsorg",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.4,
+      "centre_right": 0.1,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  },
+  {
+    "speech_id": "21e29fc9-63cc-f011-b214-6805cad971a9",
+    "speaker": "Fredrik Kärrholm (M)",
+    "party": "M",
+    "title": "Hemliga och preventiva tvångsmedel när barn under 15 år begår brott",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "1a3ca669-0a0d-f111-b218-6805cad971a9",
+    "speaker": "Kerstin Lundgren (C)",
+    "party": "C",
+    "title": "Utrikespolitisk debatt",
+    "scores": {
+      "far_left": 0.041666666666666664,
+      "left": 0.08333333333333333,
+      "centre_left": 0.16666666666666666,
+      "centre": 0.25,
+      "centre_right": 0.20833333333333334,
+      "right": 0.041666666666666664,
+      "far_right": 0.20833333333333334
+    }
+  },
+  {
+    "speech_id": "f7e9d6c1-b812-f111-880e-6805cad9744d",
+    "speaker": "Vasiliki Tsouplaki (V)",
+    "party": "V",
+    "title": "Tillgång till kultur",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "fb5ac389-7018-f111-880e-6805cad9744d",
+    "speaker": "Tobias Andersson (SD)",
+    "party": "SD",
+    "title": "Energipolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.3,
+      "centre": 0.25,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "3bbfdae3-e01b-f111-880e-6805cad9744d",
+    "speaker": "Jytte Guteland (S)",
+    "party": "S",
+    "title": "Svar på interpellation 2025/26:351 om regeringens proposition med anledning av Miljömålsberedningens betänkande",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.3,
+      "centre_left": 0.45,
+      "centre": 0.1,
+      "centre_right": 0.05,
+      "right": 0.02,
+      "far_right": 0.03
+    }
+  },
+  {
+    "speech_id": "36c4cda7-4b22-f111-b21a-6805cad971a9",
+    "speaker": "Josef Fransson (SD)",
+    "party": "SD",
+    "title": "Näringspolitik",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.35,
+      "centre_right": 0.2,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "30d2a72d-6f23-f111-b21a-6805cad971a9",
+    "speaker": "Tony Haddou (V)",
+    "party": "V",
+    "title": "Nya regler för arbetskraftsinvandring",
+    "scores": {
+      "far_left": 0.1,
+      "left": 0.6,
+      "centre_left": 0.2,
+      "centre": 0.05,
+      "centre_right": 0.0,
+      "right": 0.0,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "4d0c96ee-8728-f111-8812-6805cad9744d",
+    "speaker": "Jonas Andersson (SD)",
+    "party": "SD",
+    "title": "Civila samhället, trossamfund och folkbildning",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.25,
+      "right": 0.05,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "8d0c96ee-8728-f111-8812-6805cad9744d",
+    "speaker": "Ilona Szatmári Waldau (V)",
+    "party": "V",
+    "title": "Inkomstskatt",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.1,
+      "centre_left": 0.2,
+      "centre": 0.3,
+      "centre_right": 0.2,
+      "right": 0.1,
+      "far_right": 0.05
+    }
+  },
+  {
+    "speech_id": "cd21deda-7c29-f111-8812-6805cad9744d",
+    "speaker": "Alexandra Anstrell (M)",
+    "party": "M",
+    "title": "Frågestund",
+    "scores": {
+      "far_left": 0.045454545454545456,
+      "left": 0.09090909090909091,
+      "centre_left": 0.18181818181818182,
+      "centre": 0.36363636363636365,
+      "centre_right": 0.18181818181818182,
+      "right": 0.09090909090909091,
+      "far_right": 0.045454545454545456
+    }
+  },
+  {
+    "speech_id": "e521deda-7c29-f111-8812-6805cad9744d",
+    "speaker": "Leonid Yurkovskiy (SD)",
+    "party": "SD",
+    "title": "Kompetensförsörjning, e-hälsa och beredskap",
+    "scores": {
+      "far_left": 0.05,
+      "left": 0.15,
+      "centre_left": 0.35,
+      "centre": 0.25,
+      "centre_right": 0.15,
+      "right": 0.05,
+      "far_right": 0.0
+    }
+  }
+]

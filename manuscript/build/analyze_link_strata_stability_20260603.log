@@ -1,0 +1,13 @@
+{
+  "input_axis_scores": "output/analysis/speech_action_axis_scores.parquet",
+  "input_link_strata": "output/analysis/speech_action_link_confidence_strata.parquet",
+  "metric": "axis_js_distance",
+  "rows_input": 89275,
+  "parties_output": 9,
+  "min_n": 100,
+  "output": "output/analysis/link_strata_stability_party.parquet",
+  "structural_available_parties": 8,
+  "delta_structural_minus_all_mean": 0.07322793286041133,
+  "delta_structural_minus_all_abs_mean": 0.07322793286041133,
+  "delta_structural_minus_all_abs_max": 0.08500272318445856
+}

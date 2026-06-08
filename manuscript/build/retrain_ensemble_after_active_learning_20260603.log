@@ -1,0 +1,10 @@
+Using existing BERTopic model with 202925 motion topic distributions.
+Training ensemble meta-classifier from gold labels...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 14339.38it/s]
+Zero-shot NLI model will be used for training features.
+Transformer ideology classifier will be used for training features.
+Features train:   0%|          | 0/1919 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 201/201 [00:00<00:00, 3751.31it/s]
+
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 202/202 [00:00<00:00, 5349.37it/s]
+Features train:   0%|          | 1/1919 [02:04<66:21:06, 124.54s/it]

@@ -1,3 +1,12 @@
+---
+_agent_frontmatter:
+  id: manuscript.anonymized
+  purpose: Blinded manuscript artifact for peer review.
+  steward: manuscript
+  edit_policy: generated_do_not_edit
+  generator: scripts/create_anonymized_manuscript.py
+---
+
 > **Blinded peer-review version**
 > Identifying author and repository metadata are redacted in this file.
 

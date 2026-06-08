@@ -3,14 +3,14 @@ section_id: "06_acknowledgments"
 section_title: "Acknowledgments"
 objective: "Satisfy PLOS ONE submission requirements for Acknowledgments, Funding, and Data Access statements."
 required_inputs:
-	- "none"
+  - "none"
 required_outputs:
-	- "Funding statement (including 'no funding' declaration if applicable)"
-	- "Competing interests statement"
-	- "Data access acknowledgment"
+  - "Funding statement (including 'no funding' declaration if applicable)"
+  - "Competing interests statement"
+  - "Data access acknowledgment"
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T00:00:00Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # Acknowledgments

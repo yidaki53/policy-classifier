@@ -1,0 +1,5 @@
+{
+  "rows": 141605,
+  "out": "output/analysis/speech_action_link_confidence_strata.parquet",
+  "summary": "output/analysis/speech_action_link_confidence_summary.json"
+}

@@ -18,7 +18,7 @@ update_triggers:
   - "Addition/removal of major modalities or tasks."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-05-29T08:05:00Z"
+last_updated_utc: "2026-06-08T17:00:00Z"
 ---
 
 # Question

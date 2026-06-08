@@ -1,0 +1,46 @@
+Checking section frontmatter...
+Frontmatter check passed.
+uv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json
+{
+  "rendered_count": 9,
+  "rendered": [
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/01_title.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01a_abstract.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/01a_abstract.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/02_question.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/02_question.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/03_methodology.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/03_methodology.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/03_results.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/03_results.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/04_significance.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/04_significance.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/05_data_availability.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/05_data_availability.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/06_acknowledgments.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/06_acknowledgments.md"
+    },
+    {
+      "source": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/07_appendix.md",
+      "rendered": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/rendered_sections/07_appendix.md"
+    }
+  ],
+  "context": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/build/manuscript_context.json",
+  "generated_utc": "2026-06-06T09:32:37Z"
+}

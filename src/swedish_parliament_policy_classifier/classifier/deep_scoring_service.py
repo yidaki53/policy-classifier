@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Dict, Optional
 
 from swedish_parliament_policy_classifier.models.models import CategoryDef, ClassificationResult
-from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
 
 @dataclass
@@ -27,5 +27,6 @@ class DeepScoringService:
             use_zero_shot=True,
             skip_policy_extraction=True,
             use_speech_preprocessing=True,
-            use_ollama=False,
+            use_ollama=True,
+            ollama_weight=0.60,
         )

@@ -1,0 +1,29 @@
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6688.30it/s]
+Already labeled motions: 3199
+Sampled 1000 unlabeled motions for entropy scoring.
+Computing ensemble entropy (batched)...
+  Scored 128/1000 motions...
+Selected top-60 highest-entropy motions (entropy range 2.479 - 2.595)
+Labeling with Ollama (llama3.1:8b)...
+  10/60 labeled, avg latency=3.2s
+  20/60 labeled, avg latency=3.5s
+  30/60 labeled, avg latency=3.6s
+  40/60 labeled, avg latency=3.5s
+  50/60 labeled, avg latency=3.5s
+  60/60 labeled, avg latency=3.4s
+
+=== Active Learning Summary ===
+Pool size: 1000
+Selected: 60 (highest entropy)
+Ollama valid labels: 60/60
+Agreement (ollama>=conf + hf match): 60/60
+Inserted into gold set: 60
+Ollama avg latency: 3.44s (total 206s)
+
+Active learning label distribution:
+  centre: 462
+  centre_left: 38
+  centre_right: 52
+  far_left: 4
+  far_right: 1
+  left: 6

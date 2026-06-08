@@ -1,0 +1,6010 @@
+{
+  "summary": {
+    "n": 200,
+    "mean_mse": 0.0527785587301311,
+    "mean_js": NaN,
+    "top1_accuracy": 0.31
+  },
+  "results": [
+    {
+      "speech_id": "36e284c2-7645-e511-9422-00262d0d7125",
+      "speaker": "Sofia Damm (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.034285714285714294,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8705c1cc-be14-e511-9420-00262d0d7125",
+      "speaker": "Finansministern Magdalena Andersson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.1734381656161651,
+        "centre_left": 0.38893242188165766,
+        "centre": 0.0,
+        "centre_right": 0.06688646745735514,
+        "right": 0.2930683376749903,
+        "far_right": 0.07767460736983178
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.012396089863121448,
+        "js": 0.12065958210768572,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "aa2ee58b-b44c-e511-9427-00262d0d0c40",
+      "speaker": "Jimmie Åkesson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0272662001814458,
+        "left": 0.11915329479291814,
+        "centre_left": 0.3183328871183797,
+        "centre": 0.05051422349404695,
+        "centre_right": 0.0,
+        "right": 0.1641425250923037,
+        "far_right": 0.3205908693209057
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.15,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02050492349548703,
+        "js": 0.16038339381381297,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "714beac1-b44c-e511-9427-00262d0d0c40",
+      "speaker": "TREDJE VICE TALMANNEN",
+      "party": NaN,
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.8532608695652174,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.14673913043478262
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.08408688900891169,
+        "js": 0.3814140966499798,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8ba90f61-9886-e411-9414-00262d0d0c40",
+      "speaker": "Janine Alm Ericson (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9032882011605415,
+        "centre": 0.06447453255963895,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.032237266279819474
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.45,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.04009854346466552,
+        "js": 0.1757214923685035,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "cabeec11-5987-e411-9414-00262d0d0c40",
+      "speaker": "Statsrådet Anders Ygeman (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.20799001698072744,
+        "centre": 0.5686815654156598,
+        "centre_right": 0.03576898381197224,
+        "right": 0.10448308429286626,
+        "far_right": 0.08307634949877422
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.04497415700392347,
+        "js": 0.22450821980021124,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0d372781-619a-e411-9412-00262d0d7125",
+      "speaker": "Johan Löfstrand (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.1369655423726157,
+        "centre_left": 0.3473367239784963,
+        "centre": 0.48928733758600695,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.026410396062881057
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.4,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.014598135832638236,
+        "js": 0.10355534776926427,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "1109ecf0-b09c-e411-9412-00262d0d7125",
+      "speaker": "Magnus Persson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11357142857142857,
+        "js": 0.4228104552401625,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5ffcc8ef-c5a6-e411-9415-00262d0d0c40",
+      "speaker": "Hillevi Engström (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.37638703974778237,
+        "centre": 0.5145544340855759,
+        "centre_right": 0.10905852616664174,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02586279488566272,
+        "js": 0.17444390096935158,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "41b0174f-b7c1-e411-941e-00262d0d0c40",
+      "speaker": "Margareta Cederfelt (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.33423180592991913,
+        "centre_right": 0.08355795148247978,
+        "right": 0.0,
+        "far_right": 0.5822102425876011
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.05883613894115853,
+        "js": 0.3541979391491599,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "cad1a054-45c2-e411-941e-00262d0d0c40",
+      "speaker": "Nooshi Dadgostar (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.06976744186046512,
+        "centre_left": 0.06976744186046512,
+        "centre": 0.7209302325581395,
+        "centre_right": 0.0,
+        "right": 0.06976744186046512,
+        "far_right": 0.06976744186046512
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.06432241365989336,
+        "js": 0.23343118179282374,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8c9e10aa-c5c7-e411-941e-00262d0d0c40",
+      "speaker": "Rickard Nordin (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 1.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.14428571428571427,
+        "js": 0.5255973270178644,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5b9e10aa-c5c7-e411-941e-00262d0d0c40",
+      "speaker": "Kultur- och demokratiministern Alice Bah Kuhnke (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.3264033264033264,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.6735966735966736
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.4,
+        "centre": 0.25,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.06882704024076167,
+        "js": 0.35234138819568095,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0b7429aa-16f3-e411-9421-00262d0d0c40",
+      "speaker": "Ulla Andersson (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.018272786599956493,
+        "left": 0.0,
+        "centre_left": 0.8614313682836633,
+        "centre": 0.04720469871655428,
+        "centre_right": 0.0,
+        "right": 0.03654557319991299,
+        "far_right": 0.03654557319991299
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11509931522714709,
+        "js": 0.3477255075536782,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b472e93e-18fe-e411-941d-00262d0d7125",
+      "speaker": "Helena Lindahl (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 1.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.08714285714285712,
+        "js": 0.3420144880071857,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e370756e-19fe-e411-941d-00262d0d7125",
+      "speaker": "Maria Malmer Stenergard (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.03919552325018892,
+        "centre_left": 0.42354366047733294,
+        "centre": 0.030231524659338538,
+        "centre_right": 0.37147503588255715,
+        "right": 0.030231524659338538,
+        "far_right": 0.10532273107124394
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.027325130782216347,
+        "js": 0.14302459752913088,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "aa7199bb-d473-e511-9426-00262d0d7125",
+      "speaker": "Lars Tysklind (FP)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.049319982065461065,
+        "centre_left": 0.0,
+        "centre": 0.2548199073382155,
+        "centre_right": 0.49858018233447915,
+        "right": 0.049319982065461065,
+        "far_right": 0.1479599461963832
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.021839207574718782,
+        "js": 0.14041527276695837,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "618a9686-5438-e611-9437-00262d0d7125",
+      "speaker": "Cecilia Magnusson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.03027060082556184,
+        "centre_left": 0.5308056872037915,
+        "centre": 0.15639810426540285,
+        "centre_right": 0.03027060082556184,
+        "right": 0.07063140192631095,
+        "far_right": 0.18162360495337104
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.012441311178643595,
+        "js": 0.09267940018913644,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "ad5bd19c-b06a-e611-9441-00262d0d0c40",
+      "speaker": "Jonas Millard (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.10640066500415628,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.8935993349958438
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.08168678346685634,
+        "js": 0.31737061843313213,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "746bbe19-b16a-e611-9441-00262d0d0c40",
+      "speaker": "Håkan Svenneling (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.09034961077711662,
+        "centre_left": 0.27119738923995196,
+        "centre": 0.17213836314655803,
+        "centre_right": 0.08805864225272336,
+        "right": 0.02710038150863189,
+        "far_right": 0.35115561307501814
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.020857406258750936,
+        "js": 0.15468899263327593,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "224397c2-3686-e611-9441-00262d0d7125",
+      "speaker": "Alexandra Anstrell (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.6666666666666666,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.3333333333333333
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.06531746031746032,
+        "js": 0.42458556383748447,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0639af3c-2582-e511-942d-00262d0d0c40",
+      "speaker": "Lotta Finstorp (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.38616243048413257,
+        "centre_left": 0.2118196872181985,
+        "centre": 0.1882092125282719,
+        "centre_right": 0.16523855040726235,
+        "right": 0.0,
+        "far_right": 0.048570119362134685
+      },
+      "teacher": {
+        "far_left": 0.047619047619047616,
+        "left": 0.14285714285714285,
+        "centre_left": 0.23809523809523808,
+        "centre": 0.3333333333333333,
+        "centre_right": 0.14285714285714285,
+        "right": 0.047619047619047616,
+        "far_right": 0.047619047619047616
+      },
+      "metrics": {
+        "mse": 0.012283693904894493,
+        "js": 0.07308573875292933,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "d199bac2-a392-e511-942b-00262d0d7125",
+      "speaker": "Emma Wallrup (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.18349159970781592,
+        "centre": 0.09466764061358655,
+        "centre_right": 0.5640613586559533,
+        "right": 0.031555880204528854,
+        "far_right": 0.12622352081811541
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0427334692316036,
+        "js": 0.2103419892241595,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "693b6f25-dd94-e511-942b-00262d0d7125",
+      "speaker": "Finansministern Magdalena Andersson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.02226373901375088,
+        "centre_left": 0.7719822062675014,
+        "centre": 0.02226373901375088,
+        "centre_right": 0.07959286697415939,
+        "right": 0.10389744873083744,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.45,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.026166773967275098,
+        "js": 0.14881918512999007,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "7096544f-5d9a-e511-942b-00262d0d7125",
+      "speaker": "Justitie- och migrationsministern Morgan Johansson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 1.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.15999999999999998,
+        "js": 0.5926390375321438,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "1150438c-5d9a-e511-942b-00262d0d7125",
+      "speaker": "Jenny Petersson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.07319778188539741,
+        "centre": 0.37818853974121996,
+        "centre_right": 0.5486136783733826,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.01840891131104708,
+        "js": 0.13279926930168043,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "14ebac59-cba3-e511-9431-00262d0d0c40",
+      "speaker": "Anette Åkesson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.20755901551486045,
+        "centre": 0.0,
+        "centre_right": 0.40478710097782883,
+        "right": 0.16657602519027015,
+        "far_right": 0.22107785831704058
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.04004731554224975,
+        "js": 0.2667300078422827,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "35ebac59-cba3-e511-9431-00262d0d0c40",
+      "speaker": "Statsrådet Per Bolund (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.15586863741143828,
+        "centre_left": 0.6587898064438694,
+        "centre": 0.15528616866176922,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.030055387482923076
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0456282252439998,
+        "js": 0.20995682761556664,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5e99eb8c-cba3-e511-9431-00262d0d0c40",
+      "speaker": "Finansministern Magdalena Andersson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 1.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.16285714285714284,
+        "js": 0.5926390375321438,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7f96bd30-4cbf-e511-9431-00262d0d0c40",
+      "speaker": "Ulf Berg (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.037018756169792694,
+        "centre_left": 0.6915103652517275,
+        "centre": 0.0,
+        "centre_right": 0.07403751233958539,
+        "right": 0.0863770977295163,
+        "far_right": 0.11105626850937808
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.15,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.026640227598266668,
+        "js": 0.17393688749229178,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "8996bd30-4cbf-e511-9431-00262d0d0c40",
+      "speaker": "Eskil Erlandsson (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.027994791666666668,
+        "centre_left": 0.83203125,
+        "centre": 0.083984375,
+        "centre_right": 0.027994791666666668,
+        "right": 0.0,
+        "far_right": 0.027994791666666668
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.043809640066964285,
+        "js": 0.1735931401419651,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "a6a7a479-4cbf-e511-9431-00262d0d0c40",
+      "speaker": "Försvarsministern Peter Hultqvist (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.7567567567567568,
+        "far_right": 0.24324324324324326
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11026400918292811,
+        "js": 0.5324529340535915,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "88577c0c-60dc-e511-9433-00262d0d0c40",
+      "speaker": "Utbildningsministern Gustav Fridolin (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.17431784122076968,
+        "centre": 0.1548875086006202,
+        "centre_right": 0.05995645494217556,
+        "right": 0.26270394073347975,
+        "far_right": 0.3481342545029548
+      },
+      "teacher": {
+        "far_left": 0.045454545454545456,
+        "left": 0.09090909090909091,
+        "centre_left": 0.18181818181818182,
+        "centre": 0.36363636363636365,
+        "centre_right": 0.18181818181818182,
+        "right": 0.09090909090909091,
+        "far_right": 0.045454545454545456
+      },
+      "metrics": {
+        "mse": 0.027134525039032017,
+        "js": 0.17276227904442065,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7ccf77a3-e8e1-e511-9433-00262d0d0c40",
+      "speaker": "Jörgen Warborn (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5420137401016573,
+        "centre_right": 0.1613756475510638,
+        "right": 0.0,
+        "far_right": 0.296610612347279
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0309875325495716,
+        "js": 0.2850938854295418,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "fdf569fb-dfec-e511-9433-00262d0d7125",
+      "speaker": "Leif Nysmed (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9163851351351351,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.041807432432432436,
+        "far_right": 0.041807432432432436
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.45,
+        "centre_right": 0.15,
+        "right": 0.03,
+        "far_right": 0.02
+      },
+      "metrics": {
+        "mse": 0.10733180591607532,
+        "js": 0.3868857821511909,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5cc87008-30fb-e511-9433-00262d0d7125",
+      "speaker": "Kultur- och demokratiministern Alice Bah Kuhnke (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.13570092777698284,
+        "centre": 0.43235052550869757,
+        "centre_right": 0.023337102229162653,
+        "right": 0.1985775244226931,
+        "far_right": 0.21003392006246385
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.25,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.017425265042342184,
+        "js": 0.15684106965297634,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e43dcda2-30fb-e511-9433-00262d0d7125",
+      "speaker": "Jens Holm (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.33011386019639677,
+        "centre": 0.2619183563374995,
+        "centre_right": 0.12635514456125466,
+        "right": 0.03534409638077053,
+        "far_right": 0.24626854252407854
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.012422796501517895,
+        "js": 0.15601836728211643,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "c094faeb-30fb-e511-9433-00262d0d7125",
+      "speaker": "Gunilla Svantorp (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.432139524869016,
+        "centre_left": 0.4845331228019809,
+        "centre": 0.08332735232900308,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.3,
+        "centre_right": 0.05,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.016140234872261038,
+        "js": 0.09100070533615297,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "98e11c96-a50b-e611-9437-00262d0d0c40",
+      "speaker": "Isak From (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.15714285714285714,
+        "centre_right": 0.39714285714285713,
+        "right": 0.44571428571428573,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.04497026239067055,
+        "js": 0.2992424648599354,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "443dd634-a60b-e611-9437-00262d0d0c40",
+      "speaker": "Adam Marttinen (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.37948363517091116,
+        "centre_right": 0.18562425321556592,
+        "right": 0.2145467750626713,
+        "far_right": 0.22034533655085162
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.017804988007286054,
+        "js": 0.21305559528394175,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e6ee13ca-3518-e611-9437-00262d0d0c40",
+      "speaker": "Carl Schlyter (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 1.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.18214285714285713,
+        "js": 0.6931471805599452,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "12d5f233-e195-e611-9441-00262d0d7125",
+      "speaker": "Raimo Pärssinen (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.16264462449429135,
+        "centre": 0.7254724491019923,
+        "centre_right": 0.0,
+        "right": 0.027970731600929086,
+        "far_right": 0.08391219480278726
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04517180452696441,
+        "js": 0.22996562423721548,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "63a891a8-413a-e711-9452-00262d0d0c40",
+      "speaker": "Hans Linde (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0072427249379958016,
+        "left": 0.09495212393712496,
+        "centre_left": 0.34144274707694494,
+        "centre": 0.20151277738879458,
+        "centre_right": 0.16285157284826923,
+        "right": 0.06162900492694609,
+        "far_right": 0.13036904888392442
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.010642533096032247,
+        "js": 0.07823540189670725,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "f04c815c-f945-e711-9450-00262d0d7125",
+      "speaker": "Barbro Westerholm (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9491869918699187,
+        "centre": 0.0,
+        "centre_right": 0.0508130081300813,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.08555187294033219,
+        "js": 0.30065086147325,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b721700a-8052-e711-9455-00262d0d0c40",
+      "speaker": "Lena Emilsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.8532608695652174,
+        "centre": 0.14673913043478262,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.043108007021334056,
+        "js": 0.19789298348957596,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "bee496f0-398e-e711-9457-00262d0d7125",
+      "speaker": "Försvarsministern Peter Hultqvist (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5295109612141653,
+        "centre": 0.47048903878583476,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.01180628370091443,
+        "js": 0.1214850509942221,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "f5e496f0-398e-e711-9457-00262d0d7125",
+      "speaker": "Kristina Nilsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.14673913043478262,
+        "centre_left": 0.8532608695652174,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.09245645422630298,
+        "js": 0.2521615538286855,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e10d626d-3a8e-e711-9457-00262d0d7125",
+      "speaker": "Maria Ferm (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.5333419056191333,
+        "centre_left": 0.0,
+        "centre": 0.10284171274270285,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.3638163816381638
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.16666666666666666,
+        "centre_left": 0.25,
+        "centre": 0.20833333333333334,
+        "centre_right": 0.08333333333333333,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.03466726540750214,
+        "js": 0.21472052751696327,
+        "top_pred": "left",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "07937811-3c8e-e711-9457-00262d0d7125",
+      "speaker": "Agneta Börjesson (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.22102459886216735,
+        "centre": 0.4699602848657925,
+        "centre_right": 0.10151986393133812,
+        "right": 0.026848228477709252,
+        "far_right": 0.18064702386299275
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.00811474531213303,
+        "js": 0.12077980225995477,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "ca52fc01-62bc-e611-9445-00262d0d7125",
+      "speaker": "Carina Herrstedt (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 1.0
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.1101190476190476,
+        "js": 0.4154159809956422,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "db44a595-49d7-e611-9448-00262d0d7125",
+      "speaker": "Jörgen Hellman (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.3341658341658342,
+        "centre_left": 0.0,
+        "centre": 0.6658341658341659,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0345835511712492,
+        "js": 0.24889330215193767,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "a6512aa2-12d8-e611-9448-00262d0d7125",
+      "speaker": "Annika Hirvonen Falk (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5664131070801638,
+        "centre_right": 0.0,
+        "right": 0.43358689291983615,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.030567648190854897,
+        "js": 0.23670002787621008,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "60fb963d-6cdd-e611-9448-00262d0d7125",
+      "speaker": "Lena Hallengren (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.7145793569226252,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.28542064307737486
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04669757871268816,
+        "js": 0.35604654743363,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "0493eb53-6ce1-e611-9448-00262d0d7125",
+      "speaker": "Statsrådet Ardalan Shekarabi (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 1.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.14285714285714285,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "dd98730d-bf8f-e611-9441-00262d0d7125",
+      "speaker": "Miljöministern Karolina Skog (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.7209302325581395,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.27906976744186046
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.06876303793556361,
+        "js": 0.38208088906170035,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "fbcc08fd-5909-e711-944e-00262d0d0c40",
+      "speaker": "Annika Hirvonen Falk (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.042138119391338276,
+        "centre_left": 0.24502536090518923,
+        "centre": 0.5442840421381194,
+        "centre_right": 0.042138119391338276,
+        "right": 0.0,
+        "far_right": 0.12641435817401483
+      },
+      "teacher": {
+        "far_left": 0.2,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0493792013415108,
+        "js": 0.2761095425513217,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "dbcc08fd-5909-e711-944e-00262d0d0c40",
+      "speaker": "Rossana Dinamarca (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.10266099362539383,
+        "centre_left": 0.603005808364561,
+        "centre": 0.0,
+        "centre_right": 0.08785709033766975,
+        "right": 0.14649625245064668,
+        "far_right": 0.059979855221728794
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.01692675636552482,
+        "js": 0.13722659233635945,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e1a8bb31-bf8f-e611-9441-00262d0d7125",
+      "speaker": "Maria Malmer Stenergard (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.20602764068436444,
+        "centre_right": 0.3617645303669585,
+        "right": 0.0,
+        "far_right": 0.4322078289486771
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.3,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03634989556161811,
+        "js": 0.29425275969839837,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6395c724-e859-e811-9108-901b0e9b71a8",
+      "speaker": "Kerstin Lundgren (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 1.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11714285714285715,
+        "js": 0.4228104552401625,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6495c724-e859-e811-9108-901b0e9b71a8",
+      "speaker": "Lotta Johnsson Fornarve (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 1.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.08499999999999999,
+        "js": 0.3420144880071857,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "8c1b14b7-816a-e811-910a-901b0e9b71a8",
+      "speaker": "Arbetsmarknads- och etableringsministern Ylva Johansson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.17647058823529413,
+        "right": 0.8235294117647058,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.4,
+        "centre": 0.3,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.13393633217993078,
+        "js": 0.5860719990412872,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "2026ee37-ed72-e811-910a-901b0e9b71a8",
+      "speaker": "Statsrådet Per Bolund (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.04985459077690071,
+        "centre_left": 0.0,
+        "centre": 0.29912754466140423,
+        "centre_right": 0.5346904860822601,
+        "right": 0.11632737847943499,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030906445760077728,
+        "js": 0.19036579405733198,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b08c5a72-9578-e811-9109-901b0eac4c70",
+      "speaker": "Mathias Sundin (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.046039899614580035,
+        "centre_left": 0.26771349035144687,
+        "centre": 0.341179887670151,
+        "centre_right": 0.3450667223638221,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.005159851075439069,
+        "js": 0.0693476390496143,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "80d60a4d-4179-e811-9109-901b0eac4c70",
+      "speaker": "Peter Helander (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.7694155324259407,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.23058446757405926
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0858980502485026,
+        "js": 0.42289705042335163,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6e384806-c69b-e811-910e-901b0e9b71a0",
+      "speaker": "Penilla Gunther (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.4177680402697093,
+        "centre_right": 0.3068656996826473,
+        "right": 0.06586967680388883,
+        "far_right": 0.20949658324375453
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0239653428304132,
+        "js": 0.1991763635354756,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "adcb081b-c89b-e811-910e-901b0e9b71a0",
+      "speaker": "Statsministern Stefan Löfven (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.6137681544927382,
+        "right": 0.0,
+        "far_right": 0.3862318455072618
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.10287652282480823,
+        "js": 0.5505689667626993,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7e94260a-c99b-e811-910e-901b0e9b71a0",
+      "speaker": "Andreas Norlén (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.4407853895414225,
+        "centre": 0.0,
+        "centre_right": 0.3831540398260472,
+        "right": 0.0,
+        "far_right": 0.17606057063253036
+      },
+      "teacher": {
+        "far_left": 0.045454545454545456,
+        "left": 0.09090909090909091,
+        "centre_left": 0.18181818181818182,
+        "centre": 0.36363636363636365,
+        "centre_right": 0.18181818181818182,
+        "right": 0.09090909090909091,
+        "far_right": 0.045454545454545456
+      },
+      "metrics": {
+        "mse": 0.03935493178421708,
+        "js": 0.2714548011887943,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "ae9a1b3b-cd9b-e811-910e-901b0e9b71a0",
+      "speaker": "Richard Jomshof (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.05068788468948854,
+        "centre": 0.03486809902206855,
+        "centre_right": 0.052302148533102825,
+        "right": 0.12203834657723991,
+        "far_right": 0.7401035211781002
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.08623317809783997,
+        "js": 0.34013118959465066,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "1932e3e4-32df-e711-90fb-901b0eac4c70",
+      "speaker": "Statsrådet Åsa Regnér (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5560538116591929,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.4439461883408072,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.04180739608679041,
+        "js": 0.3100013524871092,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "dbcbbe7f-b905-e811-9102-901b0e9b71a8",
+      "speaker": "Désirée Pethrus (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.050453893932154804,
+        "centre": 0.06516961299569995,
+        "centre_right": 0.4509316770186335,
+        "right": 0.3577639751552795,
+        "far_right": 0.0756808408982322
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.032251579617540695,
+        "js": 0.1981658409595523,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "44dd40e1-f02c-e811-9101-901b0eac4c70",
+      "speaker": "Carl Schlyter (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.2090078367720808,
+        "centre_left": 0.23434843149781054,
+        "centre": 0.20822679104423295,
+        "centre_right": 0.12090587867084493,
+        "right": 0.04030195955694831,
+        "far_right": 0.18720910245808248
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.00602486217267582,
+        "js": 0.053697601538286066,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "113874d5-d33c-e811-9106-901b0e9b71a0",
+      "speaker": "Karin Rågsjö (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.35,
+        "centre_right": 0.1,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03785714285714286,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0ea04b2d-45ca-e911-9123-901b0eac4c78",
+      "speaker": "Karolina Skog (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.35130581297388375,
+        "right": 0.6486941870261163,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.01,
+        "left": 0.05,
+        "centre_left": 0.1,
+        "centre": 0.6,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.04
+      },
+      "metrics": {
+        "mse": 0.11045125141656263,
+        "js": 0.4501855025704167,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "20a04b2d-45ca-e911-9123-901b0eac4c78",
+      "speaker": "John Widegren (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 1.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11714285714285715,
+        "js": 0.4228104552401625,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "fd69111d-47ca-e911-9123-901b0eac4c78",
+      "speaker": "Malin Larsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 1.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.065,
+        "js": 0.27435846855026524,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e6f7457f-0723-e911-9118-901b0e9b71a0",
+      "speaker": "Camilla Waltersson Grönvall (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.034104038153151064,
+        "centre_left": 0.4582513807257957,
+        "centre": 0.19537178807466585,
+        "centre_right": 0.09403844421691744,
+        "right": 0.09604588984245341,
+        "far_right": 0.12218845898701657
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.006120032913757642,
+        "js": 0.063896392411043,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "381874f8-c239-e911-9116-901b0eac4c78",
+      "speaker": "Gustaf Lantz (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 1.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.18214285714285713,
+        "js": 0.6931471805599452,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6f7fe1f3-473f-e911-9116-901b0eac4c78",
+      "speaker": "Statsrådet Ardalan Shekarabi (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.16414791322654165,
+        "centre_left": 0.5784990478528315,
+        "centre": 0.15299723118388872,
+        "centre_right": 0.10435580773673814,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.009625851416134635,
+        "js": 0.07794557548657403,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "c2ffc269-2f40-e911-9116-901b0eac4c78",
+      "speaker": "Hans Wallmark (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.08728166134643664,
+        "centre": 0.15510562748825366,
+        "centre_right": 0.060040888059969155,
+        "right": 0.07004770273663068,
+        "far_right": 0.6275241203687099
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.05953054475903959,
+        "js": 0.24894719877068533,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7cd5362f-e14f-e911-911c-0090facf175a",
+      "speaker": "Mattias Bäckström Johansson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.2235716057549198,
+        "centre_left": 0.0,
+        "centre": 0.04311021994377377,
+        "centre_right": 0.7333181743013064,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.06743836169964422,
+        "js": 0.2799444920558774,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0f949111-e24f-e911-911c-0090facf175a",
+      "speaker": "Socialministern Lena Hallengren (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.2788710887622257,
+        "centre_left": 0.053773348954151146,
+        "centre": 0.3984888175128674,
+        "centre_right": 0.053773348954151146,
+        "right": 0.0,
+        "far_right": 0.21509339581660458
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.020860969420511553,
+        "js": 0.18193427016077074,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "b41af306-e465-e911-911b-901b0eac4c78",
+      "speaker": "Alireza Akhondi (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.21992482888260415,
+        "centre_left": 0.3698835375651372,
+        "centre": 0.042407029784538024,
+        "centre_right": 0.0,
+        "right": 0.2405635144141066,
+        "far_right": 0.12722108935361406
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.030305437764975966,
+        "js": 0.22686704430214585,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5ccd2959-e565-e911-911b-901b0eac4c78",
+      "speaker": "Statsrådet Annika Strandhäll (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.6326530612244898,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.3673469387755102
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04343874576069495,
+        "js": 0.3484740486908364,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "6b9f6f9f-bce1-e811-910f-901b0eac4c70",
+      "speaker": "Emma Hult (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.419256166245873,
+        "centre": 0.0,
+        "centre_right": 0.3644396970285492,
+        "right": 0.0,
+        "far_right": 0.21630413672557777
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.03490747919527962,
+        "js": 0.28740031872537336,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "74623beb-e565-e911-911b-901b0eac4c78",
+      "speaker": "Statsrådet Per Bolund (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.1361821460592833,
+        "centre": 0.7841420432250943,
+        "centre_right": 0.07967581071562244,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.027116353044708486,
+        "js": 0.11738101685817907,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "988c39ea-ac66-e911-911b-901b0eac4c78",
+      "speaker": "Jens Holm (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.37728563191710607,
+        "centre": 0.0,
+        "centre_right": 0.10875214873923957,
+        "right": 0.3770911783716722,
+        "far_right": 0.1368710409719822
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.1,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02697635085552245,
+        "js": 0.22909606094765714,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e3d5f22d-016d-e911-911b-901b0eac4c78",
+      "speaker": "Statsrådet Mikael Damberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.9117647058823529,
+        "centre_right": 0.08823529411764706,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.04705635195254572,
+        "js": 0.2010175578685157,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "d0f5e8cf-9ce2-e811-910f-901b0eac4c70",
+      "speaker": "Malin Larsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.6387837856751046,
+        "centre": 0.08566020307580433,
+        "centre_right": 0.15730127497812008,
+        "right": 0.08743004198232922,
+        "far_right": 0.03082469428864171
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.45,
+        "centre": 0.25,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.014815420125892608,
+        "js": 0.12454893753360109,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "996e952a-9b80-e911-9121-901b0e9b71a0",
+      "speaker": "Martin Ådahl (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.7209302325581395,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.27906976744186046
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.039410878467125085,
+        "js": 0.32795810992979885,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "992f24ec-2982-e911-9121-901b0e9b71a0",
+      "speaker": "Ebba Busch Thor (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.036428571428571435,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b32f24ec-2982-e911-9121-901b0e9b71a0",
+      "speaker": "Jonas Sjöstedt (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.06768571428571428,
+        "js": 0.27435846855026524,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "ab56a4a9-0d86-e911-9121-901b0e9b71a0",
+      "speaker": "Lars Thomsson (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.49290515309932786,
+        "right": 0.5070948469006722,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.045454545454545456,
+        "left": 0.09090909090909091,
+        "centre_left": 0.18181818181818182,
+        "centre": 0.36363636363636365,
+        "centre_right": 0.18181818181818182,
+        "right": 0.09090909090909091,
+        "far_right": 0.045454545454545456
+      },
+      "metrics": {
+        "mse": 0.06395309108634054,
+        "js": 0.36912163336375875,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "2e4124bf-868b-e911-9121-901b0e9b71a0",
+      "speaker": "Dag Larsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.8142589118198874,
+        "centre": 0.12382739212007504,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.06191369606003752
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03949721993560369,
+        "js": 0.19106260639185813,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e5bbd4a7-e591-e911-9121-901b0e9b71a0",
+      "speaker": "Niklas Wykman (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.8134715025906736,
+        "centre": 0.09326424870466321,
+        "centre_right": 0.0,
+        "right": 0.09326424870466321,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.3,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0747798215100693,
+        "js": 0.2874098218419939,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "4d1e9bed-ace0-eb11-9153-901b0eac4c78",
+      "speaker": "Daniel Riazat (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.05628177996913338,
+        "left": 0.09729330955904453,
+        "centre_left": 0.3289736364525776,
+        "centre": 0.1938594643381261,
+        "centre_right": 0.14223940755835526,
+        "right": 0.08754943550754081,
+        "far_right": 0.0938029666152223
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.007070662151427358,
+        "js": 0.03456020055635299,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6118b480-7506-ec11-9160-901b0e9b71a0",
+      "speaker": "Statsrådet Mikael Damberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5297362714743435,
+        "centre_right": 0.03177079910988803,
+        "right": 0.18022707858700118,
+        "far_right": 0.2582658508287672
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02477713541919427,
+        "js": 0.2226216940076978,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "2a48d815-7706-ec11-9160-901b0e9b71a0",
+      "speaker": "Infrastrukturministern Tomas Eneroth (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.22796126610040332,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.22218091927959407,
+        "right": 0.37403118785197853,
+        "far_right": 0.17582662676802407
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.050753898883356054,
+        "js": 0.36936958104632633,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "562aaf21-3a0b-ec11-9160-901b0e9b71a0",
+      "speaker": "Utrikesministern Ann Linde (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.038813218499829265,
+        "centre_left": 0.5104526311795727,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.45073415032059794
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.06403035966712016,
+        "js": 0.3595712257662236,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "da75c7f0-3216-ec11-9160-901b0e9b71a0",
+      "speaker": "Ali Esbati (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.2635052875319281,
+        "centre_left": 0.0,
+        "centre": 0.25405218304647775,
+        "centre_right": 0.380821656203003,
+        "right": 0.05081043660929555,
+        "far_right": 0.05081043660929555
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.040783435189098265,
+        "js": 0.2401255606476108,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7a75c7f0-3216-ec11-9160-901b0e9b71a0",
+      "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.08344549125168237,
+        "centre": 0.43113503813369225,
+        "centre_right": 0.0,
+        "right": 0.19470614625392552,
+        "far_right": 0.29071332436069985
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.024644064261951443,
+        "js": 0.2575469284010905,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "9151d933-3416-ec11-9160-901b0e9b71a0",
+      "speaker": "Infrastrukturministern Tomas Eneroth (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.28353823965291725,
+        "centre_left": 0.0,
+        "centre": 0.18425582809743146,
+        "centre_right": 0.13519298589436174,
+        "right": 0.0,
+        "far_right": 0.39701294635528955
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.03,
+        "far_right": 0.02
+      },
+      "metrics": {
+        "mse": 0.0441536547504735,
+        "js": 0.27347896683343575,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "61a28ea4-3516-ec11-9160-901b0e9b71a0",
+      "speaker": "Eric Palmqvist (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 1.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.1792857142857143,
+        "js": 0.6931471805599452,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "d7184259-3c1d-ec11-915b-901b0eac4c78",
+      "speaker": "Utrikesministern Ann Linde (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02785714285714286,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a15c2d87-3d36-eb11-914a-901b0e9b71a8",
+      "speaker": "Johan Hultberg (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.7343772446487573,
+        "centre": 0.19149547478810516,
+        "centre_right": 0.04941818704209165,
+        "right": 0.0,
+        "far_right": 0.024709093521045826
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03576096954388924,
+        "js": 0.14806842454653873,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8e6a3d5e-083b-eb11-914a-901b0e9b71a8",
+      "speaker": "Daniel Riazat (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5008052123217753,
+        "centre": 0.04289552139801074,
+        "centre_right": 0.29186643425450604,
+        "right": 0.10008954992869172,
+        "far_right": 0.0643432820970161
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.07942055893811957,
+        "js": 0.4123809165791606,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "f36dfcf1-df3e-eb11-914a-901b0e9b71a8",
+      "speaker": "Statsrådet Mikael Damberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.09984002304648833,
+        "centre": 0.1330670370858451,
+        "centre_right": 0.017169940269141305,
+        "right": 0.25840760105057664,
+        "far_right": 0.4915153985479486
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.04997123253888162,
+        "js": 0.2686139726768112,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "2021258c-cd3f-eb11-914a-901b0e9b71a8",
+      "speaker": "Rickard Nordin (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.10423704275649069,
+        "centre_left": 0.30305955023646364,
+        "centre": 0.1389827236753209,
+        "centre_right": 0.3726474278544542,
+        "right": 0.08107325547727054,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.008224817923792833,
+        "js": 0.06304930407267925,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "4a21258c-cd3f-eb11-914a-901b0e9b71a8",
+      "speaker": "Mats Persson (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.09642857142857142,
+        "js": 0.3420144880071857,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0a5e4e26-4157-eb11-9147-901b0eac4c70",
+      "speaker": "Emma Hult (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03928571428571429,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0ec05bc4-4157-eb11-9147-901b0eac4c70",
+      "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.31310707394783455,
+        "centre_left": 0.12074981327136221,
+        "centre": 0.12074981327136221,
+        "centre_right": 0.3051677099039881,
+        "right": 0.0,
+        "far_right": 0.1402255896054529
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03175470376632605,
+        "js": 0.1985175050882067,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "81947aea-2f62-eb11-914e-901b0e9b71a0",
+      "speaker": "Tobias Andersson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.7280240042912699,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.09093804479013008,
+        "far_right": 0.18103795091859998
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03359360163336817,
+        "js": 0.2269814896194162,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "93af6c2c-c567-eb11-914e-901b0e9b71a0",
+      "speaker": "Teres Lindberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.6526315789473685,
+        "centre": 0.04962406015037594,
+        "centre_right": 0.0,
+        "right": 0.09924812030075188,
+        "far_right": 0.19849624060150375
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03164480750749053,
+        "js": 0.20273004275149442,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "6032e588-b57d-eb11-914b-901b0eac4c70",
+      "speaker": "Ebba Busch (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.07832278481012658,
+        "centre_left": 0.6867088607594937,
+        "centre": 0.15664556962025317,
+        "centre_right": 0.0,
+        "right": 0.07832278481012658,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.027075839208460184,
+        "js": 0.14222300099531224,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "b29e5c80-3987-eb11-914b-901b0eac4c70",
+      "speaker": "Socialministern Lena Hallengren (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.604289331773126,
+        "centre": 0.0,
+        "centre_right": 0.06540487998167376,
+        "right": 0.2267872731662921,
+        "far_right": 0.10351851507890811
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.020292703545031036,
+        "js": 0.1862316410655322,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "369c9728-c58c-eb11-9152-901b0e9b71a8",
+      "speaker": "Marléne Lund Kopparklint (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.3388533532158694,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.6611466467841306,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.07964425813308629,
+        "js": 0.3818574085952309,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6a9c9728-c58c-eb11-9152-901b0e9b71a8",
+      "speaker": "Statsrådet Mikael Damberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.24500831946755408,
+        "centre_right": 0.04742096505823627,
+        "right": 0.13851913477537436,
+        "far_right": 0.5690515806988353
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0616368745221794,
+        "js": 0.3640346414248223,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "226ef16d-620d-eb11-9146-901b0e9b71a8",
+      "speaker": "Arbetsmarknadsministern Eva Nordmark (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.38998932708329864,
+        "centre": 0.4970108702111526,
+        "centre_right": 0.11299980270554873,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.45,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.036998269581524294,
+        "js": 0.21796405841610697,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b05693c4-64bd-eb11-9156-901b0e9b71a8",
+      "speaker": "Kultur- och demokratiministern Amanda Lind (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.1552400678622355,
+        "centre": 0.7913652591150848,
+        "centre_right": 0.05339467302267972,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.052548623449063504,
+        "js": 0.19178429488949608,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "3a0d7667-bb23-ed11-9178-901b0e9b71a8",
+      "speaker": "Larry Söder (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.17647058823529413,
+        "centre_right": 0.0,
+        "right": 0.8235294117647058,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.4,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.11377162629757784,
+        "js": 0.46725687822984824,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a90c7667-bb23-ed11-9178-901b0e9b71a8",
+      "speaker": "Edward Riedl (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.6087352138307552,
+        "centre_left": 0.0,
+        "centre": 0.11737943585077343,
+        "centre_right": 0.0,
+        "right": 0.27388535031847133,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.3,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.06782663404697582,
+        "js": 0.35528116280245853,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "78851f8f-a231-ec11-915b-901b0eac4c78",
+      "speaker": "Eric Westroth (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.37069216664096105,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.4863503161791168,
+        "right": 0.1429575171799222,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03896811729128598,
+        "js": 0.2803355246808612,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8aa850f7-7b40-ec11-9164-0090facf175a",
+      "speaker": "Alexandra Anstrell (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.3390928725701944,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.5442764578833693,
+        "far_right": 0.11663066954643629
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.057654336481220966,
+        "js": 0.35788512339875644,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "ca9c9294-3e5f-ec11-915f-901b0eac4c70",
+      "speaker": "Oscar Sjöstedt (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.06646293101054958,
+        "centre_left": 0.07291313782446161,
+        "centre": 0.09292208674269972,
+        "centre_right": 0.11375770928552156,
+        "right": 0.24529814002966763,
+        "far_right": 0.4086459951070999
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03542676325393764,
+        "js": 0.1913515872770324,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "1a84c086-cf85-ec11-9163-901b0eac4c70",
+      "speaker": "Daniel Bäckström (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5924528301886792,
+        "centre": 0.30566037735849055,
+        "centre_right": 0.0,
+        "right": 0.1018867924528302,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.031158775364898538,
+        "js": 0.17978582368468538,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "999653a2-d085-ec11-9163-901b0eac4c70",
+      "speaker": "Maria Gardfjell (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.7407422912509362,
+        "centre": 0.031723438597470496,
+        "centre_right": 0.08017378118269816,
+        "right": 0.0,
+        "far_right": 0.14736048896889523
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.25,
+        "centre": 0.3,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.05066501078096684,
+        "js": 0.23076619780829277,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "89ebd02a-f6bf-ec11-9167-901b0eac4c78",
+      "speaker": "Roza Güclü Hedin (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.45295645121947176,
+        "centre": 0.29360771235494726,
+        "centre_right": 0.04370842582180622,
+        "right": 0.04905406063454511,
+        "far_right": 0.16067334996922963
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.45,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.021135990517757917,
+        "js": 0.17402645449109394,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "a8ebd02a-f6bf-ec11-9167-901b0eac4c78",
+      "speaker": "Annika Hirvonen (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5066510393746759,
+        "centre": 0.0,
+        "centre_right": 0.04569755010906493,
+        "right": 0.10257291823041911,
+        "far_right": 0.34507849228584003
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0285462189346101,
+        "js": 0.23486746645420908,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "74649a50-80d0-ec11-9170-0090facf175a",
+      "speaker": "Magnus Ek (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.3341658341658342,
+        "centre_left": 0.0,
+        "centre": 0.6658341658341659,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.027928777373618253,
+        "js": 0.2233558699665595,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "b389ee29-2bf6-ec11-916f-901b0eac4c70",
+      "speaker": "Patrick Reslow (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9163851351351351,
+        "centre": 0.08361486486486487,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.07214716979286233,
+        "js": 0.24206795774172524,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a5d97b48-d9fe-ec11-9174-901b0e9b71a0",
+      "speaker": "Elisabeth Svantesson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 1.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.3,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0907142857142857,
+        "js": 0.3420144880071857,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "34a1012e-8e16-ee11-b1cd-6805cad971a9",
+      "speaker": "Nima Gholam Ali Pour (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.4341855197830751,
+        "centre_left": 0.32455145258877705,
+        "centre": 0.11162916203690422,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.1296338655912436
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03618837449628794,
+        "js": 0.262362066865897,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "48a1012e-8e16-ee11-b1cd-6805cad971a9",
+      "speaker": "Kerstin Lundgren (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.7,
+        "far_right": 0.3
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.09857142857142856,
+        "js": 0.5295280648114854,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "2806a3cd-6fc6-ee11-87d6-6805cad9744d",
+      "speaker": "Eva Lindh (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.005774084343867312,
+        "left": 0.15139649149620094,
+        "centre_left": 0.5384333650656269,
+        "centre": 0.005774084343867312,
+        "centre_right": 0.1032117576466282,
+        "right": 0.12835633440083416,
+        "far_right": 0.06705388270297524
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.7,
+        "centre_left": 0.2,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.06514843629234827,
+        "js": 0.2670288648251036,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "513e4bcf-8b66-ed11-917b-901b0eac4c70",
+      "speaker": "Anna-Caren Sätherberg (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030000000000000002,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8f5232c9-7975-ed11-917b-901b0eac4c70",
+      "speaker": "Statsrådet Acko Ankarberg Johansson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.09717868338557993,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.9028213166144201
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.45,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.1513892872234241,
+        "js": 0.5585089364314916,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "335f98c6-b995-ed11-9180-901b0e9b71a0",
+      "speaker": "Linus Sköld (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.07567191900926289,
+        "centre_left": 0.4714602118542585,
+        "centre": 0.2827654557013217,
+        "centre_right": 0.07216178453912685,
+        "right": 0.009517741366071886,
+        "far_right": 0.08842288752995817
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.008066683527714818,
+        "js": 0.07216086857764098,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "91554483-c098-ed11-917f-901b0eac4c70",
+      "speaker": "Fredrik Lundh Sammeli (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.03309271457208851,
+        "left": 0.08581017848343882,
+        "centre_left": 0.693371162462807,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.18772594448166574,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.4,
+        "centre_left": 0.3,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.042780670385363935,
+        "js": 0.20541840997575733,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "04eef305-c198-ed11-917f-901b0eac4c70",
+      "speaker": "Camilla Rinaldo Miller (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.3,
+        "centre_right": 0.05,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.0707142857142857,
+        "js": 0.27435846855026524,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "3ad7d288-ff9b-ed11-917f-901b0eac4c70",
+      "speaker": "Ida Gabrielsson (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 1.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.20214285714285715,
+        "js": 0.6931471805599452,
+        "top_pred": "centre_right",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5767caa4-97a1-ed11-917f-901b0eac4c70",
+      "speaker": "Ilona Szatmári Waldau (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.45183402229082725,
+        "centre": 0.1554078802783737,
+        "centre_right": 0.39275809743079904,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.023678475868225794,
+        "js": 0.1942415551506607,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "39dc5a53-79c1-ed11-b1c5-6805cad971a9",
+      "speaker": "Jytte Guteland (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.12158671823800773,
+        "centre": 0.3140990221148533,
+        "centre_right": 0.0,
+        "right": 0.17758060163709025,
+        "far_right": 0.3867336580100487
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030144827361741584,
+        "js": 0.23616501375908863,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "f1bec2a9-91cc-ed11-87bf-6805cad9744d",
+      "speaker": "Statsrådet Erik Slottner (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.25654166324773414,
+        "centre": 0.0,
+        "centre_right": 0.450282924592024,
+        "right": 0.08823725997055823,
+        "far_right": 0.20493815218968364
+      },
+      "teacher": {
+        "far_left": 0.045454545454545456,
+        "left": 0.09090909090909091,
+        "centre_left": 0.18181818181818182,
+        "centre": 0.2727272727272727,
+        "centre_right": 0.22727272727272727,
+        "right": 0.13636363636363635,
+        "far_right": 0.045454545454545456
+      },
+      "metrics": {
+        "mse": 0.02396843707271052,
+        "js": 0.19374789386496655,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "9c71f1cb-7dcd-ed11-87bf-6805cad9744d",
+      "speaker": "Teresa Carvalho (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.64792516920581,
+        "centre": 0.0,
+        "centre_right": 0.15587213871074046,
+        "right": 0.0,
+        "far_right": 0.1962026920834495
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.45,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.03,
+        "far_right": 0.02
+      },
+      "metrics": {
+        "mse": 0.019891922455245094,
+        "js": 0.20267324829017816,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "c74746e0-7ae3-ed11-b1c9-6805cad971a9",
+      "speaker": "Statsministern Ulf Kristersson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.2,
+        "right": 0.0,
+        "far_right": 0.8
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.25,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.10428571428571429,
+        "js": 0.4594375621199769,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "16c3c89d-75ee-ed11-b1c9-6805cad971a9",
+      "speaker": "Marcus Andersson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.25822286667550975,
+        "centre": 0.3819418700300579,
+        "centre_right": 0.10528977890337533,
+        "right": 0.08353569235309118,
+        "far_right": 0.17100979203796582
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.012083744478527308,
+        "js": 0.11166625241559086,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e9c2c89d-75ee-ed11-b1c9-6805cad971a9",
+      "speaker": "Statsrådet Lotta Edholm (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.3063659183438146,
+        "centre": 0.13610842550624883,
+        "centre_right": 0.39946425878784114,
+        "right": 0.0,
+        "far_right": 0.15806139736209543
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.028477362233222926,
+        "js": 0.20610383019320228,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a38c19ed-35ef-ed11-b1c9-6805cad971a9",
+      "speaker": "Cecilia Rönn (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.036428571428571435,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7476ce7e-b2f8-ed11-b1c9-6805cad971a9",
+      "speaker": "Juno Blom (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.4137121502491376,
+        "centre": 0.24506515906477577,
+        "centre_right": 0.11987351475661173,
+        "right": 0.2213491759294749,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.01685121168984318,
+        "js": 0.11467055463601308,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "86439680-3605-ee11-87c3-6805cad9744d",
+      "speaker": "Statsrådet Carl-Oskar Bohlin (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.23428061144087828,
+        "centre_left": 0.045175185165729895,
+        "centre": 0.3501076850344067,
+        "centre_right": 0.11417001341884464,
+        "right": 0.25626650494014047,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.02,
+        "left": 0.05,
+        "centre_left": 0.1,
+        "centre": 0.6,
+        "centre_right": 0.15,
+        "right": 0.03,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02211308462139023,
+        "js": 0.13101908739568005,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "5a0f0b93-7318-ef11-87dd-6805cad9744d",
+      "speaker": "Arbetsmarknads- och integrationsministern Johan Pehrson (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.20333253202315416,
+        "centre_left": 0.2279850396426364,
+        "centre": 0.10128634722977,
+        "centre_right": 0.0,
+        "right": 0.11452751656201496,
+        "far_right": 0.3528685645424245
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030263008313864786,
+        "js": 0.2097072239499839,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a08c458b-581f-ef11-b1e6-6805cad971a9",
+      "speaker": "Statsrådet Andreas Carlson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.42215454243219724,
+        "centre": 0.31096205134514526,
+        "centre_right": 0.0,
+        "right": 0.21096848169358243,
+        "far_right": 0.05591492452907503
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.010626688488759055,
+        "js": 0.14070750285175174,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5087dd33-7827-ef11-b1e6-6805cad971a9",
+      "speaker": "Susanne Nordström (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.20214342359163023,
+        "centre_left": 0.11332588047393255,
+        "centre": 0.5034700740800506,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.18106062185438657
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.25,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.03,
+        "far_right": 0.02
+      },
+      "metrics": {
+        "mse": 0.013094239153356833,
+        "js": 0.1417794461717319,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "1adfc965-392b-ef11-b1e6-6805cad971a9",
+      "speaker": "Thomas Ragnarsson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9491869918699187,
+        "centre": 0.0508130081300813,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.07408845830618584,
+        "js": 0.28052402494933254,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "3b5c0788-5690-ee11-b1d9-6805cad971a9",
+      "speaker": "Lotta Johnsson Fornarve (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.015320037220971616,
+        "left": 0.03972521279391477,
+        "centre_left": 0.722230326131519,
+        "centre": 0.07915352564168668,
+        "centre_right": 0.0,
+        "right": 0.046113312035124567,
+        "far_right": 0.0974575861767833
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.4,
+        "centre_left": 0.3,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.04620201045559862,
+        "js": 0.17800230659538177,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "aa8e9c44-cca0-ee11-87d4-6805cad9744d",
+      "speaker": "Leonid Yurkovskiy (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.34571658245291687,
+        "centre_left": 0.3876320624712908,
+        "centre": 0.19998851630684428,
+        "centre_right": 0.0,
+        "right": 0.06666283876894809,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.03,
+        "right": 0.01,
+        "far_right": 0.01
+      },
+      "metrics": {
+        "mse": 0.019510439946848413,
+        "js": 0.11688548223244387,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "892c94d4-5dd2-ee11-b1e0-6805cad971a9",
+      "speaker": "Yasmine Eriksson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5030951982599966,
+        "centre_right": 0.49690480174000334,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.022815662954076815,
+        "js": 0.18973258494572945,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "c6771c4a-c5d4-ee11-b1e0-6805cad971a9",
+      "speaker": "Kadir Kasirga (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.2681125514947301,
+        "centre": 0.11911369724049317,
+        "centre_right": 0.4661153008730618,
+        "right": 0.0,
+        "far_right": 0.14665845039171488
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.015486836214386835,
+        "js": 0.12094540742148562,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "11771c4a-c5d4-ee11-b1e0-6805cad971a9",
+      "speaker": "Adam Reuterskiöld (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5559109080525414,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.4440890919474586
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.06395793063528496,
+        "js": 0.41593563950269113,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a899f199-d9d7-ee11-b1e0-6805cad971a9",
+      "speaker": "Patrick Reslow (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0498772786014266,
+        "centre_left": 0.5311207432894031,
+        "centre": 0.035635708704800234,
+        "centre_right": 0.06543928467054166,
+        "right": 0.0594542040891037,
+        "far_right": 0.25847278064472473
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.037450664605223186,
+        "js": 0.1875830091933453,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "5339f36d-60dd-ee11-b1e0-6805cad971a9",
+      "speaker": "Magnus Jacobsson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 1.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.35,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.1442857142857143,
+        "js": 0.5255973270178644,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0839f36d-60dd-ee11-b1e0-6805cad971a9",
+      "speaker": "Energi- och näringsministern Ebba Busch (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.07858546168958742,
+        "centre_right": 0.8428290766208252,
+        "right": 0.07858546168958742,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.07753031456792056,
+        "js": 0.2932163873045849,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "85fc3686-7d0c-ef11-87dd-6805cad9744d",
+      "speaker": "Elin Nilsson (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.868,
+        "centre": 0.132,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.056292571428571435,
+        "js": 0.23729383388190023,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "0c8cbe12-3e1c-ef11-b1e6-6805cad971a9",
+      "speaker": "Håkan Svenneling (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.08695652173913043,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.9130434782608695
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.15,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.1319740750742641,
+        "js": 0.5169771212030767,
+        "top_pred": "far_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "7551b22c-886e-ee11-87d0-6805cad9744d",
+      "speaker": "Eva Lindh (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.20290910799887207,
+        "centre": 0.3605837014757026,
+        "centre_right": 0.10468559075101043,
+        "right": 0.2969264028574114,
+        "far_right": 0.034895196917003476
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.018642772371996123,
+        "js": 0.1426526757638438,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6bd3166a-cc3a-ef11-87e1-6805cad9744d",
+      "speaker": "Gunilla Svantorp (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.3233669603323139,
+        "centre_left": 0.0,
+        "centre": 0.16268772538458026,
+        "centre_right": 0.5139453142831059,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.45,
+        "centre": 0.25,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.06560354155409064,
+        "js": 0.3225354372779814,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "6f6bf767-62b9-ef11-b1f2-6805cad971a9",
+      "speaker": "Statsrådet Romina Pourmokhtari (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.35463468725615016,
+        "centre": 0.12197626185880324,
+        "centre_right": 0.462400919955645,
+        "right": 0.06098813092940162,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.1,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.026642304784521925,
+        "js": 0.18609621133084456,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0d73d666-d68f-f011-87ff-6805cad9744d",
+      "speaker": "Adam Marttinen (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.09802498992341797,
+        "right": 0.5726723095525997,
+        "far_right": 0.32930270052398225
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.07522789205330813,
+        "js": 0.4378108634865157,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8e9770df-5695-f011-b207-6805cad971a9",
+      "speaker": "Katja Nyberg (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0737165733685163,
+        "centre_left": 0.0,
+        "centre": 0.3954843739201878,
+        "centre_right": 0.028428813047947987,
+        "right": 0.26361263008097224,
+        "far_right": 0.23875760958237566
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02059189775254635,
+        "js": 0.17980614693107486,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "e922e4b8-d79a-f011-b207-6805cad971a9",
+      "speaker": "Sara-Lena Bjälkö (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.04525319737265936,
+        "centre_left": 0.2445011990422527,
+        "centre": 0.11271022439789784,
+        "centre_right": 0.1871716887743155,
+        "right": 0.1050604723936018,
+        "far_right": 0.30530321801927274
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02280087249673698,
+        "js": 0.1233889951940017,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e7fe8c33-63b9-ef11-b1f2-6805cad971a9",
+      "speaker": "Ola Möller (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.2550335570469799,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.7449664429530202,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.2,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0830705180590321,
+        "js": 0.38086362043713007,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "78c1d311-d8b0-f011-b208-6805cad971a9",
+      "speaker": "Energi- och näringsministern Ebba Busch (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.458601569242062,
+        "centre": 0.0,
+        "centre_right": 0.2628629244244294,
+        "right": 0.2785355063335086,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.1,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.028773593351566838,
+        "js": 0.20403116485943706,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "52b0b21a-dfbe-ef11-87ed-6805cad9744d",
+      "speaker": "Malcolm Momodou Jallow (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.15497465990930914,
+        "far_right": 0.8450253400906909
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.15265463380004637,
+        "js": 0.5967381384726215,
+        "top_pred": "far_right",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e946f945-61da-ef11-87ef-6805cad9744d",
+      "speaker": "Johanna Haraldsson (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.4881816924196585,
+        "centre": 0.33239704316758795,
+        "centre_right": 0.15851412555109798,
+        "right": 0.02090713886165561,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.25,
+        "centre_left": 0.4,
+        "centre": 0.15,
+        "centre_right": 0.1,
+        "right": 0.03,
+        "far_right": 0.02
+      },
+      "metrics": {
+        "mse": 0.015707325035280724,
+        "js": 0.13452175274125877,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "9592251c-55ae-ef11-b1f2-6805cad971a9",
+      "speaker": "Amanda Lind (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.733694353746914,
+        "far_right": 0.26630564625308595
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.2,
+        "centre_left": 0.3,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.10060372884948222,
+        "js": 0.5311343114742982,
+        "top_pred": "right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0a5c3267-d9f5-ef11-b1f8-6805cad971a9",
+      "speaker": "Jonas Andersson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5601038472655637,
+        "centre": 0.23670262999648758,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.20319352273794866
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.20833333333333334,
+        "far_right": 0.041666666666666664
+      },
+      "metrics": {
+        "mse": 0.039506667352857607,
+        "js": 0.2730452673427331,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "bd5b3267-d9f5-ef11-b1f8-6805cad971a9",
+      "speaker": "Margareta Cederfelt (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.5,
+        "centre_right": 0.25,
+        "right": 0.25,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03,
+        "js": 0.23230383138504704,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b8322954-9dfa-ef11-b1f8-6805cad971a9",
+      "speaker": "Ulrika Heie (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.45559401921098375,
+        "centre_right": 0.28968604081967647,
+        "right": 0.17830395797853787,
+        "far_right": 0.07641598199080195
+      },
+      "teacher": {
+        "far_left": 0.0,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.02125228351776724,
+        "js": 0.2319421346090956,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "81a25606-ddb3-ef11-b1f2-6805cad971a9",
+      "speaker": "Cecilia Rönn (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.6645865153829369,
+        "centre": 0.0,
+        "centre_right": 0.25921885228016583,
+        "right": 0.07619463233689723,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.09483438080715158,
+        "js": 0.45933197268382225,
+        "top_pred": "centre_left",
+        "top_teacher": "left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "adb62c6f-d516-f011-b1fb-6805cad971a9",
+      "speaker": "Mikael Oscarsson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.38386308068459657,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.6161369193154034,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.07597380626439512,
+        "js": 0.41674574420317945,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "ca223bc7-4b32-f011-87f7-6805cad9744d",
+      "speaker": "Magnus Jacobsson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.33822654235270777,
+        "centre_right": 0.6617734576472922,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.03886438375103391,
+        "js": 0.2051466633183283,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "ce802011-5348-f011-b1ff-6805cad971a9",
+      "speaker": "Kjell-Arne Ottosson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.42912414760361756,
+        "centre": 0.05513372346085022,
+        "centre_right": 0.2628040818300527,
+        "right": 0.16104850800406248,
+        "far_right": 0.09188953910141703
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030105984171805766,
+        "js": 0.17337144207900526,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "a7de6333-eed1-f011-b214-6805cad971a9",
+      "speaker": "Oscar Sjöstedt (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.20833094307359998,
+        "centre_left": 0.15236626426656147,
+        "centre": 0.1294525846990189,
+        "centre_right": 0.06851629463196969,
+        "right": 0.3239657917700138,
+        "far_right": 0.11736812155883618
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.023147058863275106,
+        "js": 0.13484754108031255,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "0b5f62e7-8a37-f111-8812-6805cad9744d",
+      "speaker": "Finansministern Elisabeth Svantesson (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 1.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.25,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.10142857142857141,
+        "js": 0.38039566584857787,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b5c6877f-4d4a-f111-bf21-6805cafeabf9",
+      "speaker": "Infrastruktur- och bostadsministern Andreas Carlson (KD)",
+      "party": "KD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.2,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.8
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.4,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.09714285714285716,
+        "js": 0.40711274774352213,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "174b8a97-a7ec-f011-880a-6805cad9744d",
+      "speaker": "Jan Riise (MP)",
+      "party": "MP",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.10685129389736009,
+        "centre_left": 0.2854665574946634,
+        "centre": 0.40768987000702966,
+        "centre_right": 0.0,
+        "right": 0.03571147062088092,
+        "far_right": 0.16428080798006592
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.4,
+        "centre": 0.2,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.011982723934055252,
+        "js": 0.09337703846937691,
+        "top_pred": "centre",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "c8c3d21b-a8ec-f011-880a-6805cad9744d",
+      "speaker": "Mikael Eskilandersson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.5
+      },
+      "teacher": {
+        "far_left": 0.02,
+        "left": 0.15,
+        "centre_left": 0.4,
+        "centre": 0.3,
+        "centre_right": 0.1,
+        "right": 0.02,
+        "far_right": 0.01
+      },
+      "metrics": {
+        "mse": 0.053342857142857136,
+        "js": 0.3594046861034832,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "2edd0942-ecf2-f011-880a-6805cad9744d",
+      "speaker": "Eric Palmqvist (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.1363108839562568,
+        "centre_left": 0.2292562973564249,
+        "centre": 0.2716030019636626,
+        "centre_right": 0.1788406863611746,
+        "right": 0.026284161480354448,
+        "far_right": 0.15770496888212668
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.0033472883431511064,
+        "js": 0.03854345027555586,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "a7241652-660e-f111-880e-6805cad9744d",
+      "speaker": "Mauricio Rojas (L)",
+      "party": "L",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.3718547592534446,
+        "centre_right": 0.0,
+        "right": 0.18124750296907238,
+        "far_right": 0.44689773777748304
+      },
+      "teacher": {
+        "far_left": 0.02,
+        "left": 0.05,
+        "centre_left": 0.1,
+        "centre": 0.4,
+        "centre_right": 0.3,
+        "right": 0.1,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.040585290725624855,
+        "js": 0.27836903929367984,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "b9523a04-cf22-f111-b21a-6805cad971a9",
+      "speaker": "Christofer Bergenblock (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.298386260755382,
+        "centre": 0.2565741732609973,
+        "centre_right": 0.0,
+        "right": 0.29109506202702234,
+        "far_right": 0.15394450395659837
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.4,
+        "centre_right": 0.1,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.01784275873748185,
+        "js": 0.1950339424877579,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "21e29fc9-63cc-f011-b214-6805cad971a9",
+      "speaker": "Fredrik Kärrholm (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.9371482176360225,
+        "centre": 0.0,
+        "centre_right": 0.018855534709193246,
+        "right": 0.04399624765478424,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.10630463097664399,
+        "js": 0.39674042439940493,
+        "top_pred": "centre_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "1a3ca669-0a0d-f111-b218-6805cad971a9",
+      "speaker": "Kerstin Lundgren (C)",
+      "party": "C",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.0,
+        "centre_right": 0.3333333333333333,
+        "right": 0.0,
+        "far_right": 0.5
+      },
+      "teacher": {
+        "far_left": 0.041666666666666664,
+        "left": 0.08333333333333333,
+        "centre_left": 0.16666666666666666,
+        "centre": 0.25,
+        "centre_right": 0.20833333333333334,
+        "right": 0.041666666666666664,
+        "far_right": 0.20833333333333334
+      },
+      "metrics": {
+        "mse": 0.024801587301587297,
+        "js": 0.18261895795162197,
+        "top_pred": "far_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "f7e9d6c1-b812-f111-880e-6805cad9744d",
+      "speaker": "Vasiliki Tsouplaki (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.43490304709141275,
+        "centre": 0.5152354570637119,
+        "centre_right": 0.0,
+        "right": 0.04986149584487535,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.022717087587024124,
+        "js": 0.17953382572200158,
+        "top_pred": "centre",
+        "top_teacher": "centre",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "fb5ac389-7018-f111-880e-6805cad9744d",
+      "speaker": "Tobias Andersson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.17774503898228267,
+        "centre_left": 0.19929525961956324,
+        "centre": 0.25398620816953793,
+        "centre_right": 0.2688581910026974,
+        "right": 0.10011530222591872,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.3,
+        "centre": 0.25,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.004064945666053977,
+        "js": 0.05209342606576418,
+        "top_pred": "centre_right",
+        "top_teacher": "centre_left",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "3bbfdae3-e01b-f111-880e-6805cad9744d",
+      "speaker": "Jytte Guteland (S)",
+      "party": "S",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.7977941176470589,
+        "centre": 0.0,
+        "centre_right": 0.06066176470588235,
+        "right": 0.14154411764705882,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.3,
+        "centre_left": 0.45,
+        "centre": 0.1,
+        "centre_right": 0.05,
+        "right": 0.02,
+        "far_right": 0.03
+      },
+      "metrics": {
+        "mse": 0.034178199147305986,
+        "js": 0.21691416403565042,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "36c4cda7-4b22-f111-b21a-6805cad971a9",
+      "speaker": "Josef Fransson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.17166858522499032,
+        "centre": 0.0,
+        "centre_right": 0.4017511574902262,
+        "right": 0.08373689414796286,
+        "far_right": 0.3428433631368206
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.35,
+        "centre_right": 0.2,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.03762880171026205,
+        "js": 0.25449801522319404,
+        "top_pred": "centre_right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "30d2a72d-6f23-f111-b21a-6805cad971a9",
+      "speaker": "Tony Haddou (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.5555186032009977,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.4444813967990023
+      },
+      "teacher": {
+        "far_left": 0.1,
+        "left": 0.6,
+        "centre_left": 0.2,
+        "centre": 0.05,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.030013452440240316,
+        "js": 0.2121248137256968,
+        "top_pred": "left",
+        "top_teacher": "left",
+        "agrees": true
+      }
+    },
+    {
+      "speech_id": "4d0c96ee-8728-f111-8812-6805cad9744d",
+      "speaker": "Jonas Andersson (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.8383458646616542,
+        "centre_left": 0.16165413533834586,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.25,
+        "right": 0.05,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.10094643159994507,
+        "js": 0.40964264213671164,
+        "top_pred": "left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "8d0c96ee-8728-f111-8812-6805cad9744d",
+      "speaker": "Ilona Szatmári Waldau (V)",
+      "party": "V",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.0
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.1,
+        "centre_left": 0.2,
+        "centre": 0.3,
+        "centre_right": 0.2,
+        "right": 0.1,
+        "far_right": 0.05
+      },
+      "metrics": {
+        "mse": 0.02785714285714286,
+        "js": NaN,
+        "top_pred": "far_left",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "cd21deda-7c29-f111-8812-6805cad9744d",
+      "speaker": "Alexandra Anstrell (M)",
+      "party": "M",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.0,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.6540880503144654,
+        "far_right": 0.34591194968553457
+      },
+      "teacher": {
+        "far_left": 0.045454545454545456,
+        "left": 0.09090909090909091,
+        "centre_left": 0.18181818181818182,
+        "centre": 0.36363636363636365,
+        "centre_right": 0.18181818181818182,
+        "right": 0.09090909090909091,
+        "far_right": 0.045454545454545456
+      },
+      "metrics": {
+        "mse": 0.08801755400350822,
+        "js": 0.4846881890997969,
+        "top_pred": "right",
+        "top_teacher": "centre",
+        "agrees": false
+      }
+    },
+    {
+      "speech_id": "e521deda-7c29-f111-8812-6805cad9744d",
+      "speaker": "Leonid Yurkovskiy (SD)",
+      "party": "SD",
+      "pred": {
+        "far_left": 0.0,
+        "left": 0.0,
+        "centre_left": 0.5,
+        "centre": 0.0,
+        "centre_right": 0.0,
+        "right": 0.0,
+        "far_right": 0.5
+      },
+      "teacher": {
+        "far_left": 0.05,
+        "left": 0.15,
+        "centre_left": 0.35,
+        "centre": 0.25,
+        "centre_right": 0.15,
+        "right": 0.05,
+        "far_right": 0.0
+      },
+      "metrics": {
+        "mse": 0.055,
+        "js": 0.40521205866924476,
+        "top_pred": "centre_left",
+        "top_teacher": "centre_left",
+        "agrees": true
+      }
+    }
+  ]
+}

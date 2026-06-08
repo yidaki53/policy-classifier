@@ -1,0 +1,66 @@
+Using predictions file: logs/speech_eval_preds_isotonic_20260603T124123Z.parquet
+Baseline accuracy: 0.3821536144578313
+Baseline NLL: 1.675068698802146
+Baseline classification report:
+
+              precision    recall  f1-score   support
+
+    far_left       0.43      0.01      0.02       264
+        left       0.62      0.04      0.07       142
+ centre_left       0.50      0.01      0.01       309
+      centre       0.38      0.94      0.54       972
+centre_right       1.00      0.00      0.01       233
+       right       1.00      0.00      0.01       314
+   far_right       0.43      0.21      0.29       422
+
+    accuracy                           0.38      2656
+   macro avg       0.62      0.17      0.13      2656
+weighted avg       0.55      0.38      0.25      2656
+
+Best temperature: 0.9808, NLL: 1.6751
+Temp-scaled accuracy: 0.3821536144578313
+Temp-scaled NLL: 1.675070141325106
+Temp-scaled classification report:
+
+              precision    recall  f1-score   support
+
+    far_left       0.43      0.01      0.02       264
+        left       0.62      0.04      0.07       142
+ centre_left       0.50      0.01      0.01       309
+      centre       0.38      0.94      0.54       972
+centre_right       1.00      0.00      0.01       233
+       right       1.00      0.00      0.01       314
+   far_right       0.43      0.21      0.29       422
+
+    accuracy                           0.38      2656
+   macro avg       0.62      0.17      0.13      2656
+weighted avg       0.55      0.38      0.25      2656
+
+Isotonic accuracy: 0.3859186746987952
+Isotonic NLL: 1.6536992439183622
+Isotonic classification report:
+
+              precision    recall  f1-score   support
+
+    far_left       0.35      0.03      0.05       264
+        left       0.75      0.04      0.08       142
+ centre_left       0.24      0.01      0.02       309
+      centre       0.38      0.94      0.54       972
+centre_right       0.60      0.01      0.03       233
+       right       0.39      0.03      0.05       314
+   far_right       0.41      0.20      0.27       422
+
+    accuracy                           0.39      2656
+   macro avg       0.45      0.18      0.15      2656
+weighted avg       0.41      0.39      0.26      2656
+
+
+Outputs saved:
+Baseline confusion: figures/calibration_confusion_baseline_20260603T202245Z.png
+Temp confusion: figures/calibration_confusion_temp_20260603T202245Z.png
+Iso confusion: figures/calibration_confusion_iso_20260603T202245Z.png
+Baseline reliability: figures/calibration_reliability_baseline_20260603T202245Z.png
+Temp reliability: figures/calibration_reliability_temp_20260603T202245Z.png
+Iso reliability: figures/calibration_reliability_iso_20260603T202245Z.png
+Temp calibrated preds: logs/speech_eval_preds_tempcal_20260603T202245Z.parquet
+Iso calibrated preds: logs/speech_eval_preds_isotonic_20260603T202245Z.parquet

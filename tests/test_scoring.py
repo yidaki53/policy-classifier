@@ -23,7 +23,7 @@ def test_speech_service_forwards_meta_learner(monkeypatch):
     sentinel_meta = {"clf": object(), "label_encoder": object()}
     captured = {}
 
-    def fake_score_motion(*, motion_id, text, categories, embedding_matcher, topic_distributions, meta_clf, use_zero_shot, skip_policy_extraction, use_speech_preprocessing, use_ollama):
+    def fake_score_motion(*, motion_id, text, categories, embedding_matcher, topic_distributions, meta_clf, use_zero_shot, skip_policy_extraction, use_speech_preprocessing, use_ollama, ollama_weight=None):
         captured.update(
             motion_id=motion_id,
             text=text,
@@ -35,6 +35,7 @@ def test_speech_service_forwards_meta_learner(monkeypatch):
             skip_policy_extraction=skip_policy_extraction,
             use_speech_preprocessing=use_speech_preprocessing,
             use_ollama=use_ollama,
+            ollama_weight=ollama_weight,
         )
         return ["sentinel-result"]
 
@@ -56,4 +57,5 @@ def test_speech_service_forwards_meta_learner(monkeypatch):
     assert captured["skip_policy_extraction"] is True
     assert captured["use_speech_preprocessing"] is True
     assert captured["use_zero_shot"] is True
-    assert captured["use_ollama"] is False
+    assert captured["use_ollama"] is True
+    assert captured["ollama_weight"] == 0.60
