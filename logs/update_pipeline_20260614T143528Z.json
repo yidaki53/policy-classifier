@@ -1,0 +1,176 @@
+{
+  "run_ts": "20260614T143528Z",
+  "dry_run": false,
+  "cpu_fraction": 0.25,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202728.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202829.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "202526",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202526.json.zip"
+          }
+        ]
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202728.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202829.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "202526",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202526.csv.zip"
+          }
+        ]
+      },
+      "mot": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2009",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2009.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "nan"
+      }
+    },
+    "download": {
+      "dry_run": false,
+      "speeches": {
+        "step": "download_speeches",
+        "ok": false,
+        "returncode": 1,
+        "stdout_preview": "SKIP anforande-199394.json.zip (18.5 MB)\nSKIP anforande-199495.json.zip (16.6 MB)\nSKIP anforande-199596.json.zip (14.9 MB)\nSKIP anforande-199697.json.zip (19.2 MB)\nSKIP anforande-199798.json.zip (19.9 MB)\nSKIP anforande-199899.json.zip (16.8 MB)\nDOWNLOAD https://data.riksdagen.se/dataset/anforande/anforande-199900.json.zip -> data/bulk_datasets/anforande-199900.json.zip\n  FAILED\nSKIP anforande-200001.json.zip (21.1 MB)\nSKIP anforande-200102.json.zip (20.8 MB)\nSKIP anforande-200203.json.zip (18.6",
+        "stderr_preview": "  Download attempt 1/4 failed: 404 Client Error: Not Found for url: https://data.riksdagen.se/dataset/anforande/anforande-199900.json.zip\n  Download attempt 2/4 failed: 404 Client Error: Not Found for url: https://data.riksdagen.se/dataset/anforande/anforande-199900.json.zip\n  Download attempt 3/4 failed: 404 Client Error: Not Found for url: https://data.riksdagen.se/dataset/anforande/anforande-199900.json.zip\n  Download attempt 4/4 failed: 404 Client Error: Not Found for url: https://data.riksd"
+      },
+      "votering": {
+        "step": "download_votering",
+        "ok": false,
+        "returncode": 1,
+        "stdout_preview": "SKIP votering-199394.csv.zip (4.3 MB)\nSKIP votering-199495.csv.zip (3.0 MB)\nSKIP votering-199596.csv.zip (2.7 MB)\nSKIP votering-199697.csv.zip (4.1 MB)\nSKIP votering-199798.csv.zip (5.0 MB)\nSKIP votering-199899.csv.zip (3.3 MB)\nDOWNLOAD https://data.riksdagen.se/dataset/votering/votering-199900.csv.zip -> data/votering/votering-199900.csv.zip\n  FAILED\nSKIP votering-200001.csv.zip (3.5 MB)\nSKIP votering-200102.csv.zip (4.4 MB)\nSKIP votering-200203.csv.zip (6.0 MB)\nSKIP votering-200304.csv.zip (7.",
+        "stderr_preview": "  Download attempt 1/4 failed: 404 Client Error: Not Found for url: https://data.riksdagen.se/dataset/votering/votering-199900.csv.zip\n  Download attempt 2/4 failed: 404 Client Error: Not Found for url: https://data.riksdagen.se/dataset/votering/votering-199900.csv.zip\n  Download attempt 3/4 failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))\n  Download attempt 4/4 failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection wi"
+      },
+      "betankande": {
+        "step": "download_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP bet-2022-2025.json.zip (78.8 MB)\nSKIP bet-2018-2021.json.zip (89.4 MB)\nSKIP bet-2014-2017.json.zip (72.8 MB)\nSKIP bet-2010-2013.json.zip (51.3 MB)\nSKIP bet-2006-2009.json.zip (39.5 MB)\nSKIP bet-2002-2005.json.zip (60.2 MB)\nSKIP bet-1998-2001.json.zip (48.7 MB)\nSKIP bet-1990-1997.json.zip (77.4 MB)\nSKIP bet-1980-1989.json.zip (116.5 MB)\nSKIP bet-1971-1979.json.zip (80.6 MB)\n\nSummary: downloaded=0, skipped=10, failed=0\n",
+        "stderr_preview": ""
+      },
+      "bulk": {
+        "step": "download_bulk",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP mot-2022-2025.json.zip (82.9 MB)\nSKIP mot-2018-2021.json.zip (104.7 MB)\nSKIP mot-2014-2017.json.zip (86.7 MB)\nSKIP mot-2010-2013.json.zip (60.6 MB)\nSKIP mot-2006-2009.json.zip (61.1 MB)\nSKIP mot-2002-2005.json.zip (72.7 MB)\nSKIP mot-1998-2001.json.zip (56.5 MB)\nSKIP mot-1990-1997.json.zip (92.9 MB)\nSKIP mot-1980-1989.json.zip (113.8 MB)\nSKIP mot-1971-1979.json.zip (69.2 MB)\nSKIP prop-2022-2025.json.zip (119.5 MB)\nSKIP prop-2018-2021.json.zip (107.9 MB)\nSKIP prop-2014-2017.json.zip (136.1 MB",
+        "stderr_preview": ""
+      }
+    },
+    "extract": {
+      "skipped": true
+    },
+    "classify": {
+      "skipped": true
+    },
+    "analysis": {
+      "skipped": true
+    },
+    "figures": {
+      "skipped": true
+    },
+    "manuscript": {
+      "skipped": true
+    }
+  },
+  "completed_at": "20260614T143642Z"
+}
