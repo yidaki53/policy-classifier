@@ -104,7 +104,7 @@ def classify_speeches(
     use_embeddings: bool = True,
     use_zero_shot: bool = True,
     max_text_len: int = DEFAULT_MAX_TEXT,
-    use_ollama: bool = False,
+    use_ollama: bool = True,
     rhetoric_parquet: Optional[str] = None,
 ):
     conn = init_db(db_path)
@@ -211,7 +211,7 @@ def classify_speeches(
                 skip_policy_extraction=True,
                 use_speech_preprocessing=True,
                 use_ollama=use_ollama,
-                ollama_weight=0.55,
+                ollama_weight=0.60,
                 rhetoric_scores=rhet_map.get(speech_id),
             )
 
@@ -267,7 +267,7 @@ def main():
     parser.add_argument("--max-text-len", type=int, default=DEFAULT_MAX_TEXT)
     parser.add_argument("--no-embeddings", dest="use_embeddings", action="store_false")
     parser.add_argument("--no-zero-shot", dest="use_zero_shot", action="store_false")
-    parser.add_argument("--ollama", dest="use_ollama", action="store_true", help="Enable Ollama LLM fallback for speech classification")
+    parser.add_argument("--no-ollama", dest="use_ollama", action="store_false", default=True, help="Disable Ollama LLM fallback (default: enabled)")
     parser.add_argument("--rhetoric-parquet", default=None, help="Path to speech_rhetoric_labels.parquet to include rhetoric scores")
     args = parser.parse_args()
     # Prefer the Parquet-first implementation if available

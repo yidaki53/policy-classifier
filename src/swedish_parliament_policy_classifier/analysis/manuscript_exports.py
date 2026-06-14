@@ -75,6 +75,7 @@ def _filter_overlay_profiles(profiles: pd.DataFrame) -> pd.DataFrame:
     if "party" not in profiles.columns:
         return profiles.copy()
     out = profiles.copy()
+    out = out[out["party"].notna()].copy()
     out["party"] = out["party"].astype(str)
     out = out[~out["party"].isin(EXCLUDED_OVERLAY_PARTIES)].copy()
     return out.reset_index(drop=True)

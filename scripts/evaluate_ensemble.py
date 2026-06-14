@@ -24,7 +24,7 @@ from swedish_parliament_policy_classifier.classifier.ensemble import (
     load_meta_classifier,
 )
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
-from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
 
 def evaluate(db_path: str = "data/swedish_parliament.db"):

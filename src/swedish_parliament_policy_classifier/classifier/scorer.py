@@ -707,3 +707,159 @@ def score_motion(
             )
         )
     return results
+
+
+# Speech meta-classifier cache
+_SPEECH_META_CLF = None
+
+
+def _load_speech_meta_classifier() -> Optional[Dict]:
+    """Load the speech-specific meta-classifier if available."""
+    global _SPEECH_META_CLF
+    if _SPEECH_META_CLF is not None:
+        return _SPEECH_META_CLF
+
+    from swedish_parliament_policy_classifier.classifier.ensemble import load_meta_classifier
+    from swedish_parliament_policy_classifier.io import loader
+    import zstandard
+
+    candidates = [
+        Path("models/speech_meta_clf.pkl"),
+        Path("models/speech_meta_clf_parquet.pkl"),
+        Path("models/speech_meta_clf_full.pkl"),
+    ]
+    for cand in candidates:
+        try:
+            if cand.suffix == ".zst":
+                with open(cand, "rb") as fh:
+                    dctx = zstandard.ZstdDecompressor()
+                    with dctx.stream_reader(fh) as reader:
+                        m = pickle.load(reader)
+            else:
+                m = loader.load_pickle(cand)
+            if m is not None and ("model" in m or "clf" in m):
+                _SPEECH_META_CLF = m
+                return m
+        except Exception:
+            continue
+    return None
+
+
+def score_speech(
+    speech_id: str,
+    text: str,
+    categories: Dict[str, CategoryDef],
+    party: Optional[str] = None,
+    embedding_matcher: Optional[EmbeddingMatcher] = None,
+    embedding_weight: float = 0.40,
+    embedding_threshold: float = 0.0,
+    zero_shot_weight: float = 0.40,
+    zero_shot_model: str = "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+    use_zero_shot: bool = True,
+    use_speech_preprocessing: bool = True,
+    use_ollama: bool = False,
+    ollama_weight: float = 0.35,
+    topic_distributions: Optional[Dict[str, List[float]]] = None,
+    llm_threshold: float = 0.30,
+    llm_max_text_len: int = 2000,
+    speech_meta_clf: Optional[Dict] = None,
+    rhetoric_scores: Optional[Dict[str, float]] = None,
+) -> List[ClassificationResult]:
+    """Score a parliamentary speech using the speech-specific pipeline.
+
+    The speech pipeline is the primary classification path for speeches. It
+    runs the base signal pipeline (keyword, embedding, zero-shot, BERT) with
+    speech-aware text extraction, then applies the speech meta-classifier (if
+    available) to produce the final probability distribution.
+
+    Args:
+        speech_id: Unique identifier for the speech.
+        text: Full speech text.
+        categories: Category definitions.
+        party: Optional party affiliation (used only for keyword extraction,
+            not for classification bias).
+        embedding_matcher, embedding_weight, embedding_threshold:
+            Embedding matcher settings.
+        zero_shot_weight, zero_shot_model, use_zero_shot:
+            Zero-shot NLI settings.
+        use_speech_preprocessing: Extract argumentative text from speech.
+        use_ollama, ollama_weight: Ollama LLM fallback settings.
+        topic_distributions: Topic model features.
+        llm_threshold, llm_max_text_len: LLM fallback settings.
+        speech_meta_clf: Pre-loaded speech meta-classifier dict. If None,
+            auto-loaded from ``models/speech_meta_clf*.pkl``.
+        rhetoric_scores: Pre-computed rhetorical scores (irony, sarcasm,
+            posturing, none, top_label). If None, auto-detected from text.
+
+    Returns:
+        List of ClassificationResult with speech-pipeline version string.
+    """
+    # Run the base pipeline WITHOUT the motion meta-classifier, so the speech
+    # meta-classifier can learn the optimal combination for the speech domain.
+    base_results = score_motion(
+        motion_id=speech_id,
+        text=text,
+        categories=categories,
+        party=party,
+        embedding_matcher=embedding_matcher,
+        embedding_weight=embedding_weight,
+        embedding_threshold=embedding_threshold,
+        zero_shot_weight=zero_shot_weight,
+        zero_shot_model=zero_shot_model,
+        use_zero_shot=use_zero_shot,
+        meta_clf=None,  # Don't use the motion-trained meta-classifier
+        llm_threshold=llm_threshold,
+        llm_max_text_len=llm_max_text_len,
+        skip_policy_extraction=True,
+        use_speech_preprocessing=use_speech_preprocessing,
+        use_ollama=use_ollama,
+        ollama_weight=ollama_weight,
+        topic_distributions=topic_distributions,
+    )
+
+    # Extract base probabilities from the signal pipeline
+    base_probs = {r.category: r.normalized_weight for r in base_results}
+
+    # Get rhetorical scores
+    if rhetoric_scores is None and use_speech_preprocessing:
+        rhetoric_scores = _detect_rhetorical_patterns(text)
+    rhetoric_scores = rhetoric_scores or {}
+
+    # Apply speech meta-classifier if available
+    speech_clf = speech_meta_clf if speech_meta_clf is not None else _load_speech_meta_classifier()
+
+    if speech_clf is not None:
+        from swedish_parliament_policy_classifier.classifier.ensemble import (
+            build_speech_feature_vector,
+            predict_with_meta_classifier,
+        )
+        category_names = sorted(categories.keys())
+        feature_df = build_speech_feature_vector(
+            base_probs, rhetoric_scores, category_names=category_names
+        )
+        final_probs = predict_with_meta_classifier(feature_df, speech_clf, categories)
+
+        # Build final results with the speech meta-classifier probabilities
+        base_version = base_results[0].classifier_version if base_results else "0.8.0"
+        speech_version = f"speech_meta+{base_version}"
+
+        final_results = []
+        for name in categories.keys():
+            base_result = next((r for r in base_results if r.category == name), None)
+            matched_rules = base_result.matched_rules if base_result else []
+            raw_score = base_result.raw_score if base_result else 0.0
+            final_results.append(
+                ClassificationResult(
+                    motion_id=speech_id,
+                    category=name,
+                    raw_score=raw_score,
+                    normalized_weight=final_probs.get(name, 0.0),
+                    matched_rules=matched_rules,
+                    classifier_version=speech_version,
+                    created_at=datetime.now(timezone.utc),
+                )
+            )
+        return final_results
+
+    # No speech meta-classifier available: return base pipeline results
+    return base_results

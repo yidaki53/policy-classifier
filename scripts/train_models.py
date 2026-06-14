@@ -74,7 +74,7 @@ def train_all(
             matcher = None
 
         # Import score_motion from the refactored pipeline
-        from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+        from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
         # Load zero-shot and transformer prediction functions for feature extraction
         zs_func = None

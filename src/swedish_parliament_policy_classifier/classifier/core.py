@@ -8,7 +8,7 @@ surface for future refactors (signal plugins, pipeline composition, DI).
 """
 from typing import List, Dict, Any, Optional
 
-from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 from swedish_parliament_policy_classifier.models.models import ClassificationResult
 
 

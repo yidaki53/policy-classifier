@@ -23,38 +23,36 @@ def test_speech_service_forwards_meta_learner(monkeypatch):
     sentinel_meta = {"clf": object(), "label_encoder": object()}
     captured = {}
 
-    def fake_score_motion(*, motion_id, text, categories, embedding_matcher, topic_distributions, meta_clf, use_zero_shot, skip_policy_extraction, use_speech_preprocessing, use_ollama, ollama_weight=None):
+    def fake_score_speech(*, speech_id, text, categories, embedding_matcher, topic_distributions, speech_meta_clf, use_zero_shot, use_speech_preprocessing, use_ollama, ollama_weight=None):
         captured.update(
-            motion_id=motion_id,
+            speech_id=speech_id,
             text=text,
             categories=categories,
             embedding_matcher=embedding_matcher,
             topic_distributions=topic_distributions,
-            meta_clf=meta_clf,
+            speech_meta_clf=speech_meta_clf,
             use_zero_shot=use_zero_shot,
-            skip_policy_extraction=skip_policy_extraction,
             use_speech_preprocessing=use_speech_preprocessing,
             use_ollama=use_ollama,
             ollama_weight=ollama_weight,
         )
         return ["sentinel-result"]
 
-    monkeypatch.setattr(deep_scoring_service, "score_motion", fake_score_motion)
+    monkeypatch.setattr(deep_scoring_service, "score_speech", fake_score_speech)
 
     service = DeepScoringService(
         categories={},
         embedding_matcher="matcher",
         topic_distributions={"topic": [0.1]},
-        meta_clf=sentinel_meta,
+        speech_meta_clf=sentinel_meta,
     )
 
     result = service.classify("speech-1", "Vi talar om arbeten och välfärd")
 
     assert result == ["sentinel-result"]
-    assert captured["motion_id"] == "speech-1"
+    assert captured["speech_id"] == "speech-1"
     assert captured["text"] == "Vi talar om arbeten och välfärd"
-    assert captured["meta_clf"] is sentinel_meta
-    assert captured["skip_policy_extraction"] is True
+    assert captured["speech_meta_clf"] is sentinel_meta
     assert captured["use_speech_preprocessing"] is True
     assert captured["use_zero_shot"] is True
     assert captured["use_ollama"] is True

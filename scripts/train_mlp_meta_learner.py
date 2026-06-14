@@ -117,7 +117,7 @@ def train_mlp(
     except Exception as e:
         print(f"Embedding matcher unavailable: {e}", file=sys.stderr)
 
-    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
     print("Preparing training data...", file=sys.stderr)
     X_train, y_train, _ = prepare_training_data_from_gold_labels(

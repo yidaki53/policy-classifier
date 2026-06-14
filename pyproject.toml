@@ -25,6 +25,7 @@ dependencies = [
   "pyarrow>=24.0.0",
   "zstandard>=0.25.0",
   "polars>=1.41.2",
+  "loguru>=0.7.0",
 ]
 
 [project.optional-dependencies]
@@ -42,6 +43,13 @@ dev = [
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["swedish_parliament_policy_classifier*"]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:torch.jit._script",
+    "ignore::DeprecationWarning:importlib._bootstrap",
+    "ignore::DeprecationWarning:sys",
+]
 
 [dependency-groups]
 dev = [

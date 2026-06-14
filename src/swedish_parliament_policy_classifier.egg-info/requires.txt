@@ -14,6 +14,7 @@ torch>=2.12.0
 pyarrow>=24.0.0
 zstandard>=0.25.0
 polars>=1.41.2
+loguru>=0.7.0
 
 [dev]
 pytest

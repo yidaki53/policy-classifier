@@ -198,7 +198,7 @@ def prepare_speech_training_data(
     categories = load_verified_definitions()
     category_names = sorted(categories.keys())
 
-    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
     X_list = []
     y_list = []

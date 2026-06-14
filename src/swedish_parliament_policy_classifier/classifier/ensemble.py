@@ -372,12 +372,76 @@ def load_meta_classifier(model_path: Optional[Path] = None) -> Optional[Dict]:
     return loader.load_pickle(model_path)
 
 
+def build_speech_feature_vector(
+    base_probs: Dict[str, float],
+    rhetorical_scores: Optional[Dict[str, float]] = None,
+    category_names: Optional[List[str]] = None,
+) -> "pd.DataFrame":
+    """Build a speech-specific feature vector from classifier probabilities and rhetoric.
+
+    This matches the training format used by `train_speech_meta_clf_parquet.py`:
+    - sorted probability columns (one per category)
+    - irony, sarcasm, posturing, none
+    - one-hot encoded top_label
+
+    Args:
+        base_probs: Dictionary mapping category -> probability (from base classifier).
+        rhetorical_scores: Dictionary with keys 'irony', 'sarcasm', 'posturing', 'none'.
+            May also contain 'top_label' for the dominant rhetoric class.
+        category_names: List of category names. If None, inferred from base_probs keys.
+
+    Returns:
+        1-row pandas DataFrame with the exact column order the speech model expects.
+    """
+    import pandas as pd
+
+    if category_names is None:
+        category_names = sorted(base_probs.keys())
+
+    # 1. Base probabilities (sorted)
+    prob_features = [float(base_probs.get(cat, 0.0)) for cat in category_names]
+    prob_names = [cat for cat in category_names]
+
+    # 2. Rhetoric scores
+    rs = rhetorical_scores or {}
+    rhet_names = ["irony", "sarcasm", "posturing", "none"]
+    rhet_features = [float(rs.get(name, 0.0)) for name in rhet_names]
+
+    # 3. Top-label one-hot encoding
+    # NOTE: The training script (train_speech_meta_clf_parquet.py) uses
+    # pd.get_dummies(df["top_label"].fillna("<none>"), prefix="rhet_top"),
+    # which preserves empty strings as a category (rhet_top_ column).
+    # The model was trained on data where some rows had empty string top_label.
+    # We must reproduce the exact column set to match the trained model.
+    top_label = rs.get("top_label", "<none>")
+    if top_label is None or top_label == "":
+        top_label = "<none>"
+
+    # The set of labels that appeared in the training data (determined by
+    # pd.get_dummies). We hardcode the exact observed labels from the
+    # trained model's feature_columns so inference matches training.
+    valid_top_labels = ["<none>", "sarcasm", ""]
+    # pd.get_dummies sorts columns alphabetically
+    top_labels_sorted = sorted(valid_top_labels)
+    ohe_features = [1.0 if top_label == lbl else 0.0 for lbl in top_labels_sorted]
+    ohe_names = [f"rhet_top_{lbl}" for lbl in top_labels_sorted]
+
+    all_features = prob_features + rhet_features + ohe_features
+    all_names = prob_names + rhet_names + ohe_names
+
+    return pd.DataFrame([all_features], columns=all_names, dtype=np.float32)
+
+
 def predict_with_meta_classifier(
     feature_vector,
     meta_clf: Dict,
     categories: Dict[str, object],
 ) -> Dict[str, float]:
-    """Predict category probabilities using the ensemble meta-classifier.
+    """Predict category probabilities using the ensemble or speech meta-classifier.
+
+    Supports both the standard ensemble format (keys: clf, label_encoder,
+    category_names, _feature_names) and the speech meta-classifier format
+    (keys: model, label_encoder, feature_columns).
 
     Accepts a 1-D numpy array (or list) and ALWAYS reconstructs a named
     DataFrame before calling LightGBM. This guarantees sklearn never sees a
@@ -386,23 +450,38 @@ def predict_with_meta_classifier(
     """
     import pandas as pd
 
-    clf = meta_clf["clf"]
-    le = meta_clf["label_encoder"]
-    category_names = meta_clf["category_names"]
-    expected_names = meta_clf.get("_feature_names")
+    # Detect model format and extract components
+    if "clf" in meta_clf:
+        # Standard ensemble format (motion pipeline)
+        clf = meta_clf["clf"]
+        le = meta_clf["label_encoder"]
+        category_names = meta_clf["category_names"]
+        expected_names = meta_clf.get("_feature_names")
+    elif "model" in meta_clf:
+        # Speech meta-classifier format (from train_speech_meta_clf_parquet)
+        clf = meta_clf["model"]
+        le = meta_clf["label_encoder"]
+        category_names = list(le.classes_)
+        expected_names = meta_clf.get("feature_columns")
+    else:
+        raise ValueError(
+            "Unknown meta-classifier format. Expected keys 'clf' or 'model', got: %s"
+            % list(meta_clf.keys())
+        )
 
-    # Build the exact feature names if the pickle is from an older model
+    # Build the exact feature names if missing
     if expected_names is None:
         expected_names = _build_feature_names(category_names, max_topics=100)
 
     # Ensure input is a DataFrame with the exact column names used during training.
-    # If expected columns (e.g. bert_cls_*) are missing, pad with zeros.
+    # If expected columns are missing, pad with zeros.
     if isinstance(feature_vector, pd.DataFrame):
         X = feature_vector.copy()
         missing = [c for c in expected_names if c not in X.columns]
         if missing:
-            for c in missing:
-                X[c] = 0.0
+            # Add missing columns all at once to avoid DataFrame fragmentation
+            fill = pd.DataFrame(0.0, index=X.index, columns=missing)
+            X = pd.concat([X, fill], axis=1)
         X = X[expected_names]
     else:
         arr = np.asarray(feature_vector, dtype=np.float32)

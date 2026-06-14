@@ -65,7 +65,7 @@ def main():
     except Exception:
         pass
 
-    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
     print("Generating test features...", file=sys.stderr)
     X_test, y_test, _ = prepare_training_data_from_gold_labels(
         conn, topic_distributions=topic_dists, categories=defs,

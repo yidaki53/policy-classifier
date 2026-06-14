@@ -64,11 +64,20 @@ def main(
     except Exception:
         meta_clf = None
 
+    # Load speech meta-classifier (primary pipeline for speech evaluation)
+    speech_meta_clf = None
+    try:
+        from swedish_parliament_policy_classifier.classifier.scorer import _load_speech_meta_classifier
+        speech_meta_clf = _load_speech_meta_classifier()
+    except Exception:
+        speech_meta_clf = None
+
     scoring = DeepScoringService(
         categories=defs,
         embedding_matcher=matcher,
         topic_distributions=topic_dists,
         meta_clf=meta_clf,
+        speech_meta_clf=speech_meta_clf,
     )
 
     # Load speech gold labels from parquet

@@ -195,6 +195,11 @@ def init_spacy(*args, **kwargs):
     impl = _lazy_attr("init_spacy", ["swedish_parliament_policy_classifier.nlp.preprocess"])
     return impl(*args, **kwargs)
 
+def score_speech(*args, **kwargs):
+    impl = _lazy_attr("score_speech", ["classifier.scorer", "swedish_parliament_policy_classifier.classifier.scorer"])
+    return impl(*args, **kwargs)
+
+
 __all__ = [
     "load_definitions",
     "score_motion",

@@ -24,7 +24,7 @@ if os.getenv("HF_TOKEN"):
 
 from swedish_parliament_policy_classifier.db.schema import init_db
 from swedish_parliament_policy_classifier.classifier.scorer import load_definitions
-from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 from swedish_parliament_policy_classifier.nlp.topic_modeler import load_topic_distributions
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.classifier.ensemble import (
@@ -325,7 +325,7 @@ def retrain_with_pseudo_labels(
         print(f"Embedding matcher unavailable: {e}", file=sys.stderr)
 
     # Re-use pipeline scorer import
-    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
     # Prepare gold training data
     X_gold, y_gold, category_names = prepare_training_data_from_gold_labels(

@@ -74,7 +74,11 @@ from tqdm.auto import tqdm
 
 
 from swedish_parliament_policy_classifier.exports import load_definitions
-from swedish_parliament_policy_classifier.classifier.pipeline import score_motion as pipeline_score_motion
+from swedish_parliament_policy_classifier.classifier.scorer import (
+    score_motion as pipeline_score_motion,
+    score_speech as pipeline_score_speech,
+)
+from swedish_parliament_policy_classifier.classifier.scorer import _load_speech_meta_classifier
 from swedish_parliament_policy_classifier.definitions.registry import snapshot_definitions, write_snapshot_manifest
 
 # Canonical usage: load_definitions is imported from swedish_parliament_policy_classifier.exports
@@ -332,21 +336,20 @@ def main():
             print("Embedding matcher unavailable:", e)
             matcher = None
 
-    # Load meta-classifier if present (speech-specific preferred)
+    # Load speech meta-classifier (primary pipeline for speeches)
+    speech_meta_clf = None
+    try:
+        speech_meta_clf = _load_speech_meta_classifier()
+    except Exception as e:
+        print(f"Speech meta-classifier not loaded: {e}", file=sys.stderr)
+
+    # Load motion meta-classifier as fallback (legacy, used only if speech model is missing)
     meta_clf = None
-    if load_meta_classifier is not None:
+    if load_meta_classifier is not None and speech_meta_clf is None:
         try:
-            speech_model_full = Path("models/speech_meta_clf_full.pkl")
-            speech_model = Path("models/speech_meta_clf.pkl")
-            speech_model_alt = Path("models/speech_meta_clf_parquet.pkl")
-            for candidate in (speech_model_full, speech_model, speech_model_alt, None):
-                try:
-                    meta_clf = load_meta_classifier(model_path=candidate) if candidate is not None else load_meta_classifier()
-                    if meta_clf is not None:
-                        break
-                except Exception:
-                    meta_clf = None
-        except Exception:
+            meta_clf = load_meta_classifier()
+        except Exception as e:
+            print(f"Motion meta-classifier not loaded: {e}", file=sys.stderr)
             meta_clf = None
 
     rows = []
@@ -416,17 +419,18 @@ def main():
                 except Exception:
                     rhetoric_scores = None
 
-            results = _score_motion_compat(
-                motion_id=speech_id,
+            # Use the speech pipeline (primary) which runs base signals and then
+            # the speech meta-classifier, or falls back to the base pipeline if
+            # the speech model is unavailable.
+            results = pipeline_score_speech(
+                speech_id=speech_id,
                 text=text,
                 categories=defs,
                 party=None,
                 embedding_matcher=matcher,
                 use_zero_shot=args.use_zero_shot,
                 topic_distributions=topic_dists,
-                meta_clf=meta_clf,
-                skip_policy_extraction=True,
-                use_speech_preprocessing=True,
+                speech_meta_clf=speech_meta_clf,
                 use_ollama=args.use_ollama,
                 rhetoric_scores=rhetoric_scores,
             )
@@ -462,6 +466,20 @@ def main():
             processed += 1
             if pbar is not None:
                 pbar.update(1)
+
+            if processed % 100 == 0:
+                elapsed = time.time() - start
+                rate = processed / elapsed if elapsed > 0 else 0.0
+                est_remaining = (input_rows - processed) / rate if rate > 0 else 0.0
+                print(
+                    f"[PROGRESS] {processed}/{input_rows} speeches processed "
+                    f"({100 * processed / input_rows:.1f}%) | "
+                    f"rate={rate:.1f} sp/s | "
+                    f"est_remaining={est_remaining / 60:.1f}m | "
+                    f"rows_buffered={len(rows)} | "
+                    f"rows_flushed={total_rows_written}",
+                    flush=True,
+                )
 
             if args.flush_every and args.flush_every > 0 and processed % args.flush_every == 0:
                 flushed_speech_ids = {str(x.get("speech_id")) for x in rows if x.get("speech_id") is not None}
