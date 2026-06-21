@@ -53,6 +53,10 @@ The figures below show headline outputs directly used for main-text interpretati
 
 ![Parliament Direction Over Time (updated 2026-05-31T02:49:40Z)](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
 
+![Quid Ergo: Speech vs Action ideology by party (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
+
+![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
+
 We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 
 ## Corpus Coverage and Model Quality

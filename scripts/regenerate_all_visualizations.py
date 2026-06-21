@@ -211,7 +211,31 @@ def main() -> None:
             ],
             False,
         ),
-    ]
+        (
+            "pareto-frontier-figure",
+            [
+                sys.executable,
+                "scripts/plot_pareto_frontier.py",
+                "--analysis-dir",
+                args.analysis_dir,
+                "--figures-dir",
+                "output/manuscript/figures",
+            ],
+            False,
+        ),
+        (
+            "quid-ergo-figure",
+            [
+                sys.executable,
+                "scripts/plot_quid_ergo.py",
+                "--analysis-dir",
+                args.analysis_dir,
+                "--figures-dir",
+                "output/manuscript/figures",
+            ],
+            False,
+        ),
+    ]   
 
     consistency = _load_consistency_args(root)
     consistency_cmd = [

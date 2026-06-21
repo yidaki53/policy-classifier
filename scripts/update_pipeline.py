@@ -32,6 +32,7 @@ from loguru import logger
 
 _FRESHNESS_CACHE_PATH = Path("data/.api_freshness_cache.json")
 _FRESHNESS_CACHE_TTL = timedelta(hours=6)
+_LAST_FETCH_CACHE_PATH = Path("data/.last_fetch_cache.json")
 
 def _load_freshness_cache() -> dict[str, Any]:
     if _FRESHNESS_CACHE_PATH.exists():
@@ -52,6 +53,22 @@ def _load_freshness_cache() -> dict[str, Any]:
 def _save_freshness_cache(cache: dict[str, Any]):
     _FRESHNESS_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
     _FRESHNESS_CACHE_PATH.write_text(json.dumps(cache, indent=2, default=str))
+
+
+def _load_last_fetch_cache() -> dict[str, str]:
+    """Load cache of last successful fetch dates per document type."""
+    if _LAST_FETCH_CACHE_PATH.exists():
+        try:
+            return json.loads(_LAST_FETCH_CACHE_PATH.read_text())
+        except Exception:
+            return {}
+    return {}
+
+
+def _save_last_fetch_cache(cache: dict[str, str]):
+    """Save cache of last successful fetch dates per document type."""
+    _LAST_FETCH_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _LAST_FETCH_CACHE_PATH.write_text(json.dumps(cache, indent=2, default=str))
 
 def _url_is_stale(url: str, local_path: str | Path) -> bool:
     """Return True if the server archive might be newer than the local file.
@@ -950,6 +967,58 @@ def merge_prop_bet(dry_run: bool) -> dict[str, Any]:
     )
 
 
+def _get_existing_ids(doktyp: str) -> set[str]:
+    """Get set of existing document IDs from local parquet data.
+    
+    Args:
+        doktyp: Document type ('mot' for motions, 'anf' for speeches)
+    
+    Returns:
+        Set of document IDs already in local data
+    """
+    existing_ids = set()
+    
+    if doktyp == "mot":
+        # Check normalized_motions.parquet
+        try:
+            mot_df = pd.read_parquet("data/parquet/normalized_motions.parquet", columns=["id"])
+            existing_ids.update(mot_df["id"].astype(str).tolist())
+        except Exception as e:
+            logger.warning("Could not read normalized_motions.parquet: {}", e)
+        
+        # Check api_motions directory for previously fetched items
+        api_dir = Path("data/parquet/api_motions")
+        if api_dir.exists():
+            for f in api_dir.glob("*.parquet"):
+                try:
+                    df = pd.read_parquet(f, columns=["id"])
+                    existing_ids.update(df["id"].astype(str).tolist())
+                except Exception as e:
+                    logger.warning("Could not read {}: {}", f, e)
+    
+    elif doktyp == "anf":
+        # Check speech parquet files
+        import glob
+        for f in glob.glob("data/speeches/parquet/*.parquet"):
+            try:
+                df = pd.read_parquet(f, columns=["anforande_id"])
+                existing_ids.update(df["anforande_id"].astype(str).tolist())
+            except Exception as e:
+                logger.warning("Could not read {}: {}", f, e)
+        
+        # Check api_speeches directory for previously fetched items
+        api_dir = Path("data/parquet/api_speeches")
+        if api_dir.exists():
+            for f in api_dir.glob("*.parquet"):
+                try:
+                    df = pd.read_parquet(f, columns=["id"])
+                    existing_ids.update(df["id"].astype(str).tolist())
+                except Exception as e:
+                    logger.warning("Could not read {}: {}", f, e)
+    
+    return existing_ids
+
+
 def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
     """Query live Riksdagen API for new items since our latest dataset date and append to parquet."""
     logger.info("Fetching new items from live API...")
@@ -959,6 +1028,7 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
     from swedish_parliament_policy_classifier.fetch.riksdag_client import fetch_page
 
     latest_dates = _latest_dates_in_parquet()
+    last_fetch_cache = _load_last_fetch_cache()
     steps: dict[str, Any] = {}
 
     for doktyp, label, date_key in [
@@ -974,8 +1044,23 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
         if pd.isna(since_date):
             logger.warning("Latest date is NaN for {}; skipping live API fetch", label)
             continue
-        # Fetch from 7 days before the latest date to avoid missing edge cases
-        from_date = (since_date - timedelta(days=7)).strftime("%Y-%m-%d")
+        
+        # Get existing IDs to avoid re-fetching
+        existing_ids = _get_existing_ids(doktyp)
+        logger.info("Found {} existing {} IDs in local data", len(existing_ids), label)
+        
+        # Check when we last fetched this document type
+        last_fetch_date_str = last_fetch_cache.get(doktyp)
+        if last_fetch_date_str:
+            last_fetch_date = pd.to_datetime(last_fetch_date_str)
+            # Only fetch from last fetch date forward (not 7 days back)
+            from_date = last_fetch_date.strftime("%Y-%m-%d")
+            logger.info("Last fetched {} on {}, fetching from {} forward", label, last_fetch_date_str, from_date)
+        else:
+            # First time fetching, use a small window to catch recent data
+            from_date = (since_date - timedelta(days=1)).strftime("%Y-%m-%d")
+            logger.info("No previous fetch record for {}, fetching from {} forward", label, from_date)
+        
         to_date = datetime.now().strftime("%Y-%m-%d")
         logger.info("Fetching {} from API: {} to {}", label, from_date, to_date)
 
@@ -1030,15 +1115,32 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
             continue
 
         # Deduplicate against existing IDs
+        df = pd.DataFrame(all_docs)
+        id_col = "id" if "id" in df.columns else ("anforande_id" if doktyp == "anf" else "dok_id")
+        if id_col in df.columns:
+            df[id_col] = df[id_col].astype(str)
+            new_docs = df[~df[id_col].isin(existing_ids)]
+            logger.info("Deduplicated {} -> {} new {} items ({} already exist)", 
+                       len(df), len(new_docs), label, len(df) - len(new_docs))
+            df = new_docs
+        
+        if df.empty:
+            logger.info("No new {} items after deduplication", label)
+            steps[label] = {"fetched": 0, "output": None}
+            continue
+
         out_path = REPO_ROOT / "data" / "parquet" / f"api_{label}"
         out_path.mkdir(parents=True, exist_ok=True)
         ts = _utc_now()
         parquet_file = out_path / f"{doktyp}_{ts}.parquet"
 
-        df = pd.DataFrame(all_docs)
         df.to_parquet(parquet_file, index=False, compression="zstd")
         logger.info("Wrote {} new {} items to {}", len(df), label, parquet_file)
         steps[label] = {"fetched": len(df), "output": str(parquet_file)}
+        
+        # Update last fetch cache
+        last_fetch_cache[doktyp] = to_date
+        _save_last_fetch_cache(last_fetch_cache)
 
     return steps
 

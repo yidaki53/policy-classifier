@@ -20,7 +20,7 @@
     {
       "id": "heading_depth",
       "status": "pass",
-      "detail": "Maximum heading depth in sections: 2"
+      "detail": "Maximum heading depth in sections: 3"
     },
     {
       "id": "journal_profile_loaded",

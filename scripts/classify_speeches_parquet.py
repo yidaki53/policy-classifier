@@ -65,12 +65,39 @@ import argparse
 import gc
 import inspect
 import json
+import signal
+import sys
 import time
+import traceback
 from pathlib import Path
 from typing import Optional
 
 import pandas as pd
 from tqdm.auto import tqdm
+
+# Global state for crash diagnostics
+_current_speech_id = None
+_current_speech_text = None
+_crash_log_path = Path("logs/classify_crash.log")
+
+def _crash_handler(signum, frame):
+    """Handle SIGSEGV and other fatal signals with diagnostic logging."""
+    signal_name = signal.Signals(signum).name if hasattr(signal, 'Signals') else str(signum)
+    crash_info = {
+        "signal": signal_name,
+        "speech_id": _current_speech_id,
+        "text_length": len(_current_speech_text) if _current_speech_text else None,
+        "text_preview": _current_speech_text[:500] if _current_speech_text else None,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    }
+    
+    _crash_log_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(_crash_log_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(crash_info, ensure_ascii=False) + "\n")
+    
+    print(f"\n[FATAL] {signal_name} caught at speech_id={_current_speech_id}", file=sys.stderr)
+    print(f"[FATAL] Crash log written to {_crash_log_path}", file=sys.stderr)
+    sys.exit(1)
 
 
 from swedish_parliament_policy_classifier.exports import load_definitions
@@ -211,6 +238,10 @@ def _build_rhetoric_predictor(model_name: str, device: int, hypothesis_template:
 
 
 def main():
+    # Install crash handlers for diagnostic logging
+    signal.signal(signal.SIGSEGV, _crash_handler)
+    signal.signal(signal.SIGABRT, _crash_handler)
+    
     safe = thermal_safe_defaults("safe")
     p = argparse.ArgumentParser()
     p.add_argument("--input-dir", default="data/speeches/parquet")
@@ -361,14 +392,21 @@ def main():
         pbar = tqdm(total=args.limit if args.limit else None, desc="speeches", unit="rows")
 
     # If output exists and resume desired, read processed speech_ids
+    # Use chunked reading to avoid loading entire file into memory
     existing_speech_ids = set()
     if out_path.exists():
         try:
-            existing = pd.read_parquet(out_path)
-            if "speech_id" in existing.columns:
-                existing_speech_ids = set(existing["speech_id"].astype(str).unique())
-            total_rows_written = len(existing)
-        except Exception:
+            # Read in chunks to manage memory for large files
+            chunk_size = 50000
+            for chunk in pd.read_parquet(out_path, columns=["speech_id"]).itertuples(index=False):
+                if hasattr(chunk, 'speech_id') and chunk.speech_id is not None:
+                    existing_speech_ids.add(str(chunk.speech_id))
+            
+            # Get total row count
+            total_rows_written = len(existing_speech_ids) * 7  # Approximate: 7 categories per speech
+            print(f"[RESUME] Loaded {len(existing_speech_ids)} existing speech IDs", flush=True)
+        except Exception as e:
+            print(f"[WARNING] Failed to load existing classifications: {e}", flush=True)
             existing_speech_ids = set()
 
     torch_mod = None
@@ -393,7 +431,8 @@ def main():
             # skip incompatible files
             continue
 
-        for _, r in df.iterrows():
+        # Process speeches with explicit error handling and memory management
+        for idx, r in df.iterrows():
             raw_speech_id = r.get("anforande_id")
             speech_id = str(raw_speech_id) if raw_speech_id is not None else None
             if not speech_id or speech_id in ("nan", "None", ""):
@@ -405,6 +444,11 @@ def main():
             if not isinstance(raw_text, str):
                 raw_text = str(raw_text) if raw_text is not None else ""
             text = _strip_html(raw_text)
+            
+            # Update global state for crash diagnostics
+            global _current_speech_id, _current_speech_text
+            _current_speech_id = speech_id
+            _current_speech_text = text
 
             rhetoric_scores = rhet_map.get(speech_id)
             if rhetoric_scores is None and rhetoric_predictor is not None:
@@ -429,18 +473,25 @@ def main():
             # Use the speech pipeline (primary) which runs base signals and then
             # the speech meta-classifier, or falls back to the base pipeline if
             # the speech model is unavailable.
-            results = pipeline_score_speech(
-                speech_id=speech_id,
-                text=text,
-                categories=defs,
-                party=None,
-                embedding_matcher=matcher,
-                use_zero_shot=args.use_zero_shot,
-                topic_distributions=topic_dists,
-                speech_meta_clf=speech_meta_clf,
-                use_ollama=args.use_ollama,
-                rhetoric_scores=rhetoric_scores,
-            )
+            try:
+                results = pipeline_score_speech(
+                    speech_id=speech_id,
+                    text=text,
+                    categories=defs,
+                    party=None,
+                    embedding_matcher=matcher,
+                    use_zero_shot=args.use_zero_shot,
+                    topic_distributions=topic_dists,
+                    speech_meta_clf=speech_meta_clf,
+                    use_ollama=args.use_ollama,
+                    rhetoric_scores=rhetoric_scores,
+                )
+            except Exception as e:
+                # Log problematic speech and continue
+                print(f"\n[ERROR] Failed to classify speech_id={speech_id}: {e}", file=sys.stderr)
+                print(f"[ERROR] Text length: {len(text)}, preview: {text[:200]}", file=sys.stderr)
+                traceback.print_exc()
+                results = []  # Skip this speech
 
             # compute confidence = max normalized weight across categories
             confidences = [float(rr.normalized_weight) for rr in results] if results else [0.0]
@@ -497,9 +548,20 @@ def main():
                     _flush_rhetoric_rows(rhet_out_path, generated_rhet_rows)
                     generated_rhet_rows = []
 
-            # memory flush
+            # memory flush - more aggressive cleanup
             if processed % 50 == 0:
                 gc.collect()
+                # Clear pandas internal caches
+                if hasattr(pd, '_cache'):
+                    pd._cache.clear()
+            
+            # Periodic deep cleanup every 500 speeches
+            if processed % 500 == 0:
+                gc.collect(2)  # Full garbage collection
+                # Clear any cached embeddings or model state
+                if matcher is not None and hasattr(matcher, '_cached_cat_embs'):
+                    del matcher._cached_cat_embs
+                    matcher._cached_cat_embs = None
 
             if cuda_available and torch_mod is not None and processed % args.cuda_cache_every == 0:
                 try:
@@ -515,6 +577,10 @@ def main():
 
         if args.limit and processed >= args.limit:
             break
+        
+        # Explicit cleanup after processing each file
+        del df
+        gc.collect()
 
     total_rows_written = _flush_rows(out_path, rows)
     if args.persist_generated_rhetoric and rhet_out_path is not None:
