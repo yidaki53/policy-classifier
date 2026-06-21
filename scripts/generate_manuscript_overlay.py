@@ -23,6 +23,9 @@ def main() -> None:
     args = p.parse_args()
 
     profiles = pd.read_parquet(args.profiles)
+    if "party" in profiles.columns:
+        profiles = profiles.copy()
+        profiles["party"] = profiles["party"].astype(str)
     out_path = plot_modality_overlay_figure(profiles, Path(args.out))
     print(json.dumps({"overlay_figure": out_path}, indent=2))
 

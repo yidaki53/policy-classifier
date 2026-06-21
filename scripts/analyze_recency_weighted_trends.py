@@ -22,9 +22,27 @@ import argparse
 import itertools
 import json
 import os
+import types
 from pathlib import Path
 
 import numpy as np
+
+# Patch pyarrow vendored docscrape before pandas triggers pyarrow import.
+# Workaround for Python 3.12 + specific pyarrow versions where a code object
+# is passed as a callable condition, causing "TypeError: 'code' object is not callable".
+try:
+    import pyarrow.vendored.docscrape as _docscrape  # type: ignore
+    _orig_read_to_condition = _docscrape.NumpyDocString.read_to_condition
+
+    def _patched_read_to_condition(self, condition_func):
+        if isinstance(condition_func, types.CodeType):
+            return False
+        return _orig_read_to_condition(self, condition_func)
+
+    _docscrape.NumpyDocString.read_to_condition = _patched_read_to_condition
+except Exception:
+    pass
+
 import pandas as pd
 
 from swedish_parliament_policy_classifier.analysis.speech_visualizations import load_speech_metadata

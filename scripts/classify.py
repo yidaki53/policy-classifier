@@ -39,7 +39,34 @@ def _normalize_raw_to_parquet(raw_parquet: str | Path, normalized_out: str | Pat
             data = raw_json or {}
         title = data.get("title") or data.get("rubrik") or ""
         text = data.get("text") or data.get("body") or title or ""
-        date = data.get("date") or data.get("datum") or None
+
+        date = data.get("date") or data.get("datum")
+        if not date:
+            # Fallbacks for motions missing explicit date:
+            # 1) systemdatum from raw metadata
+            # 2) rm session period, e.g. "1994/95" -> derive year from first part
+            md = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
+            if not isinstance(md, dict):
+                try:
+                    md = json.loads(data.get("metadata") or "{}")
+                except Exception:
+                    md = {}
+            date = (
+                data.get("systemdatum")
+                or md.get("systemdatum")
+                or data.get("datum")
+                or md.get("datum")
+            )
+            if not date:
+                rm = data.get("rm") or md.get("rm")
+                if isinstance(rm, str) and "/" in rm:
+                    try:
+                        year_part = rm.split("/")[0].strip()
+                        if year_part.isdigit() and len(year_part) == 4:
+                            date = f"{year_part}-01-01"
+                    except Exception:
+                        pass
+
         party = data.get("party") or data.get("parti") or None
         doc_type = data.get("doc_type") or data.get("dokumenttyp") or None
         metadata = {k: v for k, v in data.items() if k not in ("title", "text", "date", "party")}
@@ -90,7 +117,12 @@ def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_m
         to_classify = to_classify.head(limit)
 
     rows = []
-    for _, r in to_classify.iterrows():
+    try:
+        from tqdm.auto import tqdm
+        class_iter = tqdm(list(to_classify.iterrows()), desc="classify_motions", unit="motion")
+    except Exception:
+        class_iter = to_classify.iterrows()
+    for _, r in class_iter:
         mid = str(r.get("id"))
         text = (r.get("title") or "") + "\n" + (r.get("text") or "")
         try:

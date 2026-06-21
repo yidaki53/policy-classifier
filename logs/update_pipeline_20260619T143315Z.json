@@ -1,0 +1,325 @@
+{
+  "run_ts": "20260619T143315Z",
+  "dry_run": false,
+  "cpu_fraction": 0.25,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202728.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202829.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "19992000",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-19992000.json.zip"
+          }
+        ]
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202728.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202829.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "19992000",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-19992000.csv.zip"
+          }
+        ]
+      },
+      "mot": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "nan"
+      }
+    },
+    "download": {
+      "skipped": true
+    },
+    "extract": {
+      "skipped": true
+    },
+    "api_fetch": {
+      "speeches": {
+        "fetched": 0,
+        "output": null
+      }
+    },
+    "extract_new_sources": {
+      "skipped": true
+    },
+    "classify": {
+      "skipped": true
+    },
+    "classify_new_sources": {
+      "skipped": true
+    },
+    "link_prop_bet": {
+      "step": "link_prop_bet_to_speech",
+      "ok": true,
+      "returncode": 0,
+      "stdout_preview": "Loading speech classifications and metadata...\nExisting speech_action_links cover 141605 speeches\nLoading propositions (doc_type=prop)...\n  0 propositions with classifications\nLoading betankande...\n  24455 betankande with classifications\nScanning speech parquet for explicit document references...\n{\n  \"output\": \"data/parquet/speech_prop_bet_links.parquet\",\n  \"rows\": 141605,\n  \"action_types\": [\n    \"betankande\"\n  ],\n  \"link_source_counts\": {\n    \"bet_fallback_category_time\": 92107,\n    \"bet_explic",
+      "stderr_preview": ""
+    },
+    "merge_prop_bet": {
+      "step": "merge_prop_bet_into_action_links",
+      "ok": true,
+      "returncode": 0,
+      "stdout_preview": "{\n  \"output\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"existing_rows\": 141605,\n  \"prop_bet_rows\": 141605,\n  \"total_rows\": 283210,\n  \"action_types\": [\n    \"betankande\",\n    \"motion\",\n    \"vote\"\n  ]\n}\n",
+      "stderr_preview": ""
+    },
+    "analysis": {
+      "linkage": {
+        "step": "build_speech_motion_linkage",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Loading speech classifications and metadata...\nLoading motion top categories and metadata...\nLinking speeches to motions (ID-first; fallback to nearest-in-time)\nWrote 169 speech->motion links to data/parquet/speech_motions.parquet\n",
+        "stderr_preview": ""
+      },
+      "profiles": {
+        "step": "build_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Reference date for recency weighting: 2026-05-12 00:00:00+00:00\nWrote party profiles to data/parquet/party_profiles_recency.parquet (rows=186, modalities=['motion', 'proposition', 'speech', 'vote'])\n",
+        "stderr_preview": ""
+      },
+      "link_all_speeches": {
+        "step": "link_all_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"data/parquet/speech_action_links.parquet\",\n  \"n_speeches\": 141605,\n  \"n_linked\": 141605,\n  \"n_speeches_with_category\": 141605,\n  \"coverage\": 1.0,\n  \"action_type_counts\": {\n    \"vote\": 75764,\n    \"motion\": 65841\n  },\n  \"link_source_top10\": {\n    \"graph_direct_signatory_motion\": 65786,\n    \"graph_direct_signatory_vote\": 59482,\n    \"fallback:party_category_vote\": 15315,\n    \"fallback:vote_any\": 853,\n    \"existing:rel_dok_id\": 169\n  },\n  \"speaker_signatory_support\": {\n    \"n_speeches_",
+        "stderr_preview": ""
+      },
+      "axis_alignment": {
+        "step": "axis_alignment",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"rows\": 283210,\n  \"mean_axis_js_distance\": 0.5015477203807256,\n  \"peak_flip_rate\": 0.21093181737932984\n}\n",
+        "stderr_preview": ""
+      },
+      "contradiction": {
+        "step": "contradiction",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"edge_summary\": {\n    \"output\": \"output/analysis/speech_action_contradiction_edges.parquet\",\n    \"rows\": 283210,\n    \"mean_contradiction_score_raw\": 0.4201752675403348,\n    \"mean_edge_confidence_raw\": 0.3749936442922214\n  },\n  \"expected_summary\": {\n    \"output\": \"output/analysis/speech_action_expected_contradiction_party_topic_year.parquet\",\n    \"rows\": 231,\n    \"mean_expected_contradiction\": 0.5128935002076227\n  }\n}\n",
+        "stderr_preview": ""
+      },
+      "contradiction_by_modality": {
+        "step": "contradiction_by_modality",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"output/analysis/speech_action_expected_contradiction_by_modality.parquet\",\n  \"rows\": 908,\n  \"action_types\": [\n    \"all\",\n    \"betankande\",\n    \"motion\",\n    \"vote\"\n  ],\n  \"mean_expected_contradiction_by_modality\": {\n    \"vote\": 0.49528379857931887,\n    \"motion\": 0.6110161630906884,\n    \"proposition\": NaN,\n    \"betankande\": 0.4779734025108366,\n    \"all\": 0.5128935002076227\n  }\n}\n",
+        "stderr_preview": ""
+      },
+      "link_confidence": {
+        "step": "link_confidence",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"rows\": 283210,\n  \"out\": \"output/analysis/speech_action_link_confidence_strata.parquet\",\n  \"summary\": \"output/analysis/speech_action_link_confidence_summary.json\"\n}\n",
+        "stderr_preview": ""
+      },
+      "uncertainty": {
+        "step": "uncertainty",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"links\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"rows_input\": 283210,\n  \"parties_output\": 9,\n  \"n_boot\": 500,\n  \"alpha\": 0.05,\n  \"min_party_n\": 200,\n  \"output\": \"output/analysis/say_do_uncertainty_intervals_party.parquet\"\n}\n",
+        "stderr_preview": ""
+      },
+      "consistency": {
+        "step": "consistency",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"inputs\": {\n    \"ideological_gap_party\": \"output/analysis/ideological_gap_party.parquet\",\n    \"promise_fulfillment_party_summary\": \"output/analysis/promise_fulfillment_party_summary.parquet\",\n    \"party_ideology_drift_by_modality_year\": \"output/analysis/party_ideology_drift_by_modality_year.parquet\",\n    \"promise_fulfillment_party_topic_year\": \"output/analysis/promise_fulfillment_party_topic_year.parquet\"\n  },\n  \"outputs\": {\n    \"consistency_score_party\": \"output/analysis/consistency_score_p",
+        "stderr_preview": ""
+      },
+      "link_stability": {
+        "step": "link_stability",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"input_axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"input_link_strata\": \"output/analysis/speech_action_link_confidence_strata.parquet\",\n  \"metric\": \"axis_js_distance\",\n  \"rows_input\": 283210,\n  \"parties_output\": 9,\n  \"min_n\": 100,\n  \"output\": \"output/analysis/link_strata_stability_party.parquet\",\n  \"structural_available_parties\": 0\n}\n",
+        "stderr_preview": ""
+      },
+      "latent": {
+        "step": "latent",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"links\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"consistency\": \"output/analysis/consistency_score_party.parquet\",\n  \"n_parties\": 9,\n  \"indicator_columns\": [\n    \"speech_axis_mean_z\",\n    \"action_axis_mean_z\",\n    \"ideology_uphold_v2_z\"\n  ],\n  \"n_boot\": 300,\n  \"alpha\": 0.05,\n  \"output\": \"output/analysis/party_latent_ideology_estimates.parquet\"\n}\n",
+        "stderr_preview": ""
+      },
+      "recency": {
+        "step": "recency",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"inputs\": {\n    \"topic_year\": \"output/analysis/promise_fulfillment_party_topic_year.parquet\"\n  },\n  \"outputs\": {\n    \"party_scores\": \"output/analysis/recency_weighted_party_scores.parquet\",\n    \"parliament_timeseries\": \"output/analysis/recency_weighted_parliament_timeseries.parquet\",\n    \"summary\": \"output/analysis/recency_weighted_summary.json\"\n  },\n  \"summary\": {\n    \"half_life_years\": 3.0,\n    \"max_year\": 2018,\n    \"election_cadence_years\": 4,\n    \"election_anchor_year\": 2010,\n    \"runup_",
+        "stderr_preview": ""
+      }
+    },
+    "figures": {
+      "manuscript_motion_figures": {
+        "step": "manuscript_motion_figures",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved: figures/manuscript/pie_chart_categories.png\nSaved: figures/manuscript/party_motions_stacked.png\nSaved: figures/manuscript/party_motions_stacked_normalized.png\nSaved: figures/manuscript/ideology_timeline.png\nSaved: figures/manuscript/party_ideology_heatmap.png\n\nAll figures saved to figures/manuscript\n",
+        "stderr_preview": "Loading classifications from database...\nLoaded 202925 classified motions.\nTotal classified motions: 202925\nStats: {'date_range': '1900-2026', 'n_parties': 8, 'n_motions': 172395}\nGenerating figures...\nSaved provenance: figures/manuscript/provenance/generate_figures_20260619T144529Z.json\n"
+      },
+      "party_profiles": {
+        "step": "party_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved final visualization: ('figures/party_profiles_final.png', 'figures/party_profiles_final.pdf')\n",
+        "stderr_preview": ""
+      },
+      "party_profiles_advanced": {
+        "step": "party_profiles_advanced",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved clustered heatmap: ('figures/party_clustered.png', 'figures/party_clustered.pdf')\nSaved PCA biplot: ('figures/party_pca.png', 'figures/party_pca.pdf')\n",
+        "stderr_preview": ""
+      },
+      "interactive": {
+        "step": "interactive",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Wrote interactive HTML to figures/party_profiles_interactive.html\n",
+        "stderr_preview": ""
+      },
+      "voting": {
+        "step": "voting",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Loading 33 votering Parquet files ...\nLoaded 7,953,402 vote records\nSaved figures/voting/party_cohesion_timeseries.pdf\nSaved figures/voting/cross_party_agreement.pdf\nSaved figures/voting/vote_distribution_by_party.pdf\nSaved figures/voting/motions_vs_votes_timeline.pdf\nSaved figures/voting/committee_vote_distribution.pdf\nSaved provenance: figures/voting/provenance/visualize_voting_20260619T144712Z.json\n\nAll figures written to figures/voting\n"
+      },
+      "speech_profiles": {
+        "step": "speech_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"stacked\": \"figures/speeches/speech_profiles_stacked.png\",\n  \"heatmap\": \"figures/speeches/speech_profiles_heatmap.png\",\n  \"clustered\": \"figures/speeches/speech_profiles_clustered.png\",\n  \"pca\": \"figures/speeches/speech_profiles_pca.png\",\n  \"party_count\": 8\n}\n",
+        "stderr_preview": ""
+      },
+      "overlay": {
+        "step": "overlay",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"overlay_figure\": \"output/manuscript/figures/figure_modality_overlay_by_party.png\"\n}\n",
+        "stderr_preview": ""
+      },
+      "three_way": {
+        "step": "three_way",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\"paired_tests\": \"figures/three_way/paired_tests.parquet\", \"heatmap\": \"figures/three_way/divergence_heatmap.png\"}\n{\"effect_table\": \"figures/three_way/effect_size_table.parquet\", \"annotated_heatmap\": \"figures/three_way/divergence_speech_vs_combined_significance.png\"}\n",
+        "stderr_preview": ""
+      }
+    },
+    "manuscript": {
+      "render": {
+        "step": "manuscript_render",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md\",\n      \"rendered\": \"/home/robin/OneDrive/Uni",
+        "stderr_preview": ""
+      },
+      "combined": {
+        "step": "manuscript_combined",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md\",\n      \"rendered\": \"/home/robin/OneDrive/Uni",
+        "stderr_preview": ""
+      }
+    }
+  },
+  "completed_at": "20260619T144805Z"
+}

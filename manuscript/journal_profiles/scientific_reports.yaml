@@ -1,0 +1,45 @@
+---
+_agent_frontmatter:
+  id: "manuscript.journal_profile.scientific_reports"
+  purpose: "Machine-readable journal requirements for manuscript rendering and readiness checks."
+  steward: "manuscript"
+  edit_policy: "update_when_journal_policy_changes"
+  consumers:
+    - "scripts/check_journal_requirements.py"
+    - "scripts/render_manuscript_jinja.py"
+  notes: "Keep requirements actionable and aligned with publisher guidance URLs."
+---
+
+name: "Scientific Reports"
+publisher: "Nature Publishing Group"
+issn: "2045-2322"
+article_type: "Original Article"
+targeted_on_utc: "2026-06-19T00:00:00Z"
+
+fit_rationale: "Broad interdisciplinary scope, rapid publication model, and strong acceptance of reproducible computational research with data/code availability."
+acceptance_context: "Scientific Reports prioritizes methodological soundness and scientific validity over perceived impact. Average time to first decision is approximately 26 days, faster than PLOS ONE. Open-access, no author fees for accepted articles (APCs apply post-acceptance)."
+reference_style: "Nature (numbered, superscript)"
+source_urls:
+  - "https://www.nature.com/srep/submission-guidelines"
+  - "https://www.nature.com/srep/journal-information"
+
+requirements:
+  - "Manuscript length: no strict limit, but recommended 3,000-5,000 words for main text (excluding abstract, methods, references, figures)."
+  - "Abstract: structured, maximum 200 words."
+  - "References: numbered in order of appearance, superscript format. No strict limit."
+  - "Figures/tables: maximum 10 display items (figures + tables combined) for initial submission."
+  - "Methods section must include: software versions, packages used, and reproducibility details."
+  - "Data Availability Statement is mandatory and must include repository URLs/accession numbers."
+  - "Code Availability Statement required if code is central to the methodology."
+  - "Competing interests and funding disclosures required in submission metadata."
+  - "Author contributions must be specified (CRediT taxonomy recommended)."
+  - "Manuscript structure: Abstract, Introduction, Methods, Results, Discussion, Conclusions, Methods (detailed), References, Figure legends, Tables."
+  - "Supplementary information is peer-reviewed and should be referenced in the main text."
+  - "Submission must include a cover letter with significance statement."
+  - "Emphasis on reproducibility; data/code should be deposited in public repositories before submission."
+
+fast_track_context:
+  typical_time_to_first_decision_days: 26
+  typical_time_to_acceptance_days: 90
+  scope: "Natural sciences, engineering, computational methods, and interdisciplinary research including computational social science."
+  notes: "Rapid publication model with no subjective 'interest assessment' gatekeeping; reviews focus on validity. Suitable for deterministic-plus-ML parliamentary analysis with reproducible pipeline outputs."

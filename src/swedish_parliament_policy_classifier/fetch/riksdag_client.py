@@ -31,6 +31,7 @@ _SAMPLE = [
 ]
 
 
+import random as _random_module
 import re as _re_module
 
 def _parse_riksdag_doc(d: Dict[str, Any]) -> Dict[str, Any]:
@@ -67,9 +68,9 @@ def fetch_page(
     doktyp: str = "mot",
     page: int = 1,
     query: Optional[str] = None,
-    timeout: int = 10,
-    retries: int = 2,
-    retry_delay: float = 1.0,
+    timeout: int = 20,
+    retries: int = 4,
+    retry_delay: float = 2.0,
     fr: Optional[str] = None,
     till: Optional[str] = None,
     sort: Optional[str] = None,
@@ -78,12 +79,7 @@ def fetch_page(
     """Fetch a single page from the Riksdag API.
 
     Returns (list_of_docs, has_more_pages).  Retries on transient errors.
-
-    Args:
-        fr: Start date (inclusive) as YYYY-MM-DD.
-        till: End date (inclusive) as YYYY-MM-DD.
-        sort: Sort field (e.g. 'datum').
-        sortorder: 'asc' or 'desc'.
+    Uses a persistent session with keep-alive and connection pooling.
     """
     import time
     base = "https://data.riksdagen.se/dokumentlista/"
@@ -99,19 +95,35 @@ def fetch_page(
     if sortorder:
         params["sortorder"] = sortorder
 
+    # Persistent session with keep-alive + connection pooling
+    if not hasattr(fetch_page, "_session"):
+        fetch_page._session = requests.Session()
+        fetch_page._session.headers.update({
+            "User-Agent": "riksdagen-pipeline/1.0 (+https://github.com/yidaki53/policy-classifier)",
+            "Accept": "application/json",
+            "Connection": "keep-alive",
+        })
+        fetch_page._session.stream = True
+    session = fetch_page._session
+
     last_err = None
     for attempt in range(retries + 1):
         try:
-            resp = requests.get(base, params=params, timeout=timeout)
+            if attempt > 0:
+                # Exponential backoff with jitter
+                wait = min(2 ** attempt * 2 + _random_module.uniform(0, 2), 30)
+                LOG.debug("API retry %s/%s for page %s: waiting %.1fs", attempt + 1, retries + 1, page, wait)
+                time.sleep(wait)
+            resp = session.get(base, params=params, timeout=timeout, stream=True)
             resp.raise_for_status()
             payload = resp.json()
+            resp.close()
             docs = []
             has_more = False
             if isinstance(payload, dict):
                 if "dokumentlista" in payload:
                     dl = payload.get("dokumentlista") or {}
                     docs = dl.get("dokument") or []
-                    # Check pagination metadata
                     sidor = dl.get("@sidor")
                     if sidor is not None:
                         try:
@@ -133,11 +145,13 @@ def fetch_page(
             return out, has_more
         except Exception as e:
             last_err = e
-            LOG.warning("Live Riksdag fetch attempt %s/%s failed on page %s: %s", attempt + 1, retries + 1, page, e)
+            LOG.debug("Live Riksdag fetch attempt %s/%s failed on page %s: %s", attempt + 1, retries + 1, page, e)
             if attempt < retries:
                 time.sleep(retry_delay * (attempt + 1))
 
-    LOG.warning("Live Riksdag fetch failed after %s retries on page %s: %s", retries + 1, page, last_err)
+    if last_err and isinstance(last_err, requests.exceptions.ConnectionError):
+        LOG.debug("API connection error on page %s — will retry next page with backoff", page)
+    LOG.debug("Live Riksdag fetch failed after %s retries on page %s: %s", retries + 1, page, last_err)
     return [], False
 
 

@@ -270,19 +270,19 @@ Use this matrix as a pre-interpretation checklist when drawing substantive concl
 ## Appendix Figures (Intermediate Steps)
 These figures capture intermediate diagnostics and process-level checks that support the main analysis without interrupting core result flow.
 
-![Consistency-Fulfillment vs External Benchmark (Party-Year) (updated 2026-06-14T14:49:36Z)](../output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png){ width=100% }
+![Consistency-Fulfillment vs External Benchmark (Party-Year) (updated 2026-06-21T12:12:14Z)](../output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png){ width=100% }
 
-![Party Modality Overlay (updated 2026-06-14T14:54:07Z)](../output/manuscript/figures/figure_modality_overlay_by_party.png){ width=100% }
+![Party Modality Overlay (updated 2026-06-19T14:47:17Z)](../output/manuscript/figures/figure_modality_overlay_by_party.png){ width=100% }
 
-![Motion Category Distribution (updated 2026-06-14T14:51:32Z)](../figures/manuscript/pie_chart_categories.png){ width=90% }
+![Motion Category Distribution (updated 2026-06-21T12:14:14Z)](../figures/manuscript/pie_chart_categories.png){ width=90% }
 
-![Party Motions Stacked (updated 2026-06-14T14:51:32Z)](../figures/manuscript/party_motions_stacked.png){ width=90% }
+![Party Motions Stacked (updated 2026-06-21T12:14:14Z)](../figures/manuscript/party_motions_stacked.png){ width=90% }
 
-![Voting Cohesion Time Series (updated 2026-06-14T14:52:12Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
+![Voting Cohesion Time Series (updated 2026-06-21T12:14:55Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
 
-![Three-way Divergence (updated 2026-06-14T14:54:10Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
+![Three-way Divergence (updated 2026-06-21T12:15:33Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
 
-![Speech Profiles Heatmap (updated 2026-06-14T14:54:05Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
+![Speech Profiles Heatmap (updated 2026-06-21T12:15:24Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
 
 
 # Data Availability

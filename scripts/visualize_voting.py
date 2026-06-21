@@ -28,7 +28,6 @@ from datetime import datetime
 
 from swedish_parliament_policy_classifier.visualization.style_config import (
     add_figure_credits,
-    query_summary_stats,
 )
 from swedish_parliament_policy_classifier.provenance import write_run_provenance
 
@@ -53,21 +52,16 @@ def _load_all_votering(parquet_dir: str) -> pd.DataFrame:
     print(f"Loading {len(files)} votering Parquet files ...", file=sys.stderr)
     dfs = [pd.read_parquet(f) for f in files]
     df = pd.concat(dfs, ignore_index=True)
-    # Derive year from rm (first 4 digits)
     df["year"] = df["rm"].astype(str).str[:4].astype(int, errors="ignore")
     return df
 
 
 def _party_cohesion(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute per-party per-year cohesion: fraction of votes where >=90% of party MPs vote the same way."""
-    # Filter to valid parties
     df = df[df["parti"].isin(VALID_PARTIES)].copy()
-    # Standardise rost
     df["rost_norm"] = df["rost"].astype(str).str.strip().str.lower()
 
     results = []
     for (year, party), group in df.groupby(["year", "parti"]):
-        # Group by votering_id
         cohesion_scores = []
         for _, vgroup in group.groupby("votering_id"):
             counts = vgroup["rost_norm"].value_counts()
@@ -89,7 +83,6 @@ def _party_cohesion(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def plot_cohesion(df: pd.DataFrame, out_dir: Path):
-    """Figure 1: Party vote cohesion timeline."""
     out_dir.mkdir(parents=True, exist_ok=True)
     coh = _party_cohesion(df)
     if coh.empty:
@@ -138,24 +131,19 @@ def plot_cohesion(df: pd.DataFrame, out_dir: Path):
 
 
 def _cross_party_agreement(df: pd.DataFrame) -> pd.DataFrame:
-    """For each votering, compute pairwise party agreement (ja/nej only)."""
     df = df[df["parti"].isin(VALID_PARTIES)].copy()
     df["rost_norm"] = df["rost"].astype(str).str.strip().str.lower()
-    # Exclude frånvarande and avstår from agreement calc
     df = df[df["rost_norm"].isin(["ja", "nej"])]
 
-    # Per votering_id, per party, pick majority vote
     party_pos = (
         df.groupby(["votering_id", "parti"])["rost_norm"]
         .agg(lambda s: s.value_counts().idxmax())
         .reset_index(name="position")
     )
 
-    # Pivot to wide
     wide = party_pos.pivot(index="votering_id", columns="parti", values="position")
     wide = wide.reindex(columns=VALID_PARTIES)
 
-    # Pairwise agreement
     matrix = pd.DataFrame(index=VALID_PARTIES, columns=VALID_PARTIES, dtype=float)
     for p1 in VALID_PARTIES:
         for p2 in VALID_PARTIES:
@@ -173,7 +161,6 @@ def _cross_party_agreement(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def plot_agreement_matrix(df: pd.DataFrame, out_dir: Path):
-    """Figure 2: Cross-party agreement heatmap."""
     out_dir.mkdir(parents=True, exist_ok=True)
     mat = _cross_party_agreement(df)
     if mat.empty:
@@ -205,7 +192,6 @@ def plot_agreement_matrix(df: pd.DataFrame, out_dir: Path):
 
 
 def plot_vote_distribution(df: pd.DataFrame, out_dir: Path):
-    """Figure 3: Vote distribution by party."""
     out_dir.mkdir(parents=True, exist_ok=True)
     df = df[df["parti"].isin(VALID_PARTIES)].copy()
     df["rost_norm"] = df["rost"].astype(str).str.strip().str.lower()
@@ -232,43 +218,32 @@ def plot_vote_distribution(df: pd.DataFrame, out_dir: Path):
     print(f"Saved {out_path}", file=sys.stderr)
 
 
-def plot_motions_vs_votes_timeline(df: pd.DataFrame, out_dir: Path, db_path: str = "data/swedish_parliament.db"):
-    """Figure 4: Motions filed vs motions voted on per year.
-    
-    Uses the motion_votes linkage table for the 'motions voted on' count
-    (actual motions that reached a roll-call vote via betänkande bridge).
-    """
+def plot_motions_vs_votes_timeline(df: pd.DataFrame, out_dir: Path,
+                                   normalized_motions_path: str = "data/parquet/normalized_motions.parquet",
+                                   motion_votes_path: str = "data/parquet/motion_votes.parquet"):
+    """Figure 4: Motions filed vs motions voted on per year (Parquet-only)."""
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Motions per year from normalized_motions
     try:
-        import sqlite3
-        conn = sqlite3.connect(db_path)
-        cur = conn.cursor()
-        cur.execute("SELECT date FROM normalized_motions WHERE doc_type = 'mot' AND date IS NOT NULL")
-        motion_years = [int(r[0][:4]) for r in cur.fetchall() if r[0] and len(r[0]) >= 4]
-        conn.close()
+        nm = pd.read_parquet(normalized_motions_path, columns=["date", "doc_type"])
+        nm = nm[nm["doc_type"] == "mot"].dropna(subset=["date"])
+        motion_years = nm["date"].dropna().apply(lambda d: int(str(d)[:4])).tolist()
         motion_counts = pd.Series(motion_years).value_counts().sort_index().reset_index()
         motion_counts.columns = ["year", "motions"]
     except Exception as e:
         print(f"WARNING: could not load motion counts: {e}", file=sys.stderr)
         motion_counts = pd.DataFrame(columns=["year", "motions"])
 
-    # Matched motions per year from motion_votes (rm is YYYYMM)
     try:
-        import sqlite3
-        conn = sqlite3.connect(db_path)
-        cur = conn.cursor()
-        cur.execute("SELECT rm FROM motion_votes")
-        matched_years = [int(r[0][:4]) for r in cur.fetchall() if r[0] and len(r[0]) >= 4]
-        conn.close()
+        mv = pd.read_parquet(motion_votes_path, columns=["rm"])
+        mv = mv.dropna(subset=["rm"])
+        matched_years = mv["rm"].apply(lambda r: int(str(r)[:4])).tolist()
         matched_counts = pd.Series(matched_years).value_counts().sort_index().reset_index()
         matched_counts.columns = ["year", "matched"]
     except Exception as e:
         print(f"WARNING: could not load matched motion counts: {e}", file=sys.stderr)
         matched_counts = pd.DataFrame(columns=["year", "matched"])
 
-    # Votes per year (votering_id count, for context)
     vote_counts = df.groupby("year")["votering_id"].nunique().reset_index(name="votes")
 
     merged = motion_counts.merge(matched_counts, on="year", how="outer")
@@ -293,7 +268,6 @@ def plot_motions_vs_votes_timeline(df: pd.DataFrame, out_dir: Path, db_path: str
 
 
 def plot_committee_distribution(df: pd.DataFrame, out_dir: Path):
-    """Figure 5: Distribution of votes by committee (beteckning prefix)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     df = df.copy()
     df["committee"] = df["beteckning"].astype(str).str.extract(r"^([A-Za-z]+)", expand=False).str.upper()
@@ -314,7 +288,9 @@ def plot_committee_distribution(df: pd.DataFrame, out_dir: Path):
     print(f"Saved {out_path}", file=sys.stderr)
 
 
-def generate_all(votering_parquet_dir: str, out_dir: str, db_path: str):
+def generate_all(votering_parquet_dir: str, out_dir: str,
+                 normalized_motions_path: str = "data/parquet/normalized_motions.parquet",
+                 motion_votes_path: str = "data/parquet/motion_votes.parquet"):
     df = _load_all_votering(votering_parquet_dir)
     print(f"Loaded {len(df):,} vote records", file=sys.stderr)
     out = Path(out_dir)
@@ -322,14 +298,17 @@ def generate_all(votering_parquet_dir: str, out_dir: str, db_path: str):
     plot_cohesion(df, out)
     plot_agreement_matrix(df, out)
     plot_vote_distribution(df, out)
-    plot_motions_vs_votes_timeline(df, out, db_path)
+    plot_motions_vs_votes_timeline(df, out,
+                                   normalized_motions_path=normalized_motions_path,
+                                   motion_votes_path=motion_votes_path)
     plot_committee_distribution(df, out)
 
     provenance_path = write_run_provenance(
         script="scripts/visualize_voting.py",
         inputs={
             "votering_parquet": votering_parquet_dir,
-            "db": db_path,
+            "normalized_motions": normalized_motions_path,
+            "motion_votes": motion_votes_path,
         },
         outputs=[
             str(out / "party_cohesion_timeseries.pdf"),
@@ -356,13 +335,16 @@ def generate_all(votering_parquet_dir: str, out_dir: str, db_path: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate voting-based analysis figures")
+    parser = argparse.ArgumentParser(description="Generate voting-based analysis figures (Parquet-only)")
     parser.add_argument("--votering-parquet", default="data/votering/parquet")
     parser.add_argument("--out", default="figures/voting")
-    parser.add_argument("--db", default="data/swedish_parliament.db")
+    parser.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
+    parser.add_argument("--motion-votes", default="data/parquet/motion_votes.parquet")
     args = parser.parse_args()
 
-    generate_all(args.votering_parquet, args.out, args.db)
+    generate_all(args.votering_parquet, args.out,
+                 normalized_motions_path=args.normalized_motions,
+                 motion_votes_path=args.motion_votes)
 
 
 if __name__ == "__main__":

@@ -22,77 +22,104 @@ import pandas as pd
 
 def _read_json_from_zip(zip_path: Path) -> pd.DataFrame:
     rows: list[dict] = []
-    with zipfile.ZipFile(zip_path) as zf:
-        json_files = [n for n in zf.namelist() if n.lower().endswith(".json")]
-        for json_name in json_files:
-            raw = zf.read(json_name)
-            if len(raw) == 0:
+
+    try:
+        with zipfile.ZipFile(zip_path) as zf:
+            json_files = [n for n in zf.namelist() if n.lower().endswith(".json")]
+
+            for json_name in json_files:
+                raw = zf.read(json_name)
+                if len(raw) == 0:
+                    continue
+                try:
+                    data = json.loads(raw.decode("utf-8", errors="replace"))
+                except json.JSONDecodeError:
+                    # Skip corrupt entries silently
+                    continue
+
+                # First valid JSON found — parse documents
+                docs = data if isinstance(data, list) else [data]
+                for d in docs:
+                    if not isinstance(d, dict):
+                        continue
+                    ds = d.get("dokumentstatus")
+                    if not isinstance(ds, dict):
+                        continue
+                    doc = ds.get("dokument")
+                    if not isinstance(doc, dict):
+                        continue
+
+                    def _safe(v):
+                        if v is None:
+                            return ""
+                        if isinstance(v, str):
+                            return v.strip()
+                        return str(v).strip()
+                    rm = _safe(doc.get("rm"))
+                    beteckning = _safe(doc.get("beteckning"))
+                    dok_id = _safe(doc.get("dok_id"))
+                    organ = _safe(doc.get("organ"))
+                    datum = _safe(doc.get("datum"))
+                    titel = _safe(doc.get("titel"))
+
+                    ref_docs: list[str] = []
+                    dokreferens = ds.get("dokreferens")
+                    if isinstance(dokreferens, dict):
+                        refs = dokreferens.get("referens")
+                        if isinstance(refs, dict):
+                            refs = [refs]
+                        if isinstance(refs, list):
+                            for r in refs:
+                                if isinstance(r, dict):
+                                    rid = r.get("ref_dok_id")
+                                    if rid:
+                                        ref_docs.append(str(rid).strip())
+
+                    # Parse remaining JSON files in the archive (not just the first)
+                    rows.append({
+                        "dok_id": dok_id,
+                        "rm": rm,
+                        "beteckning": beteckning,
+                        "organ": organ,
+                        "datum": datum,
+                        "titel": titel,
+                        "ref_dok_ids": json.dumps(ref_docs) if ref_docs else None,
+                        "ref_dok_count": len(ref_docs),
+                    })
+
+                # Continue to next JSON file in the archive
                 continue
-            try:
-                data = json.loads(raw.decode("utf-8", errors="replace"))
-            except json.JSONDecodeError:
-                print(f"    SKIP corrupt JSON: {json_name}", file=sys.stderr)
-                continue
-            docs = data if isinstance(data, list) else [data]
-            for d in docs:
-                if not isinstance(d, dict):
-                    continue
-                ds = d.get("dokumentstatus")
-                if not isinstance(ds, dict):
-                    continue
-                doc = ds.get("dokument")
-                if not isinstance(doc, dict):
-                    continue
 
-                rm = str(doc.get("rm", "")).strip()
-                beteckning = str(doc.get("beteckning", "")).strip()
-                dok_id = str(doc.get("dok_id", "")).strip()
-                organ = str(doc.get("organ", "")).strip()
-                datum = str(doc.get("datum", "")).strip()
-                titel = str(doc.get("titel", "")).strip()
+    except zipfile.BadZipFile:
+        print(f"    {zip_path.name}: Bad ZIP file", file=sys.stderr)
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"    {zip_path.name}: extraction error: {e}", file=sys.stderr)
+        return pd.DataFrame()
 
-                # Related motions: dokreferens (committee report -> motion refs)
-                ref_docs: list[str] = []
-                dokreferens = ds.get("dokreferens")
-                if isinstance(dokreferens, dict):
-                    refs = dokreferens.get("referens")
-                    if isinstance(refs, dict):
-                        refs = [refs]
-                    if isinstance(refs, list):
-                        for r in refs:
-                            if isinstance(r, dict):
-                                rid = r.get("ref_dok_id")
-                                if rid:
-                                    ref_docs.append(str(rid).strip())
-
-                rows.append({
-                    "dok_id": dok_id,
-                    "rm": rm,
-                    "beteckning": beteckning,
-                    "organ": organ,
-                    "datum": datum,
-                    "titel": titel,
-                    "ref_dok_ids": json.dumps(ref_docs) if ref_docs else None,
-                    "ref_dok_count": len(ref_docs),
-                })
     return pd.DataFrame(rows)
 
 
 def _clean_df(df: pd.DataFrame) -> pd.DataFrame:
-    # Strip whitespace and replace empty strings with None
     for col in df.columns:
         if df[col].dtype == object:
             df[col] = df[col].astype(str).str.strip().replace({"nan": None, "": None, "null": None})
 
-    # Parse dates
     if "datum" in df.columns:
         df["datum"] = pd.to_datetime(df["datum"], errors="coerce", utc=True)
 
-    # Normalise rm: 2013/14 -> 201314, 1972 -> 1972
     if "rm" in df.columns:
         df["rm"] = df["rm"].astype(str).str.replace("/", "", regex=False)
 
     return df
+
+
+def _archive_url(stem: str) -> str | None:
+    stem_clean = stem.replace(".json", "")
+    if stem_clean.startswith("bet-"):
+        period = stem_clean[len("bet-"):]
+        return f"https://data.riksdagen.se/dataset/dokument/bet-{period}.json.zip"
+    return None
 
 
 def extract_all(
@@ -120,6 +147,9 @@ def extract_all(
         try:
             df = _read_json_from_zip(z)
             df = _clean_df(df)
+            if df.empty:
+                print(f"  SKIP {stem}: no valid rows extracted", file=sys.stderr)
+                continue
             df.to_parquet(dest, index=False, compression="zstd")
             size_mb = dest.stat().st_size / 1024 / 1024
             rows = len(df)

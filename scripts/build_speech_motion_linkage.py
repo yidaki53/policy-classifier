@@ -35,10 +35,12 @@ from swedish_parliament_policy_classifier.analysis.speech_visualizations import 
 ELECTION_YEARS = {2010, 2014, 2018, 2022, 2026}
 
 
+import builtins
+
 def _clean_doc_id(value: object) -> str | None:
     if value is None:
         return None
-    text = str(value).strip()
+    text = builtins.str(value).strip()
     if not text or text.lower() == "none":
         return None
     return text

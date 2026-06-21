@@ -1,0 +1,160 @@
+{
+  "run_ts": "20260614T174008Z",
+  "dry_run": true,
+  "cpu_fraction": 0.25,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202728.json.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202829.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "19992000",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-19992000.json.zip"
+          }
+        ]
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202728",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202728.csv.zip",
+            "exists": false
+          },
+          {
+            "period": "202829",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202829.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "19992000",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-19992000.csv.zip"
+          }
+        ]
+      },
+      "mot": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [
+          {
+            "period": "2028-2031",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2028-2031.json.zip",
+            "exists": false
+          },
+          {
+            "period": "2032-2035",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2032-2035.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "nan"
+      }
+    },
+    "download": {
+      "skipped": true
+    },
+    "extract": {
+      "skipped": true
+    },
+    "api_fetch": {
+      "dry_run": true,
+      "note": "API fetch skipped in dry-run"
+    },
+    "extract_new_sources": {
+      "dry_run": true,
+      "note": "New source extraction skipped in dry-run"
+    },
+    "classify": {
+      "skipped": true
+    },
+    "classify_new_sources": {
+      "dry_run": true,
+      "note": "New source classification skipped in dry-run"
+    },
+    "analysis": {
+      "skipped": true
+    },
+    "figures": {
+      "skipped": true
+    },
+    "manuscript": {
+      "skipped": true
+    }
+  },
+  "completed_at": "20260614T174014Z"
+}

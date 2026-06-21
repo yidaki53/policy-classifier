@@ -384,19 +384,26 @@ def main():
             cuda_available = False
 
     for f in files:
-        df = pd.read_parquet(f)
+        try:
+            df = pd.read_parquet(f)
+        except Exception as e:
+            print(f"SKIP unreadable parquet {f}: {e}")
+            continue
         if "anforande_id" not in df.columns or "anforandetext" not in df.columns:
             # skip incompatible files
             continue
 
         for _, r in df.iterrows():
-            speech_id = str(r["anforande_id"]) if r.get("anforande_id") is not None else None
-            if not speech_id:
+            raw_speech_id = r.get("anforande_id")
+            speech_id = str(raw_speech_id) if raw_speech_id is not None else None
+            if not speech_id or speech_id in ("nan", "None", ""):
                 continue
             if speech_id in existing_speech_ids:
                 continue
 
             raw_text = r.get("anforandetext") or ""
+            if not isinstance(raw_text, str):
+                raw_text = str(raw_text) if raw_text is not None else ""
             text = _strip_html(raw_text)
 
             rhetoric_scores = rhet_map.get(speech_id)

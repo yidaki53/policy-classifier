@@ -1,0 +1,92 @@
+name: Weekly Data Update
+
+"on":
+  schedule:
+    # Every Monday at 06:00 UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:  # Allow manual trigger
+
+concurrency:
+  group: weekly-update-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 480  # 8 hours max for classification
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-latex-base texlive-latex-recommended texlive-fonts-recommended
+
+      - name: Restore uv cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: ${{ runner.os }}-uv-${{ hashFiles('uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/bulk_datasets
+            data/speeches/parquet
+            data/votering/parquet
+            data/betankande/parquet
+            data/parquet
+            models
+            output
+            logs
+          key: data-${{ github.run_id }}
+          restore-keys: data-
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Smoke import test
+        run: uv run python -c "import swedish_parliament_policy_classifier; print('Import OK')"
+
+      - name: Run full incremental update
+        run: make incremental-update
+        env:
+          CLASSIFIER_CPU_FRACTION: "0.5"
+
+      - name: Validate result drift
+        run: uv run python scripts/validate_result_drift.py
+
+      - name: Upload drift report
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-report
+          path: logs/drift_report_*.json
+          retention-days: 90
+
+      - name: Build main manuscript PDF
+        run: make -C manuscript pdf
+
+      - name: Build Scientific Reports manuscript
+        run: |
+          make -C manuscript scireps-pdf
+
+      - name: Commit updated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || \
+            git commit -m "Weekly data update $(date -u +'%Y-%m-%d')"
+          git push

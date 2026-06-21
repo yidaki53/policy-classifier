@@ -29,9 +29,11 @@ PARTY_MAP = {
 
 
 def _normalize_party(p: Optional[str]) -> Optional[str]:
-    if not p:
+    if p is None:
         return None
-    p = p.strip()
+    if isinstance(p, float) and pd.isna(p):
+        return None
+    p = str(p).strip()
     if not p:
         return None
     if p in PARTY_MAP:

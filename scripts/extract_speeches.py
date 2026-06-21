@@ -14,8 +14,22 @@ import json
 import sys
 import zipfile
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
+
+
+def _safe_str(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, bytes):
+        try:
+            return value.decode("utf-8", errors="replace").strip()
+        except Exception:
+            return ""
+    return str(value).strip()
 
 
 def _read_json_from_zip(zip_path: Path) -> pd.DataFrame:
@@ -27,7 +41,9 @@ def _read_json_from_zip(zip_path: Path) -> pd.DataFrame:
             if len(raw) == 0:
                 continue
             try:
-                data = json.loads(raw.decode("utf-8", errors="replace"))
+                # utf-8-sig handles UTF-8 BOM present in pre-2014 Riksdag archives
+                raw_s = raw.decode("utf-8-sig", errors="replace")
+                data = json.loads(raw_s)
             except json.JSONDecodeError:
                 print(f"    SKIP corrupt JSON: {json_name}", file=sys.stderr)
                 continue
@@ -36,22 +52,25 @@ def _read_json_from_zip(zip_path: Path) -> pd.DataFrame:
                 continue
 
             rows.append({
-                "dok_id": str(af.get("dok_id", "")).strip(),
-                "anforande_id": str(af.get("anforande_id", "")).strip(),
-                "rm": str(af.get("dok_rm", "")).strip(),
-                "datum": str(af.get("dok_datum", "")).strip(),
-                "talare": str(af.get("talare", "")).strip(),
-                "parti": str(af.get("parti", "")).strip() or None,
-                "anforandetext": str(af.get("anforandetext", "")).strip(),
-                "avsnittsrubrik": str(af.get("avsnittsrubrik", "")).strip() or None,
-                "kammaraktivitet": str(af.get("kammaraktivitet", "")).strip() or None,
-                "rel_dok_id": str(af.get("rel_dok_id", "")).strip() or None,
-                "intressent_id": str(af.get("intressent_id", "")).strip() or None,
+                "dok_id": _safe_str(af.get("dok_id")),
+                "anforande_id": _safe_str(af.get("anforande_id")),
+                "rm": _safe_str(af.get("dok_rm")),
+                "datum": _safe_str(af.get("dok_datum")),
+                "talare": _safe_str(af.get("talare")),
+                "parti": _safe_str(af.get("parti")) or None,
+                "anforandetext": _safe_str(af.get("anforandetext")),
+                "avsnittsrubrik": _safe_str(af.get("avsnittsrubrik")) or None,
+                "kammaraktivitet": _safe_str(af.get("kammaraktivitet")) or None,
+                "rel_dok_id": _safe_str(af.get("rel_dok_id")) or None,
+                "intressent_id": _safe_str(af.get("intressent_id")) or None,
             })
     return pd.DataFrame(rows)
 
 
 def _clean_df(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df
+
     # Parse dates
     if "datum" in df.columns:
         df["datum"] = pd.to_datetime(df["datum"], errors="coerce", utc=True)
@@ -65,15 +84,19 @@ def _clean_df(df: pd.DataFrame) -> pd.DataFrame:
     PARTY_MAP = {"s": "S", "m": "M", "c": "C", "v": "V", "mp": "MP", "kd": "KD", "fp": "L"}
 
     def _norm_party(p):
+        if p is None or (isinstance(p, float) and pd.isna(p)):
+            return None
+        p = _safe_str(p).lower()
         if not p:
             return None
-        p = p.strip().lower()
         return PARTY_MAP.get(p, p.upper() if p.upper() in VALID_PARTIES else None)
 
-    df["parti"] = df["parti"].apply(_norm_party)
+    if "parti" in df.columns:
+        df["parti"] = df["parti"].apply(_norm_party)
 
     # Drop empty text rows
-    df = df[df["anforandetext"].str.len() > 0].copy()
+    if "anforandetext" in df.columns:
+        df = df[df["anforandetext"].str.len() > 0].copy()
 
     return df
 

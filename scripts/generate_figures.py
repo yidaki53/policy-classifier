@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate all figures for the manuscript from classified motions.
+"""Generate all figures for the manuscript from classified motions (Parquet-only).
 
 Produces:
   1. pie_chart_categories.png — Overall ideological category distribution
@@ -18,65 +18,82 @@ Color scheme (ideological spectrum, left->right):
   far_right     dark blue   #00008B
 
 Usage:
-    uv run python scripts/generate_figures.py --db data/swedish_parliament.db --out-dir figures/manuscript
+    uv run python scripts/generate_figures.py --classifications data/parquet/classifications.parquet --normalized-motions data/parquet/normalized_motions.parquet --out-dir figures/manuscript
 """
 
 import argparse
 import os
-import sqlite3
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import numpy as np
+import pandas as pd
 
 from swedish_parliament_policy_classifier.visualization.style_config import (
     CATEGORY_ORDER,
     CATEGORY_COLORS,
     CATEGORY_LABELS,
     add_figure_credits,
-    query_summary_stats,
 )
 from swedish_parliament_policy_classifier.provenance import write_run_provenance
 
 
-def load_classifications(conn: sqlite3.Connection) -> List[Tuple]:
-    """Load deterministic top-classification per motion.
+def load_classifications_parquet(
+    classifications_path: str,
+    normalized_motions_path: str,
+) -> List[Tuple]:
+    """Load deterministic top-classification per motion from Parquet files."""
+    cls = pd.read_parquet(classifications_path, columns=["motion_id", "category", "normalized_weight"])
+    nm = pd.read_parquet(normalized_motions_path, columns=["id", "party", "date", "doc_type"])
+    nm["id"] = nm["id"].astype(str)
+    cls["motion_id"] = cls["motion_id"].astype(str)
 
-    Uses explicit tie-breaking (category ASC) when normalized_weight ties occur,
-    so figure inputs are stable across reruns.
-    """
-    cur = conn.cursor()
-    cur.execute(
-        """
-        WITH ranked AS (
-            SELECT
-                c.motion_id,
-                c.category,
-                c.normalized_weight,
-                ROW_NUMBER() OVER (
-                    PARTITION BY c.motion_id
-                    ORDER BY c.normalized_weight DESC, c.category ASC
-                ) AS rn
-            FROM classifications c
-        )
-        SELECT
-            r.motion_id,
-            r.category,
-            r.normalized_weight,
-            n.date,
-            n.party,
-            n.doc_type
-        FROM ranked r
-        LEFT JOIN normalized_motions n ON n.id = r.motion_id
-        WHERE r.rn = 1
-        """
+    cls_sorted = cls.sort_values(
+        ["motion_id", "normalized_weight", "category"],
+        ascending=[True, False, True],
     )
-    return [tuple(row) for row in cur.fetchall()]
+    top = cls_sorted.groupby("motion_id", sort=False).first().reset_index()
+    top["date"] = top["motion_id"].map(nm.set_index("id")["date"])
+    top["party"] = top["motion_id"].map(nm.set_index("id")["party"])
+    top["doc_type"] = top["motion_id"].map(nm.set_index("id")["doc_type"])
+
+    rows = [
+        (row.motion_id, row.category, row.normalized_weight, row.date, row.party, row.doc_type)
+        for row in top.itertuples()
+    ]
+    return rows
+
+
+def query_summary_stats_parquet(
+    classifications_path: str,
+    normalized_motions_path: str,
+) -> dict:
+    """Return global summary stats from Parquet files for figure captions."""
+    cls = pd.read_parquet(classifications_path, columns=["motion_id"])
+    nm = pd.read_parquet(normalized_motions_path, columns=["id", "party", "date"])
+    nm["id"] = nm["id"].astype(str)
+    cls["motion_id"] = cls["motion_id"].astype(str)
+
+    merged = cls.merge(nm, left_on="motion_id", right_on="id", how="inner")
+    merged = merged[merged["party"].notna() & (merged["party"] != "") & (merged["party"] != "NYD")]
+
+    min_date = merged["date"].dropna().min()
+    max_date = merged["date"].dropna().max()
+
+    def _year(v):
+        try:
+            return str(v)[:4]
+        except Exception:
+            return "?"
+
+    return {
+        "date_range": f"{_year(min_date)}-{_year(max_date)}",
+        "n_parties": int(merged["party"].nunique()),
+        "n_motions": int(merged["id"].nunique()),
+    }
 
 
 def prepare_data(rows: List[Tuple]) -> Dict:
@@ -159,18 +176,21 @@ def plot_party_motions(data: Dict, stats: Dict, out_dir: Path, normalized: bool 
     fig_height = max(6, 0.5 * n_parties)
     fig, ax = plt.subplots(figsize=(10, fig_height))
 
-    y_positions = np.arange(n_parties)
-    lefts = np.zeros(n_parties)
+    y_positions = range(n_parties)
+    lefts = [0.0] * n_parties
 
     for cat in CATEGORY_ORDER:
-        vals = np.array([data["party_cat_counts"][p].get(cat, 0) for p in parties], dtype=float)
-        if normalized:
-            totals = np.array([data["party_total"].get(p, 1) for p in parties], dtype=float)
-            vals = np.divide(vals, totals, out=np.zeros_like(vals), where=totals > 0) * 100
+        vals = []
+        for p in parties:
+            v = data["party_cat_counts"][p].get(cat, 0)
+            if normalized:
+                t = data["party_total"].get(p, 1)
+                v = v / t * 100 if t > 0 else 0.0
+            vals.append(v)
         ax.barh(y_positions, vals, left=lefts, color=CATEGORY_COLORS[cat], edgecolor="white", linewidth=0.5, height=bar_height, label=CATEGORY_LABELS[cat])
-        lefts += vals
+        lefts = [l + v for l, v in zip(lefts, vals)]
 
-    ax.set_yticks(y_positions)
+    ax.set_yticks(list(y_positions))
     ax.set_yticklabels(parties)
     ax.set_xlabel("Percentage of Motions" if normalized else "Number of Motions", fontsize=12)
     title = "Ideological Distribution of Motions by Party"
@@ -182,7 +202,7 @@ def plot_party_motions(data: Dict, stats: Dict, out_dir: Path, normalized: bool 
     )
     ax.legend(loc="lower right", fontsize=9, framealpha=0.9)
     ax.invert_yaxis()
-    ax.set_xlim(0, lefts.max() * 1.05)
+    ax.set_xlim(0, max(lefts) * 1.05 if lefts else 1)
     add_figure_credits(fig, n_total=stats["n_motions"], n_parties=stats["n_parties"], date_range=stats["date_range"])
 
     suffix = "_normalized" if normalized else ""
@@ -199,7 +219,6 @@ def plot_ideology_timeline(data: Dict, stats: Dict, out_dir: Path):
         print("Not enough temporal data for timeline. Skipping.", file=sys.stderr)
         return
 
-    # Filter to years with >50 motions for stability
     years = [y for y in years if data["year_total"].get(y, 0) >= 50]
     if len(years) < 2:
         print("Not enough years with sufficient data. Skipping timeline.", file=sys.stderr)
@@ -245,21 +264,20 @@ def plot_party_ideology_heatmap(data: Dict, stats: Dict, out_dir: Path):
         row = [data["party_cat_counts"][party].get(cat, 0) / total * 100 for cat in CATEGORY_ORDER]
         matrix.append(row)
 
-    matrix = np.array(matrix)
+    matrix_np = __import__("numpy").array(matrix)
 
     fig, ax = plt.subplots(figsize=(10, max(4, 0.5 * len(parties) + 1)))
-    im = ax.imshow(matrix, cmap="RdBu_r", aspect="auto", vmin=0, vmax=matrix.max())
+    im = ax.imshow(matrix_np, cmap="RdBu_r", aspect="auto", vmin=0, vmax=matrix_np.max())
 
-    ax.set_xticks(np.arange(len(CATEGORY_ORDER)))
+    ax.set_xticks(range(len(CATEGORY_ORDER)))
     ax.set_xticklabels([CATEGORY_LABELS[c] for c in CATEGORY_ORDER], rotation=45, ha="right")
-    ax.set_yticks(np.arange(len(parties)))
+    ax.set_yticks(range(len(parties)))
     ax.set_yticklabels(parties)
 
-    # Annotate cells
     for i in range(len(parties)):
         for j in range(len(CATEGORY_ORDER)):
-            text_color = "white" if matrix[i, j] > matrix.max() * 0.6 else "black"
-            ax.text(j, i, f"{matrix[i, j]:.1f}", ha="center", va="center", color=text_color, fontsize=8)
+            text_color = "white" if matrix_np[i, j] > matrix_np.max() * 0.6 else "black"
+            ax.text(j, i, f"{matrix_np[i, j]:.1f}", ha="center", va="center", color=text_color, fontsize=8)
 
     ax.set_title(
         f"Party Ideology Intensity (% of Party Motions)\n"
@@ -275,23 +293,24 @@ def plot_party_ideology_heatmap(data: Dict, stats: Dict, out_dir: Path):
     print(f"Saved: {out_path}")
 
 
-def generate_all_figures(db_path: str, out_dir: str):
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-
+def generate_all_figures(
+    classifications_path: str,
+    normalized_motions_path: str,
+    out_dir: str,
+):
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
-    print("Loading classifications from database...", file=sys.stderr)
-    rows = load_classifications(conn)
+    print("Loading classifications from Parquet...", file=sys.stderr)
+    rows = load_classifications_parquet(classifications_path, normalized_motions_path)
     print(f"Loaded {len(rows)} classified motions.", file=sys.stderr)
 
     if not rows:
-        print("No classifications found. Run classify_batch.py first.", file=sys.stderr)
+        print("No classifications found.", file=sys.stderr)
         sys.exit(1)
 
     data = prepare_data(rows)
-    stats = query_summary_stats(conn)
+    stats = query_summary_stats_parquet(classifications_path, normalized_motions_path)
     print(f"Total classified motions: {data['total']}", file=sys.stderr)
     print(f"Stats: {stats}", file=sys.stderr)
 
@@ -304,7 +323,7 @@ def generate_all_figures(db_path: str, out_dir: str):
 
     provenance_path = write_run_provenance(
         script="scripts/generate_figures.py",
-        inputs={"db": db_path},
+        inputs={"classifications": classifications_path, "normalized_motions": normalized_motions_path},
         outputs=[
             str(out_path / "pie_chart_categories.png"),
             str(out_path / "party_motions_stacked.png"),
@@ -322,16 +341,16 @@ def generate_all_figures(db_path: str, out_dir: str):
     print(f"Saved provenance: {provenance_path}", file=sys.stderr)
 
     print(f"\nAll figures saved to {out_path}")
-    conn.close()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate manuscript figures from classifications")
-    parser.add_argument("--db", default="data/swedish_parliament.db")
+    parser = argparse.ArgumentParser(description="Generate manuscript figures from classifications (Parquet-only)")
+    parser.add_argument("--classifications", default="data/parquet/classifications.parquet")
+    parser.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
     parser.add_argument("--out-dir", default="figures/manuscript")
     args = parser.parse_args()
 
-    generate_all_figures(args.db, args.out_dir)
+    generate_all_figures(args.classifications, args.normalized_motions, args.out_dir)
 
 
 if __name__ == "__main__":
