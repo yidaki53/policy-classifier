@@ -1,0 +1,138 @@
+{
+  "run_ts": "20260621T130253Z",
+  "dry_run": true,
+  "cpu_fraction": 0.25,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "mot": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "2026-05-07"
+      }
+    },
+    "download": {
+      "dry_run": true,
+      "speeches": {
+        "step": "download_speeches_dry_run",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "DRY-RUN https://data.riksdagen.se/dataset/anforande/anforande-199394.json.zip -> data/bulk_datasets/anforande-199394.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/anforande/anforande-199495.json.zip -> data/bulk_datasets/anforande-199495.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/anforande/anforande-199596.json.zip -> data/bulk_datasets/anforande-199596.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/anforande/anforande-199697.json.zip -> data/bulk_datasets/anforande-199697.json.",
+        "stderr_preview": ""
+      },
+      "votering": {
+        "step": "download_votering_dry_run",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "DRY-RUN https://data.riksdagen.se/dataset/votering/votering-199394.csv.zip -> data/votering/votering-199394.csv.zip\nDRY-RUN https://data.riksdagen.se/dataset/votering/votering-199495.csv.zip -> data/votering/votering-199495.csv.zip\nDRY-RUN https://data.riksdagen.se/dataset/votering/votering-199596.csv.zip -> data/votering/votering-199596.csv.zip\nDRY-RUN https://data.riksdagen.se/dataset/votering/votering-199697.csv.zip -> data/votering/votering-199697.csv.zip\nDRY-RUN https://data.riksdagen.se/da",
+        "stderr_preview": ""
+      },
+      "betankande": {
+        "step": "download_betankande_dry_run",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "DRY-RUN https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip -> data/bulk_datasets/bet-2022-2025.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/bet-2018-2021.json.zip -> data/bulk_datasets/bet-2018-2021.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/bet-2014-2017.json.zip -> data/bulk_datasets/bet-2014-2017.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/bet-2010-2013.json.zip -> data/bulk_datasets/bet-2010-2013.json.zip\nDRY-RUN https://data.rik",
+        "stderr_preview": ""
+      },
+      "bulk": {
+        "step": "download_bulk_dry_run",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "DRY-RUN https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip -> data/bulk_datasets/mot-2022-2025.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/mot-2018-2021.json.zip -> data/bulk_datasets/mot-2018-2021.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/mot-2014-2017.json.zip -> data/bulk_datasets/mot-2014-2017.json.zip\nDRY-RUN https://data.riksdagen.se/dataset/dokument/mot-2010-2013.json.zip -> data/bulk_datasets/mot-2010-2013.json.zip\nDRY-RUN https://data.rik",
+        "stderr_preview": ""
+      }
+    },
+    "extract": {
+      "dry_run": true,
+      "note": "Extraction skipped in dry-run"
+    },
+    "api_fetch": {
+      "dry_run": true,
+      "note": "API fetch skipped in dry-run"
+    },
+    "extract_new_sources": {
+      "dry_run": true,
+      "note": "New source extraction skipped in dry-run"
+    },
+    "classify": {
+      "dry_run": true,
+      "note": "Classification skipped in dry-run"
+    },
+    "classify_new_sources": {
+      "dry_run": true,
+      "note": "New source classification skipped in dry-run"
+    },
+    "link_prop_bet": {
+      "dry_run": true,
+      "note": "Prop/bet linking skipped in dry-run"
+    },
+    "merge_prop_bet": {
+      "dry_run": true,
+      "note": "Prop/bet merge skipped in dry-run"
+    },
+    "analysis": {
+      "dry_run": true,
+      "note": "Analysis skipped in dry-run"
+    },
+    "figures": {
+      "dry_run": true,
+      "note": "Figures skipped in dry-run"
+    },
+    "manuscript": {
+      "dry_run": true,
+      "note": "Manuscript render skipped in dry-run"
+    }
+  },
+  "completed_at": "20260621T130254Z"
+}

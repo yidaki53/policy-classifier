@@ -43,10 +43,9 @@ def test_generate_all_writes_provenance(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "write_run_provenance", _fake_write_run_provenance)
 
     out_dir = tmp_path / "figures"
-    module.generate_all("data/votering/parquet", str(out_dir), "data/swedish_parliament.db")
+    module.generate_all("data/votering/parquet", str(out_dir))
 
     assert calls["script"] == "scripts/visualize_voting.py"
     assert calls["inputs"]["votering_parquet"] == "data/votering/parquet"
-    assert calls["inputs"]["db"] == "data/swedish_parliament.db"
     assert calls["output_dir"] == out_dir
     assert any(name.endswith("cross_party_agreement.pdf") for name in calls["outputs"])

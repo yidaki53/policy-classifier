@@ -1,6 +1,7 @@
 import importlib.util
-import sqlite3
 from pathlib import Path
+
+import pandas as pd
 
 
 def _load_generate_figures_module():
@@ -15,49 +16,29 @@ def _load_generate_figures_module():
 def test_load_classifications_is_deterministic_on_ties(tmp_path):
     module = _load_generate_figures_module()
 
-    db_path = tmp_path / "figures.db"
-    conn = sqlite3.connect(db_path)
-    cur = conn.cursor()
+    cls_path = tmp_path / "classifications.parquet"
+    nm_path = tmp_path / "normalized_motions.parquet"
 
-    cur.execute(
-        """
-        CREATE TABLE classifications (
-            motion_id TEXT,
-            category TEXT,
-            normalized_weight REAL
-        )
-        """
-    )
-    cur.execute(
-        """
-        CREATE TABLE normalized_motions (
-            id TEXT PRIMARY KEY,
-            date TEXT,
-            party TEXT,
-            doc_type TEXT
-        )
-        """
-    )
-
-    cur.executemany(
-        "INSERT INTO classifications (motion_id, category, normalized_weight) VALUES (?, ?, ?)",
+    cls = pd.DataFrame(
         [
             ("m1", "right", 0.8),
             ("m1", "left", 0.8),
             ("m2", "centre", 0.3),
             ("m2", "far_left", 0.9),
         ],
+        columns=["motion_id", "category", "normalized_weight"],
     )
-    cur.executemany(
-        "INSERT INTO normalized_motions (id, date, party, doc_type) VALUES (?, ?, ?, ?)",
+    nm = pd.DataFrame(
         [
             ("m1", "2020-01-01", "V", "mot"),
             ("m2", "2021-01-01", "M", "mot"),
         ],
+        columns=["id", "date", "party", "doc_type"],
     )
-    conn.commit()
+    cls.to_parquet(cls_path, index=False)
+    nm.to_parquet(nm_path, index=False)
 
-    rows = module.load_classifications(conn)
+    rows = module.load_classifications_parquet(str(cls_path), str(nm_path))
     by_motion = {r[0]: r for r in rows}
 
     # For tied normalized_weight, category ASC tie-break should make this deterministic.
@@ -65,48 +46,23 @@ def test_load_classifications_is_deterministic_on_ties(tmp_path):
     assert by_motion["m1"][2] == 0.8
     assert by_motion["m2"][1] == "far_left"
 
-    conn.close()
-
 
 def test_generate_all_figures_writes_provenance(tmp_path, monkeypatch):
     module = _load_generate_figures_module()
 
-    db_path = tmp_path / "figures.db"
-    conn = sqlite3.connect(db_path)
-    cur = conn.cursor()
-    cur.execute(
-        """
-        CREATE TABLE classifications (
-            motion_id TEXT,
-            category TEXT,
-            normalized_weight REAL
-        )
-        """
+    cls_path = tmp_path / "classifications.parquet"
+    nm_path = tmp_path / "normalized_motions.parquet"
+
+    cls = pd.DataFrame(
+        [("m1", "left", 0.9)],
+        columns=["motion_id", "category", "normalized_weight"],
     )
-    cur.execute(
-        """
-        CREATE TABLE normalized_motions (
-            id TEXT PRIMARY KEY,
-            date TEXT,
-            party TEXT,
-            doc_type TEXT
-        )
-        """
+    nm = pd.DataFrame(
+        [("m1", "2020-01-01", "V", "mot")],
+        columns=["id", "date", "party", "doc_type"],
     )
-    cur.executemany(
-        "INSERT INTO classifications (motion_id, category, normalized_weight) VALUES (?, ?, ?)",
-        [
-            ("m1", "left", 0.9),
-        ],
-    )
-    cur.executemany(
-        "INSERT INTO normalized_motions (id, date, party, doc_type) VALUES (?, ?, ?, ?)",
-        [
-            ("m1", "2020-01-01", "V", "mot"),
-        ],
-    )
-    conn.commit()
-    conn.close()
+    cls.to_parquet(cls_path, index=False)
+    nm.to_parquet(nm_path, index=False)
 
     monkeypatch.setattr(module, "plot_pie_chart", lambda *args, **kwargs: None)
     monkeypatch.setattr(module, "plot_party_motions", lambda *args, **kwargs: None)
@@ -114,8 +70,8 @@ def test_generate_all_figures_writes_provenance(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "plot_party_ideology_heatmap", lambda *args, **kwargs: None)
     monkeypatch.setattr(
         module,
-        "query_summary_stats",
-        lambda _conn: {"n_parties": 1, "n_motions": 1, "date_range": "2020-2020"},
+        "query_summary_stats_parquet",
+        lambda _c, _n: {"n_parties": 1, "n_motions": 1, "date_range": "2020-2020"},
     )
 
     calls = {}
@@ -127,9 +83,10 @@ def test_generate_all_figures_writes_provenance(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "write_run_provenance", _fake_write_run_provenance)
 
     out_dir = tmp_path / "figures"
-    module.generate_all_figures(str(db_path), str(out_dir))
+    module.generate_all_figures(str(cls_path), str(nm_path), str(out_dir))
 
     assert calls["script"] == "scripts/generate_figures.py"
-    assert calls["inputs"]["db"] == str(db_path)
+    assert calls["inputs"]["classifications"] == str(cls_path)
+    assert calls["inputs"]["normalized_motions"] == str(nm_path)
     assert calls["output_dir"] == out_dir
     assert any(name.endswith("pie_chart_categories.png") for name in calls["outputs"])
