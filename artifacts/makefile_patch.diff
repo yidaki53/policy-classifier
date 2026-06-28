@@ -1,0 +1,21 @@
+--- a/manuscript/Makefile
++++ b/manuscript/Makefile
+@@ -24,7 +24,7 @@
+ 
+ .PHONY: all figures manuscript pdf docx html combined anonymized anonymized-pdf check-frontmatter render journal-check stats clean incremental-update
+ 
+-combined: render | $(OUTPUT_DIR)
++combined: render polish | $(OUTPUT_DIR)
+ 	@echo "Creating combined manuscript file (frontmatter-safe)..."
+ 	@: > $(COMBINED)
+ 	@for f in $(RENDERED_SECTIONS); do \
+@@ -119,6 +119,10 @@
+ incremental-update:
+ 	cd $(ROOT) && uv run python scripts/update_pipeline.py --cpu-fraction 0.25
+ 
++polish:
++	cd $(ROOT) && uv run python scripts/polish_manuscript_text.py --dir sections
++
++
+ scireps-render: check-frontmatter | $(SCIREPS_OUTPUT_DIR)
+ 	uv run python $(ROOT)/scripts/render_manuscript_jinja.py --repo-root $(ROOT) --manuscript-dir manuscript --out-dir $(SCIREPS_RENDERED_DIR) --context-out $(SCIREPS_OUTPUT_DIR)/manuscript_context.json --journal-profile manuscript/journal_profiles/scientific_reports.yaml

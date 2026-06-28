@@ -62,11 +62,16 @@ def _party_modality_profiles_from_parquet(parquet_dir: str | Path) -> pd.DataFra
     vote_grp["modality"] = "vote"
 
     out = pd.concat([motion_grp, vote_grp], ignore_index=True)
+    if out.empty:
+        raise ValueError("No motion/vote modality profiles produced; check input parquet tables.")
     return out[["party", "modality", "category", "weight"]]
 
 
 def _speech_profiles(speech_classifications_path: str | Path, speech_parquet_dir: str | Path) -> pd.DataFrame:
-    cls = pd.read_parquet(speech_classifications_path)[["speech_id", "category", "normalized_weight"]].copy()
+    try:
+        cls = pd.read_parquet(speech_classifications_path)[["speech_id", "category", "normalized_weight"]].copy()
+    except Exception as exc:
+        raise RuntimeError(f"Failed to read speech classifications from {speech_classifications_path}: {exc}")
     cls["speech_id"] = cls["speech_id"].astype(str)
     meta = load_speech_metadata(speech_parquet_dir)[["speech_id", "party"]].copy()
     df = cls.merge(meta, on="speech_id", how="left")
@@ -85,7 +90,8 @@ def build_modality_profiles(
     a = _party_modality_profiles_from_parquet(parquet_dir)
     b = _speech_profiles(speech_classifications_path, speech_parquet_dir)
     allp = pd.concat([a, b], ignore_index=True)
-
+    if allp.empty:
+        raise ValueError("No modality profiles produced from motion/vote/speech sources.")
     totals = allp.groupby(["party", "modality"], as_index=False)["weight"].sum().rename(columns={"weight": "sum_w"})
     out = allp.merge(totals, on=["party", "modality"], how="left")
     out["proportion"] = np.where(out["sum_w"] > 0, out["weight"] / out["sum_w"], 0.0)
@@ -123,7 +129,7 @@ def run_ideological_gap_analysis(
     out_dir.mkdir(parents=True, exist_ok=True)
 
     prof = build_modality_profiles(db_path, speech_classifications_path, speech_parquet_dir)
-    parties = sorted(prof["party"].unique().tolist())
+    parties = sorted(prof["party"].dropna().unique().tolist())
 
     rows = []
     for p in parties:

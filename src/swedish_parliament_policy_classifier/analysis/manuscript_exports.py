@@ -55,7 +55,12 @@ def _write_table(df: pd.DataFrame, out_dir: Path, stem: str) -> dict:
         },
     )
     md_p.write_text(md_text, encoding="utf-8")
-    tex_p.write_text(df.to_latex(index=False, escape=True, float_format=lambda x: f"{x:.4f}"), encoding="utf-8")
+    def _safe_fmt(x):
+        try:
+            return f"{float(x):.4f}"
+        except (TypeError, ValueError):
+            return str(x)
+    tex_p.write_text(df.to_latex(index=False, escape=True, float_format=_safe_fmt), encoding="utf-8")
 
     return {"parquet": str(pq_p), "md": str(md_p), "tex": str(tex_p)}
 
@@ -90,7 +95,7 @@ def plot_modality_overlay_figure(
 
     profiles = _filter_overlay_profiles(profiles)
 
-    parties = sorted(profiles["party"].unique().tolist())
+    parties = sorted(profiles["party"].dropna().unique().tolist())
     if not parties:
         raise ValueError("No party profiles available for modality overlay figure.")
 
