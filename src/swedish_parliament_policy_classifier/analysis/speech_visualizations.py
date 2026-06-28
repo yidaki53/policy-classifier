@@ -98,7 +98,7 @@ def build_speech_party_profiles(
 
 
 def _profiles_to_matrix(profiles: pd.DataFrame) -> tuple[list[str], np.ndarray]:
-    parties = sorted(profiles["party"].unique().tolist())
+    parties = sorted(profiles["party"].dropna().unique().tolist())
     cats = IDEOLOGY_ORDER
     pivot = (
         profiles.pivot_table(index="party", columns="category", values="proportion", aggfunc="mean", fill_value=0.0)

@@ -1,0 +1,375 @@
+{
+  "run_ts": "20260627T125834Z",
+  "dry_run": false,
+  "cpu_fraction": 0.25,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "mot": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "2026-05-07"
+      }
+    },
+    "download": {
+      "dry_run": false,
+      "speeches": {
+        "step": "download_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP anforande-199394.json.zip (18.5 MB)\nSKIP anforande-199495.json.zip (16.6 MB)\nSKIP anforande-199596.json.zip (14.9 MB)\nSKIP anforande-199697.json.zip (19.2 MB)\nSKIP anforande-199798.json.zip (19.9 MB)\nSKIP anforande-199899.json.zip (16.8 MB)\nSKIP anforande-19992000.json.zip (20.0 MB)\nSKIP anforande-200001.json.zip (21.1 MB)\nSKIP anforande-200102.json.zip (20.8 MB)\nSKIP anforande-200203.json.zip (18.6 MB)\nSKIP anforande-200304.json.zip (20.1 MB)\nSKIP anforande-200405.json.zip (23.6 MB)\nSKIP a",
+        "stderr_preview": ""
+      },
+      "votering": {
+        "step": "download_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP votering-199394.csv.zip (4.3 MB)\nSKIP votering-199495.csv.zip (3.0 MB)\nSKIP votering-199596.csv.zip (2.7 MB)\nSKIP votering-199697.csv.zip (4.1 MB)\nSKIP votering-199798.csv.zip (5.0 MB)\nSKIP votering-199899.csv.zip (3.3 MB)\nSKIP votering-19992000.csv.zip (3.7 MB)\nSKIP votering-200001.csv.zip (3.5 MB)\nSKIP votering-200102.csv.zip (4.4 MB)\nSKIP votering-200203.csv.zip (6.0 MB)\nSKIP votering-200304.csv.zip (7.0 MB)\nSKIP votering-200405.csv.zip (6.2 MB)\nSKIP votering-200506.csv.zip (7.2 MB)\nSKIP",
+        "stderr_preview": ""
+      },
+      "betankande": {
+        "step": "download_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP bet-2022-2025.json.zip (78.8 MB)\nSKIP bet-2018-2021.json.zip (89.4 MB)\nSKIP bet-2014-2017.json.zip (72.8 MB)\nSKIP bet-2010-2013.json.zip (51.3 MB)\nSKIP bet-2006-2009.json.zip (39.5 MB)\nSKIP bet-2002-2005.json.zip (60.2 MB)\nSKIP bet-1998-2001.json.zip (48.7 MB)\nSKIP bet-1990-1997.json.zip (77.4 MB)\nSKIP bet-1980-1989.json.zip (116.5 MB)\nSKIP bet-1971-1979.json.zip (80.6 MB)\n\nSummary: downloaded=10, not_found=0, invalid=0, failed=0\n",
+        "stderr_preview": ""
+      },
+      "bulk": {
+        "step": "download_bulk",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP mot-2022-2025.json.zip (82.9 MB)\nSKIP mot-2018-2021.json.zip (104.7 MB)\nSKIP mot-2014-2017.json.zip (86.7 MB)\nSKIP mot-2010-2013.json.zip (60.6 MB)\nSKIP mot-2006-2009.json.zip (61.1 MB)\nSKIP mot-2002-2005.json.zip (72.7 MB)\nSKIP mot-1998-2001.json.zip (56.5 MB)\nSKIP mot-1990-1997.json.zip (92.9 MB)\nSKIP mot-1980-1989.json.zip (113.8 MB)\nSKIP mot-1971-1979.json.zip (69.2 MB)\nSKIP prop-2022-2025.json.zip (119.5 MB)\nSKIP prop-2018-2021.json.zip (107.9 MB)\nSKIP prop-2014-2017.json.zip (136.1 MB",
+        "stderr_preview": ""
+      }
+    },
+    "extract": {
+      "speeches": {
+        "step": "extract_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 33 anf\u00f6rande ZIP files\nSKIP anforande-199394.json (9.9 MB)\nSKIP anforande-199495.json (9.0 MB)\nSKIP anforande-199596.json (8.0 MB)\nSKIP anforande-199697.json (10.5 MB)\nSKIP anforande-199798.json (10.9 MB)\nSKIP anforande-199899.json (9.0 MB)\nSKIP anforande-19992000.json (10.8 MB)\nSKIP anforande-200001.json (11.5 MB)\nSKIP anforande-200102.json (11.4 MB)\nSKIP anforande-200203.json (10.1 MB)\nSKIP anforande-200304.json (10.4 MB)\nSKIP anforande-200405.json (12.2 MB)\nSKIP anforande-200506.json (1"
+      },
+      "votering": {
+        "step": "extract_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 33 ZIP files\nSKIP votering-199394.csv (0.1 MB)\nSKIP votering-199495.csv (0.1 MB)\nSKIP votering-199596.csv (0.1 MB)\nSKIP votering-199697.csv (0.1 MB)\nSKIP votering-199798.csv (0.2 MB)\nSKIP votering-199899.csv (0.1 MB)\nSKIP votering-19992000.csv (0.1 MB)\nSKIP votering-200001.csv (0.1 MB)\nSKIP votering-200102.csv (0.2 MB)\nSKIP votering-200203.csv (0.2 MB)\nSKIP votering-200304.csv (0.3 MB)\nSKIP votering-200405.csv (0.3 MB)\nSKIP votering-200506.csv (0.3 MB)\nSKIP votering-200607.csv (0.2 MB)\nSKI"
+      },
+      "betankande": {
+        "step": "extract_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 10 bet\u00e4nkande ZIP files\nSKIP bet-1971-1979.json (0.2 MB)\nSKIP bet-1980-1989.json (0.2 MB)\nSKIP bet-1990-1997.json (0.2 MB)\nSKIP bet-1998-2001.json (0.1 MB)\nSKIP bet-2002-2005.json (0.1 MB)\nSKIP bet-2006-2009.json (0.1 MB)\nSKIP bet-2010-2013.json (0.1 MB)\nSKIP bet-2014-2017.json (0.0 MB)\nSKIP bet-2018-2021.json (0.0 MB)\nSKIP bet-2022-2025.json (0.1 MB)\n"
+      }
+    },
+    "api_fetch": {
+      "motions": {
+        "fetched": 0,
+        "output": null,
+        "caught_up": true
+      },
+      "speeches": {
+        "fetched": 0,
+        "output": null
+      }
+    },
+    "extract_new_sources": {
+      "extract_questions": {
+        "step": "extract_questions",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 0 fr ZIP files\nNo fr ZIP files found, creating empty output\n"
+      },
+      "normalize_betankande": {
+        "step": "extract_betankande_to_normalized",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Normalized 21356 betankande rows.\n",
+        "stderr_preview": "Found 10 betankande parquet files\nREAD bet-1971-1979.json.parquet ...\n  6170 rows from bet-1971-1979.json.parquet\nREAD bet-1980-1989.json.parquet ...\n  5469 rows from bet-1980-1989.json.parquet\nREAD bet-1990-1997.json.parquet ...\n  3348 rows from bet-1990-1997.json.parquet\nREAD bet-1998-2001.json.parquet ...\n  1184 rows from bet-1998-2001.json.parquet\nREAD bet-2002-2005.json.parquet ...\n  1328 rows from bet-2002-2005.json.parquet\nREAD bet-2006-2009.json.parquet ...\n  941 rows from bet-2006-2009."
+      },
+      "extract_interpellations": {
+        "step": "extract_interpellations",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Extracted 89339 interpellation turns.\n",
+        "stderr_preview": "Found 33 speech parquet files\n  Loaded anforande-199394.json.parquet: 12370 rows\n  Loaded anforande-199495.json.parquet: 11161 rows\n  Loaded anforande-199596.json.parquet: 10274 rows\n  Loaded anforande-199697.json.parquet: 12882 rows\n  Loaded anforande-199798.json.parquet: 13300 rows\n  Loaded anforande-199899.json.parquet: 11651 rows\n  Loaded anforande-19992000.json.parquet: 13519 rows\n  Loaded anforande-200001.json.parquet: 14207 rows\n  Loaded anforande-200102.json.parquet: 13746 rows\n  Loaded "
+      }
+    },
+    "classify": {
+      "classify_speeches": {
+        "step": "classify_speeches_parquet",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Warming up embedding model...\nEmbedding model warmup complete.\nSpeech meta-classifier loaded.\n[RESUME] Found existing output: 2619204 rows in data/parquet/speech_classifications.parquet\n[RESUME] Schema columns: ['speech_id', 'category', 'raw_score', 'normalized_weight', 'category_probability', 'all_category_probs_json', 'matched_rules', 'classifier_version', 'created_at', 'confidence', 'label_source']\n[RESUME] Loaded 374172 existing speech IDs from 2619204 rows\n[STATUS] 374172 already classified",
+        "stderr_preview": "\nLoading weights:   0%|          | 0/199 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 199/199 [00:00<00:00, 23585.48it/s]\n\n\nLoading weights:   0%|          | 0/202 [00:00<?, ?it/s]\u001b[A\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 202/202 [00:00<00:00, 17777.70it/s]\n\n\nLoading weights:   0%|          | 0/201 [00:00<?, ?it/s]\u001b[A\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 201/201 [00:00<00:00, 15551.37it/s]\nLoaded tuned rhetorical weights from models/rhetorical_weights_best.json\n[PROGRESS] 20/51104 (0% new) | done"
+      },
+      "classify_motions": {
+        "step": "classify_motions",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Normalized motions (rows) now: 202925\nAppended 0 classification rows to data/parquet/classifications.parquet\n",
+        "stderr_preview": "\nclassify_motions: 0motion [00:00, ?motion/s]\nclassify_motions: 0motion [00:00, ?motion/s]\n"
+      },
+      "rhetorical_adjustment": {
+        "step": "rhetorical_adjustment",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Reading classifications from data/parquet/speech_classifications.parquet\n  Loaded 2976939 rows, 425277 unique speeches\n  Found texts for 425276 speeches\n\napplying rhetorical adjustments:   0%|          | 0/425277 [00:00<?, ?speeches/s]Loaded tuned rhetorical weights from models/rhetorical_weights_best.json\n\napplying rhetorical adjustments:   0%|          | 399/425277 [00:00<01:46, 3988.76speeches/s]\napplying rhetorical adjustments:   0%|          | 854/425277 [00:00<01:38, 4318.19speeches/s]\napp"
+      }
+    },
+    "classify_new_sources": {
+      "classify_questions": {
+        "step": "classify_questions",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Appended 0 classification rows to data/parquet/classifications.parquet\n",
+        "stderr_preview": "Classifying 0 of 0 questions ...\n"
+      },
+      "classify_betankande": {
+        "step": "classify_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Appended 0 classification rows to data/parquet/classifications.parquet\n",
+        "stderr_preview": "Classifying 0 of 21356 betankande ...\n"
+      },
+      "classify_interpellations": {
+        "step": "classify_interpellations",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Appended 309890 classification rows to data/parquet/classifications.parquet\n",
+        "stderr_preview": "Classifying 44270 turns (questions=24095, answers=20035) ...\n  classify_interpellations: 1/44270 turns\n\nLoading weights:   0%|          | 0/202 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 202/202 [00:00<00:00, 4716.66it/s]\n\nLoading weights:   0%|          | 0/201 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 201/201 [00:00<00:00, 6042.02it/s]\n  classify_interpellations: 50/44270 turns\n  classify_interpellations: 100/44270 turns\n  classify_interpellations: 150/44270 turns\n  classify_i"
+      }
+    },
+    "link_prop_bet": {
+      "step": "link_prop_bet_to_speech",
+      "ok": true,
+      "returncode": 0,
+      "stdout_preview": "Loading speech classifications and metadata...\nExisting speech_action_links cover 152061 speeches\nLoading propositions (doc_type=prop)...\n  4571 propositions loaded (before category/motion filters)\nLoading betankande...\n  21339 betankande loaded (before category/motion filters)\nScanning speech parquet for explicit document references...\n{\n  \"output\": \"data/parquet/speech_prop_bet_links.parquet\",\n  \"rows\": 343812,\n  \"action_types\": [\n    \"betankande\",\n    \"proposition\"\n  ],\n  \"link_source_counts\"",
+      "stderr_preview": "\nlink_prop_bet:   0%|          | 0/425276 [00:00<?, ?speech/s]\nlink_prop_bet:   0%|          | 36/425276 [00:00<19:45, 358.63speech/s]\nlink_prop_bet:   0%|          | 79/425276 [00:00<17:53, 396.00speech/s]\nlink_prop_bet:   0%|          | 121/425276 [00:00<17:36, 402.32speech/s]\nlink_prop_bet:   0%|          | 163/425276 [00:00<17:20, 408.53speech/s]\nlink_prop_bet:   0%|          | 204/425276 [00:00<17:39, 401.07speech/s]\nlink_prop_bet:   0%|          | 249/425276 [00:00<16:59, 416.87speech/s]\nl"
+    },
+    "merge_prop_bet": {
+      "step": "merge_prop_bet_into_action_links",
+      "ok": true,
+      "returncode": 0,
+      "stdout_preview": "{\n  \"output\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"existing_rows\": 152061,\n  \"prop_bet_rows\": 343812,\n  \"total_rows\": 495873,\n  \"action_types\": [\n    \"betankande\",\n    \"motion\",\n    \"proposition\",\n    \"vote\"\n  ]\n}\n",
+      "stderr_preview": ""
+    },
+    "analysis": {
+      "linkage": {
+        "step": "build_speech_motion_linkage",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Loading speech classifications and metadata...\nLoading motion top categories and metadata...\nLinking speeches to motions (ID-first; fallback to nearest-in-time)\nWrote 57921 speech->motion links to data/parquet/speech_motions.parquet\n",
+        "stderr_preview": ""
+      },
+      "profiles": {
+        "step": "build_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Reference date for recency weighting: 2026-05-12 00:00:00+00:00\nWrote party profiles to data/parquet/party_profiles_recency.parquet (rows=361, modalities=['ip_answer', 'ip_question', 'motion', 'speech', 'vote'])\n",
+        "stderr_preview": ""
+      },
+      "link_all_speeches": {
+        "step": "link_all_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"data/parquet/speech_action_links.parquet\",\n  \"n_speeches\": 425276,\n  \"n_linked\": 425276,\n  \"n_speeches_with_category\": 425276,\n  \"coverage\": 1.0,\n  \"action_type_counts\": {\n    \"vote\": 315091,\n    \"motion\": 110185\n  },\n  \"link_source_top10\": {\n    \"fallback:party_category_vote\": 206840,\n    \"graph_direct_signatory_motion\": 104046,\n    \"graph_direct_signatory_vote\": 50438,\n    \"existing:rel_dok_id\": 26611,\n    \"existing:existing\": 16851,\n    \"existing:betankande_ref_dok_id\": 14459,\n",
+        "stderr_preview": ""
+      },
+      "axis_alignment": {
+        "step": "axis_alignment",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"rows\": 495873,\n  \"mean_axis_js_distance\": 0.4783860427455872,\n  \"peak_flip_rate\": 0.12736325631764586\n}\n",
+        "stderr_preview": ""
+      },
+      "contradiction": {
+        "step": "contradiction",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"edge_summary\": {\n    \"output\": \"output/analysis/speech_action_contradiction_edges.parquet\",\n    \"rows\": 496239,\n    \"mean_contradiction_score_raw\": 0.38012026294142787,\n    \"mean_edge_confidence_raw\": 0.4046751061484486\n  },\n  \"expected_summary\": {\n    \"output\": \"output/analysis/speech_action_expected_contradiction_party_topic_year.parquet\",\n    \"rows\": 565,\n    \"mean_expected_contradiction\": 0.41880658495940065\n  }\n}\n",
+        "stderr_preview": ""
+      },
+      "contradiction_by_modality": {
+        "step": "contradiction_by_modality",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"output\": \"output/analysis/speech_action_expected_contradiction_by_modality.parquet\",\n  \"rows\": 1613,\n  \"action_types\": [\n    \"all\",\n    \"betankande\",\n    \"motion\",\n    \"proposition\",\n    \"vote\"\n  ],\n  \"mean_expected_contradiction_by_modality\": {\n    \"vote\": 0.5215904787061493,\n    \"motion\": 0.5986178098928998,\n    \"proposition\": 0.5039606571196725,\n    \"betankande\": 0.37797831264745574,\n    \"all\": 0.41880658495940065\n  }\n}\n",
+        "stderr_preview": ""
+      },
+      "link_confidence": {
+        "step": "link_confidence",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"rows\": 495873,\n  \"out\": \"output/analysis/speech_action_link_confidence_strata.parquet\",\n  \"summary\": \"output/analysis/speech_action_link_confidence_summary.json\"\n}\n",
+        "stderr_preview": ""
+      },
+      "uncertainty": {
+        "step": "uncertainty",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"links\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"rows_input\": 496239,\n  \"parties_output\": 9,\n  \"n_boot\": 500,\n  \"alpha\": 0.05,\n  \"min_party_n\": 200,\n  \"output\": \"output/analysis/say_do_uncertainty_intervals_party.parquet\"\n}\n",
+        "stderr_preview": ""
+      },
+      "consistency": {
+        "step": "consistency",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"inputs\": {\n    \"ideological_gap_party\": \"output/analysis/ideological_gap_party.parquet\",\n    \"promise_fulfillment_party_summary\": \"output/analysis/promise_fulfillment_party_summary.parquet\",\n    \"party_ideology_drift_by_modality_year\": \"output/analysis/party_ideology_drift_by_modality_year.parquet\",\n    \"promise_fulfillment_party_topic_year\": \"output/analysis/promise_fulfillment_party_topic_year.parquet\"\n  },\n  \"outputs\": {\n    \"consistency_score_party\": \"output/analysis/consistency_score_p",
+        "stderr_preview": ""
+      },
+      "link_stability": {
+        "step": "link_stability",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"input_axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"input_link_strata\": \"output/analysis/speech_action_link_confidence_strata.parquet\",\n  \"metric\": \"axis_js_distance\",\n  \"rows_input\": 496239,\n  \"parties_output\": 9,\n  \"min_n\": 100,\n  \"output\": \"output/analysis/link_strata_stability_party.parquet\",\n  \"structural_available_parties\": 9,\n  \"delta_structural_minus_all_mean\": 0.18581292913163674,\n  \"delta_structural_minus_all_abs_mean\": 0.18581292913163674,\n  \"delta_structu",
+        "stderr_preview": ""
+      },
+      "latent": {
+        "step": "latent",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"axis_scores\": \"output/analysis/speech_action_axis_scores.parquet\",\n  \"links\": \"data/parquet/speech_action_links_with_prop_bet.parquet\",\n  \"consistency\": \"output/analysis/consistency_score_party.parquet\",\n  \"n_parties\": 9,\n  \"indicator_columns\": [\n    \"speech_axis_mean_z\",\n    \"action_axis_mean_z\",\n    \"ideology_uphold_v2_z\"\n  ],\n  \"n_boot\": 300,\n  \"alpha\": 0.05,\n  \"output\": \"output/analysis/party_latent_ideology_estimates.parquet\"\n}\n",
+        "stderr_preview": ""
+      },
+      "recency": {
+        "step": "recency",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"inputs\": {\n    \"topic_year\": \"output/analysis/promise_fulfillment_party_topic_year.parquet\"\n  },\n  \"outputs\": {\n    \"party_scores\": \"output/analysis/recency_weighted_party_scores.parquet\",\n    \"parliament_timeseries\": \"output/analysis/recency_weighted_parliament_timeseries.parquet\",\n    \"summary\": \"output/analysis/recency_weighted_summary.json\"\n  },\n  \"summary\": {\n    \"half_life_years\": 3.0,\n    \"max_year\": 2018,\n    \"election_cadence_years\": 4,\n    \"election_anchor_year\": 2010,\n    \"runup_",
+        "stderr_preview": ""
+      }
+    },
+    "figures": {
+      "manuscript_motion_figures": {
+        "step": "manuscript_motion_figures",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved: figures/manuscript/pie_chart_categories.png\nSaved: figures/manuscript/party_motions_stacked.png\nSaved: figures/manuscript/party_motions_stacked_normalized.png\nSaved: figures/manuscript/ideology_timeline.png\nSaved: figures/manuscript/party_ideology_heatmap.png\n\nAll figures saved to figures/manuscript\n",
+        "stderr_preview": "Loading classifications from Parquet...\nLoaded 316755 classified motions.\nTotal classified motions: 316755\nStats: {'date_range': '2012-2026', 'n_parties': 19, 'n_motions': 7953}\nGenerating figures...\nSaved provenance: figures/manuscript/provenance/generate_figures_20260628T093234Z.json\n"
+      },
+      "party_profiles": {
+        "step": "party_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved final visualization: ('figures/party_profiles_final.png', 'figures/party_profiles_final.pdf')\n",
+        "stderr_preview": ""
+      },
+      "party_profiles_advanced": {
+        "step": "party_profiles_advanced",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Saved clustered heatmap: ('figures/party_clustered.png', 'figures/party_clustered.pdf')\nSaved PCA biplot: ('figures/party_pca.png', 'figures/party_pca.pdf')\n",
+        "stderr_preview": ""
+      },
+      "interactive": {
+        "step": "interactive",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Wrote interactive HTML to figures/party_profiles_interactive.html\n",
+        "stderr_preview": ""
+      },
+      "voting": {
+        "step": "voting",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Loading 33 votering Parquet files ...\nLoaded 7,953,402 vote records\nSaved figures/voting/party_cohesion_timeseries.pdf\nSaved figures/voting/cross_party_agreement.pdf\nSaved figures/voting/vote_distribution_by_party.pdf\nSaved figures/voting/motions_vs_votes_timeline.pdf\nSaved figures/voting/committee_vote_distribution.pdf\nSaved provenance: figures/voting/provenance/visualize_voting_20260628T093344Z.json\n\nAll figures written to figures/voting\n"
+      },
+      "speech_profiles": {
+        "step": "speech_profiles",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\n  \"stacked\": \"figures/speeches/speech_profiles_stacked.png\",\n  \"heatmap\": \"figures/speeches/speech_profiles_heatmap.png\",\n  \"clustered\": \"figures/speeches/speech_profiles_clustered.png\",\n  \"pca\": \"figures/speeches/speech_profiles_pca.png\",\n  \"party_count\": 8\n}\n",
+        "stderr_preview": ""
+      },
+      "overlay": {
+        "step": "overlay",
+        "ok": false,
+        "returncode": 1,
+        "stdout_preview": "",
+        "stderr_preview": "Traceback (most recent call last):\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_overlay.py\", line 34, in <module>\n    main()\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_overlay.py\", line 29, in main\n    out_path = plot_modality_overlay_figure(profiles, Path(args.out))\n               ^^^^^^^^^^^^^^^^^^^^^"
+      },
+      "three_way": {
+        "step": "three_way",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "{\"paired_tests\": \"figures/three_way/paired_tests.parquet\", \"heatmap\": \"figures/three_way/divergence_heatmap.png\"}\n{\"effect_table\": \"figures/three_way/effect_size_table.parquet\", \"annotated_heatmap\": \"figures/three_way/divergence_speech_vs_combined_significance.png\"}\n",
+        "stderr_preview": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:592: UserWarning: scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate. Current N is 5262.\n  res = hypotest_fun_out(*samples, **kwds)\n/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:5"
+      }
+    },
+    "manuscript": {
+      "render": {
+        "step": "manuscript_render",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stderr_preview": ""
+      },
+      "combined": {
+        "step": "manuscript_combined",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stderr_preview": ""
+      }
+    }
+  },
+  "completed_at": "20260628T093448Z"
+}

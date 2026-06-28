@@ -16,30 +16,30 @@
   },
   "exists:https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip": {
     "exists": false,
-    "checked": 1782045915.3189483
+    "checked": 1782482613.0194128
   },
   "exists:https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip": {
     "exists": false,
-    "checked": 1782045915.7079031
+    "checked": 1782482613.2641723
   },
   "stale:https://data.riksdagen.se/dataset/anforande/anforande-19992000.json.zip": {
     "stale": false,
-    "checked": 1782045915.98139
+    "checked": 1782562691.0257902
   },
   "stale:https://data.riksdagen.se/dataset/votering/votering-19992000.csv.zip": {
     "stale": false,
-    "checked": 1782045916.1791058
+    "checked": 1782562691.362091
   },
   "stale:https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip": {
     "stale": true,
-    "checked": 1782045916.6061203
+    "checked": 1782562691.5928862
   },
   "stale:https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip": {
     "stale": true,
-    "checked": 1782045916.8750222
+    "checked": 1782562691.7945979
   },
   "stale:https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip": {
     "stale": true,
-    "checked": 1782045917.0762591
+    "checked": 1782562691.991619
   }
 }

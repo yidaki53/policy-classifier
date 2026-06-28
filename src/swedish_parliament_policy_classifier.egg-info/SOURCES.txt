@@ -34,6 +34,7 @@ src/swedish_parliament_policy_classifier/classifier/persist_parquet.py
 src/swedish_parliament_policy_classifier/classifier/persistence_port.py
 src/swedish_parliament_policy_classifier/classifier/scorer.py
 src/swedish_parliament_policy_classifier/classifier/transformer_predict.py
+src/swedish_parliament_policy_classifier/data/committee_composition.py
 src/swedish_parliament_policy_classifier/db/__init__.py
 src/swedish_parliament_policy_classifier/db/readers.py
 src/swedish_parliament_policy_classifier/db/repo.py
@@ -62,6 +63,7 @@ src/swedish_parliament_policy_classifier/orchestration/runner.py
 src/swedish_parliament_policy_classifier/orchestration/speech_pipeline.py
 src/swedish_parliament_policy_classifier/runtime/__init__.py
 src/swedish_parliament_policy_classifier/runtime/experiment.py
+src/swedish_parliament_policy_classifier/runtime/progress.py
 src/swedish_parliament_policy_classifier/runtime/resources.py
 src/swedish_parliament_policy_classifier/visualization/advanced.py
 src/swedish_parliament_policy_classifier/visualization/analysis_plots.py
@@ -85,6 +87,8 @@ tests/test_markdown_frontmatter.py
 tests/test_nlp_preprocess.py
 tests/test_parquet_writer.py
 tests/test_pipeline_extractors.py
+tests/test_plot_pareto_frontier.py
+tests/test_plot_quid_ergo.py
 tests/test_provenance.py
 tests/test_recency_runup_logic.py
 tests/test_render_manuscript.py

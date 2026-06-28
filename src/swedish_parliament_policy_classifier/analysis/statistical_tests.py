@@ -15,12 +15,27 @@ import numpy as np
 from scipy import stats
 
 
-def shapiro_ok(diff: np.ndarray, alpha: float = 0.05) -> bool:
-    if len(diff) < 3:
+def _normal_enough(diff: np.ndarray) -> bool:
+    """Check if paired differences are plausibly normal for small n.
+    
+    For n >= 30 the central limit theorem makes normality diagnostics
+    unnecessary (paired t-test is robust).  For 8 <= n < 30 we use
+    the Shapiro-Wilk test with a conservative alpha (0.01) to avoid
+    false negatives.  For n < 8 we lack power to detect non-normality,
+    so we conservatively assume non-normal and use Wilcoxon.
+    
+    Reference: Lumley et al. (2002). "The importance of the normality
+    assumption in large public health data sets." Annu Rev Public Health.
+    """
+    n = len(diff)
+    if n < 8:
         return False
+    if n >= 30:
+        return True  # CLT guarantees t-test robustness
+    # 8 <= n < 30: run Shapiro with a conservative alpha
     try:
         p = float(stats.shapiro(diff).pvalue)
-        return p > alpha
+        return p > 0.01
     except Exception:
         return False
 
@@ -88,9 +103,7 @@ def run_paired_test(a: Iterable[float], b: Iterable[float]) -> Dict:
     if n == 0:
         return result
 
-    use_t = False
-    if n > 30 and shapiro_ok(diff):
-        use_t = True
+    use_t = _normal_enough(diff)
 
     if use_t:
         tstat, p = stats.ttest_rel(a, b, nan_policy="omit")

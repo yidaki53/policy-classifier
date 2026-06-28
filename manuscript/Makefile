@@ -21,7 +21,7 @@ SCIREPS_CSL=$(ROOT)/manuscript/bibliography/nature.csl
 
 PANDOC_OPTS=--standalone --citeproc --bibliography=$(BIB) --csl=$(CSL)
 
-.PHONY: all figures manuscript pdf docx html combined anonymized anonymized-pdf check-frontmatter render journal-check stats clean incremental-update
+.PHONY: all figures manuscript pdf docx html combined anonymized anonymized-pdf check-frontmatter render journal-check stats clean incremental-update polish
 
 all: figures manuscript
 
@@ -32,7 +32,7 @@ figures:
 	cd $(ROOT) && uv run python scripts/visualize.py --profiles data/parquet/party_profiles_recency.parquet --out figures
 	cd $(ROOT) && uv run python scripts/visualize_voting.py --votering-parquet data/votering/parquet --out figures/voting
 
-combined: render | $(OUTPUT_DIR)
+combined: render polish | $(OUTPUT_DIR)
 	@echo "Creating combined manuscript file (frontmatter-safe)..."
 	@: > $(COMBINED)
 	@for f in $(RENDERED_SECTIONS); do \
@@ -116,7 +116,7 @@ stats: combined
 	@echo "Word count (combined markdown):"
 	@wc -w $(COMBINED)
 
-incremental-update:
+incremental-update: polish
 	cd $(ROOT) && uv run python scripts/update_pipeline.py --cpu-fraction 0.25
 
 scireps-render: check-frontmatter | $(SCIREPS_OUTPUT_DIR)
@@ -158,3 +158,5 @@ scireps-clean:
 
 clean: scireps-clean
 	rm -rf $(OUTPUT_DIR) $(MANUSCRIPT_MD) $(MANUSCRIPT_PDF) $(ANON_MANUSCRIPT_MD) $(ANON_MANUSCRIPT_PDF)
+polish:
+\tcd $(ROOT) \&\& uv run python scripts/polish_manuscript_text.py --dir sections

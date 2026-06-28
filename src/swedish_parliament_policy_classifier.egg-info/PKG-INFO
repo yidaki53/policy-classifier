@@ -22,6 +22,7 @@ Requires-Dist: pyarrow>=24.0.0
 Requires-Dist: zstandard>=0.25.0
 Requires-Dist: polars>=1.41.2
 Requires-Dist: loguru>=0.7.0
+Requires-Dist: spacy>=3.8.14
 Provides-Extra: dev
 Requires-Dist: pytest; extra == "dev"
 Requires-Dist: matplotlib; extra == "dev"

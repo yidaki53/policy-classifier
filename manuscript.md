@@ -116,17 +116,17 @@ How to read this section: each reported metric summarizes observed parliamentary
 ## Key Visual Evidence
 The figures below show headline outputs directly used for main-text interpretation.
 
-![Consistency vs Fulfillment (updated 2026-05-31T02:49:40Z)](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
-*Figure 1. Consistency vs Fulfillment by party. NOTE: figure pending regeneration from current pipeline run; replace placeholder PNG with `make figures` output.*
+![Consistency vs Fulfillment](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
+*Figure 1. Consistency vs Fulfillment by party. Each point represents one parliamentary party, plotted as mean consistency score (x-axis) against mean fulfillment score (y-axis). Higher values indicate greater coherence between proposed policies, spoken commitments, and enacted votes.*
 
-![Parliament Direction Over Time (updated 2026-05-31T02:49:40Z)](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
-*Figure 2. Parliament Direction Over Time. NOTE: figure pending regeneration from current pipeline run; replace placeholder PNG with `make figures` output.*
+![Parliament Direction Over Time](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
+*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement (0 = far left, 1 = far right). Shaded bands indicate 95% bootstrap CIs around the annual mean.*
 
-![Quid Ergo: Speech vs Action ideology by party (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
-*Figure 3. Quid Ergo: Speech vs Action ideology by party. NOTE: figure pending regeneration from current pipeline run; replace placeholder PNG with `make figures` output.*
+![Quid Ergo: Speech vs Action ideology by party](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
+*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches (anforanden) versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
 
 ![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
-*Figure 4. Pareto frontier of consistency vs vote fidelity. NOTE: figure pending regeneration from current pipeline run; replace placeholder PNG with `make figures` output.*
+*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores [0,1] across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
 
 We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 
@@ -190,7 +190,7 @@ A final synthesis helps bound interpretation. Robust findings are those that per
 
 For first-time readers, see the compact plain-language guide in the Appendix section "How to read the metrics."
 
-Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-05-31T20:47:30Z` and outputs are written under `output/analysis_rhetorical/`.
+Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-06-28T11:20:00Z` and outputs are written under `output/analysis_rhetorical/`.
 
 These findings establish the empirical basis for the manuscript and motivate the final conclusion on what this framework can and cannot claim.
 
@@ -272,19 +272,19 @@ Use this matrix as a pre-interpretation checklist when drawing substantive concl
 ## Appendix Figures (Intermediate Steps)
 These figures capture intermediate diagnostics and process-level checks that support the main analysis without interrupting core result flow.
 
-![Consistency-Fulfillment vs External Benchmark (Party-Year) (updated 2026-06-28T09:32:18Z)](../output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png){ width=100% }
+![Consistency-Fulfillment vs External Benchmark (Party-Year) (updated 2026-06-28T16:57:39Z)](../output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png){ width=100% }
 
-![Party Modality Overlay (updated 2026-06-21T16:45:35Z)](../output/manuscript/figures/figure_modality_overlay_by_party.png){ width=100% }
+![Party Modality Overlay (updated 2026-06-28T16:59:08Z)](../output/manuscript/figures/figure_modality_overlay_by_party.png){ width=100% }
 
-![Motion Category Distribution (updated 2026-06-28T09:32:33Z)](../figures/manuscript/pie_chart_categories.png){ width=90% }
+![Motion Category Distribution (updated 2026-06-28T16:58:00Z)](../figures/manuscript/pie_chart_categories.png){ width=90% }
 
-![Party Motions Stacked (updated 2026-06-28T09:32:33Z)](../figures/manuscript/party_motions_stacked.png){ width=90% }
+![Party Motions Stacked (updated 2026-06-28T16:58:01Z)](../figures/manuscript/party_motions_stacked.png){ width=90% }
 
-![Voting Cohesion Time Series (updated 2026-06-28T09:33:18Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
+![Voting Cohesion Time Series (updated 2026-06-28T16:58:40Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
 
-![Three-way Divergence (updated 2026-06-28T09:34:05Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
+![Three-way Divergence (updated 2026-06-28T16:59:23Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
 
-![Speech Profiles Heatmap (updated 2026-06-28T09:33:48Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
+![Speech Profiles Heatmap (updated 2026-06-28T16:59:05Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
 
 
 # Data Availability

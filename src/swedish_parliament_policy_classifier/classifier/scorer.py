@@ -462,15 +462,26 @@ def score_motion(
     emb_map: Dict[str, float] = {}
     if embedding_matcher is not None and embedding_weight > 0:
         try:
-            if not hasattr(embedding_matcher, "_cached_cat_embs"):
+            if not hasattr(embedding_matcher, "_cached_cat_embs") or embedding_matcher._cached_cat_embs is None:
+                if categories is None:
+                    LOG.error("Cannot build category embeddings: categories is None")
+                    raise ValueError("categories is None when building embedding cache")
                 embedding_matcher._cached_cat_embs = embedding_matcher.build_category_embeddings(categories)
+            if embedding_matcher._cached_cat_embs is None:
+                LOG.error("Embedding cache is None after build_category_embeddings")
+                raise ValueError("embedding_matcher._cached_cat_embs is None")
             emb_matches = embedding_matcher.match(policy_text, embedding_matcher._cached_cat_embs, top_k=len(categories))
+            if emb_matches is None:
+                LOG.error("match() returned None for text: %s", policy_text[:100] if policy_text else "(empty)")
+                raise ValueError("embedding_matcher.match() returned None")
             emb_map = {name: float(score) for name, score in emb_matches}
             for name, score in emb_map.items():
                 if score >= embedding_threshold:
                     matches.setdefault(name, []).append(f"embedding:{score:.3f}")
         except Exception as e:
             LOG.warning("Embedding matcher failed: %s", e)
+            import traceback
+            LOG.debug("Embedding matcher traceback:\n%s", traceback.format_exc())
 
     zs_map: Dict[str, float] = {}
     if use_zero_shot and zero_shot_weight > 0:

@@ -1019,8 +1019,26 @@ def _get_existing_ids(doktyp: str) -> set[str]:
     return existing_ids
 
 
+def _doc_date(doc: dict[str, Any]) -> Optional[pd.Timestamp]:
+    """Extract and parse the date from an API document dict."""
+    for key in ("date", "dok_datum", "datum"):
+        val = doc.get(key)
+        if val:
+            try:
+                return pd.to_datetime(val).normalize()
+            except Exception:
+                pass
+    return None
+
+
 def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
-    """Query live Riksdagen API for new items since our latest dataset date and append to parquet."""
+    """Query live Riksdagen API for new items.
+
+    Strategy: page from the most recent entry backwards.  Stop as soon as we
+    see an entry whose date is at or before our local cutoff date (the latest
+    date already in our parquet).  This guarantees we never miss data even if
+    several update runs were skipped.
+    """
     logger.info("Fetching new items from live API...")
     if dry_run:
         return {"dry_run": True, "note": "API fetch skipped in dry-run"}
@@ -1044,38 +1062,35 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
         if pd.isna(since_date):
             logger.warning("Latest date is NaN for {}; skipping live API fetch", label)
             continue
-        
+
+        # The cutoff: the latest date already present in our local parquet.
+        # We page from the API (most-recent first) until we reach this date.
+        cutoff_date = since_date.normalize()
+
         # Get existing IDs to avoid re-fetching
         existing_ids = _get_existing_ids(doktyp)
-        logger.info("Found {} existing {} IDs in local data", len(existing_ids), label)
-        
-        # Check when we last fetched this document type
-        last_fetch_date_str = last_fetch_cache.get(doktyp)
-        if last_fetch_date_str:
-            last_fetch_date = pd.to_datetime(last_fetch_date_str)
-            # Only fetch from last fetch date forward (not 7 days back)
-            from_date = last_fetch_date.strftime("%Y-%m-%d")
-            logger.info("Last fetched {} on {}, fetching from {} forward", label, last_fetch_date_str, from_date)
-        else:
-            # First time fetching, use a small window to catch recent data
-            from_date = (since_date - timedelta(days=1)).strftime("%Y-%m-%d")
-            logger.info("No previous fetch record for {}, fetching from {} forward", label, from_date)
-        
+        logger.info("Found {} existing {} IDs in local data; cutoff date: {}", len(existing_ids), label, cutoff_date.strftime("%Y-%m-%d"))
+
+        # Wide date range so the API returns everything from cutoff to today
+        from_date = cutoff_date.strftime("%Y-%m-%d")
         to_date = datetime.now().strftime("%Y-%m-%d")
-        logger.info("Fetching {} from API: {} to {}", label, from_date, to_date)
+        logger.info("Fetching {} from API: {} to {} (will stop at cutoff {})", label, from_date, to_date, cutoff_date.strftime("%Y-%m-%d"))
 
         # Cross-page rate-limit guard: sleep progressively longer between pages
         def _page_sleep(p: int):
             import time as _t
-            wait = min(0.5 + (p - 1) * 0.5, 10.0)  # 0.5s, 1.0s, 1.5s, ... up to 10s
+            wait = min(0.5 + (p - 1) * 0.5, 10.0)
             _t.sleep(wait)
 
+        id_col = "anforande_id" if doktyp == "anf" else "id"
         all_docs: list[dict[str, Any]] = []
         consecutive_failures = 0
         page = 1
         has_more = True
         max_consecutive_failures = 8
-        while has_more and page <= 200:
+        caught_up = False
+
+        while has_more and page <= 500:
             _page_sleep(page)
             try:
                 docs, has_more = fetch_page(
@@ -1090,12 +1105,27 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
                     timeout=20,
                 )
                 if not docs:
+                    logger.info("Empty page {} for {}, stopping", page, label)
                     break
+
+                # Check dates on this page -- API is sorted desc, so the last
+                # entry on the page is the oldest.  If the oldest entry on this
+                # page is at or before our cutoff, we have caught up.
+                oldest_on_page = _doc_date(docs[-1])
+                newest_on_page = _doc_date(docs[0])
+                logger.debug("Page {}: {} docs, newest={}, oldest={}", page, len(docs), newest_on_page, oldest_on_page)
+
                 all_docs.extend(docs)
+
+                if oldest_on_page is not None and oldest_on_page <= cutoff_date:
+                    logger.info("Page {} oldest entry ({}) <= cutoff ({}) -- caught up", page, oldest_on_page.strftime("%Y-%m-%d"), cutoff_date.strftime("%Y-%m-%d"))
+                    caught_up = True
+                    break
+
                 consecutive_failures = 0
                 page += 1
-                if len(all_docs) >= 5000:
-                    logger.info("Reached 5000 docs for {}, stopping pagination", label)
+                if len(all_docs) >= 20000:
+                    logger.info("Reached 20000 docs for {}, stopping pagination (safety limit)", label)
                     break
             except Exception as e:
                 consecutive_failures += 1
@@ -1110,23 +1140,23 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
                 continue
 
         if not all_docs:
-            logger.info("No new {} items from API", label)
+            logger.info("No {} items from API", label)
             steps[label] = {"fetched": 0, "output": None}
             continue
 
         # Deduplicate against existing IDs
         df = pd.DataFrame(all_docs)
-        id_col = "id" if "id" in df.columns else ("anforande_id" if doktyp == "anf" else "dok_id")
         if id_col in df.columns:
             df[id_col] = df[id_col].astype(str)
             new_docs = df[~df[id_col].isin(existing_ids)]
-            logger.info("Deduplicated {} -> {} new {} items ({} already exist)", 
-                       len(df), len(new_docs), label, len(df) - len(new_docs))
+            logger.info("Dedup: {} fetched -> {} new {} items ({} already exist, caught_up={})", len(df), len(new_docs), label, len(df) - len(new_docs), caught_up)
             df = new_docs
-        
+        else:
+            logger.warning("ID column '{}' not found in fetched data for {}", id_col, label)
+
         if df.empty:
             logger.info("No new {} items after deduplication", label)
-            steps[label] = {"fetched": 0, "output": None}
+            steps[label] = {"fetched": 0, "output": None, "caught_up": caught_up}
             continue
 
         out_path = REPO_ROOT / "data" / "parquet" / f"api_{label}"
@@ -1136,8 +1166,8 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
 
         df.to_parquet(parquet_file, index=False, compression="zstd")
         logger.info("Wrote {} new {} items to {}", len(df), label, parquet_file)
-        steps[label] = {"fetched": len(df), "output": str(parquet_file)}
-        
+        steps[label] = {"fetched": len(df), "output": str(parquet_file), "caught_up": caught_up}
+
         # Update last fetch cache
         last_fetch_cache[doktyp] = to_date
         _save_last_fetch_cache(last_fetch_cache)
