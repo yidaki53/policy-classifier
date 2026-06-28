@@ -37,7 +37,7 @@ update_triggers:
   - "Any change in classifier/ensemble methodology."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-06-08T22:40:42Z"
+last_updated_utc: "2026-06-28T11:20:00Z"
 ---
 
 # Results
@@ -49,13 +49,17 @@ How to read this section: each reported metric summarizes observed parliamentary
 ## Key Visual Evidence
 The figures below show headline outputs directly used for main-text interpretation.
 
-![Consistency vs Fulfillment (updated 2026-05-31T02:49:40Z)](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
+![Consistency vs Fulfillment](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
+*Figure 1. Consistency vs Fulfillment by party. Each point represents one parliamentary party, plotted as mean consistency score (x-axis) against mean fulfillment score (y-axis). Higher values indicate greater coherence between proposed policies, spoken commitments, and enacted votes.*
 
-![Parliament Direction Over Time (updated 2026-05-31T02:49:40Z)](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
+![Parliament Direction Over Time](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
+*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement (0 = far left, 1 = far right). Shaded bands indicate 95% bootstrap CIs around the annual mean.*
 
-![Quid Ergo: Speech vs Action ideology by party (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
+![Quid Ergo: Speech vs Action ideology by party](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
+*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches (anforanden) versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
 
 ![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
+*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores [0,1] across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
 
 We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 
@@ -63,7 +67,7 @@ We moved intermediate, process-oriented figures to the appendix to keep the Resu
 
 On the current full corpus, the workflow covers `n=202925` motions (1971-2024), `n=991235` speech-category rows corresponding to `n=141605` unique speeches (2014-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), the conservative motion baseline evaluation path yields accuracy `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). The speech-side pipeline with rhetorical pattern adjustment (7-dimension Britannica-derived signals) and ollama teacher weighting (0.60) is the primary speech classification path, achieving `0.94` per-category accuracy on held-out speech gold labels (via `models/speech_meta_clf_parquet.pkl`). The motion baseline evaluation path, when transferred to speeches without speech-specific adaptation, yields `0.2033` accuracy and is retained as a cross-domain sensitivity check: it demonstrates that motion-trained classifiers fail on parliamentary speech due to register and rhetorical differences. Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
 
-These figures indicate informative but uncertain signal. The speech-specific meta-classifier is the primary anchor for speech-level claims, while the motion baseline and integrated hybrid ensemble serve as cross-domain and cross-model sensitivity checks. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value.
+These figures indicate informative but uncertain signal. The speech-specific meta-classifier is the primary anchor for speech-level claims, while the motion baseline and integrated hybrid ensemble serve as cross-domain and cross-model sensitivity checks. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value. This interpretative stance follows established practice in cross-national scaling of party positions from parliamentary text [@ebrecht2024cross].
 
 Across hypotheses, the results are consistent with modality-sensitive ideology measurement under a descriptive interpretation. Party-level profiles differ across motions, speeches, and vote-linked action channels. Speech-action consistency also varies across parties after linkage constraints. Fulfillment diagnostics add information beyond aggregate consistency alone.
 
@@ -71,7 +75,7 @@ Across hypotheses, the results are consistent with modality-sensitive ideology m
 
 (See Figure 1, Consistency vs Fulfillment, generated by `scripts/analyze_consistency_trends.py`; see Figure 3, Party Modality Overlay, generated by `scripts/generate_manuscript_overlay.py`; see Figure 8, Three-way Divergence, generated by `scripts/speeches_analysis.py`.)
 
-Substantively, this means no single channel can be treated as a complete proxy for party ideology. Motion-side evidence can reflect formal agenda setting and coalition strategy. Speech-side evidence can reflect rhetorical framing and constituency signaling. Vote-linked action can reflect final institutional bargaining constraints. When these channels converge, confidence in the descriptive estimate increases. When they diverge, the divergence itself becomes a meaningful analytical result rather than a nuisance to suppress.
+Substantively, this means no single channel can be treated as a complete proxy for party ideology. Motion-side evidence can reflect formal agenda setting and coalition strategy. Speech-side evidence can reflect rhetorical framing and constituency signaling. Vote-linked action can reflect final institutional bargaining constraints [@osnabrugge2023speech]. When these channels converge, confidence in the descriptive estimate increases. When they diverge, the divergence itself becomes a meaningful analytical result rather than a nuisance to suppress, consistent with recent multimodal frameworks for comparative political communication [@jaursch2025multimodal].
 
 One concrete speech-level example shows how the classifier surfaces interpretable ideological signal from parliamentary language. Speech `c6c44eb9-b09c-e411-9412-00262d0d7125` (party `V`) is assigned category `left` with normalized weight `1.00` and confidence `1.00` in the speech classification artifact (`speech_classifications_with_rhetoric_full.parquet`). The speech text includes the statement: "Vi har redan varit med om Skånepolisens registrering av romer, och nu är det ett kvinnoregister ... Den här utvecklingen måste stoppas." This is not presented as proof of latent ideology on its own, but as an auditable instance of category assignment that can be traced back to source text and model output.
 
@@ -105,7 +109,7 @@ The speech-to-motion linkage uses rel_dok_id-to-betankande bridging with graph-d
 
 The linkage diagnostics clarify how much of the speech corpus enters cross-modality comparison at different confidence levels. Higher-coverage linkage increases representativeness, while confidence-level splits provide a direct view of robustness under stricter versus looser matching criteria. Readers can then evaluate whether key comparisons are stable only in permissive linkage settings or remain visible under stricter thresholds.
 
-Stage-3 stratified error review also identified three recurring failure modes that bound interpretation of speech-level labels. First, rhetorical inversion cases appear when opposition speeches quote or attack right-coded issue language; this can induce rightward predictions even for left/center-left speakers (for example, speech IDs `277ee5c2-d93f-f111-bf21-6805cafeabf9` and `82a2f18c-2482-e511-942d-00262d0d0c40` in `stratified_classification_report.md`). Second, governance/procedural debate often yields low-margin centrist assignments with near-tied alternatives. Third, occasional markup contamination (for example `STYLEREF ... MERGEFORMAT`) remains in source text previews and can perturb token evidence. We therefore treat individual speech labels as auditable but noisy intermediates and prioritize party-level aggregates and sensitivity checks for substantive claims.
+Stage-3 stratified error review also identified three recurring failure modes that bound interpretation of speech-level labels. First, rhetorical inversion cases appear when opposition speeches quote or attack right-coded issue language; this can induce rightward predictions even for left/center-left speakers (for example, speech IDs `277ee5c2-d93f-f111-bf21-6805cafeabf9` and `82a2f18c-2482-e511-942d-00262d0d0c40` in `stratified_classification_report.md`). Second, governance/procedural debate often yields low-margin centrist assignments with near-tied alternatives. Third, occasional markup contamination (for example `STYLEREF ... MERGEFORMAT`) remains in source text previews and can perturb token evidence. We therefore treat individual speech labels as auditable but noisy intermediates and prioritize party-level aggregates and sensitivity checks for substantive claims. These patterns are consistent with known challenges in automated parliamentary text analysis [@rheault2016measuring; @patz2025german].
 
 Fulfillment-imputation sensitivity was also checked directly in the current artifact set. Recomputing consistency outputs with `--fulfillment-fill` set to `0.0` and `0.5` produced identical party-level consistency estimates in this refresh (`rho = 1.000`, max absolute delta `0.000`), because no party-level missing-motion pathways remained after aggregation.
 
@@ -119,6 +123,6 @@ A final synthesis helps bound interpretation. Robust findings are those that per
 
 For first-time readers, see the compact plain-language guide in the Appendix section "How to read the metrics."
 
-Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-05-31T20:47:30Z` and outputs are written under `output/analysis_rhetorical/`.
+Run provenance for the latest full-chain recency and robustness execution remains anchored to `scripts/extract_motion_signatories.py`, `scripts/tune_link_rebalance_fair_ga.py`, `scripts/link_all_speeches_to_action.py`, `scripts/compute_ideology_axis_alignment.py`, `scripts/score_say_vs_do_contradiction.py`, `scripts/tune_consistency_wrangling_fair_ga.py`, and `scripts/analyze_consistency_trends.py`. The UTC timestamp is `2026-06-28T11:20:00Z` and outputs are written under `output/analysis_rhetorical/`.
 
 These findings establish the empirical basis for the manuscript and motivate the final conclusion on what this framework can and cannot claim.
