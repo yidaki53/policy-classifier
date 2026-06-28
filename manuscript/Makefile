@@ -158,5 +158,6 @@ scireps-clean:
 
 clean: scireps-clean
 	rm -rf $(OUTPUT_DIR) $(MANUSCRIPT_MD) $(MANUSCRIPT_PDF) $(ANON_MANUSCRIPT_MD) $(ANON_MANUSCRIPT_PDF)
+
 polish:
-\tcd $(ROOT) \&\& uv run python scripts/polish_manuscript_text.py --dir sections
+	cd $(ROOT) && uv run python scripts/polish_manuscript_text.py --dir sections
