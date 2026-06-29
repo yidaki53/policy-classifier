@@ -32,10 +32,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from swedish_parliament_policy_classifier.cli_base import build_common_parser, start_experiment
 from swedish_parliament_policy_classifier.visualization.style_config import (
     CATEGORY_ORDER,
     CATEGORY_COLORS,
     CATEGORY_LABELS,
+    CURRENT_PARTIES,
     add_figure_credits,
 )
 from swedish_parliament_policy_classifier.provenance import write_run_provenance
@@ -78,7 +80,7 @@ def query_summary_stats_parquet(
     cls["motion_id"] = cls["motion_id"].astype(str)
 
     merged = cls.merge(nm, left_on="motion_id", right_on="id", how="inner")
-    merged = merged[merged["party"].notna() & (merged["party"] != "") & (merged["party"] != "NYD")]
+    merged = merged[merged["party"].notna() & merged["party"].isin(CURRENT_PARTIES)]
 
     min_date = merged["date"].dropna().min()
     max_date = merged["date"].dropna().max()
@@ -344,13 +346,21 @@ def generate_all_figures(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate manuscript figures from classifications (Parquet-only)")
-    parser.add_argument("--classifications", default="data/parquet/classifications.parquet")
-    parser.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
-    parser.add_argument("--out-dir", default="figures/manuscript")
-    args = parser.parse_args()
+    p = build_common_parser("Generate manuscript figures from classifications (Parquet-only)")
+    p.add_argument("--classifications", default="data/parquet/classifications.parquet")
+    p.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
+    p.add_argument("--out-dir", default="figures/manuscript")
+    args = p.parse_args()
 
-    generate_all_figures(args.classifications, args.normalized_motions, args.out_dir)
+    run = start_experiment(
+        args,
+        "generate-figures",
+        experiment_name="manuscript-figures",
+    )
+    try:
+        generate_all_figures(args.classifications, args.normalized_motions, args.out_dir)
+    finally:
+        run.close()
 
 
 if __name__ == "__main__":

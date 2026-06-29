@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from swedish_parliament_policy_classifier.analysis.speech_visualizations import IDEOLOGY_ORDER, load_speech_metadata
+from swedish_parliament_policy_classifier.analysis.parquet_utils import read_parquet_table
 
 ELECTION_YEARS = {2010, 2014, 2018, 2022, 2026}
 
@@ -20,22 +21,12 @@ def _top_category_from_long(df: pd.DataFrame, id_col: str) -> pd.DataFrame:
     return out
 
 
-def _read_parquet_table(parquet_dir: Path, stem: str, columns: list[str]) -> pd.DataFrame:
-    candidates = [
-        parquet_dir / f"{stem}.parquet",
-        parquet_dir / f"{stem}.parquet.zst",
-        parquet_dir / f"{stem}.pq",
-    ]
-    for p in candidates:
-        if p.exists():
-            return pd.read_parquet(p, columns=columns)
-    raise FileNotFoundError(f"Missing parquet table for '{stem}' under {parquet_dir}")
 
 
 def _load_motions_votes(parquet_dir: str | Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     root = Path(parquet_dir)
-    cls = _read_parquet_table(root, "classifications", ["motion_id", "category", "normalized_weight"]).copy()
-    nm = _read_parquet_table(root, "normalized_motions", ["id", "party", "doc_type", "metadata"]).copy()
+    cls = read_parquet_table(root, "classifications", ["motion_id", "category", "normalized_weight"]).copy()
+    nm = read_parquet_table(root, "normalized_motions", ["id", "party", "doc_type", "metadata"]).copy()
 
     cls["motion_id"] = cls["motion_id"].astype(str)
     cls["normalized_weight"] = pd.to_numeric(cls["normalized_weight"], errors="coerce").fillna(0.0)
@@ -68,7 +59,7 @@ def _load_motions_votes(parquet_dir: str | Path) -> tuple[pd.DataFrame, pd.DataF
     out = meta.merge(top, on="item_id", how="left")
     motions = out[out["doc_type"].isin(["mot", "prop"])].copy()
 
-    mv = _read_parquet_table(root, "motion_votes", ["motion_id", "votering_count"]).copy()
+    mv = read_parquet_table(root, "motion_votes", ["motion_id", "votering_count"]).copy()
     mv["motion_id"] = mv["motion_id"].astype(str)
     mv["votering_count"] = pd.to_numeric(mv["votering_count"], errors="coerce").fillna(0.0)
     mv = mv[mv["votering_count"] > 0].copy()

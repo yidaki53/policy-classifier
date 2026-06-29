@@ -447,8 +447,13 @@ def _read_existing_speech_ids_fast(out_path: Path) -> tuple[set[str], int]:
 def main():
     global _current_speech_id, _current_speech_text
 
-    safe = thermal_safe_defaults("safe")
-    p = argparse.ArgumentParser()
+    from swedish_parliament_policy_classifier.cli_base import (
+        apply_resource_controls,
+        build_common_parser,
+        start_experiment,
+    )
+
+    p = build_common_parser("Parquet-first speech classification")
     p.add_argument("--input-dir", default="data/speeches/parquet")
     p.add_argument("--out", default="data/parquet/speech_classifications.parquet")
     p.add_argument("--rhetoric-parquet", default=None, help="Path to speech_rhetoric_labels.parquet to include rhetoric scores")
@@ -459,29 +464,19 @@ def main():
     p.add_argument("--quiet", dest="quiet", action="store_true")
     p.add_argument("--flush-every", type=int, default=1000, help="Flush buffered classifications every N speeches")
     p.add_argument("--cuda-cache-every", type=int, default=200, help="Clear CUDA cache every N speeches (0 disables)")
-    p.add_argument("--sleep-every", type=int, default=int(safe["sleep_every"]), help="Sleep every N speeches (0 disables)")
-    p.add_argument("--sleep-seconds", type=float, default=float(safe["sleep_seconds"]), help="Seconds to sleep when sleep-every triggers")
     p.add_argument("--auto-generate-rhetoric", action="store_true", help="Generate missing rhetoric scores on the fly")
     p.add_argument("--rhetoric-model", default="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli")
     p.add_argument("--rhetoric-device", type=int, default=None)
     p.add_argument("--rhetoric-hypothesis-template", default="Det här uttalandet är {}.")
     p.add_argument("--persist-generated-rhetoric", action="store_true")
     p.add_argument("--generated-rhetoric-out", default=None)
-    p.add_argument("--cpu-fraction", type=float, default=float(os.environ.get("CLASSIFIER_CPU_FRACTION", str(safe["cpu_fraction"]))))
     p.add_argument("--min-total-input-rows", type=int, default=100000, help="Fail if speech parquet has fewer rows")
     p.add_argument("--speech-timeout", type=int, default=300, help="Max seconds per speech classification (0=disabled)")
-    p.add_argument("--mlflow", action="store_true")
-    p.add_argument("--mlflow-experiment", default="speech-classification")
-    p.add_argument("--mlflow-tracking-uri", default=os.environ.get("MLFLOW_TRACKING_URI"))
     args = p.parse_args()
 
-    throttle = apply_cpu_throttle(cpu_fraction=args.cpu_fraction)
-    run = ExperimentRun.start(
-        enabled=args.mlflow,
-        experiment_name=args.mlflow_experiment,
-        run_name="classify-speeches-parquet",
-        tracking_uri=args.mlflow_tracking_uri,
-    )
+    ctx = apply_resource_controls(args)
+    throttle = ctx["throttle"]
+    run = start_experiment(args, "classify-speeches-parquet", experiment_name="speech-classification")
 
     input_dir = Path(args.input_dir)
     out_path = Path(args.out)
