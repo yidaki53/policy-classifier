@@ -2,627 +2,567 @@
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_speech_profiles.py": {
     "mtime": 1780005675.320635,
     "ast_hash": "88a845c1c9bde26b17e8873b3cbe659f",
-    "semantic_hash": ""
+    "semantic_hash": "88a845c1c9bde26b17e8873b3cbe659f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/eval_mlp.py": {
-    "mtime": 1779724089.9865024,
-    "ast_hash": "1d1c6af9f899ac1dde4a8f36e9ef2aa2",
-    "semantic_hash": ""
+    "mtime": 1780776340.6729276,
+    "ast_hash": "e0db8f025bb49cc3ed5ef0e6c63a2844",
+    "semantic_hash": "e0db8f025bb49cc3ed5ef0e6c63a2844"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/history_cleanup.sh": {
     "mtime": 1779724089.9890394,
     "ast_hash": "78a126eb412137864e96365abc03c369",
-    "semantic_hash": ""
+    "semantic_hash": "78a126eb412137864e96365abc03c369"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/precompute_category_embeddings.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "19f1306da83f74ff7bcc835fab7afe91",
-    "semantic_hash": ""
+    "semantic_hash": "19f1306da83f74ff7bcc835fab7afe91"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/verify_parquet_exports.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "0dbec0b6113158c252445adb0bb0b2e7",
-    "semantic_hash": ""
+    "semantic_hash": "0dbec0b6113158c252445adb0bb0b2e7"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/download_bulk_datasets.py": {
-    "mtime": 1779724089.9861276,
-    "ast_hash": "eb0135ed348a62b0111ba0879bdbb23e",
-    "semantic_hash": ""
+    "mtime": 1782035084.5822482,
+    "ast_hash": "2af759557681538ba5e04136199cc4b6",
+    "semantic_hash": "2af759557681538ba5e04136199cc4b6"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/evaluate_ensemble.py": {
-    "mtime": 1779724089.9866378,
-    "ast_hash": "565a5bd25b422c752644504b2358f1b7",
-    "semantic_hash": ""
+    "mtime": 1780776340.6729276,
+    "ast_hash": "3698d82c111b191d928e60fe9e066d42",
+    "semantic_hash": "3698d82c111b191d928e60fe9e066d42"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_promise_fulfillment.py": {
     "mtime": 1780005675.320635,
     "ast_hash": "04acc2ccff835f1bb0f136239f5edf32",
-    "semantic_hash": ""
+    "semantic_hash": "04acc2ccff835f1bb0f136239f5edf32"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/augment_gold_labels.py": {
     "mtime": 1779724089.9819536,
     "ast_hash": "19acaf163a0dd0afbab7c8aa2b502086",
-    "semantic_hash": ""
+    "semantic_hash": "19acaf163a0dd0afbab7c8aa2b502086"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/download_votering.py": {
-    "mtime": 1779724089.9863648,
-    "ast_hash": "d920433c7553246082317bd2ac18676d",
-    "semantic_hash": ""
+    "mtime": 1782035098.0542488,
+    "ast_hash": "6568cd9db1d025ddfc14af62de52d83b",
+    "semantic_hash": "6568cd9db1d025ddfc14af62de52d83b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/build_profiles.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "93bc301389f3e2c97a7b5d90ef836d52",
-    "semantic_hash": ""
+    "mtime": 1782014414.7814684,
+    "ast_hash": "86e0952dc397353851b86e7621fb29bb",
+    "semantic_hash": "86e0952dc397353851b86e7621fb29bb"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_from_parquet.py": {
     "mtime": 1779724089.9849253,
     "ast_hash": "5e3cfa4db6f959593e36da01dbd7e527",
-    "semantic_hash": ""
+    "semantic_hash": "5e3cfa4db6f959593e36da01dbd7e527"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/run_calibration_checks.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "7058f6440fad4ccdb33b3696212b7cfe",
-    "semantic_hash": ""
+    "semantic_hash": "7058f6440fad4ccdb33b3696212b7cfe"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/debug_pipeline.py": {
     "mtime": 1779724089.9858863,
     "ast_hash": "ca57f8ba304efa6750d93ee0c97a6661",
-    "semantic_hash": ""
+    "semantic_hash": "ca57f8ba304efa6750d93ee0c97a6661"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/explain.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "9b09d1f90e3f53190b89dc8eaacb1858",
-    "semantic_hash": ""
+    "semantic_hash": "9b09d1f90e3f53190b89dc8eaacb1858"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_speech_meta_clf_parquet.py": {
     "mtime": 1780005675.3136942,
     "ast_hash": "d9a1faf5b4ab1084dfc539890936d445",
-    "semantic_hash": ""
+    "semantic_hash": "d9a1faf5b4ab1084dfc539890936d445"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_supervised.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "a77743c853fae61f57a0dd30f3faf34a",
-    "semantic_hash": ""
+    "semantic_hash": "a77743c853fae61f57a0dd30f3faf34a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/benchmark_embedding_models.py": {
     "mtime": 1779724089.984396,
     "ast_hash": "cdb4afe627b0bba9edde5e26471977dc",
-    "semantic_hash": ""
+    "semantic_hash": "cdb4afe627b0bba9edde5e26471977dc"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/run_tests_with_coverage.sh": {
     "mtime": 1779724091.2877674,
     "ast_hash": "e85ee5dc0defa36c0dc3bee2ed121fb2",
-    "semantic_hash": ""
+    "semantic_hash": "e85ee5dc0defa36c0dc3bee2ed121fb2"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/active_labeler.py": {
     "mtime": 1779724091.28755,
     "ast_hash": "484a2f0e12f411e00e2e66bec2157790",
-    "semantic_hash": ""
+    "semantic_hash": "484a2f0e12f411e00e2e66bec2157790"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/visualize_voting.py": {
-    "mtime": 1779724089.992401,
-    "ast_hash": "3fb993c97a6f1f1354b080cffc8f829d",
-    "semantic_hash": ""
+    "mtime": 1782045234.522333,
+    "ast_hash": "f9581144cc5149d778818c8ce656c6c0",
+    "semantic_hash": "f9581144cc5149d778818c8ce656c6c0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_ideological_gap.py": {
     "mtime": 1780005675.320635,
     "ast_hash": "3e7e65b39dfd1d8b6c6ab972a1cd1047",
-    "semantic_hash": ""
+    "semantic_hash": "3e7e65b39dfd1d8b6c6ab972a1cd1047"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/sync.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "02628f1d5649392dd29641ee4f138f00",
-    "semantic_hash": ""
+    "semantic_hash": "02628f1d5649392dd29641ee4f138f00"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/download_speeches.py": {
-    "mtime": 1779724089.9862413,
-    "ast_hash": "efece0889831a8e8c5830ef759a1b897",
-    "semantic_hash": ""
+    "mtime": 1782034269.9222176,
+    "ast_hash": "974a3375983ce4adb51fe424c2debca9",
+    "semantic_hash": "974a3375983ce4adb51fe424c2debca9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/export_active_learning_candidates.py": {
     "mtime": 1779724089.98688,
     "ast_hash": "ac1ae6f7c240743b0474fcac1ab151e1",
-    "semantic_hash": ""
+    "semantic_hash": "ac1ae6f7c240743b0474fcac1ab151e1"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/self_train.py": {
-    "mtime": 1779724089.9910371,
-    "ast_hash": "54a38583d8cc6cf09c4071a179a1c8bb",
-    "semantic_hash": ""
+    "mtime": 1780776340.6729276,
+    "ast_hash": "4d5f83c5cde4cca7b4a1963253290793",
+    "semantic_hash": "4d5f83c5cde4cca7b4a1963253290793"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_speeches.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "fa8743ded8bf3872e0ff6eac7647b151",
-    "semantic_hash": ""
+    "mtime": 1782044953.060982,
+    "ast_hash": "e996296bf8da208091fc3ee5ced1c9b1",
+    "semantic_hash": "e996296bf8da208091fc3ee5ced1c9b1"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/visualize_interactive.py": {
-    "mtime": 1779724176.1239755,
-    "ast_hash": "1a0daf90b4be698ab20896a26a2ddaec",
-    "semantic_hash": ""
+    "mtime": 1780142391.761793,
+    "ast_hash": "32454a768fd77ef6171a0c28237761f5",
+    "semantic_hash": "32454a768fd77ef6171a0c28237761f5"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/run_stratified_sample.py": {
-    "mtime": 1779724089.9907343,
-    "ast_hash": "cac6c7f5f5b068ff0a0ad5c25d6d45ca",
-    "semantic_hash": ""
+    "mtime": 1780913405.078866,
+    "ast_hash": "00b3ab1c608f2c209070b97c7ccc5361",
+    "semantic_hash": "00b3ab1c608f2c209070b97c7ccc5361"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/run_speech_analysis_suite.py": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "ec88f4ecc9ac1f251241dc4c2f31ae9d",
-    "semantic_hash": ""
+    "mtime": 1780936133.9077234,
+    "ast_hash": "69fdce0f4de1f0d547ae8037f8567295",
+    "semantic_hash": "69fdce0f4de1f0d547ae8037f8567295"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/parallel_utils.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "0ee72125c1ebab4a36818793e6e7c611",
-    "semantic_hash": ""
+    "semantic_hash": "0ee72125c1ebab4a36818793e6e7c611"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/backfill_text.py": {
     "mtime": 1779724089.9842806,
     "ast_hash": "48baf0ae7e961413476e96ce7aaa0737",
-    "semantic_hash": ""
+    "semantic_hash": "48baf0ae7e961413476e96ce7aaa0737"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_speeches.py": {
-    "mtime": 1780005675.3136942,
-    "ast_hash": "0e5c9a2fc5376f8407c6070706d53d86",
-    "semantic_hash": ""
+    "mtime": 1780776429.0036898,
+    "ast_hash": "0e0b3cefe2865214895b0e664a21f14f",
+    "semantic_hash": "0e0b3cefe2865214895b0e664a21f14f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/evaluate_speech_gold_labels.py": {
-    "mtime": 1780045136.942124,
-    "ast_hash": "97ee4f5ece717b8e6b6ea73b201e4c1d",
-    "semantic_hash": ""
+    "mtime": 1780950009.404247,
+    "ast_hash": "b176ee0473bcf4e39843d02f1151fbc7",
+    "semantic_hash": "b176ee0473bcf4e39843d02f1151fbc7"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/run_graphify.sh": {
     "mtime": 1779724091.2877674,
     "ast_hash": "e6f133f0d63216589881418e8a4e208e",
-    "semantic_hash": ""
+    "semantic_hash": "e6f133f0d63216589881418e8a4e208e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_assets.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "e749a6b735f9785c7cb2220f11d204d4",
-    "semantic_hash": ""
+    "semantic_hash": "e749a6b735f9785c7cb2220f11d204d4"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/label_rhetoric_zero_shot.py": {
     "mtime": 1779725883.2082603,
     "ast_hash": "12c6df921cdba94d7585deb240f30a09",
-    "semantic_hash": ""
+    "semantic_hash": "12c6df921cdba94d7585deb240f30a09"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/clean_party_labels.py": {
     "mtime": 1779724089.9852803,
     "ast_hash": "c334d4583440653afa35f91668dc768c",
-    "semantic_hash": ""
+    "semantic_hash": "c334d4583440653afa35f91668dc768c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/rhetoric_ideology_crosstab.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "84d94e201708d72f6ab12bab34b3b463",
-    "semantic_hash": ""
+    "semantic_hash": "84d94e201708d72f6ab12bab34b3b463"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/active_learning.py": {
-    "mtime": 1779725879.0341115,
-    "ast_hash": "b0a4e3903cca046e42fb6275042e3105",
-    "semantic_hash": ""
+    "mtime": 1780687205.4803689,
+    "ast_hash": "1031cdb238c9c65c13e27f82c6ee2361",
+    "semantic_hash": "1031cdb238c9c65c13e27f82c6ee2361"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/backfill_party.py": {
     "mtime": 1779724089.9841647,
     "ast_hash": "b088b5ccd623267423a0bdebc80604ee",
-    "semantic_hash": ""
+    "semantic_hash": "b088b5ccd623267423a0bdebc80604ee"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/augment_rare_classes.py": {
     "mtime": 1779724089.9819536,
     "ast_hash": "974bf56b55b9b22a20daf4ffb42f270c",
-    "semantic_hash": ""
+    "semantic_hash": "974bf56b55b9b22a20daf4ffb42f270c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/visualize_advanced.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "241864c8cbd65ba571c2a7ef211f3c0c",
-    "semantic_hash": ""
+    "semantic_hash": "241864c8cbd65ba571c2a7ef211f3c0c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/ollama_review_from_stratified_report.py": {
     "mtime": 1779725869.0579796,
     "ast_hash": "99dedf66b98482831cb0de8fcd4a8a1c",
-    "semantic_hash": ""
+    "semantic_hash": "99dedf66b98482831cb0de8fcd4a8a1c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify.py": {
-    "mtime": 1780005675.3136942,
-    "ast_hash": "e2f656a64854844e675dbe69db521c20",
-    "semantic_hash": ""
+    "mtime": 1781893618.655696,
+    "ast_hash": "410b04c7dfebdf151de8fefb820b9543",
+    "semantic_hash": "410b04c7dfebdf151de8fefb820b9543"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/finetune_swedish_bert.py": {
     "mtime": 1779724089.987944,
     "ast_hash": "a9283379608c0d8a53a9eb45cdf704f7",
-    "semantic_hash": ""
+    "semantic_hash": "a9283379608c0d8a53a9eb45cdf704f7"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_hybrid_ensemble.py": {
-    "mtime": 1779724089.991656,
-    "ast_hash": "8c5a9f11fc79cdca0937e793b7ef3237",
-    "semantic_hash": ""
+    "mtime": 1780687205.478337,
+    "ast_hash": "adb7020573568e14b9cec2cb74404279",
+    "semantic_hash": "adb7020573568e14b9cec2cb74404279"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/export_tables_to_parquet.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "843709c663fb48950ec6600135a45553",
-    "semantic_hash": ""
+    "semantic_hash": "843709c663fb48950ec6600135a45553"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/lookup_motions.py": {
     "mtime": 1779724089.989786,
     "ast_hash": "ed8552824914ac92c58bf56d26270a15",
-    "semantic_hash": ""
+    "semantic_hash": "ed8552824914ac92c58bf56d26270a15"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/convert_artifacts_to_zstd.py": {
     "mtime": 1779724089.9856548,
     "ast_hash": "1c376ff7aa3d1bd5db202165a1f2f7b3",
-    "semantic_hash": ""
+    "semantic_hash": "1c376ff7aa3d1bd5db202165a1f2f7b3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/fix_dates.py": {
     "mtime": 1779724089.9884303,
     "ast_hash": "feeea37e79ea7e6049634a250ed01dc5",
-    "semantic_hash": ""
+    "semantic_hash": "feeea37e79ea7e6049634a250ed01dc5"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/speeches_analysis.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "25aa19bd83b6392efdd0f4af685dff81",
-    "semantic_hash": ""
+    "mtime": 1780489355.801543,
+    "ast_hash": "56406a3859d56f3e5325fb59415461b4",
+    "semantic_hash": "56406a3859d56f3e5325fb59415461b4"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/combined_analysis.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "dab054d3e3799c277c42a0346b4ac9bb",
-    "semantic_hash": ""
+    "semantic_hash": "dab054d3e3799c277c42a0346b4ac9bb"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/import_bulk_datasets.py": {
     "mtime": 1779724089.9891646,
     "ast_hash": "143fee7afacb71e13aa70d9c15f790c9",
-    "semantic_hash": ""
+    "semantic_hash": "143fee7afacb71e13aa70d9c15f790c9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_betankande.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "5c3c37bb8a6efb0d91191913fe82874a",
-    "semantic_hash": ""
+    "mtime": 1782015396.011165,
+    "ast_hash": "2eae7e17dccc26ace76e1657906acc6b",
+    "semantic_hash": "2eae7e17dccc26ace76e1657906acc6b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/match_votes.py": {
     "mtime": 1779724089.990062,
     "ast_hash": "e6c3ab482b035d8994d58fb2c2de3b34",
-    "semantic_hash": ""
+    "semantic_hash": "e6c3ab482b035d8994d58fb2c2de3b34"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/self_train_speech.py": {
     "mtime": 1779724089.9911811,
     "ast_hash": "f827b077400f40ca47e3b1817ba92303",
-    "semantic_hash": ""
+    "semantic_hash": "f827b077400f40ca47e3b1817ba92303"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_speech_meta_clf.py": {
     "mtime": 1779724089.9920585,
     "ast_hash": "41761e0a50fcda0971119f4045284dc3",
-    "semantic_hash": ""
+    "semantic_hash": "41761e0a50fcda0971119f4045284dc3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/create_train_test_split.py": {
     "mtime": 1779724089.9857638,
     "ast_hash": "ca920612ae07ac39f32ee8f51a61be11",
-    "semantic_hash": ""
+    "semantic_hash": "ca920612ae07ac39f32ee8f51a61be11"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/merge_rhetoric_into_parquet.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "b6143566399e2ea30f48301f52c54bab",
-    "semantic_hash": ""
+    "semantic_hash": "b6143566399e2ea30f48301f52c54bab"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_mlp_meta_learner.py": {
-    "mtime": 1779724089.9917924,
-    "ast_hash": "d77a62f393cb2be933cf2e1e2fc24729",
-    "semantic_hash": ""
+    "mtime": 1780776340.6769276,
+    "ast_hash": "9993411f8897235153f9db1bd91226e6",
+    "semantic_hash": "9993411f8897235153f9db1bd91226e6"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/download_betankande.py": {
-    "mtime": 1779724089.986,
-    "ast_hash": "9fe18b7d1d6f5da632eb0768b8792ec6",
-    "semantic_hash": ""
+    "mtime": 1782035070.5582478,
+    "ast_hash": "1b6fab911bf33802956cf9fd8be38581",
+    "semantic_hash": "1b6fab911bf33802956cf9fd8be38581"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/sync_old.py": {
     "mtime": 1779725865.370533,
     "ast_hash": "b229f9f27d97299a4f7b2997b3e4131e",
-    "semantic_hash": ""
+    "semantic_hash": "b229f9f27d97299a4f7b2997b3e4131e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_rhetoric_sample.py": {
     "mtime": 1780005675.3136942,
     "ast_hash": "f9f312894d9153e5e08c72fbfbae9074",
-    "semantic_hash": ""
+    "semantic_hash": "f9f312894d9153e5e08c72fbfbae9074"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_speech_gold_labels.py": {
     "mtime": 1779724089.988935,
     "ast_hash": "d2e789cc7de6dba6336f8de7045ea4ff",
-    "semantic_hash": ""
+    "semantic_hash": "d2e789cc7de6dba6336f8de7045ea4ff"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/lookup_speeches.py": {
     "mtime": 1779724089.9899302,
     "ast_hash": "921864d2202e175a77fc3b739d043418",
-    "semantic_hash": ""
+    "semantic_hash": "921864d2202e175a77fc3b739d043418"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_gold_labels.py": {
     "mtime": 1779724089.9887183,
     "ast_hash": "3c2c6f5eb23e635f3a590854c8bf0009",
-    "semantic_hash": ""
+    "semantic_hash": "3c2c6f5eb23e635f3a590854c8bf0009"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_votering.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "c778b4db8a73932b3c8c753684cd7477",
-    "semantic_hash": ""
+    "mtime": 1781982355.281227,
+    "ast_hash": "3c01a62b9a962b4c6637fe9955b802db",
+    "semantic_hash": "3c01a62b9a962b4c6637fe9955b802db"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_speeches_parquet.py": {
-    "mtime": 1780091612.5510187,
-    "ast_hash": "2ee82a051c9f72ebcdbf540fdfdbcd09",
-    "semantic_hash": ""
+    "mtime": 1782772935.41346,
+    "ast_hash": "805cc966885508e9db931790de19127d",
+    "semantic_hash": "805cc966885508e9db931790de19127d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/fetch_full_text.py": {
     "mtime": 1779724089.987793,
     "ast_hash": "c2e14c8e08c64eaca98bbee4d2598b9d",
-    "semantic_hash": ""
+    "semantic_hash": "c2e14c8e08c64eaca98bbee4d2598b9d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/compute_party_centroids.py": {
     "mtime": 1779725861.425327,
     "ast_hash": "e3045750fdfdb9c086ebcb1134173505",
-    "semantic_hash": ""
+    "semantic_hash": "e3045750fdfdb9c086ebcb1134173505"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/ingest_rhetoric_labels.py": {
     "mtime": 1779725857.225327,
     "ast_hash": "b8bcb0d889c08369b1b09949627dc7c4",
-    "semantic_hash": ""
+    "semantic_hash": "b8bcb0d889c08369b1b09949627dc7c4"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/train_models.py": {
-    "mtime": 1779724089.9919298,
-    "ast_hash": "5ebddd6bf8094d190bc5c42048f5384e",
-    "semantic_hash": ""
+    "mtime": 1780776340.6769276,
+    "ast_hash": "2b9c0708af452d45911c563f0e64e286",
+    "semantic_hash": "2b9c0708af452d45911c563f0e64e286"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/build_speech_motion_linkage.py": {
-    "mtime": 1780045136.942124,
-    "ast_hash": "e988d73cb4fca63aeec3f0c8a9d26e30",
-    "semantic_hash": ""
+    "mtime": 1782014246.769462,
+    "ast_hash": "0b6d8ee29a447a40932ac2ab11a9fd1d",
+    "semantic_hash": "0b6d8ee29a447a40932ac2ab11a9fd1d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/finetune_transformer_classifier.py": {
     "mtime": 1779724089.988312,
     "ast_hash": "f0b22c1dbfc3cae82bd918ebef542d2f",
-    "semantic_hash": ""
+    "semantic_hash": "f0b22c1dbfc3cae82bd918ebef542d2f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_batch.py": {
     "mtime": 1779724089.9848106,
     "ast_hash": "a30719b279c410c0505e73e1db511b82",
-    "semantic_hash": ""
+    "semantic_hash": "a30719b279c410c0505e73e1db511b82"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_figures.py": {
-    "mtime": 1779724089.988569,
-    "ast_hash": "d043a650d29da785459a3e5ed45b9960",
-    "semantic_hash": ""
+    "mtime": 1782772981.6089077,
+    "ast_hash": "d2d36e23d52f55447b7cf74ec01cb7ad",
+    "semantic_hash": "d2d36e23d52f55447b7cf74ec01cb7ad"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_rhetoric_zs_sample.py": {
-    "mtime": 1780091619.533231,
+    "mtime": 1780142391.7336986,
     "ast_hash": "1b59aff3c9bf02c272d266da2e16fe2a",
-    "semantic_hash": ""
+    "semantic_hash": "1b59aff3c9bf02c272d266da2e16fe2a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/ollama_review_gold_speeches.py": {
     "mtime": 1779725849.4413297,
     "ast_hash": "d709ff79074541867672298329fce12c",
-    "semantic_hash": ""
+    "semantic_hash": "d709ff79074541867672298329fce12c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/visualize.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "9b8b5648614f004ac7b3fa7ec404f656",
-    "semantic_hash": ""
+    "semantic_hash": "9b8b5648614f004ac7b3fa7ec404f656"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/apply_manual_speech_corrections.py": {
     "mtime": 1779725841.4144735,
     "ast_hash": "6488c6d09acb2f7b49a424341172d0d1",
-    "semantic_hash": ""
+    "semantic_hash": "6488c6d09acb2f7b49a424341172d0d1"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/ingest.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "fc4e53f410640382b3dcd0663bac9d00",
-    "semantic_hash": ""
+    "semantic_hash": "fc4e53f410640382b3dcd0663bac9d00"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/augment_speech_gold_labels.py": {
     "mtime": 1779724089.9819536,
     "ast_hash": "457861296bcc52398f9802c093693f9a",
-    "semantic_hash": ""
+    "semantic_hash": "457861296bcc52398f9802c093693f9a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/config.json": {
     "mtime": 1779724088.0070286,
     "ast_hash": "42cf253c19c8f03c5b4067ca4f1833cf",
-    "semantic_hash": ""
+    "semantic_hash": "42cf253c19c8f03c5b4067ca4f1833cf"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/final/tokenizer_config.json": {
     "mtime": 1779724089.9805758,
     "ast_hash": "455df46fc6e739875d9ddf7b3e13f6f3",
-    "semantic_hash": ""
+    "semantic_hash": "455df46fc6e739875d9ddf7b3e13f6f3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/final/tokenizer.json": {
-    "mtime": 1779724089.9804487,
+    "mtime": 1780348642.4607456,
     "ast_hash": "1db8106c8afcbe72b60f4a278020299e",
-    "semantic_hash": ""
+    "semantic_hash": "1db8106c8afcbe72b60f4a278020299e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/final/config.json": {
     "mtime": 1779724088.0070286,
     "ast_hash": "58c1452ffcb3500f8d513ca1dc4b3211",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-1017/tokenizer_config.json": {
-    "mtime": 1779724077.3012598,
-    "ast_hash": "455df46fc6e739875d9ddf7b3e13f6f3",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-1017/tokenizer.json": {
-    "mtime": 1779724077.3012598,
-    "ast_hash": "1db8106c8afcbe72b60f4a278020299e",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-1017/trainer_state.json": {
-    "mtime": 1779724077.3012598,
-    "ast_hash": "822232bc957b6587d306f2933e807a38",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-1017/config.json": {
-    "mtime": 1779724072.1985946,
-    "ast_hash": "58c1452ffcb3500f8d513ca1dc4b3211",
-    "semantic_hash": ""
+    "semantic_hash": "58c1452ffcb3500f8d513ca1dc4b3211"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-678/tokenizer_config.json": {
     "mtime": 1779724088.006689,
     "ast_hash": "455df46fc6e739875d9ddf7b3e13f6f3",
-    "semantic_hash": ""
+    "semantic_hash": "455df46fc6e739875d9ddf7b3e13f6f3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-678/tokenizer.json": {
-    "mtime": 1779724088.0066283,
+    "mtime": 1780348642.460744,
     "ast_hash": "1db8106c8afcbe72b60f4a278020299e",
-    "semantic_hash": ""
+    "semantic_hash": "1db8106c8afcbe72b60f4a278020299e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-678/trainer_state.json": {
     "mtime": 1779724088.0069528,
     "ast_hash": "74c0107e33b1815120671bbc11aff906",
-    "semantic_hash": ""
+    "semantic_hash": "74c0107e33b1815120671bbc11aff906"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-678/config.json": {
     "mtime": 1779724082.5781164,
     "ast_hash": "58c1452ffcb3500f8d513ca1dc4b3211",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-339/tokenizer_config.json": {
-    "mtime": 1779724082.5775342,
-    "ast_hash": "455df46fc6e739875d9ddf7b3e13f6f3",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-339/tokenizer.json": {
-    "mtime": 1779724082.5774589,
-    "ast_hash": "1db8106c8afcbe72b60f4a278020299e",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-339/trainer_state.json": {
-    "mtime": 1779724082.5780005,
-    "ast_hash": "b023be7ee89effe036941af816c83e9c",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/transformer_ideology_classifier/checkpoint-339/config.json": {
-    "mtime": 1779724077.3012598,
-    "ast_hash": "58c1452ffcb3500f8d513ca1dc4b3211",
-    "semantic_hash": ""
+    "semantic_hash": "58c1452ffcb3500f8d513ca1dc4b3211"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/tokenizer_config.json": {
     "mtime": 1779724042.959077,
     "ast_hash": "275d0a20d3a8b91676d923be1b82149e",
-    "semantic_hash": ""
+    "semantic_hash": "275d0a20d3a8b91676d923be1b82149e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/tokenizer.json": {
-    "mtime": 1779724042.9587402,
+    "mtime": 1780348642.4607222,
     "ast_hash": "8d0e7c4e5544a29950b82819a2322831",
-    "semantic_hash": ""
+    "semantic_hash": "8d0e7c4e5544a29950b82819a2322831"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/config_sentence_transformers.json": {
     "mtime": 1779724038.4487274,
     "ast_hash": "2962968e1088ea3d4e580f2fd081b701",
-    "semantic_hash": ""
+    "semantic_hash": "2962968e1088ea3d4e580f2fd081b701"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/config.json": {
     "mtime": 1779724038.4487274,
     "ast_hash": "fde6e7d7aec73378bc5b753046107830",
-    "semantic_hash": ""
+    "semantic_hash": "fde6e7d7aec73378bc5b753046107830"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/sentence_bert_config.json": {
     "mtime": 1779724042.9144688,
     "ast_hash": "24fb91122bcc7a3e063ae455a36d6e57",
-    "semantic_hash": ""
+    "semantic_hash": "24fb91122bcc7a3e063ae455a36d6e57"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/modules.json": {
     "mtime": 1779724042.9141607,
     "ast_hash": "1f17497e0cd4d0bee2b7dd653a139225",
-    "semantic_hash": ""
+    "semantic_hash": "1f17497e0cd4d0bee2b7dd653a139225"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/1_Pooling/config.json": {
     "mtime": 1779724038.4484055,
     "ast_hash": "95e413d2e4119d32a49f6e1c96b8f75c",
-    "semantic_hash": ""
+    "semantic_hash": "95e413d2e4119d32a49f6e1c96b8f75c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-5000/tokenizer_config.json": {
     "mtime": 1779724068.0775871,
     "ast_hash": "5a80ab89a5afa7629ab31785d7618194",
-    "semantic_hash": ""
+    "semantic_hash": "5a80ab89a5afa7629ab31785d7618194"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-5000/tokenizer.json": {
-    "mtime": 1779724068.0774782,
+    "mtime": 1780348642.4607346,
     "ast_hash": "a90851b507b53d6463e75a6f37d3c8d3",
-    "semantic_hash": ""
+    "semantic_hash": "a90851b507b53d6463e75a6f37d3c8d3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-5000/trainer_state.json": {
     "mtime": 1779724068.0779035,
     "ast_hash": "450b26c188ceab9cd9fac8b0411625f6",
-    "semantic_hash": ""
+    "semantic_hash": "450b26c188ceab9cd9fac8b0411625f6"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-5000/config.json": {
     "mtime": 1779724055.285259,
     "ast_hash": "883ee53a8f0e8adbfd5808d8aa99f13b",
-    "semantic_hash": ""
+    "semantic_hash": "883ee53a8f0e8adbfd5808d8aa99f13b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/final/tokenizer_config.json": {
     "mtime": 1779724072.1893995,
     "ast_hash": "5a80ab89a5afa7629ab31785d7618194",
-    "semantic_hash": ""
+    "semantic_hash": "5a80ab89a5afa7629ab31785d7618194"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/final/tokenizer.json": {
-    "mtime": 1779724072.1892362,
+    "mtime": 1780348642.4607368,
     "ast_hash": "a90851b507b53d6463e75a6f37d3c8d3",
-    "semantic_hash": ""
+    "semantic_hash": "a90851b507b53d6463e75a6f37d3c8d3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/final/config.json": {
     "mtime": 1779724068.07803,
     "ast_hash": "883ee53a8f0e8adbfd5808d8aa99f13b",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-2500/tokenizer_config.json": {
-    "mtime": 1779724055.285259,
-    "ast_hash": "5a80ab89a5afa7629ab31785d7618194",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-2500/tokenizer.json": {
-    "mtime": 1779724055.285259,
-    "ast_hash": "a90851b507b53d6463e75a6f37d3c8d3",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-2500/trainer_state.json": {
-    "mtime": 1779724055.285259,
-    "ast_hash": "29828a0847d1340b4856e8a3e8a170bf",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/mlm_adapted/checkpoint-2500/config.json": {
-    "mtime": 1779724042.9779608,
-    "ast_hash": "883ee53a8f0e8adbfd5808d8aa99f13b",
-    "semantic_hash": ""
+    "semantic_hash": "883ee53a8f0e8adbfd5808d8aa99f13b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_boundary_classifier.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "702e20addfc9b87f85bafbec4da9c56f",
-    "semantic_hash": ""
+    "semantic_hash": "702e20addfc9b87f85bafbec4da9c56f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_scoring.py": {
-    "mtime": 1780090218.6875317,
-    "ast_hash": "6d36c47c59808bcfcd57550fb8e58f64",
-    "semantic_hash": ""
+    "mtime": 1780951098.612288,
+    "ast_hash": "c7a9fbfa2fd2db89887f87cd2282e4db",
+    "semantic_hash": "c7a9fbfa2fd2db89887f87cd2282e4db"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_exports_boundary.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "cc8cdcc62fd372667243ffd711e1e130",
-    "semantic_hash": ""
+    "semantic_hash": "cc8cdcc62fd372667243ffd711e1e130"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_db_and_persistence.py": {
     "mtime": 1779725830.476356,
     "ast_hash": "24f170cda0e5f00966b865c8d2d1a5f1",
-    "semantic_hash": ""
+    "semantic_hash": "24f170cda0e5f00966b865c8d2d1a5f1"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/conftest.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "b89a535234653e9e5049785b3b3a2a0d",
-    "semantic_hash": ""
+    "semantic_hash": "b89a535234653e9e5049785b3b3a2a0d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_nlp_preprocess.py": {
     "mtime": 1778014351.438258,
     "ast_hash": "09762b08d3d00c851e9e4aa1944f2279",
-    "semantic_hash": ""
+    "semantic_hash": "09762b08d3d00c851e9e4aa1944f2279"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/__init__.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "8681baf2bf8979c843a1e21b7397077e",
-    "semantic_hash": ""
+    "semantic_hash": "8681baf2bf8979c843a1e21b7397077e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_pipeline_extractors.py": {
     "mtime": 1779724090.023266,
     "ast_hash": "c93c7f9e18f4ece238065143881d2477",
-    "semantic_hash": ""
+    "semantic_hash": "c93c7f9e18f4ece238065143881d2477"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/data/motion_topics.json": {
     "mtime": 1779724037.1135993,
@@ -632,311 +572,296 @@
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/cuda_fix.py": {
     "mtime": 1779724090.017884,
     "ast_hash": "d0d3ffbd3d3820a3323f83730c2788d4",
-    "semantic_hash": ""
+    "semantic_hash": "d0d3ffbd3d3820a3323f83730c2788d4"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/__init__.py": {
-    "mtime": 1780005675.3136942,
-    "ast_hash": "09fdd343414823d5277d2eede7dcd535",
-    "semantic_hash": ""
+    "mtime": 1782761440.9455395,
+    "ast_hash": "0de7417d37247b32229dde72b4fd0848",
+    "semantic_hash": "0de7417d37247b32229dde72b4fd0848"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/exports.py": {
-    "mtime": 1779724091.2877674,
-    "ast_hash": "3c84a00c0ce5a6a1d9d3fdf438708638",
-    "semantic_hash": ""
+    "mtime": 1780950009.404247,
+    "ast_hash": "26992223f47dba1fd4b85576ed8b889b",
+    "semantic_hash": "26992223f47dba1fd4b85576ed8b889b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/party_extractor.py": {
     "mtime": 1779724090.0173576,
     "ast_hash": "fc34a5a5444fc10b7263e0503b2692e5",
-    "semantic_hash": ""
+    "semantic_hash": "fc34a5a5444fc10b7263e0503b2692e5"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/scorer.py": {
-    "mtime": 1780005675.3136942,
-    "ast_hash": "6a7105ae2e7ea6f6f72a031c4a628fe4",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/scorer_v020.py": {
-    "mtime": 1779724090.017884,
-    "ast_hash": "be4e4c1af1ddcca7f38fe03262d10008",
-    "semantic_hash": ""
+    "mtime": 1782117263.0853486,
+    "ast_hash": "67566a1d18f98e70d7326be333105188",
+    "semantic_hash": "67566a1d18f98e70d7326be333105188"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/boundary.py": {
     "mtime": 1779727884.0783706,
     "ast_hash": "ab32a208b0d84044cde08d5a8dd183e0",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/pipeline.py": {
-    "mtime": 1780089507.5997977,
-    "ast_hash": "66e6f272d7beb9a9c25ff89929c75ec9",
-    "semantic_hash": ""
+    "semantic_hash": "ab32a208b0d84044cde08d5a8dd183e0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/transformer_predict.py": {
     "mtime": 1779724090.017884,
     "ast_hash": "2ebcc739ef75a5074ae4020ac94c31d5",
-    "semantic_hash": ""
+    "semantic_hash": "2ebcc739ef75a5074ae4020ac94c31d5"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/persist_parquet.py": {
     "mtime": 1779725678.8990028,
     "ast_hash": "7fe48350197f138cf54fcde5dfbc3747",
-    "semantic_hash": ""
+    "semantic_hash": "7fe48350197f138cf54fcde5dfbc3747"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/ensemble.py": {
-    "mtime": 1779724090.016834,
-    "ast_hash": "c1c59c163fce0d70d1782e24999492e9",
-    "semantic_hash": ""
+    "mtime": 1780950159.6042526,
+    "ast_hash": "3388b329cf8e322687770260e28e5c5d",
+    "semantic_hash": "3388b329cf8e322687770260e28e5c5d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/persist.py": {
     "mtime": 1779725656.5872006,
     "ast_hash": "27dd9ab7292cc02a38a4178d685a6fbc",
-    "semantic_hash": ""
+    "semantic_hash": "27dd9ab7292cc02a38a4178d685a6fbc"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/llm_judge.py": {
     "mtime": 1779724090.0171578,
     "ast_hash": "62e7372ed7d07d15a0f8fe71cd6dac59",
-    "semantic_hash": ""
+    "semantic_hash": "62e7372ed7d07d15a0f8fe71cd6dac59"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/features.py": {
     "mtime": 1779724090.016834,
     "ast_hash": "5064ffb3318a0b35db2fa411cadf03a5",
-    "semantic_hash": ""
+    "semantic_hash": "5064ffb3318a0b35db2fa411cadf03a5"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/__init__.py": {
     "mtime": 1779724401.4731398,
     "ast_hash": "c3203f66286df3bfe9cc3e218c971343",
-    "semantic_hash": ""
+    "semantic_hash": "c3203f66286df3bfe9cc3e218c971343"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/core.py": {
-    "mtime": 1779724090.016567,
-    "ast_hash": "11e710720788bdffc5f3c6b3857b036d",
-    "semantic_hash": ""
-  },
-  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/scorer_old.py": {
-    "mtime": 1779725648.0736372,
-    "ast_hash": "cad9f8e3dad3c5ba3415d6092696c4d5",
-    "semantic_hash": ""
+    "mtime": 1780776340.6769276,
+    "ast_hash": "28837538255f0660957a35b0c8584d79",
+    "semantic_hash": "28837538255f0660957a35b0c8584d79"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/io/loader.py": {
     "mtime": 1779724090.0195484,
     "ast_hash": "f8e344c3e641776c5a3965e40ea72d2b",
-    "semantic_hash": ""
+    "semantic_hash": "f8e344c3e641776c5a3965e40ea72d2b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/web/app.py": {
     "mtime": 1779725826.1482701,
     "ast_hash": "d91a1eb09ccfe033f9cb27c951df1b97",
-    "semantic_hash": ""
+    "semantic_hash": "d91a1eb09ccfe033f9cb27c951df1b97"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/ideological_gap.py": {
-    "mtime": 1780005675.320635,
-    "ast_hash": "6442d2a5901ca798435f1ce30f8405e1",
-    "semantic_hash": ""
+    "mtime": 1782773241.696261,
+    "ast_hash": "c01d75cb09b30524025701e6f1fbf657",
+    "semantic_hash": "c01d75cb09b30524025701e6f1fbf657"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/aggregate.py": {
     "mtime": 1779725749.921278,
     "ast_hash": "b621c865aac10aeff0f35f9604af9fb9",
-    "semantic_hash": ""
+    "semantic_hash": "b621c865aac10aeff0f35f9604af9fb9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/manuscript_exports.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "656cccf7a66d9dc88ff59d806659f8de",
-    "semantic_hash": ""
+    "mtime": 1782736121.6690342,
+    "ast_hash": "68d14039821873edbcafed34b5e475b1",
+    "semantic_hash": "68d14039821873edbcafed34b5e475b1"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/statistical_tests.py": {
-    "mtime": 1779724091.2877674,
-    "ast_hash": "34cddb6dd806bb3f9caec34b127a620b",
-    "semantic_hash": ""
+    "mtime": 1782640236.886511,
+    "ast_hash": "975d58a9228d0f5160973ac566182d95",
+    "semantic_hash": "975d58a9228d0f5160973ac566182d95"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/promise_fulfillment.py": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "76f7ffdfa74dd9cf7a2742e4fc029fa7",
-    "semantic_hash": ""
+    "mtime": 1782773231.6248255,
+    "ast_hash": "4ddecce66ac57858a61d5c70938b838a",
+    "semantic_hash": "4ddecce66ac57858a61d5c70938b838a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/__init__.py": {
     "mtime": 1780005675.320635,
     "ast_hash": "60687ec2c5d3a87d6eb4cc0621117cbb",
-    "semantic_hash": ""
+    "semantic_hash": "60687ec2c5d3a87d6eb4cc0621117cbb"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/speech_visualizations.py": {
-    "mtime": 1780005675.320635,
-    "ast_hash": "06643b6ca6e4481defab9827b2873c9e",
-    "semantic_hash": ""
+    "mtime": 1782736103.6167262,
+    "ast_hash": "9666584b944e67c0db12c243e70f218d",
+    "semantic_hash": "9666584b944e67c0db12c243e70f218d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/models/models.py": {
-    "mtime": 1779724176.4103513,
-    "ast_hash": "ae6a431f3841b4bcb39faa3532188248",
-    "semantic_hash": ""
+    "mtime": 1780818414.8345149,
+    "ast_hash": "eb15341f11159572d14e2b26e06036f0",
+    "semantic_hash": "eb15341f11159572d14e2b26e06036f0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/models/__init__.py": {
     "mtime": 1779724176.3820589,
     "ast_hash": "3d45862700255257fb4eb55b0c652e0a",
-    "semantic_hash": ""
+    "semantic_hash": "3d45862700255257fb4eb55b0c652e0a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/db/repo.py": {
     "mtime": 1779724090.017884,
     "ast_hash": "9d3ff1978d52016cefa0ba199f0b8c5a",
-    "semantic_hash": ""
+    "semantic_hash": "9d3ff1978d52016cefa0ba199f0b8c5a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/db/schema.py": {
     "mtime": 1779725740.211923,
     "ast_hash": "6cf9505eb78e48a33348a16fd7d3f71a",
-    "semantic_hash": ""
+    "semantic_hash": "6cf9505eb78e48a33348a16fd7d3f71a"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/db/__init__.py": {
     "mtime": 1779724176.2927694,
     "ast_hash": "41ad5007910db9734760b2bfe6347b19",
-    "semantic_hash": ""
+    "semantic_hash": "41ad5007910db9734760b2bfe6347b19"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/db/readers.py": {
     "mtime": 1779725731.8626955,
     "ast_hash": "cc2a1e65450b3841a88dcc1b52b5c987",
-    "semantic_hash": ""
+    "semantic_hash": "cc2a1e65450b3841a88dcc1b52b5c987"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/fetch/riksdag_client.py": {
-    "mtime": 1779724090.0195484,
-    "ast_hash": "c80d2bc2894d3f45d007844aee2316a5",
-    "semantic_hash": ""
+    "mtime": 1781982645.2715836,
+    "ast_hash": "2bc07fa69b68f04a5224b9d3d1375873",
+    "semantic_hash": "2bc07fa69b68f04a5224b9d3d1375873"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/fetch/__init__.py": {
     "mtime": 1779724090.017884,
     "ast_hash": "90659291b94586c980e4d97872e3787d",
-    "semantic_hash": ""
+    "semantic_hash": "90659291b94586c980e4d97872e3787d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/zero_shot_values.py": {
     "mtime": 1779724090.0213385,
     "ast_hash": "ae433c850caeaa30d73832a061d29a61",
-    "semantic_hash": ""
+    "semantic_hash": "ae433c850caeaa30d73832a061d29a61"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/embeddings_cache.py": {
     "mtime": 1779724176.4652689,
     "ast_hash": "26e07c3c6c2924d9ad9d35b05182481c",
-    "semantic_hash": ""
+    "semantic_hash": "26e07c3c6c2924d9ad9d35b05182481c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/topic_modeler.py": {
-    "mtime": 1779724090.0211616,
-    "ast_hash": "29d29e91c0e33a10ccaaf4b814085ce4",
-    "semantic_hash": ""
+    "mtime": 1780489355.8193185,
+    "ast_hash": "6b0fcaf2b920cfc2ee91915d898160b2",
+    "semantic_hash": "6b0fcaf2b920cfc2ee91915d898160b2"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/feature_store.py": {
     "mtime": 1779724090.0195484,
     "ast_hash": "164cee21f275d0ac7157ff80d0883924",
-    "semantic_hash": ""
+    "semantic_hash": "164cee21f275d0ac7157ff80d0883924"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/registry.py": {
     "mtime": 1779724090.0195484,
     "ast_hash": "67381cdb16419c7a13b886dd89d4c7af",
-    "semantic_hash": ""
+    "semantic_hash": "67381cdb16419c7a13b886dd89d4c7af"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/adapters.py": {
     "mtime": 1779724090.0195484,
     "ast_hash": "cf5a97ea1fcf9c5f3b49bcff45c8f0fd",
-    "semantic_hash": ""
+    "semantic_hash": "cf5a97ea1fcf9c5f3b49bcff45c8f0fd"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/ollama_classifier.py": {
     "mtime": 1779733350.9881363,
     "ast_hash": "1c52f2835c8d553d497b6b84dc4ddef9",
-    "semantic_hash": ""
+    "semantic_hash": "1c52f2835c8d553d497b6b84dc4ddef9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/embedding_matcher.py": {
     "mtime": 1780005675.3136942,
     "ast_hash": "34930fd90192ae5c42b6c8cf128feefe",
-    "semantic_hash": ""
+    "semantic_hash": "34930fd90192ae5c42b6c8cf128feefe"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/preprocess.py": {
-    "mtime": 1779724176.4933085,
-    "ast_hash": "732d7ea7d9d6ae0453798eb6e1794cb3",
-    "semantic_hash": ""
+    "mtime": 1780687205.4803689,
+    "ast_hash": "d34e70b0c00a5491ce3d41ecbadd1b86",
+    "semantic_hash": "d34e70b0c00a5491ce3d41ecbadd1b86"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/__init__.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "1ebd90cc19a4c2f7c0a57eafd9be8afc",
-    "semantic_hash": ""
+    "semantic_hash": "1ebd90cc19a4c2f7c0a57eafd9be8afc"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/definitions/loader.py": {
-    "mtime": 1779724549.2012777,
-    "ast_hash": "13910b1a2451e1c2824a3e01657487d4",
-    "semantic_hash": ""
+    "mtime": 1780913303.0211494,
+    "ast_hash": "b40caf4764bfd3a94286fd7050037cf4",
+    "semantic_hash": "b40caf4764bfd3a94286fd7050037cf4"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/definitions/__init__.py": {
     "mtime": 1779724091.2877674,
     "ast_hash": "3848e34d856e508bc1caeab15ec09984",
-    "semantic_hash": ""
+    "semantic_hash": "3848e34d856e508bc1caeab15ec09984"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/orchestration/runner.py": {
     "mtime": 1779724090.0215743,
     "ast_hash": "6fe1d9d861521200c811d46265bd0f16",
-    "semantic_hash": ""
+    "semantic_hash": "6fe1d9d861521200c811d46265bd0f16"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/orchestration/speech_pipeline.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "38b7fbf7e4952153e0c24a88853a4691",
-    "semantic_hash": ""
+    "mtime": 1780776340.6769276,
+    "ast_hash": "1bc6fe51f5ae457bcde5232cfedf1de2",
+    "semantic_hash": "1bc6fe51f5ae457bcde5232cfedf1de2"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/common_plots.py": {
     "mtime": 1779724090.0222044,
     "ast_hash": "c939f9d86ee76c89478058fd7b37dd99",
-    "semantic_hash": ""
+    "semantic_hash": "c939f9d86ee76c89478058fd7b37dd99"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/style_config.py": {
-    "mtime": 1779724090.022576,
-    "ast_hash": "190d048b5b91b07b41c27d5b84d8d2a2",
-    "semantic_hash": ""
+    "mtime": 1782767693.6031406,
+    "ast_hash": "272cf5a12f9ba5838fb41df3a1d43a1f",
+    "semantic_hash": "272cf5a12f9ba5838fb41df3a1d43a1f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/advanced.py": {
-    "mtime": 1779726309.3448396,
-    "ast_hash": "5638201937a82a0c580fa46d8968199b",
-    "semantic_hash": ""
+    "mtime": 1780142391.761793,
+    "ast_hash": "630ac654ea5d5f5113dd0d89ed1a8e7e",
+    "semantic_hash": "630ac654ea5d5f5113dd0d89ed1a8e7e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/timeseries.py": {
     "mtime": 1779724090.022709,
     "ast_hash": "1a32321811057518e13a52f72f1ee258",
-    "semantic_hash": ""
+    "semantic_hash": "1a32321811057518e13a52f72f1ee258"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/plot_final_profiles.py": {
-    "mtime": 1779726248.0930016,
-    "ast_hash": "1986bdeb4eb9328dc25be160b6f9b3cb",
-    "semantic_hash": ""
+    "mtime": 1782736275.7958777,
+    "ast_hash": "e923357e1da70c484c8e0d9507387a43",
+    "semantic_hash": "e923357e1da70c484c8e0d9507387a43"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/analysis_plots.py": {
     "mtime": 1779724090.0220802,
     "ast_hash": "0f44a69d0ec74e5efca139f1a38deb9d",
-    "semantic_hash": ""
+    "semantic_hash": "0f44a69d0ec74e5efca139f1a38deb9d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/visualization/plot_party_profiles.py": {
-    "mtime": 1779724091.2877674,
-    "ast_hash": "a52a0e5e2b4bed8388f08098bcbc6ef5",
-    "semantic_hash": ""
+    "mtime": 1782736112.3364167,
+    "ast_hash": "b0cfc60bb752c1123c80c35a8e593796",
+    "semantic_hash": "b0cfc60bb752c1123c80c35a8e593796"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/pre-commit": {
     "mtime": 1779724024.6469305,
     "ast_hash": "f8ca8a4c34efa212cf2f0205936905ac",
-    "semantic_hash": ""
+    "semantic_hash": "f8ca8a4c34efa212cf2f0205936905ac"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/pre-push": {
     "mtime": 1779724024.6932578,
     "ast_hash": "a9399d70a31d576f0435e776cae4934e",
-    "semantic_hash": ""
+    "semantic_hash": "a9399d70a31d576f0435e776cae4934e"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/post-merge": {
     "mtime": 1779724024.6983335,
     "ast_hash": "675fe1c500a971841ba2e5abc1aeb579",
-    "semantic_hash": ""
+    "semantic_hash": "675fe1c500a971841ba2e5abc1aeb579"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/post-commit": {
     "mtime": 1779724024.6983244,
     "ast_hash": "4d58bc5ca88e7330533771a694429974",
-    "semantic_hash": ""
+    "semantic_hash": "4d58bc5ca88e7330533771a694429974"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/post-checkout": {
     "mtime": 1779724024.6983144,
     "ast_hash": "ef678df1e004da305e21cdeead47876f",
-    "semantic_hash": ""
+    "semantic_hash": "ef678df1e004da305e21cdeead47876f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/speech_review.md": {
-    "mtime": 1779724089.9925766,
-    "ast_hash": "77e71b5c1be06815ad22f0c95697caf5",
+    "mtime": 1780913534.0988708,
+    "ast_hash": "a15e4beab56e471db030a931469a0af9",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/AGENTS.md": {
-    "mtime": 1780045136.942124,
-    "ast_hash": "068256f94d8340072f740e098b94c4fb",
+    "mtime": 1781957048.7167227,
+    "ast_hash": "d97c325f550698e0a848ddf557cfd400",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/stratified_sample_ids.txt": {
@@ -945,28 +870,28 @@
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript.md": {
-    "mtime": 1780088564.3577895,
-    "ast_hash": "d0fa6f6d74f2f1b988f4e2683cc9705f",
+    "mtime": 1782767956.0354664,
+    "ast_hash": "e3af8bb6183e30768e775751a1ee6a12",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/DATA_LICENSES.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "cfbd181055b5780cc59b6ede3bf27235",
+    "mtime": 1780913533.8669682,
+    "ast_hash": "354075a211b154715f9d83d6db780ed7",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/README.md": {
-    "mtime": 1780005675.304635,
-    "ast_hash": "bd83b0f5f0ca7f79fe7453ee5f371f5c",
+    "mtime": 1780913533.8865635,
+    "ast_hash": "0c45bd8ca7492e1bb86bea1346993b2c",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/DATA_EXPORT_AND_COMMIT.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "4d5b7d9670d054e8253cd705a12b32ba",
+    "mtime": 1780913533.8576734,
+    "ast_hash": "4880e62faa3b4517672b7d01f91ae969",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/Add zero-shot + transformer features to meta-classifier.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "a1c37e68422cd3bfe946d08b74b5f63a",
+    "mtime": 1780913533.8373415,
+    "ast_hash": "12bad27bce0eb31df2e582011d545798",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/requirements.txt": {
@@ -975,18 +900,18 @@
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/HISTORY_CLEANUP.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "efe8ad83327a205f02bd4049361a30f3",
+    "mtime": 1780913533.8770475,
+    "ast_hash": "362c2af2d2609322d92c056476751e5c",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/stratified_classification_report.md": {
-    "mtime": 1779724090.0230067,
-    "ast_hash": "1f547f77a3358c9a8c4196c499b4800a",
+    "mtime": 1780913534.1210716,
+    "ast_hash": "23abacf1a1141fb36cab43a68224eadb",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/CONTRIBUTING.md": {
-    "mtime": 1779724091.28755,
-    "ast_hash": "8002453d798cccc3c7bce06c2d5d625b",
+    "mtime": 1780913533.8473017,
+    "ast_hash": "51bebd773b93a9945bee1a2d4a0ec606",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/far_left_far_right_with_classification.txt": {
@@ -1000,33 +925,33 @@
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/README.md": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "a33e3df014ff3de36948f90b1db2243f",
+    "mtime": 1780913534.030871,
+    "ast_hash": "9470cb005daa0207e63fda32cc9ee2a0",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/TQRS_GUIDELINES.md": {
-    "mtime": 1778014351.434258,
-    "ast_hash": "5bbd32afee7d964746de2d39ce4f2e66",
+    "mtime": 1780913534.0429008,
+    "ast_hash": "55e6f43382261ceaea4f91f34181e4e9",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/03_results.md": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "808fec8cfb913f88fae21a94366dbaa8",
+    "mtime": 1782752356.6575425,
+    "ast_hash": "e4acdbbc0dc8b280061cb3bde61da8fe",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md": {
-    "mtime": 1780088694.2035792,
-    "ast_hash": "53e17fc304eb7f3ce2677bd2a85179ee",
+    "mtime": 1782682946.916941,
+    "ast_hash": "a9b86e3eb62ff3091b09ac1fae748bc6",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/02_question.md": {
-    "mtime": 1780088694.2035792,
-    "ast_hash": "164c26046262aa9296929382743faa3f",
+    "mtime": 1782682946.9178493,
+    "ast_hash": "360c13af2595cee21a45fd25c4f6d053",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/04_significance.md": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "595d2b028113192b61c85c2b5f0764b2",
+    "mtime": 1782682946.9179952,
+    "ast_hash": "4bb8485e483e5d08da25f351b87f0f53",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/finetuned_swedish_bert/README.md": {
@@ -1035,333 +960,918 @@
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/directory_tree.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "ac57930f266c308a43180f64f911f53b",
+    "mtime": 1780913533.813002,
+    "ast_hash": "1c17906b85da4b28b87fcfc023fc0e4f",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/agent_plan.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "9a5fa6e5450555896051cc0618ff11b6",
+    "mtime": 1780913533.7948709,
+    "ast_hash": "5768344e4bd0170665aa62a9fc43d1c0",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/missing_items.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "7fb9177d5c6cd13fa5cc92554bb886ad",
+    "mtime": 1780913533.8196707,
+    "ast_hash": "2a0afcc452a56b96123092d3b55015a9",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/copilot-instructions.md": {
-    "mtime": 1780045136.942124,
-    "ast_hash": "5e0146b5c58e8794dd81b4b086df9864",
+    "mtime": 1780913639.1585226,
+    "ast_hash": "0470f409dc20fbf7cc031fc8bab540da",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/workflows/ci.yml": {
-    "mtime": 1779724175.9094887,
-    "ast_hash": "257e432e905940b52284057536779a2b",
+    "mtime": 1782060316.3632002,
+    "ast_hash": "bebd17a91feddfb2d44a6db060e8fc1f",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/workflows/release.yml": {
-    "mtime": 1778014351.438258,
-    "ast_hash": "fe71b24445e63429fc78759f94cc3d8a",
+    "mtime": 1782935542.2431576,
+    "ast_hash": "2cbbb7f151e1482f55c5e5166ec87df8",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/rules/use_uv.md": {
-    "mtime": 1779724024.6469305,
-    "ast_hash": "81cf3c39473386f85345bb76f8d2b98b",
+    "mtime": 1780913533.8277907,
+    "ast_hash": "c09c7bf66426b66cedc449ed472d4940",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/nlp/README.md": {
-    "mtime": 1779724090.0195484,
-    "ast_hash": "d834fa3ba0bd7ee74fa17428c03f04f2",
+    "mtime": 1780913534.1101995,
+    "ast_hash": "dceb8abc6c6ebbc9decbc2e0855354cd",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/definitions/political_spectrum.yaml": {
-    "mtime": 1779724090.017884,
-    "ast_hash": "8e168f05e9cfcbcc6d1ec8b06f975ebc",
+    "mtime": 1782736014.5345674,
+    "ast_hash": "b7db6f898f5d92d65725a42c3ca079bb",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/rlhf_research_memo.md": {
-    "mtime": 1779724038.419603,
-    "ast_hash": "fb71b49ef4869187512f3af717a12b10",
+    "mtime": 1780913533.9668708,
+    "ast_hash": "4e6eb36c431b8fa3e5c94dadef68173d",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.githooks/README.md": {
-    "mtime": 1779724024.643526,
-    "ast_hash": "3399a7b8a973de3e6bd3c52481e222a8",
+    "mtime": 1780913533.786147,
+    "ast_hash": "19b83223d7ab81d10f4c7391526054a4",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript.pdf": {
-    "mtime": 1780085744.939569,
-    "ast_hash": "893bfc466d7defb46edb4b711ca28432",
+    "mtime": 1782760088.5468583,
+    "ast_hash": "4c77cabd0ec8245854a8f34671ddaec2",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_consistency_trends.py": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "72ea6214f3be187f6fe51eb0bc714ef6",
-    "semantic_hash": ""
+    "mtime": 1780936313.5997303,
+    "ast_hash": "83d1ae62f74ffe4c343dcf0c38803c91",
+    "semantic_hash": "83d1ae62f74ffe4c343dcf0c38803c91"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T064926Z.json": {
     "mtime": 1780037366.096258,
     "ast_hash": "2fd79793111f28ad24c7aab85fb76dd9",
-    "semantic_hash": ""
+    "semantic_hash": "2fd79793111f28ad24c7aab85fb76dd9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T192030Z.json": {
     "mtime": 1780082430.1330914,
     "ast_hash": "f57b399f5ffa3d17aea16c09e7ca48cf",
-    "semantic_hash": ""
+    "semantic_hash": "f57b399f5ffa3d17aea16c09e7ca48cf"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T185422Z.json": {
     "mtime": 1780080862.3175347,
     "ast_hash": "b3c354345b5ec7500995c6bd69020933",
-    "semantic_hash": ""
+    "semantic_hash": "b3c354345b5ec7500995c6bd69020933"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/definitions_snapshot_speech_classifier.json": {
-    "mtime": 1780092108.144001,
-    "ast_hash": "bf8459e8b407d3a0feb06815f8fd6b9b",
-    "semantic_hash": ""
+    "mtime": 1782757292.3871253,
+    "ast_hash": "238373ffbd27fdc728092da8cb12b247",
+    "semantic_hash": "238373ffbd27fdc728092da8cb12b247"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T181615Z.json": {
     "mtime": 1780078575.1463976,
     "ast_hash": "5d1058b1f49e29eae99081580c0a2730",
-    "semantic_hash": ""
+    "semantic_hash": "5d1058b1f49e29eae99081580c0a2730"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T065522Z.json": {
     "mtime": 1780037722.5040329,
     "ast_hash": "7f53087e3a961b16f76a37cdab14a2c0",
-    "semantic_hash": ""
+    "semantic_hash": "7f53087e3a961b16f76a37cdab14a2c0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T065408Z.json": {
     "mtime": 1780037648.7236774,
     "ast_hash": "96d2a4fda42cc53245479ac13015709c",
-    "semantic_hash": ""
+    "semantic_hash": "96d2a4fda42cc53245479ac13015709c"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/experiment_fallback_20260529T190306Z.json": {
     "mtime": 1780081386.2878819,
     "ast_hash": "dbf630eff290a62e37e5bfeb944464e0",
-    "semantic_hash": ""
+    "semantic_hash": "dbf630eff290a62e37e5bfeb944464e0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_recency_weighted_trends.py": {
-    "mtime": 1780045136.9661238,
-    "ast_hash": "8827efdcf96268d275819504bbdc5c8a",
-    "semantic_hash": ""
+    "mtime": 1782014524.1903186,
+    "ast_hash": "5df7d3daa28ade4ad4bd71add3bd0ef6",
+    "semantic_hash": "5df7d3daa28ade4ad4bd71add3bd0ef6"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/check_journal_requirements.py": {
     "mtime": 1780088694.219767,
     "ast_hash": "f22427606de9f586ed28d51372a9792f",
-    "semantic_hash": ""
+    "semantic_hash": "f22427606de9f586ed28d51372a9792f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/tune_link_rebalance_fair_ga.py": {
     "mtime": 1780088694.219767,
     "ast_hash": "39c36b0adfb996bb4737f965559b5431",
-    "semantic_hash": ""
+    "semantic_hash": "39c36b0adfb996bb4737f965559b5431"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/link_all_speeches_to_action.py": {
-    "mtime": 1780088694.2115824,
-    "ast_hash": "8c79954552e81d99b18b28cefd9524f0",
-    "semantic_hash": ""
+    "mtime": 1780261110.854272,
+    "ast_hash": "3c3c976cac1ba171cdad73bbdc601f3f",
+    "semantic_hash": "3c3c976cac1ba171cdad73bbdc601f3f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/compute_ideology_axis_alignment.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "63700713c7a7baf04305394be2da20ce",
-    "semantic_hash": ""
+    "semantic_hash": "63700713c7a7baf04305394be2da20ce"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/tune_link_rebalance_mlflow.py": {
     "mtime": 1780088694.219767,
     "ast_hash": "652423d0f5524011bad99b3ac79eadb7",
-    "semantic_hash": ""
+    "semantic_hash": "652423d0f5524011bad99b3ac79eadb7"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_motion_signatories.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "084fb61e20db8d247b15842eaa3855d8",
-    "semantic_hash": ""
+    "semantic_hash": "084fb61e20db8d247b15842eaa3855d8"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/render_manuscript_jinja.py": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "f3cb63ec5ac94ceebefd78a62c3e8427",
-    "semantic_hash": ""
+    "mtime": 1780913393.0035112,
+    "ast_hash": "5f54280920b576345db1cc38ee769c00",
+    "semantic_hash": "5f54280920b576345db1cc38ee769c00"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/regenerate_all_visualizations.py": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "6817898a9ff4d36827ffd9cc613da2be",
-    "semantic_hash": ""
+    "mtime": 1782049536.9627936,
+    "ast_hash": "b4d21317bb1de3249447bd028d178b57",
+    "semantic_hash": "b4d21317bb1de3249447bd028d178b57"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_overlay.py": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "47bb93b37f90cbe019c61e3ceb45add9",
-    "semantic_hash": ""
+    "mtime": 1782045248.13685,
+    "ast_hash": "a96be68a7251d4d1f5ee51e5d0c84c3d",
+    "semantic_hash": "a96be68a7251d4d1f5ee51e5d0c84c3d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/tune_consistency_wrangling_fair_ga.py": {
     "mtime": 1780088694.219767,
     "ast_hash": "3bc816ab61a8b3363b24a87d0c7274d0",
-    "semantic_hash": ""
+    "semantic_hash": "3bc816ab61a8b3363b24a87d0c7274d0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/score_say_vs_do_contradiction.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "bda99ab78a77ff0ee499333fd10a83ce",
-    "semantic_hash": ""
+    "semantic_hash": "bda99ab78a77ff0ee499333fd10a83ce"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_speech_motion_linkage.py": {
     "mtime": 1780045136.9661238,
     "ast_hash": "cd165ff5c3ee7173f9f7eea485b3bfb3",
-    "semantic_hash": ""
+    "semantic_hash": "cd165ff5c3ee7173f9f7eea485b3bfb3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_contradiction_scoring.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "fea34a333af7429952a4fa8f543162e0",
-    "semantic_hash": ""
+    "semantic_hash": "fea34a333af7429952a4fa8f543162e0"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_recency_runup_logic.py": {
     "mtime": 1780045136.9661238,
     "ast_hash": "aad27e2683a7a6a3d52635fbae111a4b",
-    "semantic_hash": ""
+    "semantic_hash": "aad27e2683a7a6a3d52635fbae111a4b"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_link_all_speeches_to_action.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "425333068455b4465e6903c456a15da6",
-    "semantic_hash": ""
+    "semantic_hash": "425333068455b4465e6903c456a15da6"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_ideology_axes.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "bb50b6468fb39d48771019f72a294742",
-    "semantic_hash": ""
+    "semantic_hash": "bb50b6468fb39d48771019f72a294742"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_extract_motion_signatories.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "7197a5e77c2a01a9e7b35b9e2660e4f9",
-    "semantic_hash": ""
+    "semantic_hash": "7197a5e77c2a01a9e7b35b9e2660e4f9"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/deep_scoring_service.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "94749ce183c22d555b4d9b28e5713180",
-    "semantic_hash": ""
+    "mtime": 1780949777.4482381,
+    "ast_hash": "7fff2bcd777cb282a543e60841fe85c8",
+    "semantic_hash": "7fff2bcd777cb282a543e60841fe85c8"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/persistence_port.py": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "e546b180e478b70a981b6676a8dd8df6",
-    "semantic_hash": ""
+    "mtime": 1780261110.862272,
+    "ast_hash": "b53e14ad08b41276d8a69c31ceb223eb",
+    "semantic_hash": "b53e14ad08b41276d8a69c31ceb223eb"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/classifier/feature_registry.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "144a756adb6e8c1720cc29985513e79d",
-    "semantic_hash": ""
+    "semantic_hash": "144a756adb6e8c1720cc29985513e79d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/io/parquet_guard.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "ea986eb683034e7385297bc0c1b085e8",
-    "semantic_hash": ""
+    "semantic_hash": "ea986eb683034e7385297bc0c1b085e8"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/contracts.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "7beab7d0152183ba05f674e1e8d5416f",
-    "semantic_hash": ""
+    "semantic_hash": "7beab7d0152183ba05f674e1e8d5416f"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/ideology_axes.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "6fe9b70abf4ec49cbae5ce135f075230",
-    "semantic_hash": ""
+    "semantic_hash": "6fe9b70abf4ec49cbae5ce135f075230"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/contradiction_scoring.py": {
     "mtime": 1780088694.2115824,
     "ast_hash": "aca55910cf4df6554a0f47dc0ab64bb3",
-    "semantic_hash": ""
+    "semantic_hash": "aca55910cf4df6554a0f47dc0ab64bb3"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/definitions/registry.py": {
     "mtime": 1780045136.958124,
     "ast_hash": "12ed806e744ee44a52ed231f3ef10d56",
-    "semantic_hash": ""
+    "semantic_hash": "12ed806e744ee44a52ed231f3ef10d56"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/runtime/resources.py": {
     "mtime": 1780045136.958124,
     "ast_hash": "8cb876df782d3965d61d090cc022c1fc",
-    "semantic_hash": ""
+    "semantic_hash": "8cb876df782d3965d61d090cc022c1fc"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/runtime/__init__.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "d00f7d1efe56a3c0fc0b6f17d5fcda3d",
-    "semantic_hash": ""
+    "semantic_hash": "d00f7d1efe56a3c0fc0b6f17d5fcda3d"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/runtime/experiment.py": {
     "mtime": 1780005675.3486352,
     "ast_hash": "66caaee5a9c127fc90ef9402e4cb34aa",
-    "semantic_hash": ""
+    "semantic_hash": "66caaee5a9c127fc90ef9402e4cb34aa"
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/AGENTS.md": {
-    "mtime": 1780088694.19763,
-    "ast_hash": "de013109678924210e20b3d7be753998",
+    "mtime": 1780913534.0188708,
+    "ast_hash": "8a8a86afc1cc572ebbaefc08b61078a7",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/agents.md": {
-    "mtime": 1780088694.2035792,
-    "ast_hash": "3c55c776af9b5f1a7c9ac57ac35ed187",
+    "mtime": 1780913534.052638,
+    "ast_hash": "a880c9c91718483a4e7d7cce79ddf8b9",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/manuscript-agent.md": {
-    "mtime": 1780088694.2115824,
-    "ast_hash": "72bf9c0fe821aab9024b3593d80b916d",
+    "mtime": 1780142391.741793,
+    "ast_hash": "49c671caf0f5b2fe19e37e517bd5d739",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/05_data_availability.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "95f6fdd4efc30952ba1e44be2bb2832b",
+    "mtime": 1782682946.9172363,
+    "ast_hash": "540811946abf715ac2087b341bf1bb8e",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/06_acknowledgments.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "cb24dd46a2e50def7f07ae44427e16ab",
+    "mtime": 1782682946.9186435,
+    "ast_hash": "326323eced9e9f1114d9e0a540aafd97",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01a_abstract.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "7ffc6234254987de01c4d3d830fe0c17",
+    "mtime": 1782682946.9188535,
+    "ast_hash": "de4e32b24f3598a16c4b7fd020ae09dc",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/journal_profiles/plos_one.yaml": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "5212c483d04cf48fbdd774a032ff32e8",
+    "mtime": 1780913198.286858,
+    "ast_hash": "530ca5d284182e14b67222ad1913f144",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/say_vs_do_contradiction_implementation_spec.md": {
-    "mtime": 1780088694.2115824,
-    "ast_hash": "aca4756c184e3dc7021c5e04b0672ed5",
+    "mtime": 1780913533.9788709,
+    "ast_hash": "c47e29f06f105f891917b86e3e8cf168",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/RUN_LOG_20260528_RECENCY_WEIGHTED.md": {
-    "mtime": 1780045136.9661238,
-    "ast_hash": "8b29191f9030ac8e3141e68cd2611fda",
+    "mtime": 1780913533.958206,
+    "ast_hash": "864b37877665ef12b43f8eb46da9153f",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/KEYWORDS.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "b2039d7b38aa6591a9e4598dd2d44017",
+    "mtime": 1780913533.925952,
+    "ast_hash": "8deea758a0ce21f4fa88177ef0a715fa",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/DEFINITION_OF_DONE.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "f0a38fb85c908dc052d5754e210d00c2",
+    "mtime": 1780913533.8948708,
+    "ast_hash": "64e12d61dbb88f898578469a11b9c340",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/say_vs_do_execution_plan.md": {
-    "mtime": 1780088694.2115824,
-    "ast_hash": "0960cbf8d5edfd992c11f352fb6418e1",
+    "mtime": 1780913533.989847,
+    "ast_hash": "6beffcf741c6c86718e4538adf4b7bf4",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/EXPERIMENT_LOGGING.md": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "439b29d23b17a61feb7da92b6efd490a",
+    "mtime": 1780913533.9068017,
+    "ast_hash": "2b116ce5c8ed0b00ed20115bd01b08b6",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/PANDOC_USAGE.md": {
-    "mtime": 1780005675.3486352,
-    "ast_hash": "36072d749e71d1a2b6bc524bb31e14ac",
+    "mtime": 1780913533.9468708,
+    "ast_hash": "065fcc0c4a00ff2448b7915d85288307",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/review/reviewer2_critique.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "636935df46cd1aa0856eb05f9c6e14d4",
+    "mtime": 1782640418.2494822,
+    "ast_hash": "1107f196e30df5817ecc0afc8a61055f",
     "semantic_hash": ""
   },
   "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/review/reviewer2_remediation_plan.md": {
-    "mtime": 1780088694.219767,
-    "ast_hash": "43aa1a8531c7587ffd5628ec213d83b3",
+    "mtime": 1780913534.0816119,
+    "ast_hash": "7a3c0e52175bf39ff52a8cb2d68401e8",
     "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/ollama_teacher_labels_test.json": {
+    "mtime": 1780779452.5375266,
+    "ast_hash": "fde6cb50c6d2f18a45cdaca7a1ad23b8",
+    "semantic_hash": "fde6cb50c6d2f18a45cdaca7a1ad23b8"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T204141Z.json": {
+    "mtime": 1782682568.9387896,
+    "ast_hash": "682a36ec31730ef0805d543a8c35fbc2",
+    "semantic_hash": "682a36ec31730ef0805d543a8c35fbc2"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/ollama_teacher_labels_val.json": {
+    "mtime": 1780838402.6460328,
+    "ast_hash": "7465fc6f97edf58fb5979e0922b61594",
+    "semantic_hash": "7465fc6f97edf58fb5979e0922b61594"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T183944Z.json": {
+    "mtime": 1781463345.2499368,
+    "ast_hash": "9304910a3da8c98dda510f475f75ee89",
+    "semantic_hash": "9304910a3da8c98dda510f475f75ee89"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260627T125834Z.json": {
+    "mtime": 1782639288.7672749,
+    "ast_hash": "fbe9db43364ba3e2165eb8dae438ce8a",
+    "semantic_hash": "fbe9db43364ba3e2165eb8dae438ce8a"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260621T115128Z.json": {
+    "mtime": 1782044176.9825914,
+    "ast_hash": "bd1066eaf933ae0f16e35a321efb3373",
+    "semantic_hash": "bd1066eaf933ae0f16e35a321efb3373"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260619T143315Z.json": {
+    "mtime": 1781880485.6995664,
+    "ast_hash": "1b1c8d5ea95bc6311a59f1a0febeecb8",
+    "semantic_hash": "1b1c8d5ea95bc6311a59f1a0febeecb8"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T174008Z.json": {
+    "mtime": 1781458814.7064805,
+    "ast_hash": "92aa53b462f6c2661cd3fb20b9625857",
+    "semantic_hash": "92aa53b462f6c2661cd3fb20b9625857"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T152759Z.json": {
+    "mtime": 1781451832.3431792,
+    "ast_hash": "b27dec6b2f66348caf1984be5034c418",
+    "semantic_hash": "b27dec6b2f66348caf1984be5034c418"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T194622Z.json": {
+    "mtime": 1782679248.475637,
+    "ast_hash": "ad823f8908c908a45ca62ce589494c61",
+    "semantic_hash": "ad823f8908c908a45ca62ce589494c61"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260619T141220Z.json": {
+    "mtime": 1781878343.3539832,
+    "ast_hash": "4ec673ff0c1d947d929de7cc135428f6",
+    "semantic_hash": "4ec673ff0c1d947d929de7cc135428f6"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T161116Z.json": {
+    "mtime": 1782666005.7998145,
+    "ast_hash": "f6da23fe63cc0b0c9019154202857c26",
+    "semantic_hash": "f6da23fe63cc0b0c9019154202857c26"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/ollama_teacher_labels.json": {
+    "mtime": 1780779811.4220753,
+    "ast_hash": "27339040a8f6ab75c2410be58c051f2f",
+    "semantic_hash": "27339040a8f6ab75c2410be58c051f2f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/validation_results_10.json": {
+    "mtime": 1780780177.6952207,
+    "ast_hash": "79dbe65e3e4da5a123eae539cd5d91f3",
+    "semantic_hash": "79dbe65e3e4da5a123eae539cd5d91f3"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143748Z.json": {
+    "mtime": 1781447872.9965367,
+    "ast_hash": "9f939fbfbd77bf6175611cf722132758",
+    "semantic_hash": "9f939fbfbd77bf6175611cf722132758"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143812Z.json": {
+    "mtime": 1781448892.0075533,
+    "ast_hash": "b7d004df913e586c06c947ce13140959",
+    "semantic_hash": "b7d004df913e586c06c947ce13140959"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260621T130253Z.json": {
+    "mtime": 1782046974.4182363,
+    "ast_hash": "804680cd068832420f4aea84464a17c5",
+    "semantic_hash": "804680cd068832420f4aea84464a17c5"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T215623Z.json": {
+    "mtime": 1782686482.263541,
+    "ast_hash": "35e149dfe20ac5e86d829582d331b32d",
+    "semantic_hash": "35e149dfe20ac5e86d829582d331b32d"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/validation_results_200.json": {
+    "mtime": 1780841811.8877006,
+    "ast_hash": "d7db71fdbfd1982b945e07524d9613a8",
+    "semantic_hash": "d7db71fdbfd1982b945e07524d9613a8"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260629T181738Z.json": {
+    "mtime": 1782759998.3990977,
+    "ast_hash": "566ad907a4b21f75ac00f0d4febcac5a",
+    "semantic_hash": "566ad907a4b21f75ac00f0d4febcac5a"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260620T194700Z.json": {
+    "mtime": 1782004698.7491019,
+    "ast_hash": "342fd26e21cf0c4c0178a600035a73b3",
+    "semantic_hash": "342fd26e21cf0c4c0178a600035a73b3"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260620T180253Z.json": {
+    "mtime": 1782000998.6817963,
+    "ast_hash": "d3eaaea12fc6ac2a8bc0dd748eb8f6b4",
+    "semantic_hash": "d3eaaea12fc6ac2a8bc0dd748eb8f6b4"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143528Z.json": {
+    "mtime": 1781447802.059873,
+    "ast_hash": "f7b3adf474e41b40ef472bcb78b97a72",
+    "semantic_hash": "f7b3adf474e41b40ef472bcb78b97a72"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260629T124553Z.json": {
+    "mtime": 1782740329.6518412,
+    "ast_hash": "418790803d51add8a65ee4c578959abe",
+    "semantic_hash": "418790803d51add8a65ee4c578959abe"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T110024Z.json": {
+    "mtime": 1781435735.8689666,
+    "ast_hash": "9d31084551a641ea678c6ed21d43e6a6",
+    "semantic_hash": "9d31084551a641ea678c6ed21d43e6a6"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_interpellations.py": {
+    "mtime": 1781518942.3457112,
+    "ast_hash": "4f6adc0b4126c951bcffa8be8f114c26",
+    "semantic_hash": "4f6adc0b4126c951bcffa8be8f114c26"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_party_trends.py": {
+    "mtime": 1782736164.8082678,
+    "ast_hash": "14ba536b654442cde3c542426abf3ae2",
+    "semantic_hash": "14ba536b654442cde3c542426abf3ae2"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_questions.py": {
+    "mtime": 1781982403.540174,
+    "ast_hash": "9c3e0ac251d047a03bb26856c6fbf9a4",
+    "semantic_hash": "9c3e0ac251d047a03bb26856c6fbf9a4"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_ollama_teacher_labels.py": {
+    "mtime": 1780832156.8230333,
+    "ast_hash": "fff00196d48e07e39bff8cca3a8b4c5f",
+    "semantic_hash": "fff00196d48e07e39bff8cca3a8b4c5f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/extract_betankande_to_normalized.py": {
+    "mtime": 1781465218.2036843,
+    "ast_hash": "6056be2c9b1e881c084b32f39601cc4b",
+    "semantic_hash": "6056be2c9b1e881c084b32f39601cc4b"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/bootstrap_say_do_uncertainty.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "5863bd0dfd20b29bbb0c1b2780df0b45",
+    "semantic_hash": "5863bd0dfd20b29bbb0c1b2780df0b45"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/fit_latent_party_ideology.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "331f050f3db69a53bedf574e737232ef",
+    "semantic_hash": "331f050f3db69a53bedf574e737232ef"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/download_questions.py": {
+    "mtime": 1782035112.3382492,
+    "ast_hash": "7818baeadccab7fec265a08fcba95102",
+    "semantic_hash": "7818baeadccab7fec265a08fcba95102"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_validation_sample.py": {
+    "mtime": 1780779388.0250425,
+    "ast_hash": "5081607fd3159bbb8653420fc6ede26c",
+    "semantic_hash": "5081607fd3159bbb8653420fc6ede26c"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/validate_result_drift.py": {
+    "mtime": 1781979672.2169402,
+    "ast_hash": "5ca9b85f79421087a98f3f361247bd1e",
+    "semantic_hash": "5ca9b85f79421087a98f3f361247bd1e"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/inventory_bulk_datasets.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "87406c293aa901d58041828f5616b73f",
+    "semantic_hash": "87406c293aa901d58041828f5616b73f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_interpellations.py": {
+    "mtime": 1781983495.7220352,
+    "ast_hash": "bef63f43e67ecae782d70d46e867099f",
+    "semantic_hash": "bef63f43e67ecae782d70d46e867099f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/score_contradiction_by_modality.py": {
+    "mtime": 1781455013.4872992,
+    "ast_hash": "7d874c504bc1a630a137220771c6a274",
+    "semantic_hash": "7d874c504bc1a630a137220771c6a274"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/tune_rhetorical_weights.py": {
+    "mtime": 1780818458.4985166,
+    "ast_hash": "0d10d4bcb9456227f9b69cbed7635ca4",
+    "semantic_hash": "0d10d4bcb9456227f9b69cbed7635ca4"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/plot_pareto_frontier.py": {
+    "mtime": 1782048773.0627646,
+    "ast_hash": "a5c4b8f318414be020dbc733b1a5ea8e",
+    "semantic_hash": "a5c4b8f318414be020dbc733b1a5ea8e"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/validate_party_ideology_benchmarks.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "9854411765cf3ca8339ad4e0aaa9a3a2",
+    "semantic_hash": "9854411765cf3ca8339ad4e0aaa9a3a2"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/analyze_link_strata_stability.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "83668d293cfb8322796bed0bdeb44bfb",
+    "semantic_hash": "83668d293cfb8322796bed0bdeb44bfb"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/update_pipeline.py": {
+    "mtime": 1782935528.5259886,
+    "ast_hash": "4b5a14276ee559a2eda3feb831ac1b7b",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/create_anonymized_manuscript.py": {
+    "mtime": 1780913409.772897,
+    "ast_hash": "c3f3f65cb580d5b5a63dcd97baaade2e",
+    "semantic_hash": "c3f3f65cb580d5b5a63dcd97baaade2e"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_questions.py": {
+    "mtime": 1781463376.2156148,
+    "ast_hash": "9324febd758db3c77beca793c2748f5f",
+    "semantic_hash": "9324febd758db3c77beca793c2748f5f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/plot_quid_ergo.py": {
+    "mtime": 1782049506.8707924,
+    "ast_hash": "3222d4e41adde2a2f7c95e0d9c8d04b8",
+    "semantic_hash": "3222d4e41adde2a2f7c95e0d9c8d04b8"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/sync_zenodo_doi.py": {
+    "mtime": 1780774053.4048412,
+    "ast_hash": "2e1e24994c3efc6b320761506f67577d",
+    "semantic_hash": "2e1e24994c3efc6b320761506f67577d"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/merge_prop_bet_into_action_links.py": {
+    "mtime": 1781874243.8521447,
+    "ast_hash": "b6f7d4088e146995835252861d7cd833",
+    "semantic_hash": "b6f7d4088e146995835252861d7cd833"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_betankande.py": {
+    "mtime": 1781463517.5876203,
+    "ast_hash": "8383b3cfe942d4006a9790fc93ccd2ab",
+    "semantic_hash": "8383b3cfe942d4006a9790fc93ccd2ab"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/compute_link_confidence_strata.py": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "86295f0c75cab4fd49949396e4c914ef",
+    "semantic_hash": "86295f0c75cab4fd49949396e4c914ef"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/_download_utils.py": {
+    "mtime": 1782019028.9176426,
+    "ast_hash": "8bec5a70f1e778e869ad471873abfe64",
+    "semantic_hash": "8bec5a70f1e778e869ad471873abfe64"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/link_prop_bet_to_speech.py": {
+    "mtime": 1781891682.5847142,
+    "ast_hash": "36258a88da32819f3c4b53b5e544b231",
+    "semantic_hash": "36258a88da32819f3c4b53b5e544b231"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/polish_manuscript_text.py": {
+    "mtime": 1782674820.7456987,
+    "ast_hash": "87df3e72de9e845deaba540dd8b16533",
+    "semantic_hash": "87df3e72de9e845deaba540dd8b16533"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/validate_tuned_weights.py": {
+    "mtime": 1780818458.4985166,
+    "ast_hash": "156b017aaddfb7500ff9da9ff455cdc1",
+    "semantic_hash": "156b017aaddfb7500ff9da9ff455cdc1"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/apply_rhetorical_adjustments.py": {
+    "mtime": 1780856438.896988,
+    "ast_hash": "1e3b23195ce713494b9bfccd4b68f58f",
+    "semantic_hash": "1e3b23195ce713494b9bfccd4b68f58f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/models/rhetorical_weights_best.json": {
+    "mtime": 1780780019.6736777,
+    "ast_hash": "facd7e4d85852d2d16bd0591db679be0",
+    "semantic_hash": "facd7e4d85852d2d16bd0591db679be0"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_parquet_writer.py": {
+    "mtime": 1780261110.886272,
+    "ast_hash": "d06634580592f27e766463e6c3fd2172",
+    "semantic_hash": "d06634580592f27e766463e6c3fd2172"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_plot_pareto_frontier.py": {
+    "mtime": 1782049549.734794,
+    "ast_hash": "1563a404213d7c70d14cfc553e9d0258",
+    "semantic_hash": "1563a404213d7c70d14cfc553e9d0258"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_markdown_frontmatter.py": {
+    "mtime": 1780913416.7457335,
+    "ast_hash": "58ea153eed035e3e4bc099b44045d216",
+    "semantic_hash": "58ea153eed035e3e4bc099b44045d216"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_manuscript_exports.py": {
+    "mtime": 1780261110.9963515,
+    "ast_hash": "f6dc6a783c68d5bc99c4e22a5444dac6",
+    "semantic_hash": "f6dc6a783c68d5bc99c4e22a5444dac6"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_sync_zenodo_doi.py": {
+    "mtime": 1780774053.4048412,
+    "ast_hash": "7c5650139c2cdb389996b098897b8d83",
+    "semantic_hash": "7c5650139c2cdb389996b098897b8d83"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_plot_quid_ergo.py": {
+    "mtime": 1782049562.3387945,
+    "ast_hash": "8d5f0eb03076fd7f0397c36b79ce6b68",
+    "semantic_hash": "8d5f0eb03076fd7f0397c36b79ce6b68"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_visualize_voting.py": {
+    "mtime": 1782046828.7746913,
+    "ast_hash": "0b5cdc6cd5b9b651583bfb09b3c150ed",
+    "semantic_hash": "0b5cdc6cd5b9b651583bfb09b3c150ed"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_provenance.py": {
+    "mtime": 1780912975.791021,
+    "ast_hash": "9b15a30e5b8ba7938f90880beff4eabd",
+    "semantic_hash": "9b15a30e5b8ba7938f90880beff4eabd"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_generate_figures.py": {
+    "mtime": 1782046828.7746913,
+    "ast_hash": "4fed5e98eb770f5bea97d17ef60b8610",
+    "semantic_hash": "4fed5e98eb770f5bea97d17ef60b8610"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_definitions_loader.py": {
+    "mtime": 1780913314.941484,
+    "ast_hash": "cd3b6448931265d4a8494e775066c1bb",
+    "semantic_hash": "cd3b6448931265d4a8494e775066c1bb"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_render_manuscript.py": {
+    "mtime": 1780913422.7381988,
+    "ast_hash": "ad94a74eb3178fa9a0d527669aaae76f",
+    "semantic_hash": "ad94a74eb3178fa9a0d527669aaae76f"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_speeches_analysis.py": {
+    "mtime": 1780261111.0062718,
+    "ast_hash": "153e56b495d92a24a9fe4d6f73de218d",
+    "semantic_hash": "153e56b495d92a24a9fe4d6f73de218d"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/tests/test_current_parties.py": {
+    "mtime": 1782768022.6160016,
+    "ast_hash": "293db497de8455a50306f42a00209b35",
+    "semantic_hash": "293db497de8455a50306f42a00209b35"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/data/.last_fetch_cache.json": {
+    "mtime": 1782056094.5741389,
+    "ast_hash": "34810410ad01ff11f37947d5ca9a92c5",
+    "semantic_hash": "34810410ad01ff11f37947d5ca9a92c5"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/data/.api_freshness_cache.json": {
+    "mtime": 1782737154.524929,
+    "ast_hash": "db684e7dbe5c95e6918a28e0a12997ec",
+    "semantic_hash": "db684e7dbe5c95e6918a28e0a12997ec"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/provenance.py": {
+    "mtime": 1780912943.6296084,
+    "ast_hash": "d6a9255b095eac6aff8e52ff30b820a2",
+    "semantic_hash": "d6a9255b095eac6aff8e52ff30b820a2"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/io/markdown_frontmatter.py": {
+    "mtime": 1780913383.6549428,
+    "ast_hash": "668a90c087226474ba35aff2d127dc48",
+    "semantic_hash": "668a90c087226474ba35aff2d127dc48"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/data/committee_composition.py": {
+    "mtime": 1781465197.6996834,
+    "ast_hash": "b44ad79c62eb93fd23ca5458e07c6672",
+    "semantic_hash": "b44ad79c62eb93fd23ca5458e07c6672"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/runtime/progress.py": {
+    "mtime": 1781891777.2786107,
+    "ast_hash": "1fb3b4d3bda0584e87f5f9a4e3370498",
+    "semantic_hash": "1fb3b4d3bda0584e87f5f9a4e3370498"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript_anonymized.md": {
+    "mtime": 1780913830.7004404,
+    "ast_hash": "d744086bf6fef358317ba87768ccc80c",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/PLAN.md": {
+    "mtime": 1782735844.9386144,
+    "ast_hash": "207267d4ecf859f1125140b7a0b12de2",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/artifacts/log_analysis_and_viz_notes.md": {
+    "mtime": 1782666950.0786803,
+    "ast_hash": "b3cbb5e6ac4de0c3a0deebc1ab2f688f",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260627T125834Z.md": {
+    "mtime": 1782639288.768413,
+    "ast_hash": "dcf9c44ef6b800d5168674b5c4aadba8",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260621T130253Z.md": {
+    "mtime": 1782046974.4183471,
+    "ast_hash": "55f4159c3c6294f479ff2afeb6489a1c",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T161116Z.md": {
+    "mtime": 1782666005.8011584,
+    "ast_hash": "7a77c32e36617705b21e42e95e4d6eee",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260620T194700Z.md": {
+    "mtime": 1782004698.7543962,
+    "ast_hash": "ab356096ab5e357d6a1fe9010d4ab6f9",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T215623Z.md": {
+    "mtime": 1782686482.264336,
+    "ast_hash": "c76cde1bbf80c8db1bf33040a61cfa49",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260619T141220Z.md": {
+    "mtime": 1781878343.3540971,
+    "ast_hash": "0027c3265860c3880124ec8b11f61cdb",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T183944Z.md": {
+    "mtime": 1781463345.2509804,
+    "ast_hash": "e06e2143c94cc92ad0c1d11254bf4489",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260621T115128Z.md": {
+    "mtime": 1782044176.9890945,
+    "ast_hash": "49d96bb806e51f455111e7d59f0d787d",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260629T124553Z.md": {
+    "mtime": 1782740329.6523066,
+    "ast_hash": "7e27f9e4ac31b6649f10d205f19df37f",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T152759Z.md": {
+    "mtime": 1781451832.3460882,
+    "ast_hash": "aa90b485cbccc91db27120b21f77853b",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T194622Z.md": {
+    "mtime": 1782679248.4767625,
+    "ast_hash": "27aa4b5a9013a1057f83f3b9e6380962",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T110024Z.md": {
+    "mtime": 1781435735.869895,
+    "ast_hash": "ed9f9cbd4b18429f0b42a33e3d5199c3",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143748Z.md": {
+    "mtime": 1781447872.9966257,
+    "ast_hash": "3af793f0b88351e5af5a4b5b58dd68a6",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/validation_sample_ids.txt": {
+    "mtime": 1780820135.6461778,
+    "ast_hash": "a7e3f2a3bbcf63c1b8d164185f2c7ce8",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260628T204141Z.md": {
+    "mtime": 1782682568.9434078,
+    "ast_hash": "a2d6fcb6236214708726f565ca05ba01",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T174008Z.md": {
+    "mtime": 1781458814.7065866,
+    "ast_hash": "d216ae197575a2301d430b07bd640426",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260619T143315Z.md": {
+    "mtime": 1781880485.7005339,
+    "ast_hash": "b95f262871208265646e6eeb26cca917",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143812Z.md": {
+    "mtime": 1781448892.0089805,
+    "ast_hash": "5f43262a57c95b6f2a5ad9e78fe59716",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260614T143528Z.md": {
+    "mtime": 1781447802.0599477,
+    "ast_hash": "3db63e53d8def3a73955214f82581d28",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260620T180253Z.md": {
+    "mtime": 1782000998.68321,
+    "ast_hash": "a0dee94c28b0c2fb62884b9691d83397",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260629T181738Z.md": {
+    "mtime": 1782759998.4002516,
+    "ast_hash": "58e3e59bd8a086dd8ec418d105709739",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/review/final_submission_checklist.md": {
+    "mtime": 1780913534.06206,
+    "ast_hash": "887e503e62b18194372b8ddfa8cec180",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/review/REVIEWER_GUIDE.md": {
+    "mtime": 1782329246.5454597,
+    "ast_hash": "9656c39afdd4bfef363ce3f1e81c7017",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/03_methodology.md": {
+    "mtime": 1782736873.5661538,
+    "ast_hash": "9096fd9db5dce84af544271931a1c805",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/07_appendix.md": {
+    "mtime": 1782752367.120204,
+    "ast_hash": "813ee6374efad8b0e4719a7b00fb2fe7",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/journal_profiles/scientific_reports.yaml": {
+    "mtime": 1781879904.3563788,
+    "ast_hash": "e8556bd5096e854c37a3e61e16c14f20",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/workflows/weekly-update.yml": {
+    "mtime": 1781979680.808158,
+    "ast_hash": "d1b1d80109cee88093717ef497757a62",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/instructions/tests.instructions.md": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "853eb58ba12b070004e86c459bce152c",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/instructions/generated-artifacts.instructions.md": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "58ffe2ff6c7ebc095c8cfc8f0292b916",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/instructions/manuscript.instructions.md": {
+    "mtime": 1780142391.749793,
+    "ast_hash": "8839eea09424e9c7eee720cddea90381",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/instructions/workflows.instructions.md": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "bdc99ee1235f4c6d67dbe7e8f6517510",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.github/instructions/scripts.instructions.md": {
+    "mtime": 1780142391.761793,
+    "ast_hash": "79860e5321a7636a71b898f2a016fb12",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/LFS.md": {
+    "mtime": 1782768037.814431,
+    "ast_hash": "a5b492fb0a5de4772ccfcc509859f2e8",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/docs/LATENT_VARIABLE_MODEL_SPEC.md": {
+    "mtime": 1780913533.9348707,
+    "ast_hash": "2744ce80f11b0c9a41937898743065a9",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript_anonymized.pdf": {
+    "mtime": 1780913837.4631193,
+    "ast_hash": "840f63c23684aacf651094317fb254db",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/review/REVIEWER_CHECKLIST.md": {
+    "mtime": 1782327560.9472673,
+    "ast_hash": "a23db6a0c8e8f0bd813b842cba4483eb",
+    "semantic_hash": ""
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/data/.parliamentary_party_cache.json": {
+    "mtime": 1782773031.1217945,
+    "ast_hash": "2026400a93dff09f5461dd885063eb10",
+    "semantic_hash": "2026400a93dff09f5461dd885063eb10"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/cli_base.py": {
+    "mtime": 1782772912.6768317,
+    "ast_hash": "d0764a40b28075b9b0769760272830ba",
+    "semantic_hash": "d0764a40b28075b9b0769760272830ba"
+  },
+  "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/src/swedish_parliament_policy_classifier/analysis/parquet_utils.py": {
+    "mtime": 1782773137.528429,
+    "ast_hash": "50bce1ab893aa6ae4a2d59d59c724848",
+    "semantic_hash": "50bce1ab893aa6ae4a2d59d59c724848"
   }
 }
