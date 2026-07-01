@@ -60,6 +60,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pandoc and LaTeX for PDF generation
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended texlive-lang-european
+
+      - name: Install uv and dependencies
+        run: |
+          python -m pip install --upgrade pip uv
+          uv sync
+          uv pip install -e .
+
+      - name: Build manuscript PDF
+        run: |
+          cd manuscript && make pdf
+
       - name: Build source archive
         run: |
           TAG=${GITHUB_REF_NAME}
@@ -80,8 +100,11 @@ jobs:
             ```
 
             ### What's included
-            Source archive built from the `${{ github.ref_name }}` tag.
+            - Source archive built from the `${{ github.ref_name }}` tag.
+            - Manuscript PDF (`manuscript.pdf`) — the latest compiled version of the paper.
             See [README.md](https://github.com/yidaki53/policy-classifier#readme) for full usage instructions.
-          files: "policy-classifier-${{ github.ref_name }}.zip"
+          files: |
+            policy-classifier-${{ github.ref_name }}.zip
+            manuscript.pdf
           draft: false
           prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
