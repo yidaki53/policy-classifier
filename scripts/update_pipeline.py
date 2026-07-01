@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
-import requests
+import httpx
 from loguru import logger
 
 _FRESHNESS_CACHE_PATH = Path("data/.api_freshness_cache.json")
@@ -94,35 +94,33 @@ def _url_is_stale(url: str, local_path: str | Path) -> bool:
             return False
 
     try:
-        session = requests.Session()
-        session.headers.update({"User-Agent": "riksdagen-pipeline/1.0"})
-        resp = session.get(url, timeout=10, stream=True)
-        resp.close()
-        if resp.status_code != 200:
-            return False  # can't reach it, assume not stale
-        server_len = resp.headers.get("Content-Length")
-        if server_len is not None:
-            try:
-                if int(server_len) != local.stat().st_size:
-                    cache[cache_key] = {"stale": True, "checked": now}
+        with httpx.Client(timeout=10) as client:
+            resp = client.get(url, headers={"User-Agent": "riksdagen-pipeline/1.0"})
+            if resp.status_code != 200:
+                return False  # can't reach it, assume not stale
+            server_len = resp.headers.get("Content-Length")
+            if server_len is not None:
+                try:
+                    if int(server_len) != local.stat().st_size:
+                        cache[cache_key] = {"stale": True, "checked": now}
+                        _save_freshness_cache(cache)
+                        return True
+                except ValueError:
+                    pass
+            last_modified = resp.headers.get("Last-Modified")
+            if last_modified:
+                try:
+                    server_mtime = parsedate_to_datetime(last_modified)
+                    local_mtime = datetime.fromtimestamp(local.stat().st_mtime, tz=timezone.utc)
+                    stale = server_mtime > local_mtime + timedelta(hours=1)
+                    cache[cache_key] = {"stale": stale, "checked": now}
                     _save_freshness_cache(cache)
-                    return True
-            except ValueError:
-                pass
-        last_modified = resp.headers.get("Last-Modified")
-        if last_modified:
-            try:
-                server_mtime = parsedate_to_datetime(last_modified)
-                local_mtime = datetime.fromtimestamp(local.stat().st_mtime, tz=timezone.utc)
-                stale = server_mtime > local_mtime + timedelta(hours=1)
-                cache[cache_key] = {"stale": stale, "checked": now}
-                _save_freshness_cache(cache)
-                return stale
-            except Exception:
-                pass
-        cache[cache_key] = {"stale": False, "checked": now}
-        _save_freshness_cache(cache)
-        return False
+                    return stale
+                except Exception:
+                    pass
+            cache[cache_key] = {"stale": False, "checked": now}
+            _save_freshness_cache(cache)
+            return False
     except Exception:
         # network failure: return False (assume not stale) to avoid blocking pipeline
         return False
@@ -153,14 +151,12 @@ def _check_url_exists(url: str, timeout: int = 10) -> bool:
             return cached.get("exists", False)
 
     try:
-        session = requests.Session()
-        session.headers.update({"User-Agent": "riksdagen-pipeline/1.0"})
-        resp = session.get(url, timeout=timeout, stream=True)
-        exists = resp.status_code == 200
-        resp.close()
-        cache[cache_key] = {"exists": exists, "checked": now}
-        _save_freshness_cache(cache)
-        return exists
+        with httpx.Client(timeout=timeout) as client:
+            resp = client.get(url, headers={"User-Agent": "riksdagen-pipeline/1.0"})
+            exists = resp.status_code == 200
+            cache[cache_key] = {"exists": exists, "checked": now}
+            _save_freshness_cache(cache)
+            return exists
     except Exception:
         return False
 
