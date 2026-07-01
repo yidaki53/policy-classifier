@@ -26,6 +26,7 @@ from swedish_parliament_policy_classifier.models.models import (
 )
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.nlp.preprocess import init_spacy, preprocess_text
+from swedish_parliament_policy_classifier.nlp.rhetorical_detector import detect_rhetorical_patterns
 from swedish_parliament_policy_classifier.nlp.topic_modeler import get_topic_features
 from swedish_parliament_policy_classifier.classifier.ensemble import (
     build_feature_vector,
@@ -34,6 +35,10 @@ from swedish_parliament_policy_classifier.classifier.ensemble import (
 from swedish_parliament_policy_classifier.classifier.llm_judge import (
     llm_judge,
     should_use_llm_fallback,
+)
+from swedish_parliament_policy_classifier.classifier.signal_combinator import (
+    compute_weighted_combination,
+    apply_rhetorical_adjustments,
 )
 
 LOG = logging.getLogger(__name__)
@@ -189,172 +194,6 @@ def _extract_speech_argumentative_text(text: str, max_chars: int = 5000) -> str:
 _RHETORICAL_WEIGHTS = None
 
 
-def _load_rhetorical_weights() -> dict:
-    """Load tuned rhetorical weights from disk if available, else return defaults."""
-    global _RHETORICAL_WEIGHTS
-    if _RHETORICAL_WEIGHTS is not None:
-        return _RHETORICAL_WEIGHTS
-
-    default = {
-        "base_far_left": 1.20, "inc_far_left": 0.25,
-        "base_left": 1.00, "inc_left": 0.20,
-        "base_centre_left": 0.80, "inc_centre_left": 0.15,
-        "base_centre": 0.60, "inc_centre": 0.10,
-        "base_centre_right": 0.80, "inc_centre_right": 0.15,
-        "base_right": 1.00, "inc_right": 0.20,
-        "base_far_right": 1.20, "inc_far_right": 0.25,
-    }
-    p = Path("models/rhetorical_weights_best.json")
-    if p.exists():
-        try:
-            with open(p) as f:
-                data = json.load(f)
-            loaded = data.get("params", {})
-            if loaded:
-                default.update(loaded)
-                print(f"Loaded tuned rhetorical weights from {p}", file=sys.stderr)
-        except Exception as e:
-            print(f"Failed to load tuned weights: {e}, using defaults", file=sys.stderr)
-
-    _RHETORICAL_WEIGHTS = default
-    return default
-
-
-def _detect_rhetorical_patterns(text: str) -> Dict[str, float]:
-    """Detect ideological rhetorical patterns using 7-dimension Britannica-derived signals.
-
-    Returns per-category adjustment floats that are added to the combined
-    classification score when speech preprocessing is active.  The function is
-    intentionally lightweight (no heavy ML) so it can run on every speech.
-    Weights are loaded from ``models/rhetorical_weights_best.json`` if it exists,
-    otherwise fall back to tuned defaults.
-    """
-    if not text:
-        return {}
-    text_lower = text.lower()
-    adjustments = {"far_left": 0.0, "left": 0.0, "centre_left": 0.0,
-                   "centre": 0.0, "centre_right": 0.0, "right": 0.0, "far_right": 0.0}
-
-    w = _load_rhetorical_weights()
-
-    def _apply(cat: str, signals: list[str]) -> None:
-        count = sum(1 for s in signals if s in text_lower)
-        base = w.get(f"base_{cat}", 0.0)
-        inc = w.get(f"inc_{cat}", 0.0)
-        if count >= 2:
-            adjustments[cat] += base + (count * inc)
-        elif count == 1:
-            adjustments[cat] += base * 0.5
-
-    # ─── FAR LEFT ───
-    _apply("far_left", [
-        "kapitalism", "kapitalistisk", "kapitalisterna", "borgarklass",
-        "klasskamp", "klassamhälle", "profit", "vinstintresse", "marknadsfundamentalism",
-        "nedrusta", "avveckla försvaret", "imperialism", "anti-imperialistisk",
-        "kollektivt ägande", "samhälligt ägande", "företagsdemokrati", "demokratiskt ägande",
-        "revolution", "radikal förändring", "omstörta", "systemkritisk", "systemfel",
-    ])
-
-    # ─── LEFT ───
-    _apply("left", [
-        "omfördelning", "progressiv beskattning", "höj skatten", "skattehöjning",
-        "fackförening", "kollektivavtal", "anställningstrygghet", "las",
-        "stärka välfärden", "bygga ut välfärden", "offentlig sektor",
-        "stoppa vinster", "vinster i välfärden", "vinstförbud",
-        "arbetstagare", "löntagare", "vanliga människor", "folkflertalet",
-        "socioekonomisk", "fattigdom", "inkomstskillnader", "jämlikhet",
-        "social rättvisa", "rättvisa", "solidaritet", "sammanhållning",
-        "allmännytta", "allmännyttan", "bostad för alla",
-    ])
-
-    # ─── CENTRE LEFT ───
-    _apply("centre_left", [
-        "välfärd", "sociala tjänster", "hälso- och sjukvård", "sjukvård",
-        "omsorg", "äldreomsorg", "barnomsorg", "förskola", "skola",
-        "utbildning", "kompetensutveckling", "livslångt lärande",
-        "miljö", "klimat", "hållbarhet", "biologisk mångfald",
-        "socialdemokrati", "socialdemokratisk", "reform", "gradvis reform",
-        "jämställdhet", "integration", "inkludering", "mänskliga rättigheter",
-        "folkhälsa", "förebyggande", "demokrati", "jämlikhet",
-        "aktiv arbetsmarknadspolitik", "arbetslöshetsbekämpning", "jobb för alla",
-    ])
-
-    # ─── CENTRE ───
-    _apply("centre", [
-        "båda sidor", "alla partier", "över blockgränsen", "samarbete",
-        "kompromiss", "pragmatisk", "balanserad", "lagenlig", "rättssäker",
-        "evidensbaserad", "fakta", "konkret förslag", "konkreta åtgärder",
-        "effektiv", "resultat", "uppföljning", "utvärdering", "granskning",
-        "riksrevisionen", "myndighet", "process", "beredning",
-        "oberoende", "opartisk", "saklig", "trovärdig",
-    ])
-
-    # ─── CENTRE RIGHT ───
-    _apply("centre_right", [
-        "marknad", "marknadsekonomi", "marknadslösning", "privat", "privata aktörer",
-        "företag", "företagare", "entreprenörskap", "näringsliv", "industri",
-        "tillväxt", "kompetitivitet", "innovation", "effektivisera", "effektivitet",
-        "skattepolitik", "skattenivå", "beskattning", "skattetryck",
-        "budget", "budgetdisciplin", "finanspolitik", "statsfinanser",
-        "reform", "modernisera", "förenkla", "färre regleringar",
-        "arbetslinjen", "sysselsättning", "arbetskraftsdeltagande",
-    ])
-
-    # ─── RIGHT ───
-    _apply("right", [
-        "sänka skatter", "skattesänkning", "lägre skatt", "dereglering", "avreglering",
-        "privatisera", "privatisering", "utförsäljning", "nedläggning",
-        "försvar", "försvarsallians", "nato", "säkerhetspolitik", "försvarspolitik",
-        "lag och ordning", "straff", "kriminalitet", "brott", "rättsväsende",
-        "tradition", "kulturarv", "svenska värderingar", "jämställdhet traditionell",
-        "familj", "föräldraskap", "uppfostran", "skolplikt", "disciplin",
-        "suveränitet", "nationell", "nationellt självbestämmande", "självständig",
-        "eu-kritisk", "eu-kritik", "bryta med eu", "lämna eu", "eu-skeptisk",
-        "motståndare till eu", "eus inflytande", "budgetramar", "budgetdisciplin",
-        "konservativ", "bevara", "värna", "tuffare", "strängare",
-        "minska byråkrati", "minska regleringar", "minska staten",
-        "tuffare tag", "ordning och reda", "svenska intressen",
-        "egna intressen", "nationella intressen", "svensk suveränitet",
-        "minska invandring", "minska migration", "minska asyl",
-        "sverigedemokrat", "sverigedemokraterna", "sd",
-    ])
-
-    # ─── FAR RIGHT ───
-    _apply("far_right", [
-        "svenskhet", "svenska folket", "etnisk", "etnicitet", "kulturarv",
-        "massinvandring", "invandring", "invandrare", "asyl", "migration",
-        "integration misslyckad", "integration har misslyckats", "parallellsamhälle",
-        "islam", "islamisering", "muslim", "muslimsk", "sharia", "extrem islam",
-        "svenska värden", "västerländska värden", "jämställdhet hotad", "kvinnoförtryck",
-        "gräns", "gränskontroll", "återvandring", "återvandra", "repatriering",
-        "folkomröstning", "folkets vilja", "eliten", "etablissemanget", "pk-elit",
-        "globalisering", "globalism", "internationalism", "fn", "förenta nationerna",
-        "censur", "yttrandefrihet hotad", "demokrati i fara", "förrädare",
-        "försvara sverige", "sverige först", "sverige åt svenskarna", "vårt land",
-        "sverigedemokrat", "sverigedemokraterna", "sd",
-    ])
-
-    # ─── COMPOUND PATTERNS ───
-    env_terms = ["miljö", "natura 2000", "biologisk mångfald", "naturvård"]
-    extraction_terms = ["gruva", "gruvdrift", "malmbrytning"]
-    pro_industry = ["ja till", "positivt", "möjliggöra"]
-    if any(t in text_lower for t in env_terms) and any(t in text_lower for t in extraction_terms):
-        if any(t in text_lower for t in pro_industry):
-            adjustments["right"] += 0.80
-            adjustments["far_right"] += 0.40
-            adjustments["centre_right"] += 0.40
-    healthcare_terms = ["sjukvård", "vård", "missbruksvård"]
-    privatization_terms = ["privat", "privata aktörer", "företag", "marknad"]
-    if any(t in text_lower for t in healthcare_terms) and any(t in text_lower for t in privatization_terms):
-        adjustments["right"] += 0.60
-        adjustments["centre_right"] += 0.30
-    eu_budget_terms = ["eu-budget", "eu:s budget", "gemensam budget", "strukturfond", "budgetram", "budgetdisciplin"]
-    conservative_terms = ["konservativ", "minska", "minskning", "effektivisera", "kritisk", "motsätter"]
-    if any(t in text_lower for t in eu_budget_terms) and any(t in text_lower for t in conservative_terms):
-        adjustments["right"] += 0.80
-        adjustments["far_right"] += 0.40
-
-    return adjustments
 
 
 # Cache the lemma keyword index so it is built only once per process
@@ -517,9 +356,14 @@ def score_motion(
         LOG.debug("Transformer predict unavailable for speech: %s", e)
 
     # Compute exact normalised weights using Fractions to avoid recurring decimals
+    keyword_norm = {}
     keyword_sum = sum(scores.values())
-    keyword_norm = {k: (Fraction(int(v), int(keyword_sum)) if keyword_sum > 0 else Fraction(0, 1)) for k, v in scores.items()}
+    if keyword_sum > 0:
+        keyword_norm = {k: Fraction(int(v), int(keyword_sum)) for k, v in scores.items()}
+    else:
+        keyword_norm = {k: Fraction(0, 1) for k in categories.keys()}
 
+    emb_norm = {}
     emb_sum = sum(emb_map.values()) if emb_map else 0.0
     if emb_sum > 1e-12:
         _emb_sum_frac = Fraction(emb_sum)
@@ -527,6 +371,7 @@ def score_motion(
     else:
         emb_norm = {k: Fraction(0, 1) for k in categories.keys()}
 
+    zs_norm = {}
     zs_sum = sum(zs_map.values()) if zs_map else 0.0
     if zs_sum > 1e-12:
         _zs_sum_frac = Fraction(zs_sum)
@@ -585,46 +430,32 @@ def score_motion(
             oll_w = 0.0
             bert_w = 0.0
 
-        # Combine signals using Fraction for exact arithmetic
-        _kw_w = Fraction(kw_w).limit_denominator(100)
-        _emb_w = Fraction(emb_w).limit_denominator(100)
-        _zs_w = Fraction(zs_w).limit_denominator(100)
-        _oll_w = Fraction(oll_w).limit_denominator(100)
-        _bert_w = Fraction(bert_w).limit_denominator(100)
-
-        combined_norm = {
-            k: (
-                _kw_w * keyword_norm.get(k, Fraction(0, 1))
-                + _emb_w * emb_norm.get(k, Fraction(0, 1))
-                + _zs_w * zs_norm.get(k, Fraction(0, 1))
-                + _oll_w * Fraction(ollama_map.get(k, 0.0)).limit_denominator(1000)
-                + _bert_w * Fraction(bert_cls_scores.get(k, 0.0)).limit_denominator(1000)
-            )
-            for k in categories.keys()
-        }
-
-        total_combined = sum(combined_norm.values())
-        if total_combined > 0:
-            for k in combined_norm:
-                combined_norm[k] = combined_norm[k] / total_combined
+        # Combine signals using module for exact arithmetic
+        ollama_norm = {k: Fraction(v).limit_denominator(1000) for k, v in ollama_map.items()} if ollama_map else None
+        bert_norm = {k: Fraction(v).limit_denominator(1000) for k, v in bert_cls_scores.items()} if bert_cls_scores else None
+        
+        combined_norm = compute_weighted_combination(
+            keyword_norm=keyword_norm,
+            embedding_norm=emb_norm,
+            zero_shot_norm=zs_norm,
+            ollama_norm=ollama_norm,
+            bert_norm=bert_norm,
+            kw_weight=kw_w,
+            emb_weight=emb_w,
+            zs_weight=zs_w,
+            oll_weight=oll_w,
+            bert_weight=bert_w,
+        )
 
     # Apply rhetorical adjustments regardless of meta-classifier path
     if use_speech_preprocessing:
-        rhet_adjustments = _detect_rhetorical_patterns(text)
+        rhet_adjustments = detect_rhetorical_patterns(text)
         if any(v != 0.0 for v in rhet_adjustments.values()):
             rhetorical_applied = True
+            combined_norm = apply_rhetorical_adjustments(combined_norm, rhet_adjustments, boost_factor=2.0)
             for k in combined_norm:
-                adj = rhet_adjustments.get(k, 0.0)
-                if adj > 0:
-                    # Aggressive multiplicative boost so speech-level rhetorical
-                    # signals (the primary source of truth for speeches) can
-                    # override motion-trained embedding/BERT bias.
-                    combined_norm[k] *= Fraction(20, 10) + Fraction(adj).limit_denominator(100)
-                    matches.setdefault(k, []).append(f"rhetorical:x{float(2.0 + adj):.2f}")
-            total_adj = sum(combined_norm.values())
-            if total_adj > 0:
-                for k in combined_norm:
-                    combined_norm[k] = combined_norm[k] / total_adj
+                if rhet_adjustments.get(k, 0.0) > 0:
+                    matches.setdefault(k, []).append(f"rhetorical:x{float(2.0 + rhet_adjustments.get(k, 0.0)):.2f}")
 
     base_version = "0.8.0"
     classifier_version = base_version
@@ -833,7 +664,7 @@ def score_speech(
 
     # Get rhetorical scores
     if rhetoric_scores is None and use_speech_preprocessing:
-        rhetoric_scores = _detect_rhetorical_patterns(text)
+        rhetoric_scores = detect_rhetorical_patterns(text)
     rhetoric_scores = rhetoric_scores or {}
 
     # Apply speech meta-classifier if available

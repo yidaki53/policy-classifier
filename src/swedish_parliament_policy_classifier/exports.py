@@ -200,6 +200,26 @@ def score_speech(*args, **kwargs):
     return impl(*args, **kwargs)
 
 
+def detect_rhetorical_patterns(*args, **kwargs):
+    impl = _lazy_attr("detect_rhetorical_patterns", ["swedish_parliament_policy_classifier.nlp.rhetorical_detector"])
+    return impl(*args, **kwargs)
+
+
+def load_rhetorical_weights(*args, **kwargs):
+    impl = _lazy_attr("load_rhetorical_weights", ["swedish_parliament_policy_classifier.nlp.rhetorical_detector"])
+    return impl(*args, **kwargs)
+
+
+def compute_weighted_combination(*args, **kwargs):
+    impl = _lazy_attr("compute_weighted_combination", ["swedish_parliament_policy_classifier.classifier.signal_combinator"])
+    return impl(*args, **kwargs)
+
+
+def apply_rhetorical_adjustments(*args, **kwargs):
+    impl = _lazy_attr("apply_rhetorical_adjustments", ["swedish_parliament_policy_classifier.classifier.signal_combinator"])
+    return impl(*args, **kwargs)
+
+
 __all__ = [
     "load_definitions",
     "score_motion",
@@ -220,6 +240,11 @@ __all__ = [
     "init_spacy",
     "classify_motion",
     "classify_and_persist",
+    "score_speech",
+    "detect_rhetorical_patterns",
+    "load_rhetorical_weights",
+    "compute_weighted_combination",
+    "apply_rhetorical_adjustments",
 ]
 
 # Graphify import hints: explicit references to top-level implementation modules
