@@ -10,10 +10,13 @@ Implementation sources:
     - score_motion: classifier.scorer.score_motion
 See inert import-hints and docstrings below for AST/semantic anchoring.
 """
+import logging
 from importlib import import_module, util as _util
 from types import ModuleType
 from typing import Any
 from pathlib import Path
+
+LOG = logging.getLogger(__name__)
 
 
 def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
@@ -27,8 +30,9 @@ def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
         try:
             mod = import_module(mod_name)
             return getattr(mod, attr_name)
-        except Exception:
+        except Exception as exc:
             # Attempt a file-based fallback loader: resolve likely file locations
+            LOG.debug("Import %s failed: %s", mod_name, exc)
             try:
                 repo_root = Path(__file__).resolve().parents[2]
                 parts = mod_name.split('.')
@@ -52,7 +56,8 @@ def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
                             sys.modules[mod_name] = module
                             spec.loader.exec_module(module)  # type: ignore[attr-defined]
                             return getattr(module, attr_name)
-                    except Exception:
+                    except Exception as exc:
+                        LOG.debug("File-based load failed for %s: %s", mod_name, exc)
                         continue
             except Exception:
                 pass

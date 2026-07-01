@@ -18,7 +18,7 @@ _spacy_nlp = None
 try:
     import spacy  # type: ignore
 except Exception:
-    spacy = None
+    spacy = None  # optional dependency
 
 # Expanded minimal Swedish stopword set as fallback (can be extended by loading spaCy stopwords)
 _SW_STOPWORDS = set(
@@ -100,6 +100,7 @@ def extract_plain_text_from_html(raw_text: str) -> str:
         text = soup.get_text(" ")
     except Exception:
         # Fallback when bs4 is unavailable: strip common HTML patterns.
+        pass
         text = re.sub(r"<script[^>]*>.*?</script>", " ", text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r"<style[^>]*>.*?</style>", " ", text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r"<[^>]+>", " ", text)

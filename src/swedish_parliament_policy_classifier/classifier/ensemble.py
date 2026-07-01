@@ -33,7 +33,7 @@ def _notna(val) -> bool:
         import pandas as _pd
         return bool(_pd.notna(val))
     except Exception:
-        return True
+        return True  # model_path resolution failed
 
 
 def _get_default_model_path() -> Path:
@@ -41,7 +41,7 @@ def _get_default_model_path() -> Path:
         # ensemble.py is in src/<package>/classifier/ → repo root is parents[3]
         return Path(__file__).resolve().parents[3] / "models" / "ensemble_meta_clf.pkl"
     except Exception:
-        return Path("models/ensemble_meta_clf.pkl")
+        return Path("models/ensemble_meta_clf.pkl")  # fallback path
 
 
 def _build_feature_names(category_names: List[str], max_topics: int = 100) -> List[str]:
@@ -56,6 +56,7 @@ def _build_feature_names(category_names: List[str], max_topics: int = 100) -> Li
         return get_feature_names(category_names, max_topics=max_topics)
     except Exception:
         # Fallback to internal logic if the helper is unavailable
+        LOG.debug("feature name helper unavailable, using built-in logic")
         names = []
         for cat in category_names:
             names.append(f"kw_{cat}")

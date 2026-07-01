@@ -42,7 +42,7 @@ class ExperimentRun:
             inst._run = mlflow.start_run(run_name=run_name)
             inst._mlflow = mlflow
         except Exception:
-            inst._mlflow = None
+            inst._mlflow = None  # mlflow import/init failed
             inst._run = None
 
         return inst
@@ -60,7 +60,7 @@ class ExperimentRun:
             try:
                 clean[str(k)] = float(v)
             except Exception:
-                continue
+                continue  # artifact logging failed
 
         if self._mlflow is not None:
             self._mlflow.log_metrics(clean, step=step)
@@ -72,7 +72,7 @@ class ExperimentRun:
             try:
                 self._mlflow.log_artifact(local_path)
             except Exception:
-                pass
+                pass  # mlflow end_run cleanup failed
             return
         self._fallback.setdefault("artifacts", []).append(local_path)
 

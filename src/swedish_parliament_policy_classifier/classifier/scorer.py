@@ -18,7 +18,7 @@ import joblib
 try:
     import numpy as np
 except Exception:
-    np = None
+    np = None  # optional dependency
 
 from swedish_parliament_policy_classifier.models.models import (
     CategoryDef,
@@ -469,7 +469,7 @@ def score_motion(
         try:
             signals.append(f"({embedding_matcher.model_name})")
         except Exception:
-            signals.append("(unknown)")
+            signals.append("(unknown)")  # model_name unavailable
     if zs_map:
         signals.append("zs")
     if meta_clf is not None:
@@ -499,17 +499,17 @@ def score_motion(
                 try:
                     probs = clf.predict_proba([text])
                 except Exception:
-                    probs = None
+                    probs = None  # predict_proba failed
 
                 if probs is not None:
                     try:
                         prob_vec = probs[0]
                     except Exception:
-                        prob_vec = probs
+                        prob_vec = probs  # probs indexing failed
                     try:
                         labels = list(mlb.classes_)
                     except Exception:
-                        labels = list(range(len(prob_vec)))
+                        labels = list(range(len(prob_vec)))  # classes_ unavailable
 
                     sup_map = {str(l): float(p) for l, p in zip(labels, prob_vec)}
                     max_combined = max(combined_norm.values()) if combined_norm else 0.0
@@ -527,7 +527,7 @@ def score_motion(
                             try:
                                 classifier_version += f"({clf_path.name})"
                             except Exception:
-                                classifier_version += "(unknown)"
+                                classifier_version += "(unknown)"  # model path unavailable
         except Exception as e:
             LOG.warning("Supervised fallback failed: %s", e)
 
