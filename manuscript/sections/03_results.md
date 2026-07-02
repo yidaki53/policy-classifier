@@ -42,7 +42,7 @@ last_updated_utc: "2026-06-28T11:20:00Z"
 
 # Results
 
-This section reports what the pipeline estimates in practice and where observed party differences are strongest. The focus is empirical rather than procedural. We present modality-sensitive contrasts, fulfillment patterns, and consistency contrasts using the current parquet artifacts.
+This section reports what the pipeline estimates in practice and where observed party differences are strongest. The focus is empirical rather than procedural. We present modality-sensitive contrasts, fulfillment patterns, and consistency contrasts using the current parquet artifacts, organized by the three hypotheses stated in the Question section.
 
 How to read this section: each reported metric summarizes observed parliamentary behavior under clearly stated assumptions. A higher consistency value means stronger agreement between what a party proposes, says, and does in linked action records. A higher fulfillment value means a larger share of speech-linked issue pathways that continue into vote-side action records. A higher contradiction value means speech-side and action-side signals point in more different directions. Use these metrics as comparison tools, not as causal effect estimates.
 
@@ -53,13 +53,13 @@ The figures below show headline outputs directly used for main-text interpretati
 *Figure 1. Consistency vs Fulfillment by party. Each point represents one parliamentary party, plotted as mean consistency score (x-axis) against mean fulfillment score (y-axis). Higher values indicate greater coherence between proposed policies, spoken commitments, and enacted votes.*
 
 ![Parliament Direction Over Time](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
-*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement (0 = far left, 1 = far right). Shaded bands indicate 95% bootstrap CIs around the annual mean.*
+*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement. Shaded bands indicate 95% bootstrap CIs around the annual mean.*
 
 ![Quid Ergo: Speech vs Action ideology by party](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
-*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches (anforanden) versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
+*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
 
 ![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
-*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores [0,1] across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
+*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
 
 We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 
@@ -70,6 +70,10 @@ On the current full corpus, the workflow covers `n=202925` motions (1971-2024), 
 These figures indicate informative but uncertain signal. The speech-specific meta-classifier is the primary anchor for speech-level claims, while the motion baseline and integrated hybrid ensemble serve as cross-domain and cross-model sensitivity checks. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value. This interpretative stance follows established practice in cross-national scaling of party positions from parliamentary text [@ebrecht2024cross].
 
 Across hypotheses, the results are consistent with modality-sensitive ideology measurement under a descriptive interpretation. Party-level profiles differ across motions, speeches, and vote-linked action channels. Speech-action consistency also varies across parties after linkage constraints. Fulfillment diagnostics add information beyond aggregate consistency alone.
+
+## Hypothesis 1: Modality-Sensitive Profiles
+
+The first hypothesis predicts that party ideology profiles differ across motions, speeches, and vote-linked action channels. The evidence supports this claim under a descriptive interpretation.
 
 ## Cross-Modality Contrasts
 
@@ -102,6 +106,14 @@ Recency-weighted party and parliament summaries continue to support the same int
 We use recency weighting to answer a specific temporal question. Do contemporary party positions reflect information that is closer in time to current parliamentary behavior, rather than an equal average of distant historical periods? This improves interpretability for present-facing comparisons. It also introduces an explicit tradeoff. Short-term volatility can carry more influence than long-run structural stability.
 
 (See Figure 2, Parliament Direction Over Time, generated by `scripts/analyze_consistency_trends.py` and `scripts/analyze_recency_weighted_trends.py`.)
+
+## Hypothesis 2: Say-Do Consistency
+
+The second hypothesis predicts that speech-action consistency varies systematically across parties after fairness-constrained linkage. The evidence supports this claim with the caveats described below.
+
+## Hypothesis 3: Fulfillment and Contradiction Diagnostics
+
+The third hypothesis predicts that fulfillment and contradiction diagnostics add information beyond aggregate consistency alone. The evidence supports this claim: parties with similar consistency scores can differ substantially in fulfillment rates, as shown in the SD vs V contrast below.
 
 ## Robustness and Interpretation Limits
 
