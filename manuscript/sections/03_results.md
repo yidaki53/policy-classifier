@@ -50,16 +50,16 @@ How to read this section: each reported metric summarizes observed parliamentary
 The figures below show headline outputs directly used for main-text interpretation.
 
 ![Consistency vs Fulfillment](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
-*Figure 1. Consistency vs Fulfillment by party. Each point represents one parliamentary party, plotted as mean consistency score (x-axis) against mean fulfillment score (y-axis). Higher values indicate greater coherence between proposed policies, spoken commitments, and enacted votes.*
+*Figure 1. Consistency vs Fulfillment by party. The x-axis shows mean consistency score (0--1 scale, where higher values indicate stronger cross-modality agreement between motions, speeches, and votes). The y-axis shows mean fulfillment score (0--1 scale, where higher values indicate a larger share of speech-linked issue pathways that proceed to vote-side action records). Points in the upper-right quadrant represent parties with both high cross-modality coherence and high action-pathway continuation.*
 
 ![Parliament Direction Over Time](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
-*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement. Shaded bands indicate 95% bootstrap CIs around the annual mean.*
+*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement on a left--right scale (0 = left, 1 = right). Shaded bands indicate 95% bootstrap confidence intervals around the annual mean. The series shows gradual centrist drift with periodic polarization around election years.*
 
 ![Quid Ergo: Speech vs Action ideology by party](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
-*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
+*Figure 3. Quid Ergo: Speech vs Action ideology by party. The x-axis shows mean ideological placement estimated from speech-side signals; the y-axis shows mean ideological placement from action-side consensus (motions + votes). Both axes use the same 0--1 left--right scale. Points on the diagonal indicate parties where speech and action ideology align; distance from the diagonal quantifies the say--do gap. Parties above the diagonal are more right-coded in action than in speech; parties below are more left-coded in action.*
 
 ![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
-*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
+*Figure 4. Pareto frontier of consistency versus vote fidelity. Both axes normalize scores across parties to a 0--1 scale. The x-axis shows consistency (cross-modality agreement); the y-axis shows vote fidelity (alignment between speech-linked positions and actual voting records). Points closer to the upper-right corner represent parties that achieve both high cross-modality coherence and high vote-side alignment. The frontier line connects parties that are not dominated on both dimensions simultaneously.*
 
 We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 

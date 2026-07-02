@@ -22,9 +22,19 @@ last_updated_utc: "2026-06-29T12:00:00Z"
 
 # Methodology
 
+## Data Sources
+
+We use official Riksdag open data (data.riksdagen.se) as the primary source. Three modalities are ingested and normalized into compressed parquet datasets:
+
+- **Motions**: `n=202925` documents spanning 1971--2024, retrieved via the Riksdag Open Data API (`/api/v1/dokument/sok?typ=mot`). Each motion includes metadata (party, date, title, signatories) and full text. Documents are deduplicated by `dok_id` and filtered to exclude committee reports and government propositions unless explicitly analyzed as comparison material.
+- **Speeches**: `n=141605` unique plenary speeches spanning 2014--2026, retrieved via the Riksdag anförande API (`/api/v1/anforande/sok`). Each speech includes speaker, party affiliation, and timestamp. Speeches shorter than 50 characters after HTML stripping are excluded.
+- **Votes**: `n=21464` unique roll-call vote events spanning 1993--2026, retrieved via the Riksdag votering API (`/api/v1/votering/sok`). Each vote event includes party-level voting records (yes/no/abstain/absent) and metadata linking to the underlying proposition.
+
+All raw data are stored under `data/` and normalized into parquet format under `data/parquet/`, `data/speeches/parquet/`, `data/betankande/parquet/`, and `data/votering/parquet/`. The ingest pipeline is runnable via `scripts/download_speeches.py`, `scripts/download_votering.py`, and `scripts/download_betankande.py`.
+
 We focus on Sweden because the parliamentary record offers unusually high institutional traceability for this research objective [@carlson2024swedish]. We can observe party-level behavior consistently across motions, plenary speeches, and roll-call voting, all tied to a transparent legislative process. This setting reduces ambiguity about where parties make claims and where they record actions. That clarity is necessary because our core goal is to compare political speech with parliamentary conduct, not to maximize cross-country breadth.
 
-We use official Riksdag open data as the primary source because each modality contributes a distinct inferential role that no single source can replace. Motions capture formal policy proposals. Speeches capture rhetorical framing and agenda emphasis. Votes capture enacted parliamentary choices under institutional constraints. The choice to combine these sources is not cosmetic. We need this combination to test whether observed ideology depends on what we measure as statement, proposal, or action, following recent multimodal approaches in political analysis [@jaursch2025multimodal; @osnabrugge2023speech].
+Each modality contributes a distinct inferential role that no single source can replace. Motions capture formal policy proposals. Speeches capture rhetorical framing and agenda emphasis. Votes capture enacted parliamentary choices under institutional constraints. The choice to combine these sources is not cosmetic. We need this combination to test whether observed ideology depends on what we measure as statement, proposal, or action, following recent multimodal approaches in political analysis [@jaursch2025multimodal; @osnabrugge2023speech].
 
 ## Measurement architecture
 
