@@ -472,6 +472,13 @@ def main():
     p.add_argument("--generated-rhetoric-out", default=None)
     p.add_argument("--min-total-input-rows", type=int, default=100000, help="Fail if speech parquet has fewer rows")
     p.add_argument("--speech-timeout", type=int, default=300, help="Max seconds per speech classification (0=disabled)")
+    p.add_argument("--calibrator", default="models/probability_calibrator.pkl", help="Path to probability calibrator pickle")
+    p.add_argument("--adaptive-thresholds", default="models/adaptive_thresholds.json", help="Path to adaptive thresholds JSON")
+    p.add_argument("--no-calibration", dest="use_calibration", action="store_false", help="Disable probability calibration")
+    p.add_argument("--no-adaptive-thresholds", dest="use_adaptive_thresholds", action="store_false", help="Disable adaptive thresholds")
+    p.add_argument("--bert-window-strategy", default="truncate", choices=["truncate", "sliding", "hierarchical"], help="BERT window strategy for long texts")
+    p.add_argument("--bert-window-overlap", type=float, default=0.1, help="Overlap fraction for sliding BERT window")
+    p.add_argument("--bert-aggregation", default="mean", choices=["mean", "max", "vote"], help="Aggregation for BERT windows")
     args = p.parse_args()
 
     ctx = apply_resource_controls(args)
@@ -587,6 +594,25 @@ def main():
             print(f"Motion meta-classifier not loaded: {e}", file=sys.stderr)
             meta_clf = None
 
+    # Enhanced scorer integration
+    enhanced_scorer = None
+    try:
+        from swedish_parliament_policy_classifier.classifier.enhanced_scorer import EnhancedScorer
+        enhanced_scorer = EnhancedScorer(
+            calibrator_path=Path(args.calibrator) if args.calibrator else None,
+            threshold_path=Path(args.adaptive_thresholds) if args.adaptive_thresholds else None,
+            use_calibration=args.use_calibration,
+            use_adaptive_thresholds=args.use_adaptive_thresholds,
+            bert_window_strategy=args.bert_window_strategy,
+            bert_window_overlap=args.bert_window_overlap,
+            bert_aggregation=args.bert_aggregation,
+        )
+        if enhanced_scorer.calibrator or enhanced_scorer.threshold_manager:
+            print("Enhanced scorer enabled with calibration/adaptive thresholds.", flush=True)
+    except Exception as e:
+        print(f"Enhanced scorer not available: {e}", file=sys.stderr)
+        enhanced_scorer = None
+
     # Load previously-hanged speech IDs to skip them on resume
     hanged_speech_ids = _read_hanged_speech_ids()
     if hanged_speech_ids:
@@ -689,9 +715,21 @@ def main():
                 except Exception:
                     rhetoric_scores = None
 
-            # Classify with optional timeout
+            # Classify with optional timeout and enhanced scorer
             try:
-                if args.speech_timeout and args.speech_timeout > 0:
+                if enhanced_scorer is not None:
+                    results = enhanced_scorer.score_speech_enhanced(
+                        speech_id=speech_id,
+                        text=text,
+                        categories=defs,
+                        embedding_matcher=matcher,
+                        use_zero_shot=args.use_zero_shot,
+                        topic_distributions=topic_dists,
+                        speech_meta_clf=speech_meta_clf,
+                        use_ollama=args.use_ollama,
+                        rhetoric_scores=rhetoric_scores,
+                    )
+                elif args.speech_timeout and args.speech_timeout > 0:
                     results = _classify_speech_with_timeout(
                         speech_id=speech_id,
                         text=text,
@@ -776,13 +814,12 @@ def main():
 
             if processed % 20 == 0:
                 elapsed = time.time() - start
-                remaining = new_to_classify - processed if new_to_classify > 0 else 0
-                if remaining < 0:
-                    remaining = 0
-                # total_done = persisted existing + new classified in this run (flushed + buffer)
-                total_done = len(existing_speech_ids) + len(newly_classified_ids) + len(rows)
-                total_done_display = min(total_done, input_rows) if input_rows > 0 else total_done
-                # Clamp remaining to non-negative for ETA calc
+                # Count unique speech IDs in buffer (rows contains 7 entries per speech)
+                buffer_speech_ids = {str(x.get("speech_id")) for x in rows if x.get("speech_id") is not None}
+                total_done = len(existing_speech_ids) + len(newly_classified_ids) + len(buffer_speech_ids)
+                # Use total_done directly (no clamping) to avoid display fluctuations
+                total_done_display = total_done
+                # For ETA, use max to avoid negative values
                 remaining = max(0, new_to_classify - processed)
                 title_pct = 100 * total_done_display / input_rows if input_rows > 0 else 0
                 new_pct = 100 * processed / new_to_classify if new_to_classify > 0 else 0
