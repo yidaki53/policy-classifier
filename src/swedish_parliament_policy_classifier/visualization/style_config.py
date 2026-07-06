@@ -7,6 +7,8 @@ size, data range, source citation and generation date.
 
 import matplotlib.pyplot as plt
 from datetime import datetime, timezone
+from pathlib import Path
+import json
 
 # ---------------------------------------------------------------------------
 # Identity
@@ -63,6 +65,89 @@ CATEGORY_COLORS = {
     "centre_right":  "#7FB3D5",
     "right":         "#3366AA",
     "far_right":     "#00008B",
+}
+
+# ---------------------------------------------------------------------------
+# Party labels and colors (fetched from Riksdagen API or parquet data)
+# ---------------------------------------------------------------------------
+def _infer_current_parties() -> set[str]:
+    """Infer parties currently represented in the Riksdag.
+
+    Source priority:
+      1. Existing cache (data/.parliamentary_party_cache.json)
+      2. Riksdag API personlista (data.riksdagen.se)
+      3. Party metadata from definitions/political_spectrum.yaml
+      4. Conservative fallback (last resort)
+    """
+    repo_root = Path(__file__).resolve().parents[3]
+
+    # 1) Try cache first
+    cache_path = repo_root / "data" / ".parliamentary_party_cache.json"
+    if cache_path.exists():
+        try:
+            cache = json.loads(cache_path.read_text(encoding="utf-8"))
+            parties = cache.get("parties", [])
+            if parties:
+                return set(str(p) for p in parties if str(p).strip())
+        except Exception:
+            pass
+
+    # 2) Try Riksdag API
+    try:
+        import requests
+        resp = requests.get(
+            "https://data.riksdagen.se/personlista/?utformat=json",
+            timeout=10,
+        )
+        resp.raise_for_status()
+        payload = resp.json()
+        persons = (((payload.get("personlista") or {}).get("person")) or [])
+        api_parties = {str(p.get("parti", "")).strip() for p in persons if p.get("parti")}
+        if api_parties:
+            return {p for p in api_parties if p}
+    except Exception:
+        pass
+
+    # 3) Try YAML definitions
+    defs_path = repo_root / "src" / "swedish_parliament_policy_classifier" / "definitions" / "political_spectrum.yaml"
+    if defs_path.exists():
+        try:
+            import yaml
+            with open(defs_path) as f:
+                content = yaml.safe_load(f)
+            if content:
+                return {str(k) for k in content.keys() if str(k).strip()}
+        except Exception:
+            pass
+
+    # 4) Conservative fallback
+    return {"S", "M", "SD", "V", "C", "KD", "L", "MP"}
+
+
+CURRENT_PARTIES = _infer_current_parties()
+
+PARTY_LABELS = {
+    "S":  "Socialdemokraterna",
+    "M":  "Moderaterna",
+    "SD": "Sverigedemokraterna",
+    "V":  "Vänsterpartiet",
+    "C":  "Centerpartiet",
+    "KD": "Kristdemokraterna",
+    "L":  "Liberaler",
+    "MP": "Miljöpartiet",
+    "NYD": "Ny Demokrati",  # historical
+}
+
+PARTY_COLORS_PLOT = {
+    "S":  "#CC3333",   # red
+    "M":  "#3366AA",   # blue
+    "SD": "#00008B",   # dark blue
+    "V":  "#8B0000",   # dark red
+    "C":  "#7FB3D5",   # light blue
+    "KD": "#FF7F7F",   # light red
+    "L":  "#33CCFF",   # cyan
+    "MP": "#33CC33",   # green
+    "NYD": "#888888",  # gray
 }
 
 
