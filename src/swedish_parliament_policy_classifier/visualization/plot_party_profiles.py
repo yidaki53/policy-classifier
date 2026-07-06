@@ -20,8 +20,9 @@ def plot_party_profiles(conn, out_dir: str = "figures") -> Optional[Tuple[str, s
     profiles = compute_party_profiles(conn)
     if not profiles:
         return None
-    # Exclude historical party NYD
-    profiles = {p: d for p, d in profiles.items() if p != "NYD"}
+    from swedish_parliament_policy_classifier.visualization.style_config import CURRENT_PARTIES
+    # Filter to current Riksdag parties only
+    profiles = {p: d for p, d in profiles.items() if p in CURRENT_PARTIES}
 
     # Prefer an explicit left->right ordering
     ordered_cats = [

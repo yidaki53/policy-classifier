@@ -10,7 +10,7 @@
 #   Recompute with: python -m swedish_parliament_policy_classifier.definitions.loader --recheck
 # ============================================================
 schema_version: "2.0.0"
-checksum: "fb96649483b48207934c3ab7a007b8ce2f9b4538d0890d31717ec30073b204ee"
+checksum: "a50e45fa154e6e6d6a929ceed53bf563ccde6e8d834a5ea9f237509e5860c021"
 _agent_frontmatter:
   id: "definitions.political_spectrum"
   purpose: "Canonical deterministic ideology taxonomy used by classifier/scoring pipelines."
@@ -212,9 +212,9 @@ categories:
       - "jämställdhet|feminism|hbtq|lgbtq|mänskliga.*rättigheter"
 
   - name: centre
-    definition: "Politik i mitten som betonar kompromiss, pragmatism, balanserade lösningar mellan marknad och välfärd, teknokratisk förvaltning, och evidensbaserad politik. Betonar samarbete över blockgränser."
+    definition: "Politik i mitten som betonar kompromiss, pragmatism, balanserade lösningar mellan marknad och välfärd, teknokrati, och evidensbaserad politik. Betonar samarbete över blockgränser."
     keywords:
-      # Swedish
+      # Swedish — IDEOLOGICALLY centrist terms only, NOT generic governance/administration terms.
       - "mitten"
       - "centrist"
       - "balans"
@@ -235,23 +235,7 @@ categories:
       - "opartisk"
       - "saklig"
       - "oberoende"
-      - "myndighet"
-      - "förvaltning"
-      - "process"
-      - "procedure"
-      - "förbättring"
-      - "kvalitet"
-      - "kvalitetssäkring"
-      - "standard"
-      - "norm"
-      - "riktlinje"
-      - "vägledning"
-      - "handläggning"
-      - "rutin"
-      - "system"
-      - "struktur"
-      - "organisation"
-      # English
+      # English — IDEOLOGICALLY centrist terms only.
       - "centre"
       - "center"
       - "centrist"
@@ -274,25 +258,11 @@ categories:
       - "impartial"
       - "objective"
       - "independent"
-      - "administration"
-      - "process"
-      - "procedure"
-      - "improvement"
-      - "quality"
-      - "quality assurance"
-      - "standard"
-      - "norm"
-      - "guideline"
-      - "handling"
-      - "routine"
-      - "system"
-      - "structure"
-      - "organisation"
     regexes:
       - "mitten|centrist|balans|kompromiss|konsensus|pragmatisk"
       - "blocköverskridande|samarbete|försoning|dialog|medling"
       - "evidensbaserad|forskningsbaserad|utvärdering|effektivitet"
-      - "opartisk|saklig|oberoende|myndighet|förvaltning"
+      - "opartisk|saklig|oberoende"
 
   - name: centre_right
     definition: "Måttligt högerriktad politik som kombinerar marknadsvänliga reformer med acceptans för vissa sociala program, entreprenörskap, innovation, och decentralisering. Betonar individuellt ansvar och konkurrens."

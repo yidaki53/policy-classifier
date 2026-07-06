@@ -14,6 +14,8 @@ from swedish_parliament_policy_classifier.analysis.speech_visualizations import 
 from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
 
 
+from swedish_parliament_policy_classifier.visualization.style_config import CURRENT_PARTIES
+
 EXCLUDED_OVERLAY_PARTIES = {"Unknown", "Moderaterna", "Vänsterpartiet", "X"}
 
 
@@ -81,7 +83,8 @@ def _filter_overlay_profiles(profiles: pd.DataFrame) -> pd.DataFrame:
         return profiles.copy()
     out = profiles.copy()
     out["party"] = out["party"].astype(str)
-    out = out[~out["party"].isin(EXCLUDED_OVERLAY_PARTIES)].copy()
+    # Filter to current Riksdag parties and exclude known error values
+    out = out[out["party"].isin(CURRENT_PARTIES)].copy()
     return out.reset_index(drop=True)
 
 

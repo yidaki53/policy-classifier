@@ -82,9 +82,10 @@ def build_speech_party_profiles(
     merged = cls.merge(meta, on="speech_id", how="left")
     merged["party"] = merged["party"].fillna("Unknown")
 
-    # normalize and filter out unknown/NYD parties for visualisations
+    # normalize and filter to current Riksdag parties only
     merged["party"] = merged["party"].astype(str).str.strip()
-    merged = merged[~merged["party"].str.lower().isin({"unknown", "nyd", ""})].copy()
+    from swedish_parliament_policy_classifier.visualization.style_config import CURRENT_PARTIES
+    merged = merged[merged["party"].isin(CURRENT_PARTIES)].copy()
 
     grp = (
         merged.groupby(["party", "category"], as_index=False)["normalized_weight"].mean()
@@ -108,11 +109,37 @@ def _profiles_to_matrix(profiles: pd.DataFrame) -> tuple[list[str], np.ndarray]:
 
 
 def _ideology_score(v: np.ndarray) -> float:
-    idx = np.arange(len(IDEOLOGY_ORDER), dtype=float)
+    """Compute a left-right ideology score from category proportions.
+
+    Uses a net left-vs-right balance approach:
+    - Left-side categories (far_left, left, centre_left) get negative weight (-1 each)
+    - Centre (centre) gets zero weight (neutral)
+    - Right-side categories (centre_right, right, far_right) get positive weight (+1 each)
+
+    Returns a float in [-1, 1] where:
+      -1.0 = far left extreme
+       0.0 = pure centre
+      +1.0 = far right extreme
+
+    This avoids the centrist pull of the old weighted-average formula which
+    inevitably mapped everything toward 0.5 regardless of ideological content.
+    """
     d = v.sum()
     if d <= 0:
-        return 0.5
-    return float((v @ idx) / d / max(1, len(IDEOLOGY_ORDER) - 1))
+        return 0.0
+
+    # Weights: far_left=-1, left=-1, centre_left=-1, centre=0, centre_right=+1, right=+1, far_right=+1
+    n = len(IDEOLOGY_ORDER)
+    if n < 7:
+        return 0.0
+
+    # Sum of left-side proportions, centre proportion, right-side proportions
+    left_sum = float(v[0] + v[1] + v[2])  # far_left, left, centre_left
+    right_sum = float(v[4] + v[5] + v[6])  # centre_right, right, far_right
+
+    # Net score: (right - left) / total
+    net = (right_sum - left_sum) / d
+    return float(net)
 
 
 def plot_speech_profiles(
@@ -165,9 +192,9 @@ def plot_speech_profiles(
     ax_top.scatter(scores_o, y, c=scores_o, cmap="RdYlBu_r", s=130, edgecolors="black")
     ax_top.set_yticks(y)
     ax_top.set_yticklabels(parties_o, fontsize=10)
-    ax_top.set_xlim(-0.02, 1.02)
+    ax_top.set_xlim(-1.02, 1.02)
     ax_top.set_ylim(len(parties_o) - 0.5, -0.5)
-    ax_top.set_xlabel("Ideological placement (Left=0 -> Right=1)", fontsize=10)
+    ax_top.set_xlabel("Ideological placement (Left → Right)", fontsize=10)
     ax_top.set_title("Speech ideological placement", fontsize=12)
     ax_top.invert_yaxis()
     ax_top.tick_params(axis="x", labelsize=9)

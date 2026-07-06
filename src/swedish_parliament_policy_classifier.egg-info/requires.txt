@@ -8,14 +8,11 @@ sentencepiece>=0.2.1
 seaborn>=0.12.0
 statsmodels>=0.14.0
 pytest-cov>=7.1.0
-transformers>=5.8.1
-accelerate>=1.13.0
-torch>=2.12.0
 pyarrow>=24.0.0
 zstandard>=0.25.0
 polars>=1.41.2
 loguru>=0.7.0
-spacy>=3.8.14
+lightgbm>=4.6.0
 
 [dev]
 pytest
@@ -26,3 +23,9 @@ plotly
 bertopic>=0.16.0
 lightgbm>=4.0.0
 ollama>=0.1.0
+
+[ml]
+transformers>=5.8.1
+accelerate>=1.13.0
+torch>=2.12.0
+spacy>=3.8.14

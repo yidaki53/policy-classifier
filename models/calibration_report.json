@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-07-03T19:41:42.101524+00:00",
+  "n_samples": 2656,
+  "n_categories": 7,
+  "categories": [
+    "centre",
+    "centre_left",
+    "centre_right",
+    "far_left",
+    "far_right",
+    "left",
+    "right"
+  ],
+  "expected_fallback_raw": 1.0,
+  "expected_fallback_calibrated": 1.0,
+  "thresholds": {
+    "centre": 0.4605263157894736,
+    "centre_left": 0.2552631578947368,
+    "centre_right": 0.15,
+    "far_left": 0.22105263157894733,
+    "far_right": 0.3921052631578947,
+    "left": 0.18684210526315786,
+    "right": 0.22105263157894733
+  },
+  "calibrator_categories_fitted": 7
+}

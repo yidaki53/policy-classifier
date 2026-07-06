@@ -3924,9 +3924,9 @@ name = "swedish-parliament-policy-classifier"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "accelerate" },
     { name = "beautifulsoup4" },
     { name = "datasets" },
+    { name = "lightgbm" },
     { name = "loguru" },
     { name = "polars" },
     { name = "pyarrow" },
@@ -3937,10 +3937,7 @@ dependencies = [
     { name = "requests" },
     { name = "seaborn" },
     { name = "sentencepiece" },
-    { name = "spacy" },
     { name = "statsmodels" },
-    { name = "torch" },
-    { name = "transformers" },
     { name = "zstandard" },
 ]
 
@@ -3957,6 +3954,12 @@ dev = [
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
+ml = [
+    { name = "accelerate" },
+    { name = "spacy" },
+    { name = "torch" },
+    { name = "transformers" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -3967,10 +3970,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "accelerate", specifier = ">=1.13.0" },
+    { name = "accelerate", marker = "extra == 'ml'", specifier = ">=1.13.0" },
     { name = "beautifulsoup4", specifier = ">=4.14.3" },
     { name = "bertopic", marker = "extra == 'dev'", specifier = ">=0.16.0" },
     { name = "datasets", specifier = ">=4.8.5" },
+    { name = "lightgbm", specifier = ">=4.6.0" },
     { name = "lightgbm", marker = "extra == 'dev'", specifier = ">=4.0.0" },
     { name = "loguru", specifier = ">=0.7.0" },
     { name = "matplotlib", marker = "extra == 'dev'" },
@@ -3988,13 +3992,13 @@ requires-dist = [
     { name = "scipy", marker = "extra == 'dev'" },
     { name = "seaborn", specifier = ">=0.12.0" },
     { name = "sentencepiece", specifier = ">=0.2.1" },
-    { name = "spacy", specifier = ">=3.8.14" },
+    { name = "spacy", marker = "extra == 'ml'", specifier = ">=3.8.14" },
     { name = "statsmodels", specifier = ">=0.14.0" },
-    { name = "torch", specifier = ">=2.12.0" },
-    { name = "transformers", specifier = ">=5.8.1" },
+    { name = "torch", marker = "extra == 'ml'", specifier = ">=2.12.0" },
+    { name = "transformers", marker = "extra == 'ml'", specifier = ">=5.8.1" },
     { name = "zstandard", specifier = ">=0.25.0" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "ml"]
 
 [package.metadata.requires-dev]
 dev = [

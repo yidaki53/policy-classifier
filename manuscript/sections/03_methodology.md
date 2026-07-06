@@ -17,7 +17,7 @@ update_triggers:
   - "Any change in data source, linkage logic, model family, or calibration settings"
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-06-29T12:00:00Z"
+last_updated_utc: "2026-07-03T11:16:00Z"
 ---
 
 # Methodology
@@ -26,9 +26,7 @@ last_updated_utc: "2026-06-29T12:00:00Z"
 
 We use official Riksdag open data (data.riksdagen.se) as the primary source. Three modalities are ingested and normalized into compressed parquet datasets:
 
-- **Motions**: `n=202925` documents spanning 1971--2024, retrieved via the Riksdag Open Data API (`/api/v1/dokument/sok?typ=mot`). Each motion includes metadata (party, date, title, signatories) and full text. Documents are deduplicated by `dok_id` and filtered to exclude committee reports and government propositions unless explicitly analyzed as comparison material.
-- **Speeches**: `n=141605` unique plenary speeches spanning 2014--2026, retrieved via the Riksdag anförande API (`/api/v1/anforande/sok`). Each speech includes speaker, party affiliation, and timestamp. Speeches shorter than 50 characters after HTML stripping are excluded.
-- **Votes**: `n=21464` unique roll-call vote events spanning 1993--2026, retrieved via the Riksdag votering API (`/api/v1/votering/sok`). Each vote event includes party-level voting records (yes/no/abstain/absent) and metadata linking to the underlying proposition.
+{{ corpus_counts_paragraph }}
 
 All raw data are stored under `data/` and normalized into parquet format under `data/parquet/`, `data/speeches/parquet/`, `data/betankande/parquet/`, and `data/votering/parquet/`. The ingest pipeline is runnable via `scripts/download_speeches.py`, `scripts/download_votering.py`, and `scripts/download_betankande.py`.
 
@@ -44,7 +42,7 @@ The modeling strategy is deterministic-first and multimodal by design [@barbera2
 - **Zero-shot NLI entailment** tests whether the text supports or criticizes each category's position, providing the strongest protection against rhetorical inversion — where a speaker quotes an opponent's language but opposes their position [@alvarez2021label; @patz2025german].
 - **A fine-tuned Swedish BERT classifier** provides domain-specific probability vectors trained on motion-level gold labels [@devlin2019bert; @wolf2020transformers].
 
-These five signal types (keyword + regex + embedding + zero-shot + BERT) are combined in a LightGBM meta-learner trained on 2,656 gold-label speeches, achieving 0.94 per-category accuracy on held-out test data. A rhetorical pattern detection layer, derived from Britannica-based keyword lists, multiplicatively boosts categories whose ideological framing signals are detected. The meta-learner receives both raw and rhetorically-adjusted probabilities, learning optimal weighting for the speech domain.
+These five signal types (keyword + regex + embedding + zero-shot + BERT) are combined in a LightGBM meta-learner. **The speech-specific meta-classifier (trained on n=2,656 speech gold labels) achieves 0.94 per-category accuracy on held-out test data** when deployed with calibration and adaptive thresholds via EnhancedScorer. Without these pipeline improvements, the base classifier achieves only 0.184 accuracy due to class imbalance in the speech domain. A rhetorical pattern detection layer, derived from Britannica-based keyword lists, multiplicatively boosts categories whose ideological framing signals are detected. The meta-learner receives both raw and rhetorically-adjusted probabilities, learning optimal weighting for the speech domain. This pipeline now loads the tuned speech meta-classifier (`models/speech_meta_clf.pkl.zst`) and calibration artifacts (`models/probability_calibrator.pkl`, `models/adaptive_thresholds.json`) by default.
 
 This hybrid design trades simplicity for better representational capacity while retaining a transparent baseline. Each component was added only after stratified validation showed a specific failure mode that existing components could not address: embedding scores catch semantic similarity but generate false positives when a speaker discusses a topic without endorsing it; zero-shot NLI corrects these false positives via the critique hypothesis term; BERT provides calibration for formal policy language where embeddings are noisy.
 

@@ -1,16 +1,16 @@
-# Graph Report - swedish_parliament_policy_classifier  (2026-07-01)
+# Graph Report - swedish_parliament_policy_classifier  (2026-07-05)
 
 ## Corpus Check
-- 360 files · ~3,498,759 words
+- 378 files · ~3,508,459 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6766 nodes · 7709 edges · 719 communities (647 shown, 72 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 339 edges (avg confidence: 0.8)
+- 7302 nodes · 8298 edges · 760 communities (686 shown, 74 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 368 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ab6a71b0`
+- Built from commit: `2653759b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -715,20 +715,62 @@
 - [[_COMMUNITY_Community 713|Community 713]]
 - [[_COMMUNITY_Community 714|Community 714]]
 - [[_COMMUNITY_Community 715|Community 715]]
+- [[_COMMUNITY_Community 719|Community 719]]
+- [[_COMMUNITY_Community 720|Community 720]]
+- [[_COMMUNITY_Community 721|Community 721]]
+- [[_COMMUNITY_Community 722|Community 722]]
+- [[_COMMUNITY_Community 723|Community 723]]
+- [[_COMMUNITY_Community 724|Community 724]]
+- [[_COMMUNITY_Community 725|Community 725]]
+- [[_COMMUNITY_Community 726|Community 726]]
+- [[_COMMUNITY_Community 727|Community 727]]
+- [[_COMMUNITY_Community 728|Community 728]]
+- [[_COMMUNITY_Community 729|Community 729]]
+- [[_COMMUNITY_Community 730|Community 730]]
+- [[_COMMUNITY_Community 731|Community 731]]
+- [[_COMMUNITY_Community 732|Community 732]]
+- [[_COMMUNITY_Community 733|Community 733]]
+- [[_COMMUNITY_Community 734|Community 734]]
+- [[_COMMUNITY_Community 735|Community 735]]
+- [[_COMMUNITY_Community 736|Community 736]]
+- [[_COMMUNITY_Community 737|Community 737]]
+- [[_COMMUNITY_Community 738|Community 738]]
+- [[_COMMUNITY_Community 739|Community 739]]
+- [[_COMMUNITY_Community 740|Community 740]]
+- [[_COMMUNITY_Community 741|Community 741]]
+- [[_COMMUNITY_Community 742|Community 742]]
+- [[_COMMUNITY_Community 743|Community 743]]
+- [[_COMMUNITY_Community 744|Community 744]]
+- [[_COMMUNITY_Community 745|Community 745]]
+- [[_COMMUNITY_Community 746|Community 746]]
+- [[_COMMUNITY_Community 747|Community 747]]
+- [[_COMMUNITY_Community 748|Community 748]]
+- [[_COMMUNITY_Community 749|Community 749]]
+- [[_COMMUNITY_Community 750|Community 750]]
+- [[_COMMUNITY_Community 753|Community 753]]
+- [[_COMMUNITY_Community 754|Community 754]]
+- [[_COMMUNITY_Community 756|Community 756]]
+- [[_COMMUNITY_Community 758|Community 758]]
+- [[_COMMUNITY_Community 761|Community 761]]
+- [[_COMMUNITY_Community 764|Community 764]]
+- [[_COMMUNITY_Community 765|Community 765]]
+- [[_COMMUNITY_Community 768|Community 768]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `load_definitions()` - 44 edges
-2. `EmbeddingMatcher` - 30 edges
+1. `load_definitions()` - 46 edges
+2. `EmbeddingMatcher` - 31 edges
 3. `add_figure_credits()` - 30 edges
-4. `main()` - 19 edges
-5. `load_topic_distributions()` - 19 edges
-6. `Say-vs-Do Contradiction Stack: Implementation Specification` - 19 edges
-7. `main()` - 17 edges
-8. `_lazy_attr()` - 17 edges
-9. `active_learning()` - 16 edges
-10. `_build_context()` - 16 edges
+4. `_lazy_attr()` - 22 edges
+5. `main()` - 20 edges
+6. `load_topic_distributions()` - 20 edges
+7. `Say-vs-Do Contradiction Stack: Implementation Specification` - 19 edges
+8. `main()` - 17 edges
+9. `load_meta_classifier()` - 17 edges
+10. `active_learning()` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `self_train_speech()` --calls--> `load_pickle()`  [INFERRED]
+  scripts/self_train_speech.py → src/swedish_parliament_policy_classifier/io/loader.py
 - `main()` --calls--> `write_snapshot_manifest()`  [INFERRED]
   scripts/classify_speeches_parquet.py → src/swedish_parliament_policy_classifier/definitions/registry.py
 - `test_score_simple_text()` --calls--> `load_definitions()`  [INFERRED]
@@ -737,30 +779,28 @@
   scripts/generate_party_trends.py → src/swedish_parliament_policy_classifier/visualization/style_config.py
 - `plot_party_fulfillment_trends()` --calls--> `add_figure_credits()`  [INFERRED]
   scripts/generate_party_trends.py → src/swedish_parliament_policy_classifier/visualization/style_config.py
-- `main()` --calls--> `plot_speech_profiles()`  [INFERRED]
-  scripts/analyze_speech_profiles.py → src/swedish_parliament_policy_classifier/analysis/speech_visualizations.py
 
-## Communities (719 total, 72 thin omitted)
+## Communities (760 total, 74 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (46): _build_axis_matrix(), canonical_axis_order(), compute_axis_alignment(), _cosine_dist(), _cmd_recheck(), _cmd_verify(), _compute_checksum(), _ensure_agent_frontmatter() (+38 more)
+Cohesion: 0.10
+Nodes (24): ExperimentRun, Small optional MLflow wrapper with graceful fallback when MLflow is missing., BaseFrames, _crossover(), evaluate_candidate(), main(), _mutate(), _party_expected() (+16 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.04
 Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.04
-Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
+Cohesion: 0.15
+Nodes (13): party_profiles_advanced, voting, ok, returncode, stderr_preview, stdout_preview, step, figures (+5 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.04
-Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
+Cohesion: 0.15
+Nodes (13): interactive, overlay, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.04
-Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
+Cohesion: 0.15
+Nodes (13): interactive, party_profiles_advanced, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.04
@@ -783,8 +823,8 @@ Cohesion: 0.04
 Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.04
-Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
+Cohesion: 0.11
+Nodes (19): interactive, party_profiles_advanced, three_way, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.04
@@ -823,8 +863,8 @@ Cohesion: 0.06
 Nodes (31): exists:https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip, checked, exists, exists:https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip, checked, exists, https://data.riksdagen.se/dataset/anforande/anforande-19992000.json.zip, checked (+23 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.09
-Nodes (25): _clean_partibet(), extract_party_from_intressent(), Extract party affiliation from Riksdagen bulk JSON structures.  Bulk dataset JSO, Return the party abbreviation from the first signatory if available.      The fu, Strip whitespace and return None for empty strings., extract_plain_text_from_html(), init_spacy(), _merge_stopwords() (+17 more)
+Cohesion: 0.08
+Nodes (26): _clean_partibet(), extract_party_from_intressent(), Extract party affiliation from Riksdagen bulk JSON structures.  Bulk dataset JSO, Return the party abbreviation from the first signatory if available.      The fu, Strip whitespace and return None for empty strings., extract_plain_text_from_html(), init_spacy(), _merge_stopwords() (+18 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.07
@@ -855,8 +895,8 @@ Cohesion: 0.10
 Nodes (14): _cosine(), EmbeddingMatcher, Embedding-based semantic matcher with fallbacks.  If `sentence_transformers` is, compute_category_embeddings(), load_cached_embeddings(), Compute and cache category embeddings for faster semantic matching.  This module, Return a mapping category_name -> embedding (numpy array) using matcher.      Ra, save_cached_embeddings() (+6 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.12
-Nodes (24): _build_feature_names(), build_feature_vector(), _get_default_model_path(), Ensemble stacking meta-classifier using LightGBM.  Replaces hardcoded fixed sign, Train a LightGBM classifier with class balancing and save it.      Converts inpu, # NOTE: The training script (train_speech_meta_clf_parquet.py) uses, Generate human-readable feature names matching build_feature_vector ordering., Build a named 1-row feature DataFrame for the meta-classifier.      Features are (+16 more)
+Cohesion: 0.20
+Nodes (16): active_learning(), _build_kw_index(), compute_entropy(), _embedding_scores_for_text(), ingest_csv(), _keyword_scores_for_text(), label_with_hf_zero_shot(), label_with_ollama() (+8 more)
 
 ### Community 29 - "Community 29"
 Cohesion: 0.14
@@ -931,12 +971,12 @@ Cohesion: 0.13
 Nodes (23): augment_rare_classes(), _build_synthetic_prompt(), _build_verification_prompt(), embedding_gate(), generate_synthetic_motion(), generate_with_ollama(), generate_with_openai(), get_example_motions() (+15 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.11
-Nodes (16): BaseModel, DeepScoringService, Deep scoring facade that hides pipeline wiring behind one call boundary., Re-exports for `models` to expose core Pydantic types for static tools.  This mo, CategoryDef, ClassificationResult, _fraction_encoder(), NormalizedMotion (+8 more)
+Cohesion: 0.16
+Nodes (12): BaseModel, Re-exports for `models` to expose core Pydantic types for static tools.  This mo, CategoryDef, ClassificationResult, _fraction_encoder(), NormalizedMotion, PartyProfile, Pydantic models used across the scaffold (package-local implementation). (+4 more)
 
 ### Community 48 - "Community 48"
-Cohesion: 0.14
-Nodes (21): build_speech_feature_vector(), predict_with_meta_classifier(), Build a speech-specific feature vector from classifier probabilities and rhetori, Predict category probabilities using the ensemble or speech meta-classifier., _build_lemma_kw_index(), _detect_rhetorical_patterns(), _extract_party_policy_text(), _extract_speech_argumentative_text() (+13 more)
+Cohesion: 0.33
+Nodes (9): _build_lemma_kw_index(), _detect_rhetorical_patterns(), _extract_party_policy_text(), _get_spacy(), _load_rhetorical_weights(), Refactored classification pipeline extracted from the legacy scorer.  This modul, Load tuned rhetorical weights from disk if available, else return defaults., Detect ideological rhetorical patterns using 7-dimension Britannica-derived sign (+1 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.13
@@ -955,8 +995,8 @@ Cohesion: 0.13
 Nodes (16): classify_betankande_parquet(), main(), classify_parquet(), classify_interpellations_parquet(), main(), main(), _normalize_raw_to_parquet(), classify_questions_parquet() (+8 more)
 
 ### Community 53 - "Community 53"
-Cohesion: 0.10
-Nodes (21): checked, new, stale, anforande, bet, latest_dates, mot, votering (+13 more)
+Cohesion: 0.12
+Nodes (17): checked, new, stale, anforande, latest_dates, mot, votering, motion (+9 more)
 
 ### Community 54 - "Community 54"
 Cohesion: 0.10
@@ -975,8 +1015,8 @@ Cohesion: 0.10
 Nodes (20): 1.1 Classification Pipeline Validity, 1.2 Ideological Category Definitions, 1.3 Statistical Methods, 1. Methodological Concerns, 2.1 No Versioned Dataset Snapshots, 2.2 Missing Data Sources, 2.3 Computational Environment, 2. Data Provenance and Reproducibility (+12 more)
 
 ### Community 58 - "Community 58"
-Cohesion: 0.10
-Nodes (20): Abstract, Acknowledgments, Appendix, Appendix Figures (Intermediate Steps), Author Contributions (CRediT), Conclusion, Corpus Coverage and Model Quality, Cross-Modality Contrasts (+12 more)
+Cohesion: 0.08
+Nodes (24): Abstract, Acknowledgments, Appendix, Appendix Figures (Intermediate Steps), Author Contributions (CRediT), code:bash (uv run python scripts/update_pipeline.py --cpu-fraction 0.25), Conclusion, Corpus Coverage and Model Quality (+16 more)
 
 ### Community 59 - "Community 59"
 Cohesion: 0.10
@@ -1015,8 +1055,8 @@ Cohesion: 0.11
 Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, extract_interpellations, extract_questions, normalize_betankande (+11 more)
 
 ### Community 68 - "Community 68"
-Cohesion: 0.11
-Nodes (19): interactive, party_profiles_advanced, three_way, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
+Cohesion: 0.04
+Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
 
 ### Community 69 - "Community 69"
 Cohesion: 0.11
@@ -1031,8 +1071,8 @@ Cohesion: 0.11
 Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, extract_interpellations, extract_questions, normalize_betankande (+11 more)
 
 ### Community 72 - "Community 72"
-Cohesion: 0.11
-Nodes (19): interactive, party_profiles_advanced, three_way, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
+Cohesion: 0.04
+Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
 
 ### Community 73 - "Community 73"
 Cohesion: 0.11
@@ -1063,8 +1103,8 @@ Cohesion: 0.11
 Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, ok, returncode, stderr_preview (+11 more)
 
 ### Community 80 - "Community 80"
-Cohesion: 0.11
-Nodes (19): axis_alignment, contradiction, uncertainty, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
+Cohesion: 0.29
+Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 81 - "Community 81"
 Cohesion: 0.11
@@ -1075,8 +1115,8 @@ Cohesion: 0.11
 Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, extract_interpellations, extract_questions, normalize_betankande (+11 more)
 
 ### Community 83 - "Community 83"
-Cohesion: 0.11
-Nodes (18): completed_at, cpu_fraction, dry_run, ok, returncode, stderr_preview, stdout_preview, step (+10 more)
+Cohesion: 0.48
+Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 84 - "Community 84"
 Cohesion: 0.11
@@ -1147,40 +1187,40 @@ Cohesion: 0.14
 Nodes (14): compute_party_profiles(), load_party_profiles(), _parse_date(), Aggregation utilities: compute per-party profiles from classifications.  Copied, Compute normalized category distributions per party and persist them.      Each, _recency_weight(), classify_batch(), _insert_batch() (+6 more)
 
 ### Community 101 - "Community 101"
-Cohesion: 0.15
-Nodes (13): _notna(), prepare_training_data_from_gold_labels(), Prepare feature matrix X and label vector y from augmented gold labels.      Use, Return True if *val* is a usable (non-null) value.      Handles Python None, num, evaluate(), main(), extract_cls_embeddings(), main() (+5 more)
+Cohesion: 0.08
+Nodes (32): _build_feature_names(), build_feature_vector(), _get_default_model_path(), load_meta_classifier(), _notna(), predict_with_meta_classifier(), prepare_training_data_from_gold_labels(), Ensemble stacking meta-classifier using LightGBM.  Replaces hardcoded fixed sign (+24 more)
 
 ### Community 102 - "Community 102"
-Cohesion: 0.20
-Nodes (17): classify_and_persist(), classify_motion(), get_annotation_by_motion(), get_connection(), get_next_unlabeled_motion(), init_db(), init_spacy(), _lazy_attr() (+9 more)
+Cohesion: 0.05
+Nodes (56): _already_gold(), _build_gold_prompt(), generate_gold_labels(), _llm_judge(), main(), _parse_llm_response(), Stratified sample by doc_type and decade., Build a prompt that presents the full definitions to the LLM. (+48 more)
 
 ### Community 103 - "Community 103"
 Cohesion: 0.11
 Nodes (17): Abstract, Acknowledgments, Appendix, Appendix Figures (Intermediate Steps), Conclusion, Corpus Coverage and Model Quality, Cross-Modality Contrasts, Data Availability (+9 more)
 
 ### Community 104 - "Community 104"
-Cohesion: 0.12
-Nodes (17): checked, new, stale, anforande, bet, prop, votering, checked (+9 more)
+Cohesion: 0.08
+Nodes (25): checked, new, stale, anforande, bet, latest_dates, mot, prop (+17 more)
 
 ### Community 105 - "Community 105"
-Cohesion: 0.12
-Nodes (17): checked, new, stale, anforande, bet, latest_dates, prop, checked (+9 more)
+Cohesion: 0.08
+Nodes (25): checked, new, stale, anforande, bet, latest_dates, mot, prop (+17 more)
 
 ### Community 106 - "Community 106"
 Cohesion: 0.12
 Nodes (16): best_loss, params, base_centre, base_centre_left, base_centre_right, base_far_left, base_far_right, base_left (+8 more)
 
 ### Community 107 - "Community 107"
-Cohesion: 0.19
-Nodes (16): _already_gold(), _build_candidate_labels(), _build_hypothesis_template(), _classify_speech(), generate_speech_gold_labels(), _insert_gold_label(), _list_speech_parquets(), _load_classifier() (+8 more)
+Cohesion: 0.25
+Nodes (7): extract_cls_embeddings(), main(), prepare_hybrid_data(), Prepare feature matrix with optional BERT [CLS] concatenation., Extract [CLS] embeddings from a fine-tuned BERT classifier., TextDataset, train_hybrid_ensemble()
 
 ### Community 108 - "Community 108"
-Cohesion: 0.18
-Nodes (16): load_meta_classifier(), Load a saved ensemble meta-classifier., _build_lemma_kw_index(), _embedding_scores_for_texts(), fetch_unlabeled_motions(), _keyword_scores_for_text(), main(), predict_batch() (+8 more)
+Cohesion: 0.20
+Nodes (14): _build_lemma_kw_index(), _embedding_scores_for_texts(), fetch_unlabeled_motions(), _keyword_scores_for_text(), main(), predict_batch(), Predict categories for a batch of motion rows. Returns (motion_id, pred_cat, con, Retrain ensemble mixing gold labels + pseudo labels. (+6 more)
 
 ### Community 109 - "Community 109"
 Cohesion: 0.17
-Nodes (14): fit_topic_model(), _get_default_model_path(), _get_default_topics_path(), get_topic_features(), load_topic_distributions(), load_topic_model(), BERTopic-based topic modeling for the Swedish parliamentary motion corpus.  Part, Load cached per-motion topic distributions.      Handles both list distributions (+6 more)
+Nodes (15): fit_topic_model(), _get_default_model_path(), _get_default_topics_path(), get_topic_features(), load_topic_distributions(), load_topic_model(), BERTopic-based topic modeling for the Swedish parliamentary motion corpus.  Part, Load cached per-motion topic distributions.      Handles both list distributions (+7 more)
 
 ### Community 110 - "Community 110"
 Cohesion: 0.18
@@ -1215,12 +1255,12 @@ Cohesion: 0.12
 Nodes (16): dry_run, note, dry_run, note, dry_run, note, dry_run, note (+8 more)
 
 ### Community 118 - "Community 118"
-Cohesion: 0.17
-Nodes (15): completed_at, cpu_fraction, dry_run, speeches, dry_run, speeches, run_ts, ok (+7 more)
+Cohesion: 0.48
+Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 119 - "Community 119"
-Cohesion: 0.17
-Nodes (15): completed_at, cpu_fraction, dry_run, speeches, dry_run, speeches, run_ts, ok (+7 more)
+Cohesion: 0.48
+Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 120 - "Community 120"
 Cohesion: 0.12
@@ -1239,16 +1279,16 @@ Cohesion: 0.22
 Nodes (12): build_speech_party_profiles(), _ideology_score(), load_speech_classifications(), load_speech_metadata(), _pick_first(), plot_speech_profiles(), _profiles_to_matrix(), Compute a left-right ideology score from category proportions.      Uses a net l (+4 more)
 
 ### Community 124 - "Community 124"
-Cohesion: 0.13
-Nodes (15): dry_run, ok, returncode, stderr_preview, stdout_preview, step, ok, returncode (+7 more)
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
 
 ### Community 125 - "Community 125"
-Cohesion: 0.17
-Nodes (15): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, speeches (+7 more)
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
 
 ### Community 126 - "Community 126"
-Cohesion: 0.13
-Nodes (15): dry_run, ok, returncode, stderr_preview, stdout_preview, step, ok, returncode (+7 more)
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
 
 ### Community 127 - "Community 127"
 Cohesion: 0.31
@@ -1267,8 +1307,8 @@ Cohesion: 0.13
 Nodes (15): extract_data(), link_prop_bet(), Render manuscript sections and combine., Render manuscript sections and combine., Run a subprocess step and return structured result.      Uses Popen with real-ti, Run a subprocess step and return structured result.      Uses Popen with real-ti, Extract new ZIPs to Parquet. Uses --force only on new periods implicitly., Extract new ZIPs to Parquet. Uses --force only on new periods implicitly. (+7 more)
 
 ### Community 131 - "Community 131"
-Cohesion: 0.17
-Nodes (14): plot_metric_vs_benchmark_party_year(), plot_parliament_direction(), _year_range_label(), plot_ideology_timeline(), plot_party_ideology_heatmap(), plot_party_motions(), plot_pie_chart(), Common plotting utilities shared across analysis scripts.  These are the standar (+6 more)
+Cohesion: 0.14
+Nodes (8): ProbabilityCalibrator, Probability calibration for ensemble predictions.  Provides isotonic regression, Fit calibrators and return calibrated probabilities.          Args:, Save calibrators to disk.          Args:             path: Path to save calibrat, Calibrates ensemble probabilities using isotonic regression.      Fits per-categ, Learn per-category thresholds from validation data.          Args:             y, Fit calibrators on validation data.          Args:             y_true: Integer-e, Apply calibration to probability matrix.          Args:             probs: Raw p
 
 ### Community 132 - "Community 132"
 Cohesion: 0.21
@@ -1283,8 +1323,8 @@ Cohesion: 0.14
 Nodes (13): artifacts, metrics, params, elite, gap, generations, pf, population (+5 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.20
-Nodes (13): _chunk_text(), _load_model(), Zero-shot value-based classification using multilingual NLI.  This module adds a, Lazy-load the zero-shot NLI pipeline., Split long text into semantically coherent chunks.      Chunks are kept large (u, Return a mapping {category: entailment_score} for the given text.      Scores ar, Tag a chunk's dominant stance for speech-aware NLI., Return a mapping {category: net_entailment_score} for a parliamentary speech. (+5 more)
+Cohesion: 0.24
+Nodes (11): _chunk_text(), _load_model(), Zero-shot value-based classification using multilingual NLI.  This module adds a, Lazy-load the zero-shot NLI pipeline., Split long text into semantically coherent chunks.      Chunks are kept large (u, Return a mapping {category: entailment_score} for the given text.      Scores ar, Tag a chunk's dominant stance for speech-aware NLI., Return a mapping {category: net_entailment_score} for a parliamentary speech. (+3 more)
 
 ### Community 136 - "Community 136"
 Cohesion: 0.18
@@ -1320,27 +1360,27 @@ Nodes (12): artifacts, metrics, params, cpu_fraction, election_anchor_month, ele
 
 ### Community 144 - "Community 144"
 Cohesion: 0.15
-Nodes (13): classify_motions, classify_speeches, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
+Nodes (11): apply_cpu_throttle(), Resource throttling helpers for CPU-intensive runs., Throttle common CPU thread pools to a fraction of available cores.      Returns, Return conservative runtime defaults for laptop thermals.      Modes:     - safe, thermal_safe_defaults(), main(), Fit calibrators and thresholds from prediction logs., apply_resource_controls() (+3 more)
 
 ### Community 145 - "Community 145"
-Cohesion: 0.15
-Nodes (13): classify_motions, classify_speeches, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
+Cohesion: 0.13
+Nodes (15): classify_motions, ok, returncode, stderr_preview, stdout_preview, step, ok, returncode (+7 more)
 
 ### Community 146 - "Community 146"
 Cohesion: 0.15
 Nodes (13): ok, returncode, stderr_preview, stdout_preview, step, combined, render, ok (+5 more)
 
 ### Community 147 - "Community 147"
-Cohesion: 0.15
-Nodes (13): ok, returncode, stderr_preview, stdout_preview, step, combined, render, ok (+5 more)
+Cohesion: 0.19
+Nodes (12): _auto_label_missing_speeches(), _entropy(), export_active_learning_candidates(), _find_latest_preds(), prepare_speech_training_data(), Orchestration helpers for speech-focused pipelines.  Provides functions to expor, Prepare X, y for speech gold labels using the same feature layout.      This mir, Run the zero-shot labeler on missing speeches and ingest the results.      Write (+4 more)
 
 ### Community 148 - "Community 148"
 Cohesion: 0.15
 Nodes (13): checked, new, stale, anforande, latest_dates, mot, motion, speech (+5 more)
 
 ### Community 149 - "Community 149"
-Cohesion: 0.15
-Nodes (13): axis_alignment, link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
+Cohesion: 0.29
+Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 150 - "Community 150"
 Cohesion: 0.15
@@ -1371,8 +1411,8 @@ Cohesion: 0.15
 Nodes (13): ok, returncode, stderr_preview, stdout_preview, step, combined, render, ok (+5 more)
 
 ### Community 157 - "Community 157"
-Cohesion: 0.15
-Nodes (12): completed_at, cpu_fraction, dry_run, ok, returncode, stderr_preview, stdout_preview, step (+4 more)
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
 
 ### Community 158 - "Community 158"
 Cohesion: 0.15
@@ -1424,15 +1464,15 @@ Nodes (11): classify_and_persist(), classify_motion(), _get_db_module(), _get_de
 
 ### Community 170 - "Community 170"
 Cohesion: 0.17
-Nodes (11): speeches, completed_at, cpu_fraction, dry_run, run_ts, fetched, output, steps (+3 more)
+Nodes (15): completed_at, cpu_fraction, dry_run, votering, dry_run, votering, run_ts, steps (+7 more)
 
 ### Community 171 - "Community 171"
-Cohesion: 0.32
-Nodes (11): BaseFrames, _crossover(), evaluate_candidate(), main(), _mutate(), _party_expected(), _party_vote_alignment(), _prepare_base() (+3 more)
+Cohesion: 0.08
+Nodes (17): apply_rhetorical_adjustments(), compute_weighted_combination(), normalize_signal_scores(), Signal combination and weight normalization for multi-source classification.  Th, Apply rhetorical pattern adjustments to a probability distribution.          Rhe, Stateful combinator for incremental signal combination.          Useful when sig, Add a named signal distribution.                  Args:             name: Signal, Combine all added signals using stored weights.                  Returns: (+9 more)
 
 ### Community 172 - "Community 172"
-Cohesion: 0.32
-Nodes (11): _compute_target_ratio(), _crossover(), _eligible_count_for_margin(), evaluate_candidate(), main(), _mutate(), _prepare_state(), _read_total_votes() (+3 more)
+Cohesion: 0.08
+Nodes (11): detect_rhetorical_patterns(), detect_rhetorical_patterns_with_metadata(), load_rhetorical_weights(), Rhetorical pattern detection for Swedish parliamentary speeches.  This module ex, Detect rhetorical patterns and return adjustments plus metadata.          Metada, Load tuned rhetorical weights from disk or return defaults.          Args:, Detect ideological rhetorical patterns using 7-dimension signals.          Retur, Tests for the rhetorical pattern detector module. (+3 more)
 
 ### Community 173 - "Community 173"
 Cohesion: 0.29
@@ -1463,16 +1503,16 @@ Cohesion: 0.18
 Nodes (10): speeches, completed_at, cpu_fraction, dry_run, run_ts, fetched, output, steps (+2 more)
 
 ### Community 180 - "Community 180"
-Cohesion: 0.27
-Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
+Cohesion: 0.48
+Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
 
 ### Community 181 - "Community 181"
-Cohesion: 0.27
-Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
+Cohesion: 0.48
+Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
 
 ### Community 182 - "Community 182"
-Cohesion: 0.27
-Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
+Cohesion: 0.39
+Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande, extract
 
 ### Community 183 - "Community 183"
 Cohesion: 0.27
@@ -1484,15 +1524,15 @@ Nodes (5): ClassificationWriter, ParquetClassificationWriter, Persistence ports 
 
 ### Community 185 - "Community 185"
 Cohesion: 0.29
-Nodes (10): _already_gold(), _build_gold_prompt(), generate_gold_labels(), _llm_judge(), main(), _parse_llm_response(), Stratified sample by doc_type and decade., Build a prompt that presents the full definitions to the LLM. (+2 more)
+Nodes (9): compute_loss(), evaluate_params(), load_speeches(), load_teacher_labels(), main(), random_params(), Sample random hyperparameters for the 7 rhetorical categories., Run score_motion with rhetorical parameters injected. (+1 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.24
-Nodes (6): Dataset, finetune_transformer(), load_gold_data(), main(), MotionDataset, Load (text, category) pairs from augmented_gold_labels for a given split.
+Cohesion: 0.14
+Nodes (10): MultiTransformerEnsemble, Multi-transformer ensemble for improved classification diversity.  Runs multiple, Run prediction on a single model., Ensemble of multiple transformer classifiers.      Combines predictions from mul, Aggregate predictions from multiple models.          Args:             prob_dict, Return number of loaded models., Initialize multi-transformer ensemble.          Args:             model_dirs: Li, Lazy-load all transformer models. (+2 more)
 
 ### Community 187 - "Community 187"
-Cohesion: 0.29
-Nodes (9): compute_loss(), evaluate_params(), load_speeches(), load_teacher_labels(), main(), random_params(), Sample random hyperparameters for the 7 rhetorical categories., Run score_motion with rhetorical parameters injected. (+1 more)
+Cohesion: 0.12
+Nodes (20): 1. Probability Calibration (`src/.../classifier/calibration.py`), 2. Hyperparameter Tuning (`scripts/tune_meta_classifier.py`), 3. Extended BERT Windows (`src/.../classifier/transformer_predict.py`), 4. Multi-Transformer Ensemble (`src/.../classifier/multi_transformer.py`), 5. Enhanced Scorer (`src/.../classifier/enhanced_scorer.py`), 6. Calibration Fitting (`scripts/fit_calibration_and_thresholds.py`), Classify with Improvements, code:bash (uv run python scripts/tune_meta_classifier.py \) (+12 more)
 
 ### Community 188 - "Community 188"
 Cohesion: 0.20
@@ -1503,16 +1543,16 @@ Cohesion: 0.20
 Nodes (9): code:yaml (---), Copilot Instructions for swedish_parliament_policy_classifier, CUDA & NVSHMEM (GPU) notes, Customization Layout, Frontmatter Policy (YAML and Markdown), graphify, Graphify Context Policy, Package Management and Python Execution (+1 more)
 
 ### Community 190 - "Community 190"
-Cohesion: 0.27
-Nodes (9): _build_prompt(), classify_speech(), _ollama_generate(), _parse_scores(), Local LLM-based ideological classifier using Ollama.  This module provides a fal, Extract the JSON score object from LLM response text., Classify a speech using the local Ollama LLM.      Returns a dict {category: nor, Construct a compact classification prompt for fast inference. (+1 more)
+Cohesion: 0.23
+Nodes (11): _build_prompt(), classify_speech(), classify_speech_with_cache(), _ollama_generate(), _parse_scores(), Local LLM-based ideological classifier using Ollama.  This module provides a fal, Extract the JSON score object from LLM response text., Classify a speech using the local Ollama LLM.      Returns a dict {category: nor (+3 more)
 
 ### Community 191 - "Community 191"
 Cohesion: 0.20
 Nodes (4): High-level runner for speech workflows.  Provides a small `SpeechRunner` class t, Run the existing scripts/classify_speeches.py flow via dynamic import., SpeechRunner, main()
 
 ### Community 192 - "Community 192"
-Cohesion: 0.20
-Nodes (9): apply_cpu_throttle(), Resource throttling helpers for CPU-intensive runs., Throttle common CPU thread pools to a fraction of available cores.      Returns, Return conservative runtime defaults for laptop thermals.      Modes:     - safe, thermal_safe_defaults(), apply_resource_controls(), build_common_parser(), Return an ``argparse.ArgumentParser`` pre-loaded with the flags shared     acros (+1 more)
+Cohesion: 0.26
+Nodes (14): _cmd_recheck(), _cmd_verify(), _compute_checksum(), _ensure_agent_frontmatter(), load_verified_definitions(), main(), _neutralise(), Verified, immutable loader for political_spectrum.yaml.  This module mirrors the (+6 more)
 
 ### Community 193 - "Community 193"
 Cohesion: 0.31
@@ -1523,28 +1563,28 @@ Cohesion: 0.29
 Nodes (8): _clean_df(), _detect_format(), extract_all(), main(), Normalise strings, clean parties, and drop empty rows., Return (has_header, column_names) based on first CSV line., Read a single ZIP into a DataFrame, handling both formats., _read_csv_from_zip()
 
 ### Community 195 - "Community 195"
-Cohesion: 0.38
-Nodes (9): augment_speech_gold_labels(), back_translate(), _build_speech_prompt(), create_augmented_table(), generate_synthetic_speech(), _get_translation_models(), _list_speech_parquets(), _load_speech_text() (+1 more)
+Cohesion: 0.20
+Nodes (9): 1. Fixed Speech Meta-Classifier Loading (CRITICAL), 2. EnhancedScorer Path Handling Fix, 3. Enabled Calibration by Default, 4. Documentation Updates, Model Stack Available, Next Actions, Speech Classifier Pipeline Improvements (2026-07-03), Summary of Changes (+1 more)
 
 ### Community 196 - "Community 196"
-Cohesion: 0.27
-Nodes (4): FeatureDataset, main(), MLPClassifier, train_mlp()
+Cohesion: 0.24
+Nodes (6): Dataset, finetune_transformer(), load_gold_data(), main(), MotionDataset, Load (text, category) pairs from augmented_gold_labels for a given split.
 
 ### Community 197 - "Community 197"
 Cohesion: 0.38
 Nodes (9): discover_doi(), _fetch_zenodo_records(), _find_matching_doi(), main(), parse_args(), _record_blob(), update_checklist_text(), update_data_availability_text() (+1 more)
 
 ### Community 198 - "Community 198"
-Cohesion: 0.31
-Nodes (8): call_ollama_teacher(), compute_metrics(), load_speeches(), load_weights(), main(), Get 7-dimension teacher labels from ollama., Run score_motion with tuned rhetorical parameters., score_with_tuned_weights()
+Cohesion: 0.17
+Nodes (14): plot_metric_vs_benchmark_party_year(), plot_parliament_direction(), _year_range_label(), plot_ideology_timeline(), plot_party_ideology_heatmap(), plot_party_motions(), plot_pie_chart(), Common plotting utilities shared across analysis scripts.  These are the standar (+6 more)
 
 ### Community 199 - "Community 199"
 Cohesion: 0.20
 Nodes (9): _infer_current_parties(), _load_party_metadata(), _party_color(), Academic figure styling configuration.  Provides a consistent scientific/politic, Call once at module import to apply the rcParams above., Load party display metadata from a JSON sidecar if available.      Returns (labe, Deterministic color from party code when no metadata color is set., Infer parties currently represented in the Riksdag.      Source priority: (+1 more)
 
 ### Community 200 - "Community 200"
-Cohesion: 0.20
-Nodes (4): ClassificationRepo, Repository helpers for classification persistence.  Provides a small, well-teste, Insert many classification rows in a transaction.          Expects rows as tuple, SpeechClassificationRepo
+Cohesion: 0.15
+Nodes (11): ClassificationRepo, Repository helpers for classification persistence.  Provides a small, well-teste, Insert many classification rows in a transaction.          Expects rows as tuple, SpeechClassificationRepo, _already_classified(), classify_speeches(), _insert_batch(), _list_speech_parquets() (+3 more)
 
 ### Community 201 - "Community 201"
 Cohesion: 0.22
@@ -1615,16 +1655,16 @@ Cohesion: 0.25
 Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
 
 ### Community 218 - "Community 218"
-Cohesion: 0.25
-Nodes (7): completed_at, cpu_fraction, dry_run, run_ts, steps, extract, manuscript
+Cohesion: 0.40
+Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
 
 ### Community 219 - "Community 219"
-Cohesion: 0.25
-Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
+Cohesion: 0.38
+Nodes (9): augment_speech_gold_labels(), back_translate(), _build_speech_prompt(), create_augmented_table(), generate_synthetic_speech(), _get_translation_models(), _list_speech_parquets(), _load_speech_text() (+1 more)
 
 ### Community 220 - "Community 220"
-Cohesion: 0.25
-Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
+Cohesion: 0.04
+Nodes (49): interactive, manuscript_motion_figures, overlay, party_profiles, party_profiles_advanced, speech_profiles, three_way, voting (+41 more)
 
 ### Community 221 - "Community 221"
 Cohesion: 0.25
@@ -1639,8 +1679,8 @@ Cohesion: 0.25
 Nodes (8): motions, speeches, caught_up, fetched, output, fetched, output, api_fetch
 
 ### Community 224 - "Community 224"
-Cohesion: 0.39
-Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande, extract
+Cohesion: 0.21
+Nodes (15): ok, returncode, stderr_preview, stdout_preview, step, betankande, votering, betankande (+7 more)
 
 ### Community 225 - "Community 225"
 Cohesion: 0.25
@@ -1651,16 +1691,16 @@ Cohesion: 0.25
 Nodes (8): motions, speeches, caught_up, fetched, output, fetched, output, api_fetch
 
 ### Community 227 - "Community 227"
-Cohesion: 0.25
-Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, combined
 
 ### Community 228 - "Community 228"
 Cohesion: 0.25
 Nodes (8): motions, speeches, caught_up, fetched, output, fetched, output, api_fetch
 
 ### Community 229 - "Community 229"
-Cohesion: 0.39
-Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande, extract
+Cohesion: 0.27
+Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
 
 ### Community 230 - "Community 230"
 Cohesion: 0.25
@@ -1683,12 +1723,16 @@ Cohesion: 0.29
 Nodes (7): _build_prompt(), llm_judge(), LLM-as-judge fallback using local Ollama for low-confidence motions.  Structured, Determine if LLM fallback should be invoked based on low confidence., Build a structured prompt for the LLM judge., Query local Ollama model for category judgment.      Returns dict with 'category, should_use_llm_fallback()
 
 ### Community 235 - "Community 235"
-Cohesion: 0.32
-Nodes (6): classify_speech_with_cache(), Classify with an in-memory cache keyed by speech_id., find_speeches_parquet(), main(), parse_report_ids(), main()
+Cohesion: 0.25
+Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
 
 ### Community 236 - "Community 236"
 Cohesion: 0.25
 Nodes (7): Implementation Plan, Phase 1: Fix ideological placement (critical — correctness), Phase 2: Filter defunct parties, Phase 3: Create per-party trend visualizations, Phase 4: Fix bibliography, Phase 5: Restructure manuscript narrative, Phase 6: Fix margin overflow
+
+### Community 237 - "Community 237"
+Cohesion: 0.48
+Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 238 - "Community 238"
 Cohesion: 0.43
@@ -1711,8 +1755,8 @@ Cohesion: 0.29
 Nodes (5): aggregate_expected_contradiction(), score_contradiction_edges(), _source_confidence(), main(), test_source_confidence_bounds_and_order()
 
 ### Community 243 - "Community 243"
-Cohesion: 0.46
-Nodes (7): _already_classified(), classify_speeches(), _insert_batch(), _list_speech_parquets(), main(), _score_motion_compat(), _strip_html()
+Cohesion: 0.13
+Nodes (14): Issue 1: Abstract contains transition text, Issue 2: Missing generated figures, Issue 3: Results section is verbose, Issue 4: No explicit hypothesis testing structure, Issue 5: Methodology section missing reproducibility command, Issue 6: Title is too long, Issue 7: Data availability section could be more specific, Issue 8: Acknowledgments section uses "the authors" for single author (+6 more)
 
 ### Community 244 - "Community 244"
 Cohesion: 0.46
@@ -1731,32 +1775,32 @@ Cohesion: 0.54
 Nodes (7): _load_plot_quid_ergo_module(), _make_topic_year_df(), Tests for the Quid Ergo visualization., test_compute_speech_vs_action_gap_returns_party_rows(), test_plot_quid_ergo_writes_figure(), test_quid_ergo_filters_by_min_year(), test_quid_ergo_includes_actionshare_calculation()
 
 ### Community 248 - "Community 248"
-Cohesion: 0.38
-Nodes (6): _default_model_dir(), _load(), predict_proba(), Predict ideology categories using the fine-tuned transformer classifier.  Loads, Return ``{category: probability}`` for the input text., Return ``{category: probability}`` for the input text.
+Cohesion: 0.23
+Nodes (11): _default_model_dir(), _load(), _predict_hierarchical(), predict_proba(), _predict_sliding_window(), Predict ideology categories using the fine-tuned transformer classifier.  Loads, Predict using sliding windows with overlap for long texts., Return ``{category: probability}`` for the input text. (+3 more)
 
 ### Community 249 - "Community 249"
 Cohesion: 0.29
 Nodes (7): profiles, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 250 - "Community 250"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.31
+Nodes (6): _build_axis_matrix(), canonical_axis_order(), compute_axis_alignment(), _cosine_dist(), main(), test_canonical_axis_order_is_seven_categories()
 
 ### Community 251 - "Community 251"
 Cohesion: 0.48
 Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 252 - "Community 252"
-Cohesion: 0.48
-Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.33
+Nodes (6): classify_speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 253 - "Community 253"
 Cohesion: 0.29
 Nodes (7): profiles, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 254 - "Community 254"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.39
+Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande, extract
 
 ### Community 255 - "Community 255"
 Cohesion: 0.48
@@ -1795,16 +1839,16 @@ Cohesion: 0.48
 Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
 
 ### Community 264 - "Community 264"
-Cohesion: 0.48
-Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.33
+Nodes (6): interactive, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 265 - "Community 265"
 Cohesion: 0.29
 Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 266 - "Community 266"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.27
+Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
 
 ### Community 267 - "Community 267"
 Cohesion: 0.29
@@ -1819,8 +1863,8 @@ Cohesion: 0.29
 Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 270 - "Community 270"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.39
+Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande, extract
 
 ### Community 271 - "Community 271"
 Cohesion: 0.29
@@ -1831,56 +1875,56 @@ Cohesion: 0.48
 Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 273 - "Community 273"
-Cohesion: 0.29
-Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
+Cohesion: 0.11
+Nodes (19): axis_alignment, consistency, link_confidence, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
 
 ### Community 274 - "Community 274"
 Cohesion: 0.29
 Nodes (7): motions, speeches, fetched, output, fetched, output, api_fetch
 
 ### Community 275 - "Community 275"
-Cohesion: 0.48
-Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.17
+Nodes (15): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, speeches (+7 more)
 
 ### Community 276 - "Community 276"
 Cohesion: 0.48
 Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 277 - "Community 277"
-Cohesion: 0.29
-Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
+Cohesion: 0.11
+Nodes (19): axis_alignment, latent, link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
 
 ### Community 278 - "Community 278"
 Cohesion: 0.48
 Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 279 - "Community 279"
-Cohesion: 0.48
-Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.31
+Nodes (8): _build_feature_vector_for_motion(), load_training_data(), main(), objective(), Load gold labels and compute features for training using the existing pipeline., Optuna objective function., Optuna objective function., Build feature vector for a single motion text.
 
 ### Community 280 - "Community 280"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.27
+Nodes (11): ok, returncode, stderr_preview, stdout_preview, step, betankande, dry_run, betankande (+3 more)
 
 ### Community 281 - "Community 281"
 Cohesion: 0.48
 Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 282 - "Community 282"
-Cohesion: 0.29
-Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
+Cohesion: 0.11
+Nodes (19): axis_alignment, latent, link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step (+11 more)
 
 ### Community 283 - "Community 283"
-Cohesion: 0.48
-Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
+Cohesion: 0.21
+Nodes (15): ok, returncode, stderr_preview, stdout_preview, step, betankande, votering, betankande (+7 more)
 
 ### Community 284 - "Community 284"
 Cohesion: 0.48
 Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 285 - "Community 285"
-Cohesion: 0.48
-Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.33
+Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 286 - "Community 286"
 Cohesion: 0.29
@@ -1899,12 +1943,12 @@ Cohesion: 0.29
 Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
 
 ### Community 290 - "Community 290"
-Cohesion: 0.48
-Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.17
+Nodes (15): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, speeches (+7 more)
 
 ### Community 291 - "Community 291"
-Cohesion: 0.48
-Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.08
+Nodes (25): checked, new, stale, anforande, bet, latest_dates, mot, prop (+17 more)
 
 ### Community 292 - "Community 292"
 Cohesion: 0.29
@@ -1995,8 +2039,8 @@ Cohesion: 0.33
 Nodes (6): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 314 - "Community 314"
-Cohesion: 0.33
-Nodes (6): consistency, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.29
+Nodes (4): DeepScoringService, Deep scoring facade that hides pipeline wiring behind one call boundary., test_score_simple_text(), test_speech_service_forwards_meta_learner()
 
 ### Community 315 - "Community 315"
 Cohesion: 0.33
@@ -2031,16 +2075,16 @@ Cohesion: 0.33
 Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 323 - "Community 323"
-Cohesion: 0.33
-Nodes (6): rhetorical_adjustment, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.15
+Nodes (13): classify_motions, classify_speeches, ok, returncode, stderr_preview, stdout_preview, step, ok (+5 more)
 
 ### Community 324 - "Community 324"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, combined
+Cohesion: 0.12
+Nodes (15): calibrator_categories_fitted, categories, expected_fallback_calibrated, expected_fallback_raw, n_categories, n_samples, thresholds, centre (+7 more)
 
 ### Community 325 - "Community 325"
-Cohesion: 0.33
-Nodes (6): render, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.11
+Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, ok, returncode, stderr_preview (+11 more)
 
 ### Community 326 - "Community 326"
 Cohesion: 0.33
@@ -2111,8 +2155,8 @@ Cohesion: 0.33
 Nodes (6): rhetorical_adjustment, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 343 - "Community 343"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, combined
+Cohesion: 0.11
+Nodes (19): classify_motions, classify_speeches, ok, returncode, stderr_preview, stdout_preview, step, rhetorical_adjustment (+11 more)
 
 ### Community 344 - "Community 344"
 Cohesion: 0.33
@@ -2135,8 +2179,8 @@ Cohesion: 0.33
 Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 349 - "Community 349"
-Cohesion: 0.33
-Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.13
+Nodes (14): all_trials, best_cv_accuracy, best_params, colsample_bytree, learning_rate, max_depth, min_child_samples, n_estimators (+6 more)
 
 ### Community 350 - "Community 350"
 Cohesion: 0.33
@@ -2159,16 +2203,16 @@ Cohesion: 0.33
 Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 355 - "Community 355"
-Cohesion: 0.33
-Nodes (6): classify_motions, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.11
+Nodes (19): classify_motions, classify_speeches, ok, returncode, stderr_preview, stdout_preview, step, rhetorical_adjustment (+11 more)
 
 ### Community 356 - "Community 356"
-Cohesion: 0.33
-Nodes (6): classify_speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.14
+Nodes (13): category_names, default_threshold, _fitted, max_threshold, min_threshold, thresholds, centre, centre_left (+5 more)
 
 ### Community 357 - "Community 357"
-Cohesion: 0.33
-Nodes (6): rhetorical_adjustment, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.17
+Nodes (7): EnhancedScorer, Enhanced scorer integrating calibration and extended BERT windows.  This wraps t, Determine if LLM fallback should be triggered.          Uses adaptive thresholds, Score a speech with enhanced features.          Args:             speech_id: Spe, Enhanced classifier with calibration and adaptive thresholds.      Wraps the bas, Initialize enhanced scorer.          Args:             calibrator_path: Path to, Score a motion with enhanced features.          Extends base score_motion with:
 
 ### Community 358 - "Community 358"
 Cohesion: 0.33
@@ -2215,24 +2259,24 @@ Cohesion: 0.33
 Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 369 - "Community 369"
-Cohesion: 0.33
-Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.20
+Nodes (6): AdaptiveThresholdManager, Manages per-category fallback thresholds based on validation performance.      I, Get threshold for a specific category.          Args:             category: Cate, Determine if LLM fallback should be triggered.          Args:             catego, Estimate expected fallback rate on new data.          Args:             probs: P, Save thresholds to disk.          Args:             path: Path to save threshold
 
 ### Community 370 - "Community 370"
-Cohesion: 0.33
-Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.13
+Nodes (15): dry_run, ok, returncode, stderr_preview, stdout_preview, step, ok, returncode (+7 more)
 
 ### Community 371 - "Community 371"
-Cohesion: 0.33
-Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.10
+Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, completed_at, cpu_fraction, bulk (+11 more)
 
 ### Community 372 - "Community 372"
-Cohesion: 0.33
-Nodes (6): three_way, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.27
+Nodes (4): FeatureDataset, main(), MLPClassifier, train_mlp()
 
 ### Community 373 - "Community 373"
 Cohesion: 0.33
-Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 374 - "Community 374"
 Cohesion: 0.33
@@ -2287,8 +2331,8 @@ Cohesion: 0.33
 Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 387 - "Community 387"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
+Cohesion: 0.46
+Nodes (7): _build_lemma_kw_index(), fetch_unlabeled_speeches(), _keyword_scores_for_text(), _list_speech_parquets(), main(), predict_batch(), self_train_speech()
 
 ### Community 388 - "Community 388"
 Cohesion: 0.33
@@ -2339,24 +2383,24 @@ Cohesion: 0.33
 Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
 
 ### Community 400 - "Community 400"
-Cohesion: 0.33
-Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.11
+Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, extract_interpellations, extract_questions, normalize_betankande (+11 more)
 
 ### Community 401 - "Community 401"
 Cohesion: 0.33
-Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (5): _extract_speech_argumentative_text(), _sentence_stance(), main(), test_extract_speech_argumentative_text_returns_own_position(), test_sentence_stance_basic()
 
 ### Community 402 - "Community 402"
-Cohesion: 0.33
-Nodes (6): party_profiles, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.15
+Nodes (13): ok, returncode, stderr_preview, stdout_preview, step, combined, render, ok (+5 more)
 
 ### Community 403 - "Community 403"
-Cohesion: 0.33
-Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.48
+Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
 
 ### Community 404 - "Community 404"
-Cohesion: 0.33
-Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.27
+Nodes (7): _ensure_parent(), load_pickle(), IO helpers for compressed pickle/JSON and Parquet export.  Provides transparent, Save a pandas DataFrame to Parquet using pyarrow., save_json(), save_parquet(), save_pickle()
 
 ### Community 405 - "Community 405"
 Cohesion: 0.33
@@ -2380,7 +2424,7 @@ Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_pre
 
 ### Community 410 - "Community 410"
 Cohesion: 0.33
-Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 411 - "Community 411"
 Cohesion: 0.33
@@ -2400,7 +2444,7 @@ Nodes (6): linkage, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 415 - "Community 415"
 Cohesion: 0.33
-Nodes (6): profiles, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 416 - "Community 416"
 Cohesion: 0.33
@@ -2412,39 +2456,39 @@ Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 418 - "Community 418"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 419 - "Community 419"
 Cohesion: 0.33
-Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
-
-### Community 420 - "Community 420"
-Cohesion: 0.33
-Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
-
-### Community 421 - "Community 421"
-Cohesion: 0.33
 Nodes (6): party_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
+### Community 420 - "Community 420"
+Cohesion: 0.29
+Nodes (7): axis_alignment, ok, returncode, stderr_preview, stdout_preview, step, analysis
+
+### Community 421 - "Community 421"
+Cohesion: 0.29
+Nodes (7): motions, speeches, fetched, output, fetched, output, api_fetch
+
 ### Community 422 - "Community 422"
-Cohesion: 0.33
-Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.48
+Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 423 - "Community 423"
-Cohesion: 0.33
-Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.48
+Nodes (7): votering, votering, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 424 - "Community 424"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
+Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 425 - "Community 425"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+Nodes (6): party_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 426 - "Community 426"
 Cohesion: 0.33
-Nodes (6): consistency, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 427 - "Community 427"
 Cohesion: 0.33
@@ -2464,7 +2508,7 @@ Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, st
 
 ### Community 431 - "Community 431"
 Cohesion: 0.33
-Nodes (6): link_confidence, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): three_way, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 432 - "Community 432"
 Cohesion: 0.33
@@ -2488,15 +2532,15 @@ Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 437 - "Community 437"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 438 - "Community 438"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+Cohesion: 0.11
+Nodes (18): completed_at, cpu_fraction, dry_run, ok, returncode, stderr_preview, stdout_preview, step (+10 more)
 
 ### Community 439 - "Community 439"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
+Nodes (6): three_way, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 440 - "Community 440"
 Cohesion: 0.33
@@ -2524,11 +2568,11 @@ Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_pre
 
 ### Community 446 - "Community 446"
 Cohesion: 0.33
-Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 447 - "Community 447"
 Cohesion: 0.33
-Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
 
 ### Community 448 - "Community 448"
 Cohesion: 0.33
@@ -2555,8 +2599,8 @@ Cohesion: 0.33
 Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 454 - "Community 454"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+Cohesion: 0.11
+Nodes (18): completed_at, cpu_fraction, dry_run, ok, returncode, stderr_preview, stdout_preview, step (+10 more)
 
 ### Community 455 - "Community 455"
 Cohesion: 0.33
@@ -2608,11 +2652,11 @@ Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_pre
 
 ### Community 467 - "Community 467"
 Cohesion: 0.33
-Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
 
 ### Community 468 - "Community 468"
 Cohesion: 0.33
-Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 469 - "Community 469"
 Cohesion: 0.33
@@ -2624,11 +2668,11 @@ Nodes (6): link_stability, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 471 - "Community 471"
 Cohesion: 0.33
-Nodes (6): linkage, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
 
 ### Community 472 - "Community 472"
 Cohesion: 0.33
-Nodes (6): profiles, ok, returncode, stderr_preview, stdout_preview, step
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
 
 ### Community 473 - "Community 473"
 Cohesion: 0.33
@@ -2703,12 +2747,12 @@ Cohesion: 0.33
 Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 491 - "Community 491"
-Cohesion: 0.33
-Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.48
+Nodes (7): ok, returncode, stderr_preview, stdout_preview, step, betankande, betankande
 
 ### Community 492 - "Community 492"
-Cohesion: 0.33
-Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+Cohesion: 0.48
+Nodes (7): speeches, speeches, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 493 - "Community 493"
 Cohesion: 0.33
@@ -2736,15 +2780,15 @@ Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 499 - "Community 499"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+Nodes (6): party_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 500 - "Community 500"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
+Nodes (6): consistency, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 501 - "Community 501"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+Cohesion: 0.40
+Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
 
 ### Community 502 - "Community 502"
 Cohesion: 0.33
@@ -2792,15 +2836,15 @@ Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 513 - "Community 513"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+Nodes (6): rhetorical_adjustment, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 514 - "Community 514"
-Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
+Cohesion: 0.13
+Nodes (15): dry_run, ok, returncode, stderr_preview, stdout_preview, step, ok, returncode (+7 more)
 
 ### Community 515 - "Community 515"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+Nodes (6): render, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 516 - "Community 516"
 Cohesion: 0.33
@@ -2856,15 +2900,15 @@ Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, link_prop_bet
 
 ### Community 529 - "Community 529"
 Cohesion: 0.33
-Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+Nodes (6): party_profiles_advanced, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 530 - "Community 530"
 Cohesion: 0.33
 Nodes (5): results, summary, mean_mse, n, top1_accuracy
 
 ### Community 531 - "Community 531"
-Cohesion: 0.33
-Nodes (5): Corpus Coverage and Model Quality, Cross-Modality Contrasts, Key Visual Evidence, Results, Robustness and Interpretation Limits
+Cohesion: 0.29
+Nodes (6): Corpus Coverage and Model Quality, Cross-Modality Contrasts, Key Visual Evidence, Linkage Quality and Interpretation Limits, Results, Robustness and Interpretation Limits
 
 ### Community 532 - "Community 532"
 Cohesion: 0.60
@@ -2931,20 +2975,20 @@ Cohesion: 0.40
 Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
 
 ### Community 549 - "Community 549"
-Cohesion: 0.40
-Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+Cohesion: 0.15
+Nodes (13): ok, returncode, stderr_preview, stdout_preview, step, combined, render, ok (+5 more)
 
 ### Community 550 - "Community 550"
 Cohesion: 0.40
 Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
 
 ### Community 551 - "Community 551"
-Cohesion: 0.40
-Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+Cohesion: 0.33
+Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 552 - "Community 552"
-Cohesion: 0.40
-Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+Cohesion: 0.33
+Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 553 - "Community 553"
 Cohesion: 0.40
@@ -2963,8 +3007,8 @@ Cohesion: 0.40
 Nodes (4): Implementation status (current cycle), Objective, Reviewer #2 Remediation Plan, Rigorous remediation protocol
 
 ### Community 557 - "Community 557"
-Cohesion: 0.50
-Nodes (4): DefinitionSnapshot, Versioned definitions registry for stable category snapshots., snapshot_definitions(), write_snapshot_manifest()
+Cohesion: 0.33
+Nodes (6): profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 558 - "Community 558"
 Cohesion: 0.60
@@ -3003,12 +3047,12 @@ Cohesion: 0.60
 Nodes (4): compute_modality_contradiction(), load_edge_scores(), main(), Compute expected contradiction for a specific action type, or all if None.
 
 ### Community 567 - "Community 567"
-Cohesion: 0.60
-Nodes (3): FeatureSpec, get_feature_names(), Feature specification utilities for the ensemble meta-classifier.  Provides a st
+Cohesion: 0.50
+Nodes (4): mot, checked, new, stale
 
 ### Community 568 - "Community 568"
-Cohesion: 0.60
-Nodes (4): classify_from_parquet(), _insert_batch(), main(), Classify motions with text from parquet, write to SQLite.
+Cohesion: 0.67
+Nodes (3): dry_run, note, classify_new_sources
 
 ### Community 569 - "Community 569"
 Cohesion: 0.60
@@ -3056,27 +3100,23 @@ Nodes (4): prop, checked, new, stale
 
 ### Community 583 - "Community 583"
 Cohesion: 0.50
-Nodes (4): mot, checked, new, stale
+Nodes (4): bet, checked, new, stale
 
 ### Community 584 - "Community 584"
 Cohesion: 0.50
 Nodes (4): votering, checked, new, stale
 
 ### Community 585 - "Community 585"
-Cohesion: 0.50
-Nodes (4): latest_dates, motion, speech, vote
-
-### Community 586 - "Community 586"
-Cohesion: 0.50
-Nodes (4): mot, checked, new, stale
+Cohesion: 0.67
+Nodes (3): dry_run, note, classify_new_sources
 
 ### Community 587 - "Community 587"
-Cohesion: 0.50
-Nodes (4): mot, checked, new, stale
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
 
 ### Community 588 - "Community 588"
-Cohesion: 0.50
-Nodes (4): votering, checked, new, stale
+Cohesion: 0.33
+Nodes (6): three_way, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 589 - "Community 589"
 Cohesion: 0.50
@@ -3103,8 +3143,8 @@ Cohesion: 0.50
 Nodes (4): votering, checked, new, stale
 
 ### Community 595 - "Community 595"
-Cohesion: 0.50
-Nodes (4): bet, checked, new, stale
+Cohesion: 0.67
+Nodes (3): apply_rhetorical_to_probs(), main(), Apply multiplicative rhetorical boost and renormalize.
 
 ### Community 596 - "Community 596"
 Cohesion: 0.50
@@ -3119,24 +3159,28 @@ Cohesion: 0.50
 Nodes (4): votering, checked, new, stale
 
 ### Community 599 - "Community 599"
-Cohesion: 0.50
-Nodes (4): bet, checked, new, stale
+Cohesion: 0.83
+Nodes (3): find_speeches_parquet(), main(), parse_report_ids()
 
 ### Community 600 - "Community 600"
 Cohesion: 0.50
 Nodes (3): CLI commands (existing manuscript workflow), code:bash (# from manuscript/), manuscript-agent
 
 ### Community 601 - "Community 601"
-Cohesion: 0.50
-Nodes (3): Linkage, aggregation, and inference boundaries, Measurement architecture, Methodology
+Cohesion: 0.29
+Nodes (6): code:bash (uv run python scripts/update_pipeline.py --cpu-fraction 0.25), Data Sources, Linkage, aggregation, and inference boundaries, Measurement architecture, Methodology, Reproducibility
 
 ### Community 602 - "Community 602"
 Cohesion: 0.50
 Nodes (3): embedding_dimension, include_prompt, pooling_mode
 
 ### Community 603 - "Community 603"
+Cohesion: 0.14
+Nodes (14): build_speech_feature_vector(), Build a speech-specific feature vector from classifier probabilities and rhetori, Build a speech-specific feature vector from classifier probabilities and rhetori, _load_hybrid_meta_classifier(), _load_speech_meta_classifier(), Load the speech-specific meta-classifier if available., Load the speech-specific meta-classifier if available.      Checks for compresse, Score a parliamentary speech using the speech-specific pipeline.      The speech (+6 more)
+
+### Community 604 - "Community 604"
 Cohesion: 0.67
-Nodes (3): apply_rhetorical_to_probs(), main(), Apply multiplicative rhetorical boost and renormalize.
+Nodes (3): dry_run, note, link_prop_bet
 
 ### Community 605 - "Community 605"
 Cohesion: 0.83
@@ -3178,17 +3222,9 @@ Nodes (3): CI Workflow, Release Workflow, UV CLI Tool
 Cohesion: 0.67
 Nodes (3): dry_run, note, api_fetch
 
-### Community 620 - "Community 620"
-Cohesion: 0.67
-Nodes (3): dry_run, note, classify_new_sources
-
 ### Community 621 - "Community 621"
-Cohesion: 0.67
-Nodes (3): dry_run, note, classify_new_sources
-
-### Community 622 - "Community 622"
-Cohesion: 0.67
-Nodes (3): dry_run, note, api_fetch
+Cohesion: 0.33
+Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 623 - "Community 623"
 Cohesion: 0.67
@@ -3199,12 +3235,12 @@ Cohesion: 0.67
 Nodes (3): dry_run, note, figures
 
 ### Community 625 - "Community 625"
-Cohesion: 0.67
-Nodes (3): dry_run, note, link_prop_bet
+Cohesion: 0.33
+Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 626 - "Community 626"
-Cohesion: 0.67
-Nodes (3): dry_run, note, classify_new_sources
+Cohesion: 0.33
+Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 627 - "Community 627"
 Cohesion: 0.67
@@ -3215,8 +3251,8 @@ Cohesion: 0.67
 Nodes (3): dry_run, note, figures
 
 ### Community 629 - "Community 629"
-Cohesion: 0.67
-Nodes (3): dry_run, note, link_prop_bet
+Cohesion: 0.33
+Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
 
 ### Community 630 - "Community 630"
 Cohesion: 0.67
@@ -3254,25 +3290,181 @@ Nodes (3): classify_and_adjust(), Run classification pipeline., Run classificati
 Cohesion: 0.67
 Nodes (3): Regenerate all visualization artifacts., Regenerate all visualization artifacts., regenerate_figures()
 
+### Community 719 - "Community 719"
+Cohesion: 0.33
+Nodes (6): three_way, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 720 - "Community 720"
+Cohesion: 0.33
+Nodes (6): linkage, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 721 - "Community 721"
+Cohesion: 0.33
+Nodes (6): profiles, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 722 - "Community 722"
+Cohesion: 0.33
+Nodes (6): contradiction, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 723 - "Community 723"
+Cohesion: 0.33
+Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 724 - "Community 724"
+Cohesion: 0.10
+Nodes (19): ok, returncode, stderr_preview, stdout_preview, step, completed_at, cpu_fraction, bulk (+11 more)
+
+### Community 725 - "Community 725"
+Cohesion: 0.33
+Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 726 - "Community 726"
+Cohesion: 0.33
+Nodes (6): manuscript_motion_figures, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 727 - "Community 727"
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, merge_prop_bet
+
+### Community 728 - "Community 728"
+Cohesion: 0.33
+Nodes (6): overlay, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 729 - "Community 729"
+Cohesion: 0.33
+Nodes (6): party_profiles, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 730 - "Community 730"
+Cohesion: 0.33
+Nodes (6): speech_profiles, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 731 - "Community 731"
+Cohesion: 0.50
+Nodes (4): bet, checked, new, stale
+
+### Community 732 - "Community 732"
+Cohesion: 0.33
+Nodes (6): voting, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 733 - "Community 733"
+Cohesion: 0.33
+Nodes (6): ok, returncode, stderr_preview, stdout_preview, step, bulk
+
+### Community 734 - "Community 734"
+Cohesion: 0.67
+Nodes (3): dry_run, note, link_prop_bet
+
+### Community 735 - "Community 735"
+Cohesion: 0.33
+Nodes (6): consistency, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 736 - "Community 736"
+Cohesion: 0.33
+Nodes (6): contradiction, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 737 - "Community 737"
+Cohesion: 0.33
+Nodes (6): contradiction_by_modality, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 738 - "Community 738"
+Cohesion: 0.33
+Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 739 - "Community 739"
+Cohesion: 0.33
+Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 740 - "Community 740"
+Cohesion: 0.33
+Nodes (6): link_confidence, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 741 - "Community 741"
+Cohesion: 0.33
+Nodes (6): link_stability, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 742 - "Community 742"
+Cohesion: 0.33
+Nodes (6): linkage, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 743 - "Community 743"
+Cohesion: 0.33
+Nodes (6): profiles, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 744 - "Community 744"
+Cohesion: 0.33
+Nodes (6): recency, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 745 - "Community 745"
+Cohesion: 0.33
+Nodes (6): uncertainty, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 746 - "Community 746"
+Cohesion: 0.25
+Nodes (8): ok, returncode, stderr_preview, stdout_preview, step, bulk, dry_run, download
+
+### Community 747 - "Community 747"
+Cohesion: 0.14
+Nodes (14): ok, returncode, stderr_preview, stdout_preview, step, ok, returncode, stderr_preview (+6 more)
+
+### Community 748 - "Community 748"
+Cohesion: 0.40
+Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+
+### Community 749 - "Community 749"
+Cohesion: 0.50
+Nodes (4): speeches, fetched, output, api_fetch
+
+### Community 750 - "Community 750"
+Cohesion: 0.67
+Nodes (3): dry_run, note, classify_new_sources
+
+### Community 753 - "Community 753"
+Cohesion: 0.67
+Nodes (3): dry_run, note, manuscript
+
+### Community 756 - "Community 756"
+Cohesion: 0.40
+Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+
+### Community 758 - "Community 758"
+Cohesion: 0.40
+Nodes (4): completed_at, cpu_fraction, dry_run, run_ts
+
+### Community 761 - "Community 761"
+Cohesion: 0.50
+Nodes (4): bet, checked, new, stale
+
+### Community 764 - "Community 764"
+Cohesion: 0.33
+Nodes (6): latent, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 765 - "Community 765"
+Cohesion: 0.33
+Nodes (6): link_all_speeches, ok, returncode, stderr_preview, stdout_preview, step
+
+### Community 768 - "Community 768"
+Cohesion: 0.50
+Nodes (4): DefinitionSnapshot, Versioned definitions registry for stable category snapshots., snapshot_definitions(), write_snapshot_manifest()
+
 ## Knowledge Gaps
-- **3725 isolated node(s):** `run_ts`, `dry_run`, `cpu_fraction`, `new`, `checked` (+3720 more)
+- **3996 isolated node(s):** `run_ts`, `dry_run`, `cpu_fraction`, `new`, `checked` (+3991 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **72 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **74 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `load_definitions()` connect `Community 52` to `Community 27`, `Community 28`, `Community 164`, `Community 45`, `Community 46`, `Community 303`, `Community 304`, `Community 47`, `Community 568`, `Community 185`, `Community 186`, `Community 187`, `Community 195`, `Community 196`, `Community 198`, `Community 100`, `Community 101`, `Community 102`, `Community 107`, `Community 108`, `Community 109`, `Community 111`, `Community 243`, `Community 121`, `Community 127`?**
+- **Why does `load_definitions()` connect `Community 52` to `Community 144`, `Community 279`, `Community 27`, `Community 28`, `Community 164`, `Community 45`, `Community 46`, `Community 303`, `Community 304`, `Community 185`, `Community 314`, `Community 196`, `Community 200`, `Community 219`, `Community 100`, `Community 101`, `Community 102`, `Community 107`, `Community 108`, `Community 109`, `Community 111`, `Community 372`, `Community 121`, `Community 127`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `main()` connect `Community 99` to `Community 192`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Why does `apply_cpu_throttle()` connect `Community 192` to `Community 99`, `Community 109`, `Community 165`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
-- **Are the 42 inferred relationships involving `load_definitions()` (e.g. with `main()` and `main()`) actually correct?**
-  _`load_definitions()` has 42 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 24 inferred relationships involving `EmbeddingMatcher` (e.g. with `MLPClassifier` and `TextDataset`) actually correct?**
-  _`EmbeddingMatcher` has 24 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `add_figure_credits()` connect `Community 198` to `Community 100`, `Community 165`, `Community 166`, `Community 199`, `Community 110`, `Community 111`, `Community 208`, `Community 52`, `Community 245`, `Community 246`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+- **Why does `load_speech_metadata()` connect `Community 123` to `Community 99`, `Community 132`, `Community 173`, `Community 174`, `Community 112`, `Community 540`, `Community 29`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Are the 44 inferred relationships involving `load_definitions()` (e.g. with `main()` and `main()`) actually correct?**
+  _`load_definitions()` has 44 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 25 inferred relationships involving `EmbeddingMatcher` (e.g. with `MLPClassifier` and `TextDataset`) actually correct?**
+  _`EmbeddingMatcher` has 25 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 28 inferred relationships involving `add_figure_credits()` (e.g. with `plot_party_ideology_trends()` and `plot_party_fulfillment_trends()`) actually correct?**
   _`add_figure_credits()` has 28 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 10 inferred relationships involving `main()` (e.g. with `build_common_parser()` and `apply_resource_controls()`) actually correct?**
-  _`main()` has 10 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 11 inferred relationships involving `main()` (e.g. with `build_common_parser()` and `apply_resource_controls()`) actually correct?**
+  _`main()` has 11 INFERRED edges - model-reasoned connections that need verification._

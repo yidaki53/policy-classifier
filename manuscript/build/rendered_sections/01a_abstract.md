@@ -18,13 +18,13 @@ update_triggers:
   - "Any major methods change"
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-06-08T22:40:42Z"
+last_updated_utc: "2026-07-02T23:30:00Z"
 ---
 
 # Abstract
 
 Most computational studies of party ideology rely on manifesto positions or single-modality text. We present a reproducible, parquet-first framework that estimates Swedish party policy profiles from three parliamentary channels: motions, speeches, and roll-call votes. The pipeline uses deterministic rules as an inspectable baseline, then adds embedding, zero-shot, and transformer signals in an ensemble, with explicit linkage and fairness controls across modalities.
 
-On the current full corpus, the workflow covers `n=202925` motions (1971-2024), `n=141605` unique speeches (2014-2026), and `n=21464` vote events (1993-2026). The speech-specific meta-classifier achieves `0.94` per-category accuracy on held-out speech gold labels (`n=2656`). The motion baseline transferred to speeches yields only `0.2033` accuracy, demonstrating register-transfer difficulty; the integrated hybrid ensemble achieves `0.784` post-active-learning test accuracy. Full speech-action linkage (`n=141605` rows) is stratified by confidence: `67.7%` graph-signatory, `14.7%` existing-reference, `8.9%` heuristic fallback, `8.7%` structural high-confidence.
+On the current full corpus, the workflow covers `n=202926` motions (2007-2026), `n=425276` speeches (1993-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), baseline accuracy is `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
 
 We interpret outputs as descriptive diagnostics under explicit non-causal boundaries. The contribution is a transparent, auditable measurement stack that can be updated and stress-tested as new parliamentary data arrive. The next section states the research question and comparative frame.

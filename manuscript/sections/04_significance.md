@@ -19,7 +19,7 @@ update_triggers:
   - "Any major methodology revision."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-06-08T22:40:42Z"
+last_updated_utc: "2026-07-02T23:25:00Z"
 ---
 
 # Conclusion
@@ -32,17 +32,15 @@ The deterministic chain matters because it keeps the analysis traceable from raw
 
 This distinction should be explicit. A behavior-based metric asks, "what pattern is visible in observed parliamentary records under declared assumptions?" It does not ask, "what is the true ideology of a party in a metaphysical sense?" By preserving that distinction, the manuscript avoids overclaiming while still offering a useful comparative instrument for political analysis. This interpretative framing aligns with recent cross-national work on measuring party positions from parliamentary debate [@ebrecht2024cross] and with multimodal approaches that combine text, speech, and voting records [@jaursch2025multimodal].
 
-The results provide descriptive evidence consistent with all three hypotheses under the manuscript's non-causal frame: modality-sensitive profiles, party-varying say-do consistency, and added explanatory value from fulfillment and contradiction diagnostics. The speech-specific meta-classifier is the primary anchor for speech-level claims, with the motion baseline and integrated hybrid ensemble serving as cross-domain and cross-model sensitivity checks.
+{{ significance_accuracy_paragraph }}
 
-The empirical value is cumulative rather than singular. We do not interpret any single figure or score as definitive. Instead, confidence comes from convergence across modalities, stability under sensitivity checks, and traceability in the artifact chain. Where those conditions are weaker, the manuscript states reduced confidence and narrows interpretation accordingly.
+{{ benchmark_validation_paragraph }}
 
-These estimates describe political text-action alignment and are not interpreted causally. The speech-specific meta-classifier achieves `0.94` per-category accuracy on held-out speech gold labels (via `models/speech_meta_clf_parquet.pkl`) and is the primary anchor for speech-level classification claims. The conservative motion baseline, when transferred to speeches without adaptation, achieves only `0.2033` accuracy; this is retained as a cross-domain sensitivity check demonstrating that motion-trained classifiers fail on parliamentary speech due to register and rhetorical differences. The integrated hybrid ensemble (`0.784` post-active-learning test accuracy) serves as a cross-model sensitivity check. Label-space metrics benchmarked to Britannica-based categories do not, by themselves, validate an external latent-ideology criterion. We therefore interpret external benchmark disagreement cautiously, because statement-based references (including manifesto-oriented sources) can diverge systematically from observed parliamentary conduct.
-
-Uncertainty is also inherited from upstream linkage and classification. Current artifacts (`output/analysis/speech_action_link_confidence_summary.json`) report full linkage coverage and confidence stratification. Although the latest run is no longer mainly fallback-driven, confidence strata still vary by party. Dictionary design, model-family weighting, and linkage rebalance choices can shift magnitudes, so substantive interpretation should remain tied to sensitivity checks. Forecast components function as model-fit diagnostics for trend characterization, not as validated policy-outcome prediction tools.
+{{ stability_drift_sentence }}
 
 These caveats are not a weakness of the study design. They are a methodological safeguard. Parliamentary language and action records are complex social data, and explicit uncertainty treatment is necessary to keep claims scientifically proportional to evidence quality. The manuscript therefore treats uncertainty reporting as part of the contribution, not merely as a limitations paragraph.
 
-If substantive conclusions remain stable across linkage-confidence strata, model-family variants, and uncertainty intervals, confidence in the latent-ideology operationalization increases. In the current refresh, structural-vs-all stability still shows measurable drift (abs max delta 0.217 in `output/analysis/link_strata_stability_summary.json`). We therefore interpret outputs as comparative diagnostics under explicit modeling assumptions, not as a fully validated single latent-trait estimate. Fairness-constrained linkage is designed to reduce this drift, but residual model-family variation remains a known limitation of cross-modal scaling [@grech2025fairness].
+{{ classifier_accuracy_context_paragraph }}
 
 Taken together, the manuscript supports a bounded claim. Multimodal parliamentary evidence can produce auditable, updateable, and policy-relevant ideology estimates when each modeling choice is justified and each interpretation is tied to reproducible artifacts.
 

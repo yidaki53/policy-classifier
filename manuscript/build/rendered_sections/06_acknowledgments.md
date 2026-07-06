@@ -23,8 +23,8 @@ Robin Oberg: Conceptualization, Methodology, Software, Data Curation, Formal Ana
 
 This manuscript reports a single-author study. Contributor roles are declared using the CRediT taxonomy for submission metadata alignment.
 
-No external funding was received for this study. The authors received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+No external funding was received for this study. The author received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
 
-The authors declare no competing interests.
+The author declares no competing interests.
 
 All source data used in this manuscript are publicly available via the Riksdag Open Data API (data.riksdagen.se). Processed analysis artifacts (parquet files), classification definitions, and analysis scripts are available in the project repository. See the Data Availability statement for full details.

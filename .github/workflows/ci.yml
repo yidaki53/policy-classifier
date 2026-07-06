@@ -38,37 +38,7 @@ jobs:
         run: uv run python -c "import swedish_parliament_policy_classifier; import swedish_parliament_policy_classifier.analysis; import swedish_parliament_policy_classifier.models; print('imports OK')"
 
       - name: Create stub figure files for tests
-        run: |
-          mkdir -p output/manuscript/figures
-          mkdir -p figures/manuscript
-          mkdir -p figures/voting
-          mkdir -p figures/three_way
-          mkdir -p figures/speeches
-          
-          # Create minimal stub PNG files (1x1 pixel transparent PNG)
-          # These are required by test_latest_figures_block_uses_image_captions
-          python3 -c "
-          import base64
-          # Minimal 1x1 transparent PNG
-          png_data = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==')
-          
-          figures = [
-              'output/manuscript/figures/figure_consistency_vs_fulfillment.png',
-              'output/manuscript/figures/figure_parliament_direction_over_time.png',
-              'output/manuscript/figures/figure_consistency_fulfillment_vs_benchmark_party_year.png',
-              'output/manuscript/figures/figure_modality_overlay_by_party.png',
-              'figures/manuscript/pie_chart_categories.png',
-              'figures/manuscript/party_motions_stacked.png',
-              'figures/voting/party_cohesion_timeseries.png',
-              'figures/three_way/divergence_speech_vs_combined_significance.png',
-              'figures/speeches/speech_profiles_heatmap.png',
-          ]
-          
-          for fig in figures:
-              with open(fig, 'wb') as f:
-                  f.write(png_data)
-              print(f'Created stub: {fig}')
-          "
+        run: python3 scripts/create_test_stubs.py
 
       - name: Run tests
         run: uv run pytest -q

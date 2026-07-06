@@ -19,7 +19,7 @@ BIB=$(ROOT)/manuscript/bibliography/references.bib
 CSL=$(ROOT)/manuscript/bibliography/nature.csl
 SCIREPS_CSL=$(ROOT)/manuscript/bibliography/nature.csl
 
-PANDOC_OPTS=--standalone --citeproc --bibliography=$(BIB) --csl=$(CSL)
+PANDOC_OPTS=--standalone --citeproc --bibliography=$(BIB) --csl=$(CSL) -V geometry:margin=1in -V fontsize=11pt -V linestretch=1.15 --pdf-engine=xelatex
 
 .PHONY: all figures manuscript pdf docx html combined anonymized anonymized-pdf check-frontmatter render journal-check stats clean incremental-update polish
 

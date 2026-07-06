@@ -37,7 +37,7 @@ update_triggers:
   - "Any change in classifier/ensemble methodology."
 owner: "manuscript-agent"
 status: "active"
-last_updated_utc: "2026-06-28T11:20:00Z"
+last_updated_utc: "2026-07-02T23:30:00Z"
 ---
 
 # Results
@@ -49,25 +49,16 @@ How to read this section: each reported metric summarizes observed parliamentary
 ## Key Visual Evidence
 The figures below show headline outputs directly used for main-text interpretation.
 
-![Consistency vs Fulfillment](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
-*Figure 1. Consistency vs Fulfillment by party. Each point represents one parliamentary party, plotted as mean consistency score (x-axis) against mean fulfillment score (y-axis). Higher values indicate greater coherence between proposed policies, spoken commitments, and enacted votes.*
+![Consistency vs Fulfillment (updated 2026-07-01T20:43:39Z)](../output/manuscript/figures/figure_consistency_vs_fulfillment.png){ width=90% }
 
-![Parliament Direction Over Time](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
-*Figure 2. Parliament Direction Over Time. Time series of recency-weighted parliament-wide ideological placement (0 = far left, 1 = far right). Shaded bands indicate 95% bootstrap CIs around the annual mean.*
+![Parliament Direction Over Time (updated 2026-07-01T20:43:39Z)](../output/manuscript/figures/figure_parliament_direction_over_time.png){ width=90% }
 
-![Quid Ergo: Speech vs Action ideology by party](../output/manuscript/figures/figure_quid_ergo_speech_vs_action.png){ width=90% }
-*Figure 3. Quid Ergo: Speech vs Action ideology by party. Per-party mean ideological placement estimated from speeches (anforanden) versus the action-side consensus (motions + votes). Distance from the diagonal indicates a say–do gap.*
-
-![Pareto frontier of consistency vs vote fidelity (updated 2026-06-21T13:32:00Z)](../output/manuscript/figures/figure_pareto_frontier_consistency_fidelity.png){ width=90% }
-*Figure 4. Pareto frontier of consistency versus vote fidelity. Each axis normalizes scores [0,1] across parties; points closer to the upper-right corner represent higher consistency and higher fidelity.*
-
-We moved intermediate, process-oriented figures to the appendix to keep the Results section focused on headline evidence.
 
 ## Corpus Coverage and Model Quality
 
-On the current full corpus, the workflow covers `n=202925` motions (1971-2024), `n=991235` speech-category rows corresponding to `n=141605` unique speeches (2014-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), the conservative motion baseline evaluation path yields accuracy `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). The speech-side pipeline with rhetorical pattern adjustment (7-dimension Britannica-derived signals) and ollama teacher weighting (0.60) is the primary speech classification path, achieving `0.94` per-category accuracy on held-out speech gold labels (via `models/speech_meta_clf_parquet.pkl`). The motion baseline evaluation path, when transferred to speeches without speech-specific adaptation, yields `0.2033` accuracy and is retained as a cross-domain sensitivity check: it demonstrates that motion-trained classifiers fail on parliamentary speech due to register and rhetorical differences. Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
+On the current full corpus, the workflow covers `n=202926` motions (2007-2026), `n=425276` speeches (1993-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), baseline accuracy is `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
 
-These figures indicate informative but uncertain signal. The speech-specific meta-classifier is the primary anchor for speech-level claims, while the motion baseline and integrated hybrid ensemble serve as cross-domain and cross-model sensitivity checks. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value. This interpretative stance follows established practice in cross-national scaling of party positions from parliamentary text [@ebrecht2024cross].
+These figures indicate informative but uncertain signal. The speech-specific meta-classifier is the primary anchor for speech-level claims, while the motion baseline serves as a cross-domain sensitivity check. We therefore interpret all downstream contrasts as descriptive evidence rather than definitive recovery of a single hidden ideology value. This interpretative stance follows established practice in cross-national scaling of party positions from parliamentary text [@ebrecht2024cross].
 
 Across hypotheses, the results are consistent with modality-sensitive ideology measurement under a descriptive interpretation. Party-level profiles differ across motions, speeches, and vote-linked action channels. Speech-action consistency also varies across parties after linkage constraints. Fulfillment diagnostics add information beyond aggregate consistency alone.
 
@@ -87,13 +78,13 @@ Promise-fulfillment contrasts are substantively visible in the current summary t
 
 We interpret the fulfillment contrast as a pathway diagnostic. It asks whether issue emphasis in speech is followed by linked formal action at different rates across parties and issue domains. This pattern does not imply direct legislative causation from speech to votes. Instead, it quantifies how often speech-side attention appears in pathways that continue toward action records.
 
-Consistency contrasts remain modest in absolute spread but informative for ranking and comparison. In `output/analysis/consistency_score_party.parquet`, `SD` records `consistency_score = 0.5654` and `motion_pathway_fulfillment = 0.9923`, while `C` records `consistency_score = 0.5176` and `motion_pathway_fulfillment = 0.9032`. The ranking difference is interpreted as descriptive signal under linkage and calibration assumptions, not as evidence of causal party effects.
+Consistency contrasts remain modest in absolute spread but informative for ranking and comparison. In `output/analysis/consistency_score_party.parquet`, `SD` records `consistency_score = 0.5499` and `motion_pathway_fulfillment = 0.9638`, while `C` records `consistency_score = 0.4840` and `motion_pathway_fulfillment = 0.8443`. The ranking difference is interpreted as descriptive signal under linkage and calibration assumptions, not as evidence of causal party effects.
 
 The consistency contrast complements fulfillment by focusing on agreement structure rather than endpoint rates. Two parties may display similar aggregate consistency while differing sharply in where that consistency comes from. For example, one party may show stable vote alignment but variable speech framing. For this reason, we interpret consistency and fulfillment jointly. Consistency indicates coherence across channels, while fulfillment indicates pathway continuation from speech-linked records into action-linked records.
 
 (See Figure 1, Consistency vs Fulfillment, generated by `scripts/analyze_consistency_trends.py`.)
 
-We keep classifier quality and substantive interpretation separate throughout. We treat calibration choices, linkage fairness constraints, and uncertainty intervals as sensitivity controls that bound interpretation. The speech-specific meta-classifier is the primary anchor for speech-level claims; the motion baseline and integrated hybrid ensemble serve as cross-domain and cross-model sensitivity checks. All cross-party contrasts remain descriptive rather than causal. We use external benchmarks for directional triangulation only, because statement-based benchmarks can diverge from observed parliamentary action.
+We keep classifier quality and substantive interpretation separate throughout. We treat calibration choices, linkage fairness constraints, and uncertainty intervals as sensitivity controls that bound interpretation. The speech-specific meta-classifier is the primary anchor for speech-level claims; the motion baseline serves as a cross-domain sensitivity check. All cross-party contrasts remain descriptive rather than causal. We use external benchmarks for directional triangulation only, because statement-based benchmarks can diverge from observed parliamentary action.
 
 This separation between model quality and substantive claim strength is central to the manuscript's inferential stance. Better classifier metrics increase confidence that labels are coherent under the chosen category system, but they do not automatically justify stronger causal claims about party intent or policy consequences. Conversely, modest classifier performance does not invalidate all comparative diagnostics if uncertainty is explicitly modeled and interpretation remains bounded.
 
@@ -101,17 +92,21 @@ Recency-weighted party and parliament summaries continue to support the same int
 
 We use recency weighting to answer a specific temporal question. Do contemporary party positions reflect information that is closer in time to current parliamentary behavior, rather than an equal average of distant historical periods? This improves interpretability for present-facing comparisons. It also introduces an explicit tradeoff. Short-term volatility can carry more influence than long-run structural stability.
 
+To check whether action-side ideology shifts in election runup windows, recency summaries report runup action index `2.9244` versus non-runup `2.9528`; the latest runup-minus-nonrunup delta is `-0.0284`.
+
 (See Figure 2, Parliament Direction Over Time, generated by `scripts/analyze_consistency_trends.py` and `scripts/analyze_recency_weighted_trends.py`.)
 
 ## Robustness and Interpretation Limits
 
-The speech-to-motion linkage uses rel_dok_id-to-betankande bridging with graph-direct and fallback strategies. Full linkage coverage is achieved by design: `n=141605` speeches are assigned a motion or vote-side candidate (`coverage=1.0000`). Evidence quality is therefore interpreted through confidence composition rather than raw coverage alone. In `output/analysis/speech_action_link_confidence_summary.json`, `n=96283` links (`67.7%`) are graph-signatory, `n=20841` (`14.7%`) are existing-reference links, `n=12115` (`8.9%`) are heuristic fallback links, and `n=12366` (`8.7%`) are structural-high links. Benchmarks are used for directional triangulation only, and election-runup summaries are treated as descriptive trend diagnostics rather than outcome forecasts.
+The speech-to-motion linkage uses rel_dok_id-to-betankande bridging with fallback strategies. In the latest linkage summary, `n=425276` speeches are linked out of `n=425276` (`coverage=1.0000`), with `n=425276` speeches carrying a mapped ideology category.
+
+Linkage diagnostics (latest production refresh): full coverage is retained by design (`n=769088` linked rows), but provenance now shifts materially toward graph-direct signatory evidence. In `output/analysis/speech_action_link_confidence_summary.json`, graph-signatory links are `n=154484` (`20.1%`), existing-reference links are `n=16851` (`2.2%`), heuristic fallback links are `n=212871` (`27.7%`), and structural high-confidence links are `n=41070` (`5.3%`). Action counts are near balanced (vote `n=315091`, motion `n=110185`).
+
+Benchmarks are used for directional triangulation only, and election-runup summaries are treated as descriptive trend diagnostics rather than outcome forecasts.
 
 The linkage diagnostics clarify how much of the speech corpus enters cross-modality comparison at different confidence levels. Higher-coverage linkage increases representativeness, while confidence-level splits provide a direct view of robustness under stricter versus looser matching criteria. Readers can then evaluate whether key comparisons are stable only in permissive linkage settings or remain visible under stricter thresholds.
 
-Stage-3 stratified error review also identified three recurring failure modes that bound interpretation of speech-level labels. First, rhetorical inversion cases appear when opposition speeches quote or attack right-coded issue language; this can induce rightward predictions even for left/center-left speakers (for example, speech IDs `277ee5c2-d93f-f111-bf21-6805cafeabf9` and `82a2f18c-2482-e511-942d-00262d0d0c40` in `stratified_classification_report.md`). Second, governance/procedural debate often yields low-margin centrist assignments with near-tied alternatives. Third, occasional markup contamination (for example `STYLEREF ... MERGEFORMAT`) remains in source text previews and can perturb token evidence. We therefore treat individual speech labels as auditable but noisy intermediates and prioritize party-level aggregates and sensitivity checks for substantive claims. These patterns are consistent with known challenges in automated parliamentary text analysis [@rheault2016measuring; @patz2025german].
-
-Fulfillment-imputation sensitivity was also checked directly in the current artifact set. Recomputing consistency outputs with `--fulfillment-fill` set to `0.0` and `0.5` produced identical party-level consistency estimates in this refresh (`rho = 1.000`, max absolute delta `0.000`), because no party-level missing-motion pathways remained after aggregation.
+Stage-3 stratified error review identified three recurring failure modes that bound interpretation of speech-level labels. First, rhetorical inversion cases appear when opposition speeches quote or attack right-coded issue language; this can induce rightward predictions even for left/center-left speakers (for example, speech IDs `277ee5c2-d93f-f111-bf21-6805cafeabf9` and `82a2f18c-2482-e511-942d-00262d0d0c40` in `stratified_classification_report.md`). Second, governance/procedural debate often yields low-margin centrist assignments with near-tied alternatives. Third, occasional markup contamination (for example `STYLEREF ... MERGEFORMAT`) remains in source text previews and can perturb token evidence. We therefore treat individual speech labels as auditable but noisy intermediates and prioritize party-level aggregates and sensitivity checks for substantive claims. These patterns are consistent with known challenges in automated parliamentary text analysis [@rheault2016measuring; @patz2025german].
 
 Current metric anchors from this workflow include `n=403` rows in party-topic-year fulfillment and expected-contradiction aggregates, and `n=480` successful SARIMAX trials for monthly model selection.
 
@@ -119,7 +114,7 @@ Taken together, these results support a bounded empirical claim. Ideology-relate
 
 (Methods pointer: `scripts/classify.py` and `src/swedish_parliament_policy_classifier/classifier/scorer.py` define the deterministic-first scoring baseline used in this workflow.)
 
-A final synthesis helps bound interpretation. Robust findings are those that persist across modality comparisons and linkage-sensitivity diagnostics, including modality-sensitive party contrasts and cross-party variation in consistency/fulfillment. Suggestive findings include rank-order differences with modest absolute spread and outcomes that depend more strongly on calibration or weighting choices. Provisional findings include trend magnitudes in settings with higher fallback linkage reliance or model-family uncertainty. This hierarchy is used to keep empirical claims proportional to current evidence quality.
+A final synthesis helps bound interpretation. Robust findings are those that persist across modality comparisons and linkage-sensitivity diagnostics, including modality-sensitive party contrasts and cross-party variation in consistency. Suggestive findings include rank-order differences with modest absolute spread and outcomes that depend more strongly on calibration or weighting choices. Provisional findings include trend magnitudes in settings with higher fallback linkage reliance or model-family uncertainty. This hierarchy is used to keep empirical claims proportional to current evidence quality.
 
 For first-time readers, see the compact plain-language guide in the Appendix section "How to read the metrics."
 
