@@ -1,0 +1,158 @@
+{
+  "run_ts": "20260801T184003Z",
+  "dry_run": false,
+  "cpu_fraction": 0.25,
+  "allow_partial": false,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "mot": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "2026-05-07"
+      }
+    },
+    "download": {
+      "dry_run": false,
+      "speeches": {
+        "step": "download_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP anforande-199394.json.zip (18.5 MB)\nSKIP anforande-199495.json.zip (16.6 MB)\nSKIP anforande-199596.json.zip (14.9 MB)\nSKIP anforande-199697.json.zip (19.2 MB)\nSKIP anforande-199798.json.zip (19.9 MB)\nSKIP anforande-199899.json.zip (16.8 MB)\nSKIP anforande-19992000.json.zip (20.0 MB)\nSKIP anforande-200001.json.zip (21.1 MB)\nSKIP anforande-200102.json.zip (20.8 MB)\nSKIP anforande-200203.json.zip (18.6 MB)\nSKIP anforande-200304.json.zip (20.1 MB)\nSKIP anforande-200405.json.zip (23.6 MB)\nSKIP a",
+        "stderr_preview": ""
+      },
+      "votering": {
+        "step": "download_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP votering-199394.csv.zip (4.3 MB)\nSKIP votering-199495.csv.zip (3.0 MB)\nSKIP votering-199596.csv.zip (2.7 MB)\nSKIP votering-199697.csv.zip (4.1 MB)\nSKIP votering-199798.csv.zip (5.0 MB)\nSKIP votering-199899.csv.zip (3.3 MB)\nSKIP votering-19992000.csv.zip (3.7 MB)\nSKIP votering-200001.csv.zip (3.5 MB)\nSKIP votering-200102.csv.zip (4.4 MB)\nSKIP votering-200203.csv.zip (6.0 MB)\nSKIP votering-200304.csv.zip (7.0 MB)\nSKIP votering-200405.csv.zip (6.2 MB)\nSKIP votering-200506.csv.zip (7.2 MB)\nSKIP",
+        "stderr_preview": ""
+      },
+      "betankande": {
+        "step": "download_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP bet-2022-2025.json.zip (78.8 MB)\nSKIP bet-2018-2021.json.zip (89.4 MB)\nSKIP bet-2014-2017.json.zip (72.8 MB)\nSKIP bet-2010-2013.json.zip (51.3 MB)\nSKIP bet-2006-2009.json.zip (39.5 MB)\nSKIP bet-2002-2005.json.zip (60.2 MB)\nSKIP bet-1998-2001.json.zip (48.7 MB)\nSKIP bet-1990-1997.json.zip (77.4 MB)\nSKIP bet-1980-1989.json.zip (116.5 MB)\nSKIP bet-1971-1979.json.zip (80.6 MB)\n\nSummary: downloaded=10, not_found=0, invalid=0, failed=0\n",
+        "stderr_preview": ""
+      },
+      "bulk": {
+        "step": "download_bulk",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "SKIP mot-2022-2025.json.zip (82.9 MB)\nSKIP mot-2018-2021.json.zip (104.7 MB)\nSKIP mot-2014-2017.json.zip (86.7 MB)\nSKIP mot-2010-2013.json.zip (60.6 MB)\nSKIP mot-2006-2009.json.zip (61.1 MB)\nSKIP mot-2002-2005.json.zip (72.7 MB)\nSKIP mot-1998-2001.json.zip (56.5 MB)\nSKIP mot-1990-1997.json.zip (92.9 MB)\nSKIP mot-1980-1989.json.zip (113.8 MB)\nSKIP mot-1971-1979.json.zip (69.2 MB)\nSKIP prop-2022-2025.json.zip (119.5 MB)\nSKIP prop-2018-2021.json.zip (107.9 MB)\nSKIP prop-2014-2017.json.zip (136.1 MB",
+        "stderr_preview": ""
+      }
+    },
+    "extract": {
+      "speeches": {
+        "step": "extract_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 33 anf\u00f6rande ZIP files\nSKIP anforande-199394.json (9.9 MB)\nSKIP anforande-199495.json (9.0 MB)\nSKIP anforande-199596.json (8.0 MB)\nSKIP anforande-199697.json (10.5 MB)\nSKIP anforande-199798.json (10.9 MB)\nSKIP anforande-199899.json (9.0 MB)\nSKIP anforande-19992000.json (10.8 MB)\nSKIP anforande-200001.json (11.5 MB)\nSKIP anforande-200102.json (11.4 MB)\nSKIP anforande-200203.json (10.1 MB)\nSKIP anforande-200304.json (10.4 MB)\nSKIP anforande-200405.json (12.2 MB)\nSKIP anforande-200506.json (1"
+      },
+      "votering": {
+        "step": "extract_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 33 ZIP files\nSKIP votering-199394.csv (0.1 MB)\nSKIP votering-199495.csv (0.1 MB)\nSKIP votering-199596.csv (0.1 MB)\nSKIP votering-199697.csv (0.1 MB)\nSKIP votering-199798.csv (0.2 MB)\nSKIP votering-199899.csv (0.1 MB)\nSKIP votering-19992000.csv (0.1 MB)\nSKIP votering-200001.csv (0.1 MB)\nSKIP votering-200102.csv (0.2 MB)\nSKIP votering-200203.csv (0.2 MB)\nSKIP votering-200304.csv (0.3 MB)\nSKIP votering-200405.csv (0.3 MB)\nSKIP votering-200506.csv (0.3 MB)\nSKIP votering-200607.csv (0.2 MB)\nSKI"
+      },
+      "betankande": {
+        "step": "extract_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 10 bet\u00e4nkande ZIP files\nSKIP bet-1971-1979.json (0.2 MB)\nSKIP bet-1980-1989.json (0.2 MB)\nSKIP bet-1990-1997.json (0.2 MB)\nSKIP bet-1998-2001.json (0.1 MB)\nSKIP bet-2002-2005.json (0.1 MB)\nSKIP bet-2006-2009.json (0.1 MB)\nSKIP bet-2010-2013.json (0.1 MB)\nSKIP bet-2014-2017.json (0.0 MB)\nSKIP bet-2018-2021.json (0.0 MB)\nSKIP bet-2022-2025.json (0.1 MB)\n"
+      }
+    },
+    "api_fetch": {
+      "motions": {
+        "fetched": 0,
+        "output": null,
+        "caught_up": true
+      },
+      "speeches": {
+        "fetched": 0,
+        "output": null
+      }
+    },
+    "extract_new_sources": {
+      "extract_questions": {
+        "step": "extract_questions",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": "Found 0 fr ZIP files\nNo fr ZIP files found, creating empty output\n"
+      },
+      "normalize_betankande": {
+        "step": "extract_betankande_to_normalized",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Normalized 21356 betankande rows.\n",
+        "stderr_preview": "Found 10 betankande parquet files\nREAD bet-1971-1979.json.parquet ...\n  6170 rows from bet-1971-1979.json.parquet\nREAD bet-1980-1989.json.parquet ...\n  5469 rows from bet-1980-1989.json.parquet\nREAD bet-1990-1997.json.parquet ...\n  3348 rows from bet-1990-1997.json.parquet\nREAD bet-1998-2001.json.parquet ...\n  1184 rows from bet-1998-2001.json.parquet\nREAD bet-2002-2005.json.parquet ...\n  1328 rows from bet-2002-2005.json.parquet\nREAD bet-2006-2009.json.parquet ...\n  941 rows from bet-2006-2009."
+      },
+      "extract_interpellations": {
+        "step": "extract_interpellations",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "Extracted 89339 interpellation turns.\n",
+        "stderr_preview": "Found 33 speech parquet files\n  Loaded anforande-199394.json.parquet: 12370 rows\n  Loaded anforande-199495.json.parquet: 11161 rows\n  Loaded anforande-199596.json.parquet: 10274 rows\n  Loaded anforande-199697.json.parquet: 12882 rows\n  Loaded anforande-199798.json.parquet: 13300 rows\n  Loaded anforande-199899.json.parquet: 11651 rows\n  Loaded anforande-19992000.json.parquet: 13519 rows\n  Loaded anforande-200001.json.parquet: 14207 rows\n  Loaded anforande-200102.json.parquet: 13746 rows\n  Loaded "
+      }
+    }
+  },
+  "interrupted": true,
+  "error": "Interrupted by user",
+  "completed_at": "20260801T185543Z"
+}

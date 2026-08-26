@@ -17,13 +17,11 @@ dependencies = [
   "requests",
   "sentencepiece>=0.2.1",
   "seaborn>=0.12.0",
-  "statsmodels>=0.14.0",
   "pytest-cov>=7.1.0",
+  "transformers>=5.8.1",
+  "accelerate>=1.13.0",
+  "torch>=2.12.0",
   "pyarrow>=24.0.0",
-  "zstandard>=0.25.0",
-  "polars>=1.41.2",
-  "loguru>=0.7.0",
-  "lightgbm>=4.6.0",
 ]
 
 [project.optional-dependencies]
@@ -37,23 +35,13 @@ dev = [
   "lightgbm>=4.0.0",
   "ollama>=0.1.0",
 ]
-ml = [
-  "transformers>=5.8.1",
-  "accelerate>=1.13.0",
-  "torch>=2.12.0",
-  "spacy>=3.8.14",
-]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["swedish_parliament_policy_classifier*"]
 
-[tool.pytest.ini_options]
-filterwarnings = [
-    "ignore::DeprecationWarning:torch.jit._script",
-    "ignore::DeprecationWarning:importlib._bootstrap",
-    "ignore::DeprecationWarning:sys",
-]
+[project.scripts]
+plot-action-position-digest = "swedish_parliament_policy_classifier.plot_action_position_digest:main"
 
 [dependency-groups]
 dev = [

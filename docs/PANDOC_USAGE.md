@@ -1,44 +1,23 @@
----
-_agent_frontmatter:
-  id: "docs/PANDOC_USAGE"
-  purpose: "Repository markdown document."
-  steward: "repo"
-  edit_policy: "manual"
----
+# Pandoc usage for repository documentation
 
-# Pandoc Usage
+Quick examples to convert Markdown docs to PDF, HTML, or DOCX for sharing.
 
-This project uses Pandoc to build a manuscript PDF from Markdown sections.
-
-## Inputs
-
-- `manuscript/sections/01_title.md`
-- `manuscript/sections/02_question.md`
-- `manuscript/sections/03_results.md`
-- `manuscript/sections/04_significance.md`
-
-## Build
-
-From repo root:
+Convert Markdown to PDF (requires a LaTeX engine):
 
 ```bash
-uv run make -C manuscript manuscript
+pandoc -s docs/GRAPHIFY_TOKEN_TIPS.md -o docs/GRAPHIFY_TOKEN_TIPS.pdf --pdf-engine=xelatex
 ```
 
-This concatenates section files into `manuscript.md` and, if Pandoc is installed, writes `manuscript.pdf`.
-
-## Verify Pandoc
+Convert to HTML:
 
 ```bash
-pandoc --version
+pandoc -s docs/GRAPHIFY_TOKEN_TIPS.md -o docs/GRAPHIFY_TOKEN_TIPS.html
 ```
 
-## Reproducibility Notes
+Combine multiple Markdown files into a single PDF:
 
-For academic rigor, record this metadata each time manuscript output is regenerated:
+```bash
+pandoc -s docs/REPRODUCIBILITY.md docs/GRAPHIFY_TOKEN_TIPS.md -o docs/REPRODUCIBILITY_FULL.pdf --pdf-engine=xelatex
+```
 
-- Producing command and script/Make target
-- Source section paths and git commit hash
-- Output files and paths
-- UTC timestamp
-- Any non-default flags/options
+Tip: keep source docs concise before converting; use `docs/GRAPHIFY_TOKEN_TIPS.md` recommendations to create short summaries for semantic extraction.

@@ -1,0 +1,123 @@
+{
+  "run_ts": "20260801T190813Z",
+  "dry_run": false,
+  "cpu_fraction": 0.25,
+  "allow_partial": false,
+  "steps": {
+    "api_check": {
+      "anforande": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/anforande/anforande-202627.json.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "votering": {
+        "new": [],
+        "checked": [
+          {
+            "period": "202627",
+            "url": "https://data.riksdagen.se/dataset/votering/votering-202627.csv.zip",
+            "exists": false
+          }
+        ],
+        "stale": []
+      },
+      "mot": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/mot-2022-2025.json.zip"
+          }
+        ]
+      },
+      "prop": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/prop-2022-2025.json.zip"
+          }
+        ]
+      },
+      "bet": {
+        "new": [],
+        "checked": [],
+        "stale": [
+          {
+            "period": "2022-2025",
+            "url": "https://data.riksdagen.se/dataset/dokument/bet-2022-2025.json.zip"
+          }
+        ]
+      },
+      "latest_dates": {
+        "speech": "2026-05-08 00:00:00+00:00",
+        "vote": "2026-05-07 00:00:00+00:00",
+        "motion": "2026-07-15 00:00:00"
+      }
+    },
+    "download": {
+      "dry_run": false,
+      "speeches": {
+        "step": "download_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      },
+      "votering": {
+        "step": "download_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      },
+      "betankande": {
+        "step": "download_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      },
+      "bulk": {
+        "step": "download_bulk",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      }
+    },
+    "extract": {
+      "speeches": {
+        "step": "extract_speeches",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      },
+      "votering": {
+        "step": "extract_votering",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      },
+      "betankande": {
+        "step": "extract_betankande",
+        "ok": true,
+        "returncode": 0,
+        "stdout_preview": "",
+        "stderr_preview": ""
+      }
+    }
+  },
+  "error": "'datetime.datetime' object has no attribute 'normalize'",
+  "completed_at": "20260801T190835Z"
+}
