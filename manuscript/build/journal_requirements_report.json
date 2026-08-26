@@ -18,6 +18,12 @@
       "detail": "26 bibliography entries in manuscript/bibliography/references.bib"
     },
     {
+      "id": "bibliography_doi_metadata",
+      "status": "warn",
+      "detail": "Could not verify DOI metadata for 10.1111/j.1939-9162.2012.00030.x",
+      "blocking": false
+    },
+    {
       "id": "heading_depth",
       "status": "pass",
       "detail": "Maximum heading depth in sections: 2"

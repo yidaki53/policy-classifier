@@ -27,4 +27,4 @@ Most computational studies of party ideology rely on manifesto positions or sing
 
 {{ abstract_metrics_paragraph }}
 
-We interpret outputs as descriptive diagnostics under explicit non-causal boundaries. The contribution is a transparent, auditable measurement stack that can be updated and stress-tested as new parliamentary data arrive. The next section states the research question and comparative frame.
+We interpret outputs as descriptive diagnostics under explicit non-causal boundaries. The contribution is a transparent, auditable measurement stack that can be updated and stress-tested as new parliamentary data arrive.

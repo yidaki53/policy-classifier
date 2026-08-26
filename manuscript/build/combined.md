@@ -8,7 +8,7 @@ Most computational studies of party ideology rely on manifesto positions or sing
 
 On the current full corpus, the workflow covers `n=202926` motions (2007-2026), `n=425276` speeches (1993-2026), and `n=21464` unique roll-call vote events (1993-2026). With full speech-action linkage in the final stage, party-level consistency outputs are exported as auditable parquet artifacts. In labeled speech evaluation (`n=2656`), baseline accuracy is `0.2033`; baseline NLL is `2.1535`, with calibration NLL `1.9221` (temperature) and `1.7115` (isotonic). Recency-weighted and lead-lag analyses provide party and parliament trajectories over time, and SARIMAX model selection is tracked through saved trial artifacts for reproducible forecasting diagnostics.
 
-We interpret outputs as descriptive diagnostics under explicit non-causal boundaries. The contribution is a transparent, auditable measurement stack that can be updated and stress-tested as new parliamentary data arrive. The next section states the research question and comparative frame.
+We interpret outputs as descriptive diagnostics under explicit non-causal boundaries. The contribution is a transparent, auditable measurement stack that can be updated and stress-tested as new parliamentary data arrive.
 
 
 # Question
@@ -46,7 +46,7 @@ We use official Riksdag open data (data.riksdagen.se) as the primary source. Thr
 - **Speeches**: `n=425276` unique plenary speeches spanning 1993-2026, retrieved via the Riksdag anförande API (`/api/v1/anforande/sok`). Each speech includes speaker, party affiliation, and timestamp. Speeches shorter than 50 characters after HTML stripping are excluded.
 - **Votes**: `n=21464` unique roll-call vote events spanning 1993-2026, retrieved via the Riksdag votering API (`/api/v1/votering/sok`). Each vote event includes party-level voting records (yes/no/abstain/absent) and metadata linking to the underlying proposition.
 
-All raw data are stored under `data/` and normalized into parquet format under `data/parquet/`, `data/speeches/parquet/`, `data/betankande/parquet/`, and `data/votering/parquet/`. The ingest pipeline is runnable via `scripts/download_speeches.py`, `scripts/download_votering.py`, and `scripts/download_betankande.py`.
+Raw parliamentary records are ingested and normalized into parquet datasets for motions, speeches, consultation documents, and voting records. The ingest workflow is runnable through the repository scripts for speeches, voting, and consultation data.
 
 We focus on Sweden because the parliamentary record offers unusually high institutional traceability for this research objective [@carlson2024swedish]. We can observe party-level behavior consistently across motions, plenary speeches, and roll-call voting, all tied to a transparent legislative process. This setting reduces ambiguity about where parties make claims and where they record actions. That clarity is necessary because our core goal is to compare political speech with parliamentary conduct, not to maximize cross-country breadth.
 
@@ -60,7 +60,7 @@ The modeling strategy is deterministic-first and multimodal by design [@barbera2
 - **Zero-shot NLI entailment** tests whether the text supports or criticizes each category's position, providing the strongest protection against rhetorical inversion — where a speaker quotes an opponent's language but opposes their position [@alvarez2021label; @patz2025german].
 - **A fine-tuned Swedish BERT classifier** provides domain-specific probability vectors trained on motion-level gold labels [@devlin2019bert; @wolf2020transformers].
 
-These five signal types (keyword + regex + embedding + zero-shot + BERT) are combined in a LightGBM meta-learner. **The speech-specific meta-classifier (trained on n=2,656 speech gold labels) achieves 0.94 per-category accuracy on held-out test data.** A rhetorical pattern detection layer, derived from Britannica-based keyword lists, multiplicatively boosts categories whose ideological framing signals are detected. The meta-learner receives both raw and rhetorically-adjusted probabilities, learning optimal weighting for the speech domain.
+These five signal types (keyword + regex + embedding + zero-shot + BERT) are combined in a LightGBM meta-learner. **The speech-specific meta-classifier (trained on n=2,656 speech gold labels) achieves 0.94 per-category accuracy on held-out test data** when deployed with calibration and adaptive thresholds via EnhancedScorer. Without these pipeline improvements, the base classifier achieves only 0.184 accuracy due to class imbalance in the speech domain. A rhetorical pattern detection layer, derived from Britannica-based keyword lists, multiplicatively boosts categories whose ideological framing signals are detected. The meta-learner receives both raw and rhetorically-adjusted probabilities, learning optimal weighting for the speech domain. The pipeline loads the tuned speech meta-classifier and its calibration artifacts by default.
 
 This hybrid design trades simplicity for better representational capacity while retaining a transparent baseline. Each component was added only after stratified validation showed a specific failure mode that existing components could not address: embedding scores catch semantic similarity but generate false positives when a speaker discusses a topic without endorsing it; zero-shot NLI corrects these false positives via the critique hypothesis term; BERT provides calibration for formal policy language where embeddings are noisy.
 
@@ -84,7 +84,7 @@ The full pipeline implementation is available in the project repository. The com
 uv run python scripts/update_pipeline.py --cpu-fraction 0.25
 ```
 
-The speech classification pipeline supports resume-by-skip for incremental processing. Linkage, fairness controls, and temporal diagnostics are executable scripts that export auditable parquet artifacts — each encoding version strings that identify which classifier components were active, enabling downstream filtering by component subset. All scripts are executed in a pinned Python environment using `uv` (see `pyproject.toml` for exact dependency versions).
+The workflow supports resume-by-skip for incremental processing. Linkage, fairness controls, and temporal diagnostics export auditable parquet artifacts with component-version metadata, enabling downstream filtering by model subset. The analysis is executed in a pinned Python environment using uv.
 
 
 # Results
@@ -109,9 +109,9 @@ These figures indicate informative but uncertain signal. The speech-specific met
 
 Across hypotheses, the results are consistent with modality-sensitive ideology measurement under a descriptive interpretation. Party-level profiles differ across motions, speeches, and vote-linked action channels. Speech-action consistency also varies across parties after linkage constraints. Fulfillment diagnostics add information beyond aggregate consistency alone.
 
-## Cross-Modality Contrasts
+## Hypothesis 1: Modality-Sensitive Profiles
 
-(See Figure 1, Consistency vs Fulfillment, generated by `scripts/analyze_consistency_trends.py`; see Figure 3, Party Modality Overlay, generated by `scripts/generate_manuscript_overlay.py`; see Figure 8, Three-way Divergence, generated by `scripts/speeches_analysis.py`.)
+(See Figure 1, consistency vs fulfillment; Figure 3, party modality overlay; and Figure 8, three-way divergence.)
 
 Substantively, this means no single channel can be treated as a complete proxy for party ideology. Motion-side evidence can reflect formal agenda setting and coalition strategy. Speech-side evidence can reflect rhetorical framing and constituency signaling. Vote-linked action can reflect final institutional bargaining constraints [@osnabrugge2023speech]. When these channels converge, confidence in the descriptive estimate increases. When they diverge, the divergence itself becomes a meaningful analytical result rather than a nuisance to suppress, consistent with recent multimodal frameworks for comparative political communication [@jaursch2025multimodal].
 
@@ -119,7 +119,9 @@ One concrete speech-level example shows how the classifier surfaces interpretabl
 
 This example is included for transparency, not anecdotal persuasion. It demonstrates how a category assignment can be audited from source text to model output. This matters for reproducibility and interpretive discipline. A single speech cannot establish party-level ideology, but it can show whether the pipeline produces traceable and linguistically plausible intermediate outputs before aggregation.
 
-(See Figure 8, Three-way Divergence, generated by `scripts/speeches_analysis.py`.)
+(See Figure 8, three-way divergence.)
+
+## Hypothesis 3: Fulfillment and Contradiction Diagnostics
 
 Promise-fulfillment contrasts are substantively visible in the current summary table. In `output/analysis/promise_fulfillment_party_summary.parquet`, `SD` has `pct_speech_motion_vote = 0.3526` while `V` has `0.1787`; `V` shows `pct_speech_motion_no_vote = 0.0921`. These differences illustrate why fulfillment diagnostics are retained as a separate axis instead of being collapsed into one aggregate consistency score.
 
@@ -127,9 +129,17 @@ We interpret the fulfillment contrast as a pathway diagnostic. It asks whether i
 
 Consistency contrasts remain modest in absolute spread but informative for ranking and comparison. In `output/analysis/consistency_score_party.parquet`, `SD` records `consistency_score = 0.5499` and `motion_pathway_fulfillment = 0.9638`, while `C` records `consistency_score = 0.4840` and `motion_pathway_fulfillment = 0.8443`. The ranking difference is interpreted as descriptive signal under linkage and calibration assumptions, not as evidence of causal party effects.
 
+Action-side party positioning is summarized from the latest supported-action evidence export when available. The current run did not yet materialize the action-position parquet artifacts.
+
+![Action-side Evidence Digest](../output/manuscript/figures/figure_action_position_digest.png){ width=100% }
+
+
+
+## Hypothesis 2: Say-Do Consistency
+
 The consistency contrast complements fulfillment by focusing on agreement structure rather than endpoint rates. Two parties may display similar aggregate consistency while differing sharply in where that consistency comes from. For example, one party may show stable vote alignment but variable speech framing. For this reason, we interpret consistency and fulfillment jointly. Consistency indicates coherence across channels, while fulfillment indicates pathway continuation from speech-linked records into action-linked records.
 
-(See Figure 1, Consistency vs Fulfillment, generated by `scripts/analyze_consistency_trends.py`.)
+(See Figure 1, consistency vs fulfillment.)
 
 We keep classifier quality and substantive interpretation separate throughout. We treat calibration choices, linkage fairness constraints, and uncertainty intervals as sensitivity controls that bound interpretation. The speech-specific meta-classifier is the primary anchor for speech-level claims; the motion baseline serves as a cross-domain sensitivity check. All cross-party contrasts remain descriptive rather than causal. We use external benchmarks for directional triangulation only, because statement-based benchmarks can diverge from observed parliamentary action.
 
@@ -141,7 +151,7 @@ We use recency weighting to answer a specific temporal question. Do contemporary
 
 To check whether action-side ideology shifts in election runup windows, recency summaries report runup action index `2.9244` versus non-runup `2.9528`; the latest runup-minus-nonrunup delta is `-0.0284`.
 
-(See Figure 2, Parliament Direction Over Time, generated by `scripts/analyze_consistency_trends.py` and `scripts/analyze_recency_weighted_trends.py`.)
+(See Figure 2, parliament direction over time.)
 
 ## Robustness and Interpretation Limits
 
@@ -253,18 +263,20 @@ These figures capture intermediate diagnostics and process-level checks that sup
 
 ![Party Motions Stacked (updated 2026-07-01T20:44:01Z)](../figures/manuscript/party_motions_stacked.png){ width=90% }
 
-![Voting Cohesion Time Series (updated 2026-07-01T21:25:03Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
+![Voting Cohesion Time Series (updated 2026-08-01T19:26:16Z)](../figures/voting/party_cohesion_timeseries.png){ width=100% }
 
 ![Three-way Divergence (updated 2026-07-01T20:45:20Z)](../figures/three_way/divergence_speech_vs_combined_significance.png){ width=100% }
 
 ![Speech Profiles Heatmap (updated 2026-07-01T20:45:03Z)](../figures/speeches/speech_profiles_heatmap.png){ width=100% }
 
+![Action-side Evidence Digest (updated 2026-08-01T15:44:42Z)](../output/manuscript/figures/figure_action_position_digest.png){ width=90% }
+
 
 # Data Availability
 
-All data and metadata underlying the findings reported in this manuscript are available within the project repository and its reproducible artifact directories. Source parliamentary records are retrieved from official Swedish Parliament open-data endpoints and normalized into compressed parquet datasets under `data/parquet/`, `data/speeches/parquet/`, `data/betankande/parquet/`, and `data/votering/parquet/`. Derived analysis tables used for results and figures are available under `output/analysis/`, and generated figure assets are available under `output/manuscript/figures/` and `figures/`.
+All data and metadata underlying the findings reported in this manuscript are available within the project repository and its reproducible artifact directories. Source parliamentary records are retrieved from official Swedish Parliament open-data endpoints and normalized into compressed parquet datasets. Derived analysis tables used for results and figures are available under the repository analysis outputs, and generated figure assets are available in the manuscript and figure directories.
 
-All scripts required to reproduce ingest, classification, linkage, analysis, and figure generation are included under `scripts/` and are executed in a pinned Python environment using `uv`. The exact rendering/build context for the manuscript is exported at build time to `manuscript/build/manuscript_context.json`, and journal-readiness checks are exported to `manuscript/build/journal_requirements_report.json`.
+All scripts required to reproduce ingest, classification, linkage, analysis, and figure generation are included in the repository and are executed in a pinned Python environment using uv. The exact rendering/build context for the manuscript is exported at build time, and journal-readiness checks are exported alongside the manuscript build artifacts.
 
 No participant-level restricted data are introduced by this project; all primary inputs originate from publicly available parliamentary materials.
 
@@ -274,7 +286,7 @@ Archival DOI for the submission snapshot (`submission-2026-06-06-r3`): `https://
 
 For production handoff, the recommended archival path is to create a versioned release snapshot and archive it in a long-term repository service (for example, a Zenodo-linked GitHub release). This preserves the exact manuscript-state code and artifacts and provides a persistent accession identifier for citation without changing the underlying access pathway described above. The archived record should include the release tag, commit hash, artifact directory inventory, and manuscript build timestamp used in the submitted version.
 
-Numeric reporting policy: JSON artifacts in `output/analysis/` preserve machine-precision float values (IEEE754). In manuscript prose and figure captions, percentages are rounded for readability (typically to one decimal place unless otherwise stated). Where rounded text differs from full-precision values, the full-precision artifact is the reproducible reference.
+Numeric reporting policy: analysis JSON artifacts preserve machine-precision float values (IEEE754). In manuscript prose and figure captions, percentages are rounded for readability (typically to one decimal place unless otherwise stated). Where rounded text differs from full-precision values, the full-precision artifact is the reproducible reference.
 
 
 # Acknowledgments
