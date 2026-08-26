@@ -7,7 +7,6 @@ Usage:
     uv run python3 scripts/run_calibration_checks.py
 """
 
-import argparse
 import os
 from pathlib import Path
 from datetime import datetime, timezone
@@ -88,25 +87,20 @@ def plot_reliability(probs, y_true_idx, classes, out_path, n_bins=10, title=None
     plt.close(fig)
 
 
-def main(predictions_path: str | None = None):
+def main():
     logs_dir = Path('logs')
     if not logs_dir.exists():
         print('No logs/ directory found. Run scripts/evaluate_speech_gold_labels.py first.')
         return
 
     # Prefer parquet prediction files, fall back to CSV for compatibility
-    if predictions_path:
-        latest = Path(predictions_path)
-        if not latest.exists():
-            print(f'Predictions file not found: {latest}')
-            return
-    else:
-        candidates = list(logs_dir.glob('speech_eval_preds_*.parquet')) + list(logs_dir.glob('speech_eval_preds_*.csv'))
-        candidates = sorted(candidates, key=lambda p: p.stat().st_mtime, reverse=True)
-        if not candidates:
-            print('No speech_eval_preds_* found in logs/. Run evaluation first.')
-            return
-        latest = candidates[0]
+    candidates = list(logs_dir.glob('speech_eval_preds_*.parquet')) + list(logs_dir.glob('speech_eval_preds_*.csv'))
+    candidates = sorted(candidates, key=lambda p: p.stat().st_mtime, reverse=True)
+    if not candidates:
+        print('No speech_eval_preds_* found in logs/. Run evaluation first.')
+        return
+
+    latest = candidates[0]
     print(f'Using predictions file: {latest}')
     if latest.suffix.lower() == '.parquet':
         df = pd.read_parquet(latest)
@@ -120,7 +114,6 @@ def main(predictions_path: str | None = None):
         return
     classes = [c[len('prob_'):] for c in prob_cols]
     probs = df[prob_cols].to_numpy(dtype=float)
-    probs = np.clip(probs, 0.0, None)
     # Normalize guard
     row_sums = probs.sum(axis=1, keepdims=True)
     row_sums[row_sums == 0] = 1.0
@@ -242,7 +235,4 @@ def main(predictions_path: str | None = None):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--predictions', default=None, help='Optional explicit predictions parquet/csv path')
-    args = parser.parse_args()
-    main(predictions_path=args.predictions)
+    main()

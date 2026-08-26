@@ -10,13 +10,10 @@ Implementation sources:
     - score_motion: classifier.scorer.score_motion
 See inert import-hints and docstrings below for AST/semantic anchoring.
 """
-import logging
 from importlib import import_module, util as _util
 from types import ModuleType
 from typing import Any
 from pathlib import Path
-
-LOG = logging.getLogger(__name__)
 
 
 def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
@@ -30,9 +27,8 @@ def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
         try:
             mod = import_module(mod_name)
             return getattr(mod, attr_name)
-        except Exception as exc:
+        except Exception:
             # Attempt a file-based fallback loader: resolve likely file locations
-            LOG.debug("Import %s failed: %s", mod_name, exc)
             try:
                 repo_root = Path(__file__).resolve().parents[2]
                 parts = mod_name.split('.')
@@ -56,8 +52,7 @@ def _lazy_attr(attr_name: str, candidates: list[str]) -> Any:
                             sys.modules[mod_name] = module
                             spec.loader.exec_module(module)  # type: ignore[attr-defined]
                             return getattr(module, attr_name)
-                    except Exception as exc:
-                        LOG.debug("File-based load failed for %s: %s", mod_name, exc)
+                    except Exception:
                         continue
             except Exception:
                 pass
@@ -191,6 +186,39 @@ from swedish_parliament_policy_classifier.models import (
 )
 
 
+def aggregate_party_choices(*args, **kwargs):
+    impl = _lazy_attr(
+        "aggregate_party_choices",
+        [
+            "swedish_parliament_policy_classifier.analysis.action_evidence",
+            "analysis.action_evidence",
+        ],
+    )
+    return impl(*args, **kwargs)
+
+
+def estimate_supported_action_positions(*args, **kwargs):
+    impl = _lazy_attr(
+        "estimate_supported_action_positions",
+        [
+            "swedish_parliament_policy_classifier.analysis.party_position",
+            "analysis.party_position",
+        ],
+    )
+    return impl(*args, **kwargs)
+
+
+def classify_say_do_transition(*args, **kwargs):
+    impl = _lazy_attr(
+        "classify_say_do_transition",
+        [
+            "swedish_parliament_policy_classifier.analysis.say_do",
+            "analysis.say_do",
+        ],
+    )
+    return impl(*args, **kwargs)
+
+
 def preprocess_text(*args, **kwargs):
     impl = _lazy_attr("preprocess_text", ["swedish_parliament_policy_classifier.nlp.preprocess"])
     return impl(*args, **kwargs)
@@ -199,31 +227,6 @@ def preprocess_text(*args, **kwargs):
 def init_spacy(*args, **kwargs):
     impl = _lazy_attr("init_spacy", ["swedish_parliament_policy_classifier.nlp.preprocess"])
     return impl(*args, **kwargs)
-
-def score_speech(*args, **kwargs):
-    impl = _lazy_attr("score_speech", ["classifier.scorer", "swedish_parliament_policy_classifier.classifier.scorer"])
-    return impl(*args, **kwargs)
-
-
-def detect_rhetorical_patterns(*args, **kwargs):
-    impl = _lazy_attr("detect_rhetorical_patterns", ["swedish_parliament_policy_classifier.nlp.rhetorical_detector"])
-    return impl(*args, **kwargs)
-
-
-def load_rhetorical_weights(*args, **kwargs):
-    impl = _lazy_attr("load_rhetorical_weights", ["swedish_parliament_policy_classifier.nlp.rhetorical_detector"])
-    return impl(*args, **kwargs)
-
-
-def compute_weighted_combination(*args, **kwargs):
-    impl = _lazy_attr("compute_weighted_combination", ["swedish_parliament_policy_classifier.classifier.signal_combinator"])
-    return impl(*args, **kwargs)
-
-
-def apply_rhetorical_adjustments(*args, **kwargs):
-    impl = _lazy_attr("apply_rhetorical_adjustments", ["swedish_parliament_policy_classifier.classifier.signal_combinator"])
-    return impl(*args, **kwargs)
-
 
 __all__ = [
     "load_definitions",
@@ -241,15 +244,13 @@ __all__ = [
     "NormalizedMotion",
     "RawMotion",
     "PartyProfile",
+    "aggregate_party_choices",
+    "estimate_supported_action_positions",
+    "classify_say_do_transition",
     "preprocess_text",
     "init_spacy",
     "classify_motion",
     "classify_and_persist",
-    "score_speech",
-    "detect_rhetorical_patterns",
-    "load_rhetorical_weights",
-    "compute_weighted_combination",
-    "apply_rhetorical_adjustments",
 ]
 
 # Graphify import hints: explicit references to top-level implementation modules

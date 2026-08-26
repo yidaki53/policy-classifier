@@ -11,6 +11,9 @@ from swedish_parliament_policy_classifier.nlp.rhetorical_detector import (
 class TestLoadRhetoricalWeights:
     def test_returns_defaults_when_no_file(self, tmp_path, monkeypatch):
         # Ensure weights file doesn't exist
+        import swedish_parliament_policy_classifier.nlp.rhetorical_detector as mod
+
+        mod._RHETORICAL_WEIGHTS = None
         monkeypatch.chdir(tmp_path)
         weights = load_rhetorical_weights()
         assert "base_far_left" in weights

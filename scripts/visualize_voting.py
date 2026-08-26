@@ -289,6 +289,7 @@ def plot_committee_distribution(df: pd.DataFrame, out_dir: Path):
 
 
 def generate_all(votering_parquet_dir: str, out_dir: str,
+                 db_path: str = "data/swedish_parliament.db",
                  normalized_motions_path: str = "data/parquet/normalized_motions.parquet",
                  motion_votes_path: str = "data/parquet/motion_votes.parquet"):
     df = _load_all_votering(votering_parquet_dir)
@@ -307,6 +308,7 @@ def generate_all(votering_parquet_dir: str, out_dir: str,
         script="scripts/visualize_voting.py",
         inputs={
             "votering_parquet": votering_parquet_dir,
+            "db": db_path,
             "normalized_motions": normalized_motions_path,
             "motion_votes": motion_votes_path,
         },
@@ -338,11 +340,13 @@ def main():
     parser = argparse.ArgumentParser(description="Generate voting-based analysis figures (Parquet-only)")
     parser.add_argument("--votering-parquet", default="data/votering/parquet")
     parser.add_argument("--out", default="figures/voting")
+    parser.add_argument("--db", default="data/swedish_parliament.db")
     parser.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
     parser.add_argument("--motion-votes", default="data/parquet/motion_votes.parquet")
     args = parser.parse_args()
 
     generate_all(args.votering_parquet, args.out,
+                 db_path=args.db,
                  normalized_motions_path=args.normalized_motions,
                  motion_votes_path=args.motion_votes)
 

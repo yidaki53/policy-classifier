@@ -68,8 +68,8 @@ def _to_row_from_classification(cl) -> dict:
 
     # ensure fields
     created = d.get("created_at")
-    if created is None:
-        created_iso = datetime.now(timezone.utc).isoformat()
+        if created is None:
+            created_iso = datetime.now(timezone.utc).isoformat()
     else:
         if isinstance(created, str):
             created_iso = created
@@ -191,7 +191,7 @@ def record_lineage_parquet(source_table: str, source_id: str, operation: str, li
         "source_table": source_table,
         "source_id": source_id,
         "operation": operation,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         "checksum": checksum,
         "parent_lineage_id": parent_lineage_id,
         "notes": notes,
@@ -214,7 +214,7 @@ def record_lineage_parquet(source_table: str, source_id: str, operation: str, li
 
 def save_annotation(conn: Optional[object], motion_id: str, annotator: str, labels: List[dict], notes: Optional[str] = None, status: str = "annotated", annotations_out: Union[str, Path] = "data/parquet/annotations.parquet") -> int:
     out_p = Path(annotations_out)
-    now = datetime.now(timezone.utc).isoformat()
+        now = datetime.now(timezone.utc).isoformat()
     row = {
         "motion_id": motion_id,
         "annotator": annotator,

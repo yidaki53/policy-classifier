@@ -82,10 +82,9 @@ def build_speech_party_profiles(
     merged = cls.merge(meta, on="speech_id", how="left")
     merged["party"] = merged["party"].fillna("Unknown")
 
-    # normalize and filter to current Riksdag parties only
+    # normalize and filter out unknown/NYD parties for visualisations
     merged["party"] = merged["party"].astype(str).str.strip()
-    from swedish_parliament_policy_classifier.visualization.style_config import CURRENT_PARTIES
-    merged = merged[merged["party"].isin(CURRENT_PARTIES)].copy()
+    merged = merged[~merged["party"].str.lower().isin({"unknown", "nyd", ""})].copy()
 
     grp = (
         merged.groupby(["party", "category"], as_index=False)["normalized_weight"].mean()
@@ -99,7 +98,7 @@ def build_speech_party_profiles(
 
 
 def _profiles_to_matrix(profiles: pd.DataFrame) -> tuple[list[str], np.ndarray]:
-    parties = sorted(profiles["party"].dropna().unique().tolist())
+    parties = sorted(profiles["party"].unique().tolist())
     cats = IDEOLOGY_ORDER
     pivot = (
         profiles.pivot_table(index="party", columns="category", values="proportion", aggfunc="mean", fill_value=0.0)
@@ -109,37 +108,24 @@ def _profiles_to_matrix(profiles: pd.DataFrame) -> tuple[list[str], np.ndarray]:
 
 
 def _ideology_score(v: np.ndarray) -> float:
-    """Compute a left-right ideology score from category proportions.
+    """Compute a left-right score with centre treated as neutral.
 
-    Uses a net left-vs-right balance approach:
-    - Left-side categories (far_left, left, centre_left) get negative weight (-1 each)
-    - Centre (centre) gets zero weight (neutral)
-    - Right-side categories (centre_right, right, far_right) get positive weight (+1 each)
-
-    Returns a float in [-1, 1] where:
-      -1.0 = far left extreme
-       0.0 = pure centre
-      +1.0 = far right extreme
-
-    This avoids the centrist pull of the old weighted-average formula which
-    inevitably mapped everything toward 0.5 regardless of ideological content.
+    The output is in the range [-1, 1], where negative values indicate leftward
+    positioning and positive values indicate rightward positioning.
     """
-    d = v.sum()
-    if d <= 0:
+    left_idx = np.array([-1.0, -0.5, -0.25], dtype=float)
+    right_idx = np.array([0.25, 0.5, 1.0], dtype=float)
+
+    left_mass = float(np.sum(v[[0, 1, 2]]))
+    right_mass = float(np.sum(v[[4, 5, 6]]))
+    total = left_mass + right_mass
+
+    if total <= 0:
         return 0.0
 
-    # Weights: far_left=-1, left=-1, centre_left=-1, centre=0, centre_right=+1, right=+1, far_right=+1
-    n = len(IDEOLOGY_ORDER)
-    if n < 7:
-        return 0.0
-
-    # Sum of left-side proportions, centre proportion, right-side proportions
-    left_sum = float(v[0] + v[1] + v[2])  # far_left, left, centre_left
-    right_sum = float(v[4] + v[5] + v[6])  # centre_right, right, far_right
-
-    # Net score: (right - left) / total
-    net = (right_sum - left_sum) / d
-    return float(net)
+    weighted_left = np.dot(v[[0, 1, 2]], left_idx)
+    weighted_right = np.dot(v[[4, 5, 6]], right_idx)
+    return float((weighted_right - weighted_left) / total)
 
 
 def plot_speech_profiles(
@@ -182,36 +168,33 @@ def plot_speech_profiles(
     mat_o = mat[order]
     scores_o = scores[order]
 
-    fig = plt.figure(figsize=(13.2, max(5.8, 0.78 * len(parties_o))))
+    fig = plt.figure(figsize=(12, max(4, 0.55 * len(parties_o))))
     gs = fig.add_gridspec(2, 1, height_ratios=[1, 3])
     ax_top = fig.add_subplot(gs[0])
     ax_heat = fig.add_subplot(gs[1])
-    fig.subplots_adjust(left=0.20, right=0.965, top=0.93, bottom=0.14, hspace=0.28)
+    fig.subplots_adjust(left=0.25, right=0.92, top=0.92, bottom=0.18, hspace=0.35)
 
     y = np.arange(len(parties_o))
-    ax_top.scatter(scores_o, y, c=scores_o, cmap="RdYlBu_r", s=130, edgecolors="black")
+    ax_top.scatter(scores_o, y, c=scores_o, cmap="RdYlBu_r", s=110, edgecolors="black")
     ax_top.set_yticks(y)
-    ax_top.set_yticklabels(parties_o, fontsize=10)
-    ax_top.set_xlim(-1.02, 1.02)
-    ax_top.set_ylim(len(parties_o) - 0.5, -0.5)
-    ax_top.set_xlabel("Ideological placement (Left → Right)", fontsize=10)
-    ax_top.set_title("Speech ideological placement", fontsize=12)
+    ax_top.set_yticklabels(parties_o)
+    ax_top.set_xlim(-0.02, 1.02)
+    ax_top.set_xlabel("Ideological placement (Left=0 -> Right=1)")
+    ax_top.set_title("Speech ideological placement")
     ax_top.invert_yaxis()
-    ax_top.tick_params(axis="x", labelsize=9)
 
     im = ax_heat.imshow(mat_o, aspect="auto", cmap="YlGnBu", interpolation="nearest", vmin=0, vmax=1)
     ax_heat.set_yticks(y)
-    ax_heat.set_yticklabels(parties_o, fontsize=10)
+    ax_heat.set_yticklabels(parties_o)
     ax_heat.set_xticks(np.arange(len(IDEOLOGY_ORDER)))
-    ax_heat.set_xticklabels(IDEOLOGY_ORDER, rotation=45, ha="right", fontsize=9)
-    ax_heat.set_xlabel("Category", fontsize=10)
-    ax_heat.set_title("Speech category distribution", fontsize=12)
+    ax_heat.set_xticklabels(IDEOLOGY_ORDER, rotation=45, ha="right")
+    ax_heat.set_xlabel("Category")
+    ax_heat.set_title("Speech category distribution")
     cbar = fig.colorbar(im, ax=ax_heat, orientation="vertical", fraction=0.04, pad=0.02)
-    cbar.set_label("Proportion", fontsize=10)
-    cbar.ax.tick_params(labelsize=9)
+    cbar.set_label("Proportion")
 
     heat_png = out_dir / f"{basename}_heatmap.png"
-    fig.savefig(heat_png, dpi=300, bbox_inches="tight", pad_inches=0.06)
+    fig.savefig(heat_png, dpi=300)
     plt.close(fig)
 
     # 3) clustered heatmap

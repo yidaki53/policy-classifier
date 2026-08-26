@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
-"""Build a simple speech->motion linkage by explicit document ID, then by
-party/date proximity and top-category match.
+"""Build a simple speech->motion linkage by party, date proximity, and top-category match.
 
 Outputs `data/parquet/speech_motions.parquet` with columns:
-    speech_id, motion_id, party, speech_date, motion_date, category, speech_weight, motion_weight, days_diff,
-    link_source, speech_dok_id, speech_rel_dok_id
+  speech_id, motion_id, party, speech_date, motion_date, category, speech_weight, motion_weight, days_diff
 
-This is a conservative, many-to-one linking: each speech first tries to resolve a
-motion via the raw speech document reference (`rel_dok_id`/`dok_id`), then falls
-back to the closest-in-time motion by the same party with the same top category
-within `--window-days`.
+This is a conservative, many-to-one linking: each speech links to the closest-in-time
+motion by the same party with the same top category within `--window-days`.
 """
 
 from __future__ import annotations
@@ -32,177 +28,121 @@ from swedish_parliament_policy_classifier.analysis.speech_visualizations import 
 )
 
 
-ELECTION_YEARS = {2010, 2014, 2018, 2022, 2026}
+def _extract_motion_candidates(entry: dict, token_re: re.Pattern, motion_lower_map: dict, motion_aliases: dict) -> tuple[list, dict]:
+    """Extract candidate motion identifiers from a speech metadata entry.
 
+    The implementation is intentionally conservative: it prefers explicit relation
+    identifiers before falling back to the speech text and title.
+    """
+    candidates: list[str] = []
+    sources: dict[str, str] = {}
 
-import builtins
+    if not entry:
+        return candidates, sources
 
-def _clean_doc_id(value: object) -> str | None:
-    if value is None:
-        return None
-    text = builtins.str(value).strip()
-    if not text or text.lower() == "none":
-        return None
-    return text
+    for field_name in ("rel_dok_id", "dok_id"):
+        value = entry.get(field_name)
+        if value:
+            key = str(value).lower()
+            if key in motion_lower_map:
+                candidate = motion_lower_map[key]
+                candidates.append(candidate)
+                sources[candidate] = field_name
+                break
+            if key in motion_aliases:
+                candidate = motion_aliases[key]
+                candidates.append(candidate)
+                sources[candidate] = field_name
+                break
 
+    if candidates:
+        return candidates, sources
 
-def _is_election_runup_year(year: object, window_years: int = 1) -> bool:
-    try:
-        y = int(year)
-    except Exception:
-        return False
-    return any((election_year - window_years) <= y <= election_year for election_year in ELECTION_YEARS)
-
-
-def _extract_motion_candidates(
-    entry: dict,
-    token_re: re.Pattern[str],
-    motion_lower_map: dict[str, str],
-    motion_aliases: dict[str, str],
-) -> tuple[list[str], dict[str, str]]:
-    found: list[str] = []
-    source_by_motion: dict[str, str] = {}
-
-    # 0) explicit document IDs from the raw speech row
-    for key in ("rel_dok_id", "dok_id", "relaterat_id", "relaterat"):
-        value = _clean_doc_id(entry.get(key))
+    for field_name in ("title", "text"):
+        value = entry.get(field_name)
         if not value:
             continue
-        vstr = value.lower()
-        mid = motion_lower_map.get(vstr) or motion_aliases.get(vstr)
-        if mid:
-            found.append(mid)
-            source_by_motion.setdefault(mid, key)
-
-    # 1) try metadata JSON keys
-    if "metadata" in entry and entry["metadata"]:
-        try:
-            md = json.loads(entry["metadata"]) if isinstance(entry["metadata"], str) else entry["metadata"]
-            if isinstance(md, dict):
-                for k in ("dok_id", "hangar_id", "relaterat_id", "dok_id_utf8"):
-                    v = md.get(k)
-                    if v:
-                        vstr = str(v).lower()
-                        if vstr in motion_lower_map:
-                            mid = motion_lower_map[vstr]
-                            found.append(mid)
-                            source_by_motion.setdefault(mid, f"metadata.{k}")
-                        elif vstr in motion_aliases:
-                            mid = motion_aliases[vstr]
-                            found.append(mid)
-                            source_by_motion.setdefault(mid, f"metadata.{k}")
-        except Exception:
-            pass
-
-    # 2) try title
-    if "title" in entry and entry["title"]:
-        toks = token_re.findall(str(entry["title"]))
-        for t in toks:
-            tl = t.lower()
-            if tl in motion_lower_map:
-                mid = motion_lower_map[tl]
-                found.append(mid)
-                source_by_motion.setdefault(mid, "title")
-            elif tl in motion_aliases:
-                mid = motion_aliases[tl]
-                found.append(mid)
-                source_by_motion.setdefault(mid, "title")
+        for token in token_re.findall(str(value)):
+            key = token.lower()
+            if key in motion_lower_map:
+                candidate = motion_lower_map[key]
+                if candidate not in candidates:
+                    candidates.append(candidate)
+                    sources[candidate] = field_name
+            elif key in motion_aliases:
+                candidate = motion_aliases[key]
+                if candidate not in candidates:
+                    candidates.append(candidate)
+                    sources[candidate] = field_name
             else:
-                tt = tl.strip(':#,.')
-                if tt in motion_aliases:
-                    mid = motion_aliases[tt]
-                    found.append(mid)
-                    source_by_motion.setdefault(mid, "title")
-
-    # 3) try text body
-    if "text" in entry and entry["text"]:
-        toks = token_re.findall(str(entry["text"]))
-        for t in toks:
-            tl = t.lower()
-            if tl in motion_lower_map:
-                mid = motion_lower_map[tl]
-                found.append(mid)
-                source_by_motion.setdefault(mid, "text")
-            elif tl in motion_aliases:
-                mid = motion_aliases[tl]
-                found.append(mid)
-                source_by_motion.setdefault(mid, "text")
-            else:
-                tt = tl.strip(':#,.')
-                if tt in motion_aliases:
-                    mid = motion_aliases[tt]
-                    found.append(mid)
-                    source_by_motion.setdefault(mid, "text")
-
-    seen = set()
-    out = []
-    for x in found:
-        if x not in seen:
-            seen.add(x)
-            out.append(x)
-    return out, source_by_motion
+                normalized = key.strip(":#,.")
+                if normalized in motion_aliases:
+                    candidate = motion_aliases[normalized]
+                    if candidate not in candidates:
+                        candidates.append(candidate)
+                        sources[candidate] = field_name
+    return candidates, sources
 
 
-def _load_betankande_motion_refs(betankande_parquet_dir: str) -> dict[str, list[str]]:
+def _is_election_runup_year(year: int | None) -> bool:
+    if year is None:
+        return False
+    return year in {2021, 2022, 2023, 2024}
+
+
+def _load_betankande_motion_refs(betankande_dir: str) -> dict:
     refs: dict[str, list[str]] = {}
-    for p in sorted(glob.glob(os.path.join(betankande_parquet_dir, "*.parquet"))):
+    for path in sorted(glob.glob(os.path.join(betankande_dir, "*.parquet"))):
         try:
-            df = pd.read_parquet(p, columns=["dok_id", "ref_dok_ids"])
+            df = pd.read_parquet(path)
         except Exception:
             continue
-        if df.empty or "dok_id" not in df.columns:
+        if "dok_id" not in df.columns or "ref_dok_ids" not in df.columns:
             continue
-        for dok_id, ref_dok_ids in df[["dok_id", "ref_dok_ids"]].itertuples(index=False):
-            key = _clean_doc_id(dok_id)
-            if not key or not ref_dok_ids:
+        for row in df[["dok_id", "ref_dok_ids"]].itertuples(index=False):
+            dok_id = str(getattr(row, "dok_id", "")).strip()
+            raw_refs = getattr(row, "ref_dok_ids", "")
+            if not dok_id or not raw_refs:
                 continue
             try:
-                ref_list = json.loads(ref_dok_ids) if isinstance(ref_dok_ids, str) else ref_dok_ids
+                parsed = json.loads(raw_refs) if isinstance(raw_refs, str) else raw_refs
+                if isinstance(parsed, list):
+                    refs[dok_id] = [str(item) for item in parsed if str(item).strip()]
             except Exception:
                 continue
-            if not isinstance(ref_list, list):
-                continue
-            cleaned = [_clean_doc_id(v) for v in ref_list]
-            cleaned = [v for v in cleaned if v]
-            if cleaned:
-                refs[key] = cleaned
     return refs
 
 
-def _select_candidate_motion(
-    candidate_ids: list[str],
-    party: str,
-    cats: list[str],
-    speech_date: pd.Timestamp,
-    motions: pd.DataFrame,
-) -> pd.Series | None:
-    if not candidate_ids:
+def _select_candidate_motion(candidates: list, party: str | None, categories: list | None, motion_date: pd.Timestamp | None, motions: pd.DataFrame) -> dict | None:
+    if not candidates:
         return None
-    sub = motions[motions["motion_id"].isin(candidate_ids)].copy()
-    if sub.empty:
+    if motions.empty:
         return None
 
-    party = str(party).strip()
-    cats_set = {str(c) for c in cats if c is not None}
-    if party:
-        party_sub = sub[sub["party"].astype(str).str.strip() == party]
-        if not party_sub.empty:
-            sub = party_sub
-    if cats_set:
-        cat_sub = sub[sub["category"].astype(str).isin(cats_set)]
-        if not cat_sub.empty:
-            sub = cat_sub
+    candidate_frame = motions[motions["motion_id"].isin(candidates)].copy()
+    if candidate_frame.empty:
+        return None
 
-    if "motion_date_parsed" in sub.columns and pd.notna(speech_date):
-        sub = sub.copy()
-        sub["_days_diff"] = (sub["motion_date_parsed"] - speech_date).abs().dt.days
-        sub = sub.sort_values(["_days_diff", "motion_weight"], ascending=[True, False])
+    if party is not None:
+        candidate_frame = candidate_frame[candidate_frame["party"].fillna("") == party]
+    if candidate_frame.empty:
+        candidate_frame = motions[motions["motion_id"].isin(candidates)].copy()
+
+    if categories:
+        category_set = {str(cat).lower() for cat in categories}
+        candidate_frame = candidate_frame[candidate_frame["category"].fillna("").astype(str).str.lower().isin(category_set)]
+
+    if candidate_frame.empty:
+        return None
+
+    if motion_date is not None:
+        candidate_frame = candidate_frame.copy()
+        candidate_frame["date_delta"] = (candidate_frame["motion_date_parsed"] - motion_date).abs()
+        candidate_frame = candidate_frame.sort_values(["date_delta", "motion_weight"], ascending=[True, False])
     else:
-        sub = sub.sort_values(["motion_weight"], ascending=[False])
+        candidate_frame = candidate_frame.sort_values(["motion_weight"], ascending=[False])
 
-    if sub.empty:
-        return None
-    return sub.iloc[0]
+    return candidate_frame.iloc[0].to_dict()
 
 
 def top_category_per_speech(speech_cls: pd.DataFrame) -> pd.DataFrame:
@@ -236,7 +176,6 @@ def main():
     parser.add_argument("--speech-parquet-dir", default="data/speeches/parquet")
     parser.add_argument("--classifications", default="data/parquet/classifications.parquet")
     parser.add_argument("--normalized-motions", default="data/parquet/normalized_motions.parquet")
-    parser.add_argument("--betankande-parquet-dir", default="data/betankande/parquet")
     parser.add_argument("--out", default="data/parquet/speech_motions.parquet")
     parser.add_argument("--window-days", type=int, default=90)
     parser.add_argument("--top-n", type=int, default=1, help="Consider top-N categories per speech when linking (>=1)")
@@ -331,8 +270,6 @@ def main():
 
     speech_df["speech_date_parsed"] = _ensure_utc(speech_df["speech_date_parsed"])
     motions["motion_date_parsed"] = _ensure_utc(motions["motion_date_parsed"])
-    motion_lookup = motions.set_index("motion_id", drop=False)
-    betankande_motion_refs = _load_betankande_motion_refs(args.betankande_parquet_dir)
 
     print("Linking speeches to motions (ID-first; fallback to nearest-in-time)")
     rows = []
@@ -406,7 +343,7 @@ def main():
                     break
             if not sid_col:
                 continue
-            candidate_cols = [c for c in ("dok_id", "rel_dok_id", "text", "metadata", "title", "relaterat_id", "relaterat") if c in df.columns]
+            candidate_cols = [c for c in ("text", "metadata", "title", "relaterat_id", "relaterat") if c in df.columns]
             if not candidate_cols:
                 continue
             subset = df[[sid_col] + candidate_cols].copy()
@@ -428,10 +365,61 @@ def main():
 
     token_re = re.compile(r"\\b[A-Za-z0-9:/-]{3,30}\\b")
 
-    def _find_motion_ids_in_speech(sid: str) -> tuple[list[str], dict[str, str]]:
+    def _find_motion_ids_in_speech(sid: str) -> list:
+        found = []
         if sid not in speech_refs:
-            return [], {}
-        return _extract_motion_candidates(speech_refs[sid], token_re, motion_lower_map, motion_aliases)
+            return found
+        entry = speech_refs[sid]
+        # 1) try metadata JSON keys
+        if "metadata" in entry and entry["metadata"]:
+            try:
+                md = json.loads(entry["metadata"]) if isinstance(entry["metadata"], str) else entry["metadata"]
+                if isinstance(md, dict):
+                    for k in ("dok_id", "hangar_id", "relaterat_id", "dok_id_utf8"):
+                        v = md.get(k)
+                        if v:
+                            vstr = str(v).lower()
+                            if vstr in motion_lower_map:
+                                found.append(motion_lower_map[vstr])
+                            elif vstr in motion_aliases:
+                                found.append(motion_aliases[vstr])
+            except Exception:
+                pass
+        # 2) try title
+        if "title" in entry and entry["title"]:
+            toks = token_re.findall(str(entry["title"]))
+            for t in toks:
+                tl = t.lower()
+                if tl in motion_lower_map:
+                    found.append(motion_lower_map[tl])
+                elif tl in motion_aliases:
+                    found.append(motion_aliases[tl])
+                else:
+                    # try stripping punctuation like ':' or '#' (e.g., '1994/95:So291')
+                    tt = tl.strip(':#,.')
+                    if tt in motion_aliases:
+                        found.append(motion_aliases[tt])
+        # 3) try text body
+        if "text" in entry and entry["text"]:
+            toks = token_re.findall(str(entry["text"]))
+            for t in toks:
+                tl = t.lower()
+                if tl in motion_lower_map:
+                    found.append(motion_lower_map[tl])
+                elif tl in motion_aliases:
+                    found.append(motion_aliases[tl])
+                else:
+                    tt = tl.strip(':#,.')
+                    if tt in motion_aliases:
+                        found.append(motion_aliases[tt])
+        # dedupe and preserve order
+        seen = set()
+        out = []
+        for x in found:
+            if x not in seen:
+                seen.add(x)
+                out.append(x)
+        return out
 
     # Prepare semantic embeddings for motions if requested
     matcher = None
@@ -505,43 +493,9 @@ def main():
         cat = s["category"]
         cats = topn_map.get(s["speech_id"], [cat])
         sdate = s["speech_date_parsed"]
-        speech_ref = speech_refs.get(s["speech_id"], {})
-
-        # First, prefer a two-hop committee bridge if the speech references a
-        # betänkande document that explicitly points at motion ids.
-        rel_doc_id = _clean_doc_id(speech_ref.get("rel_dok_id"))
-        if rel_doc_id and rel_doc_id in betankande_motion_refs:
-            chosen = _select_candidate_motion(betankande_motion_refs[rel_doc_id], party, cats, sdate, motions)
-            if chosen is not None:
-                motion_date_val = chosen.get("motion_date_parsed")
-                days_diff_val = None
-                try:
-                    if pd.notna(motion_date_val) and pd.notna(sdate):
-                        days_diff_val = int(abs((motion_date_val - sdate).days))
-                except Exception:
-                    days_diff_val = None
-
-                rows.append(
-                    {
-                        "speech_id": s["speech_id"],
-                        "motion_id": chosen["motion_id"],
-                        "party": s.get("party"),
-                        "speech_date": sdate,
-                        "motion_date": motion_date_val,
-                        "category": cat,
-                        "speech_weight": float(s["speech_weight"]),
-                        "motion_weight": float(chosen.get("motion_weight", 0.0)),
-                        "days_diff": int(days_diff_val) if days_diff_val is not None else None,
-                        "link_source": "betankande_ref_dok_id",
-                        "speech_dok_id": _clean_doc_id(speech_ref.get("dok_id")),
-                        "speech_rel_dok_id": rel_doc_id,
-                        "similarity": None,
-                    }
-                )
-                continue
 
         # First, prefer explicit ID-based linking if speech references a known motion id
-        id_candidates, id_sources = _find_motion_ids_in_speech(s["speech_id"])
+        id_candidates = _find_motion_ids_in_speech(s["speech_id"])
         if id_candidates:
             chosen_mid = None
             # prefer candidate whose party matches the speech party
@@ -567,8 +521,8 @@ def main():
             motion_row = None
             motion_weight = 0.0
             motion_date_val = None
-            if chosen_mid in motion_lookup.index:
-                motion_row = motion_lookup.loc[chosen_mid]
+            if chosen_mid in motions["motion_id"].values:
+                motion_row = motions[motions["motion_id"] == chosen_mid].iloc[0]
                 motion_weight = float(motion_row.get("motion_weight", 0.0))
                 motion_date_val = motion_row.get("motion_date_parsed")
             elif nm_index is not None and chosen_mid in nm_index.index:
@@ -609,9 +563,6 @@ def main():
                     "speech_weight": float(s["speech_weight"]),
                     "motion_weight": float(motion_weight),
                     "days_diff": int(days_diff_val) if days_diff_val is not None else None,
-                    "link_source": id_sources.get(chosen_mid, "explicit_id"),
-                    "speech_dok_id": _clean_doc_id(speech_ref.get("dok_id")),
-                    "speech_rel_dok_id": _clean_doc_id(speech_ref.get("rel_dok_id")),
                     "similarity": None,
                 }
             )
@@ -862,12 +813,12 @@ def main():
         # write empty parquet for downstream checks
         outdf = pd.DataFrame(columns=["speech_id", "motion_id", "party", "speech_date", "motion_date", "category", "speech_weight", "motion_weight", "days_diff", "similarity"])
         os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-        outdf.to_parquet(args.out, index=False, compression="zstd")
+        outdf.to_parquet(args.out, index=False)
         return
 
     outdf = pd.DataFrame(rows)
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-    outdf.to_parquet(args.out, index=False, compression="zstd")
+    outdf.to_parquet(args.out, index=False)
     print(f"Wrote {len(outdf)} speech->motion links to {args.out}")
 
 

@@ -23,7 +23,7 @@ from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
 
-from swedish_parliament_policy_classifier.classifier.scorer import _detect_rhetorical_patterns
+from swedish_parliament_policy_classifier.nlp.rhetorical_detector import detect_rhetorical_patterns
 
 
 def apply_rhetorical_to_probs(
@@ -93,7 +93,7 @@ def main():
 
     for sid in speech_ids:
         text = speech_texts.get(sid, "")
-        rhet_adjustments = _detect_rhetorical_patterns(text)
+        rhet_adjustments = detect_rhetorical_patterns(text)
         original_probs = speech_probs[sid]
         adjusted_probs = apply_rhetorical_to_probs(original_probs, rhet_adjustments)
 

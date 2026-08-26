@@ -67,9 +67,33 @@ CATEGORY_COLORS = {
     "far_right":     "#00008B",
 }
 
+
+def compute_ideology_score_from_proportions(proportions: dict[str, float | int]) -> float:
+    """Compute a net left-right score in [-1, 1] with the centre category as neutral."""
+    left_mass = sum(float(proportions.get(cat, 0.0)) for cat in ["far_left", "left", "centre_left"])
+    right_mass = sum(float(proportions.get(cat, 0.0)) for cat in ["centre_right", "right", "far_right"])
+    total = left_mass + right_mass
+    if total <= 0:
+        return 0.0
+    return float((right_mass - left_mass) / total)
+
 # ---------------------------------------------------------------------------
 # Party labels and colors (fetched from Riksdagen API or parquet data)
 # ---------------------------------------------------------------------------
+BAD_PARTY_VALUES = {"", "-", "NYD", "Unknown", "None", "nan", "null", "N/A"}
+
+
+def _is_substantive_party(value: object) -> bool:
+    if value is None:
+        return False
+    text = str(value).strip()
+    if not text:
+        return False
+    if text.lower() in {item.lower() for item in BAD_PARTY_VALUES}:
+        return False
+    return True
+
+
 def _infer_current_parties() -> set[str]:
     """Infer parties currently represented in the Riksdag.
 
@@ -88,7 +112,7 @@ def _infer_current_parties() -> set[str]:
             cache = json.loads(cache_path.read_text(encoding="utf-8"))
             parties = cache.get("parties", [])
             if parties:
-                return set(str(p) for p in parties if str(p).strip())
+                return {str(p).strip() for p in parties if _is_substantive_party(p)}
         except Exception:
             pass
 
@@ -104,7 +128,7 @@ def _infer_current_parties() -> set[str]:
         persons = (((payload.get("personlista") or {}).get("person")) or [])
         api_parties = {str(p.get("parti", "")).strip() for p in persons if p.get("parti")}
         if api_parties:
-            return {p for p in api_parties if p}
+            return {p for p in api_parties if _is_substantive_party(p)}
     except Exception:
         pass
 
@@ -116,7 +140,7 @@ def _infer_current_parties() -> set[str]:
             with open(defs_path) as f:
                 content = yaml.safe_load(f)
             if content:
-                return {str(k) for k in content.keys() if str(k).strip()}
+                return {str(k).strip() for k in content.keys() if _is_substantive_party(k)}
         except Exception:
             pass
 
@@ -135,7 +159,7 @@ PARTY_LABELS = {
     "KD": "Kristdemokraterna",
     "L":  "Liberaler",
     "MP": "Miljöpartiet",
-    "NYD": "Ny Demokrati",  # historical
+    "-":  "Ej specificerad",
 }
 
 PARTY_COLORS_PLOT = {
@@ -147,7 +171,7 @@ PARTY_COLORS_PLOT = {
     "KD": "#FF7F7F",   # light red
     "L":  "#33CCFF",   # cyan
     "MP": "#33CC33",   # green
-    "NYD": "#888888",  # gray
+    "-":  "#888888",  # gray
 }
 
 

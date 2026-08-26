@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import signal
 import subprocess
 import sys
 import time as _time
@@ -263,12 +264,49 @@ def _run_step(
 ) -> dict[str, Any]:
     """Run a subprocess step and return structured result.
 
-    Uses Popen with real-time stderr forwarding so progress messages
-    appear in the terminal immediately (not buffered until completion).
+    Interactive terminal sessions stream directly to the parent terminal so
+    progress bars from child tools like tqdm remain visible. Non-interactive
+    runs still capture output for structured logging.
     """
     logger.info(">>> STEP: {}", step_name)
     logger.debug("CMD: {}", " ".join(cmd))
     merged_env = {**os.environ, **(env or {})}
+    merged_env.setdefault("PYTHONUNBUFFERED", "1")
+
+    interactive = bool(getattr(sys.stderr, "isatty", lambda: False)() and getattr(sys.stdout, "isatty", lambda: False)())
+    if interactive:
+        proc = subprocess.Popen(
+            cmd,
+            cwd=str(cwd or REPO_ROOT),
+            stdin=None,
+            stdout=None,
+            stderr=None,
+            text=True,
+            env=merged_env,
+            start_new_session=True,
+        )
+        try:
+            proc.wait()
+        except BaseException:
+            _terminate_process_group(proc)
+            raise
+        ok = proc.returncode == 0
+        status = "OK" if ok else "FAILED"
+        if not ok and not allow_fail:
+            logger.error("{}: {} (exit {})", status, step_name, proc.returncode)
+            raise RuntimeError(f"Step {step_name} failed with exit code {proc.returncode}")
+        if not ok:
+            logger.warning("{}: {} (exit {})", status, step_name, proc.returncode)
+        else:
+            logger.info("{}: {}", status, step_name)
+        return {
+            "step": step_name,
+            "ok": ok,
+            "returncode": proc.returncode,
+            "stdout_preview": "",
+            "stderr_preview": "",
+        }
+
     proc = subprocess.Popen(
         cmd,
         cwd=str(cwd or REPO_ROOT),
@@ -276,6 +314,7 @@ def _run_step(
         stderr=subprocess.PIPE,
         text=True,
         env=merged_env,
+        start_new_session=True,
     )
     stdout_lines: list[str] = []
     stderr_lines: list[str] = []
@@ -284,36 +323,37 @@ def _run_step(
     sel = selectors.DefaultSelector()
     sel.register(proc.stdout, selectors.EVENT_READ)
     sel.register(proc.stderr, selectors.EVENT_READ)
-    while True:
-        for key, _ in sel.select(timeout=0.5):
-            line = key.fileobj.readline()
-            if not line:
-                continue
-            if key.fileobj is proc.stdout:
-                stdout_lines.append(line)
-            else:
-                stderr_lines.append(line)
-                sys.stderr.write(line)
-                sys.stderr.flush()
-        if proc.poll() is not None:
-            # Drain remaining output
-            for line in proc.stdout.readlines():
-                stdout_lines.append(line)
-            for line in proc.stderr.readlines():
-                stderr_lines.append(line)
-                sys.stderr.write(line)
-                sys.stderr.flush()
-            break
-    sel.close()
+    try:
+        while True:
+            for key, _ in sel.select(timeout=0.5):
+                line = key.fileobj.readline()
+                if not line:
+                    continue
+                if key.fileobj is proc.stdout:
+                    stdout_lines.append(line)
+                else:
+                    stderr_lines.append(line)
+                    sys.stderr.write(line)
+                    sys.stderr.flush()
+            if proc.poll() is not None:
+                # Drain remaining output
+                for line in proc.stdout.readlines():
+                    stdout_lines.append(line)
+                for line in proc.stderr.readlines():
+                    stderr_lines.append(line)
+                    sys.stderr.write(line)
+                    sys.stderr.flush()
+                break
+    except BaseException:
+        _terminate_process_group(proc)
+        raise
+    finally:
+        sel.close()
     proc.wait()
-    elapsed = proc.returncode  # placeholder, will compute below
     ok = proc.returncode == 0
     stdout = "".join(stdout_lines)
     stderr = "".join(stderr_lines)
     status = "OK" if ok else "FAILED"
-    elapsed_msg = ""
-    if "started_at" in locals() or 'start' in dir():
-        pass
     if not ok and not allow_fail:
         logger.error("{}: {} (exit {})", status, step_name, proc.returncode)
         logger.error("STDERR:\n{}", stderr[-2000:] if len(stderr) > 2000 else stderr)
@@ -329,6 +369,35 @@ def _run_step(
         "stdout_preview": stdout[:500] if stdout else "",
         "stderr_preview": stderr[:500] if stderr else "",
     }
+
+
+def _terminate_process_group(
+    proc: subprocess.Popen[str],
+    grace_seconds: float = 5.0,
+) -> None:
+    """Terminate a subprocess session, escalating if it ignores SIGTERM."""
+    if proc.poll() is not None:
+        return
+    try:
+        os.killpg(proc.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    except OSError:
+        proc.terminate()
+
+    try:
+        proc.wait(timeout=grace_seconds)
+        return
+    except subprocess.TimeoutExpired:
+        pass
+
+    try:
+        os.killpg(proc.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        return
+    except OSError:
+        proc.kill()
+    proc.wait()
 
 
 def _find_latest_period_file(pattern: str, directory: str) -> tuple[Path | None, str | None]:
@@ -373,38 +442,62 @@ def _find_latest_period_file(pattern: str, directory: str) -> tuple[Path | None,
 
 def _latest_dates_in_parquet() -> dict[str, datetime | None]:
     """Return latest dates found in speech, motion, and vote parquet data."""
-    from pathlib import Path
     import glob
+
+    def _coerce_datetime(value: Any) -> datetime | None:
+        if value is None:
+            return None
+        if isinstance(value, pd.Timestamp):
+            return value.to_pydatetime()
+        if isinstance(value, datetime):
+            return value
+        try:
+            parsed = pd.to_datetime(value, errors="coerce")
+        except Exception:
+            return None
+        if pd.isna(parsed):
+            return None
+        return parsed.to_pydatetime()
+
+    def _latest_from_file(path: str | Path, candidate_columns: tuple[str, ...]) -> datetime | None:
+        try:
+            frame = pd.read_parquet(path)
+        except Exception:
+            return None
+
+        for column in candidate_columns:
+            if column not in frame.columns:
+                continue
+            values = pd.to_datetime(frame[column], errors="coerce")
+            candidate = values.max()
+            if pd.notna(candidate):
+                return _coerce_datetime(candidate)
+        return None
+
+    def _merge_latest(current: datetime | None, candidate: datetime | None) -> datetime | None:
+        if candidate is None:
+            return current
+        if current is None:
+            return candidate
+        return max(current, candidate)
 
     latest_speech = None
     latest_vote = None
     latest_motion = None
 
-    for f in sorted(glob.glob("data/speeches/parquet/*.parquet")):
-        try:
-            df = pd.read_parquet(f, columns=["datum"])
-            max_d = df["datum"].max()
-            if pd.notna(max_d) and (latest_speech is None or max_d > latest_speech):
-                latest_speech = max_d
-        except Exception:
-            pass
+    parquet_paths = []
+    for pattern in ["data/speeches/parquet/*.parquet", "data/parquet/api_speeches/*.parquet"]:
+        parquet_paths.extend(glob.glob(pattern))
+    for path in sorted(set(parquet_paths)):
+        latest_speech = _merge_latest(latest_speech, _latest_from_file(path, ("datum", "dok_datum", "date")))
 
-    for f in sorted(glob.glob("data/votering/parquet/*.parquet")):
-        try:
-            df = pd.read_parquet(f, columns=["datum"])
-            max_d = df["datum"].max()
-            if pd.notna(max_d) and (latest_vote is None or max_d > latest_vote):
-                latest_vote = max_d
-        except Exception:
-            pass
+    for path in sorted(glob.glob("data/votering/parquet/*.parquet")):
+        latest_vote = _merge_latest(latest_vote, _latest_from_file(path, ("datum", "dok_datum", "date")))
 
-    try:
-        mot_df = pd.read_parquet("data/parquet/normalized_motions.parquet", columns=["date"])
-        latest_motion = mot_df["date"].max()
-        if latest_motion is None or (isinstance(latest_motion, float) and pd.isna(latest_motion)):
-            latest_motion = None
-    except Exception:
-        pass
+    motion_paths = ["data/parquet/normalized_motions.parquet"]
+    motion_paths.extend(glob.glob("data/parquet/api_motions/*.parquet"))
+    for path in sorted(set(motion_paths)):
+        latest_motion = _merge_latest(latest_motion, _latest_from_file(path, ("date", "dok_datum", "datum")))
 
     return {
         "speech": latest_speech,
@@ -639,7 +732,11 @@ def classify_new_data_sources(dry_run: bool, cpu_fraction: float, args: argparse
     return steps
 
 
-def classify_and_adjust(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
+def classify_and_adjust(
+    dry_run: bool,
+    cpu_fraction: float,
+    allow_partial: bool = False,
+) -> dict[str, Any]:
     """Run classification pipeline."""
     logger.info("Classifying data...")
     if dry_run:
@@ -653,7 +750,7 @@ def classify_and_adjust(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         [sys.executable, str(SCRIPT_DIR / "classify_speeches_parquet.py")],
         "classify_speeches_parquet",
         env=env,
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
 
     # Classify motions (from normalized motions parquet)
@@ -661,7 +758,7 @@ def classify_and_adjust(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         [sys.executable, str(SCRIPT_DIR / "classify.py"), "--raw", "data/parquet/raw_motions.parquet"],
         "classify_motions",
         env=env,
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
 
     # Rhetorical adjustment
@@ -675,20 +772,53 @@ def classify_and_adjust(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         ],
         "rhetorical_adjustment",
         env=env,
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
 
     return steps
 
 
-def rebuild_analysis(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
-    """Rebuild all downstream analysis artifacts."""
+def rebuild_analysis(
+    dry_run: bool,
+    cpu_fraction: float,
+    allow_partial: bool = False,
+) -> dict[str, Any]:
+    """Rebuild all downstream analysis artifacts and verify the expected outputs."""
     logger.info("Rebuilding analysis artifacts...")
     if dry_run:
         return {"dry_run": True, "note": "Analysis skipped in dry-run"}
 
     env = {"CLASSIFIER_CPU_FRACTION": str(cpu_fraction)}
     steps = {}
+
+    # Canonical party-level roll-call evidence. This is the action-first input
+    # for publication analyses and must exist before any multimodal comparison.
+    steps["party_action_evidence"] = _run_step(
+        [
+            sys.executable,
+            str(SCRIPT_DIR / "build_party_action_evidence.py"),
+            "--vote-dir", "data/votering/parquet",
+            "--out", "output/analysis/party_decision_choices.parquet",
+            "--summary-out", "output/analysis/party_decision_choices_summary.json",
+        ],
+        "build_party_action_evidence",
+        env=env,
+        allow_fail=allow_partial,
+    )
+
+    steps["action_position_outputs"] = _run_step(
+        [
+            sys.executable,
+            str(SCRIPT_DIR / "build_action_position_outputs.py"),
+            "--party-choices", "output/analysis/party_decision_choices.parquet",
+            "--policy-probabilities", "data/parquet/policy_probabilities.parquet",
+            "--speech-stances", "data/parquet/speech_action_links_with_prop_bet.parquet",
+            "--out-dir", "output/analysis",
+        ],
+        "action_position_outputs",
+        env=env,
+        allow_fail=allow_partial,
+    )
 
     # Speech-motion linkage
     steps["linkage"] = _run_step(
@@ -700,7 +830,7 @@ def rebuild_analysis(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         ],
         "build_speech_motion_linkage",
         env=env,
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
 
     # Party profiles
@@ -713,7 +843,7 @@ def rebuild_analysis(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         ],
         "build_profiles",
         env=env,
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
 
     # Speech analysis suite (individual steps to avoid OOM)
@@ -822,12 +952,32 @@ def rebuild_analysis(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
     ]
 
     for name, cmd in analysis_steps:
-        steps[name] = _run_step(cmd, name, env=env, allow_fail=True)
+        steps[name] = _run_step(cmd, name, env=env, allow_fail=allow_partial)
+
+    # Publication-grade validation: critical outputs must exist after the
+    # analysis stage. Missing artifacts are a pipeline failure, not a warning.
+    required_outputs = [
+        REPO_ROOT / "output/analysis/party_decision_choices.parquet",
+        REPO_ROOT / "output/analysis/party_decision_choices_summary.json",
+        REPO_ROOT / "output/analysis/party_supported_action_positions.parquet",
+        REPO_ROOT / "output/analysis/say_do_transitions.parquet",
+        REPO_ROOT / "output/analysis/speech_action_axis_scores.parquet",
+        REPO_ROOT / "data/parquet/party_profiles_recency.parquet",
+    ]
+    missing = [str(path.relative_to(REPO_ROOT)) for path in required_outputs if not path.exists()]
+    if missing:
+        raise FileNotFoundError(
+            "Missing required analysis outputs after rebuild: " + ", ".join(missing)
+        )
 
     return steps
 
 
-def regenerate_figures(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
+def regenerate_figures(
+    dry_run: bool,
+    cpu_fraction: float,
+    allow_partial: bool = False,
+) -> dict[str, Any]:
     """Regenerate all visualization artifacts."""
     logger.info("Regenerating figures...")
     if dry_run:
@@ -848,6 +998,16 @@ def regenerate_figures(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
         (
             "party_profiles_advanced",
             [sys.executable, str(SCRIPT_DIR / "visualize_advanced.py"), "--profiles", "data/parquet/party_profiles_recency.parquet", "--out", "figures"],
+        ),
+        (
+            "party_trends",
+            [
+                sys.executable,
+                str(SCRIPT_DIR / "generate_party_trends.py"),
+                "--party-scores", "output/analysis/recency_weighted_party_scores.parquet",
+                "--fulfillment", "output/analysis/promise_fulfillment_party_topic_year.parquet",
+                "--out-dir", "figures/manuscript",
+            ],
         ),
         (
             "interactive",
@@ -902,10 +1062,20 @@ def regenerate_figures(dry_run: bool, cpu_fraction: float) -> dict[str, Any]:
                 "--votering-dir", "data/votering/parquet",
             ],
         ),
+        (
+            "action_position_digest",
+            [
+                sys.executable,
+                str(SCRIPT_DIR / "plot_action_position_digest.py"),
+                "--positions", "output/analysis/party_supported_action_positions.parquet",
+                "--transitions", "output/analysis/say_do_transitions.parquet",
+                "--out", "output/manuscript/figures/figure_action_position_digest.png",
+            ],
+        ),
     ]
 
     for name, cmd in figure_steps:
-        steps[name] = _run_step(cmd, name, env=env, allow_fail=True)
+        steps[name] = _run_step(cmd, name, env=env, allow_fail=allow_partial)
 
     # Legacy alias copies
     alias_steps = [
@@ -977,13 +1147,13 @@ def _get_existing_ids(doktyp: str) -> set[str]:
     if doktyp == "mot":
         # Check normalized_motions.parquet
         try:
-            mot_df = pd.read_parquet("data/parquet/normalized_motions.parquet", columns=["id"])
+            mot_df = pd.read_parquet(REPO_ROOT / "data/parquet/normalized_motions.parquet", columns=["id"])
             existing_ids.update(mot_df["id"].astype(str).tolist())
         except Exception as e:
             logger.warning("Could not read normalized_motions.parquet: {}", e)
         
         # Check api_motions directory for previously fetched items
-        api_dir = Path("data/parquet/api_motions")
+        api_dir = REPO_ROOT / "data/parquet" / "api_motions"
         if api_dir.exists():
             for f in api_dir.glob("*.parquet"):
                 try:
@@ -995,7 +1165,7 @@ def _get_existing_ids(doktyp: str) -> set[str]:
     elif doktyp == "anf":
         # Check speech parquet files
         import glob
-        for f in glob.glob("data/speeches/parquet/*.parquet"):
+        for f in (REPO_ROOT / "data" / "speeches" / "parquet").glob("*.parquet"):
             try:
                 df = pd.read_parquet(f, columns=["anforande_id"])
                 existing_ids.update(df["anforande_id"].astype(str).tolist())
@@ -1003,25 +1173,48 @@ def _get_existing_ids(doktyp: str) -> set[str]:
                 logger.warning("Could not read {}: {}", f, e)
         
         # Check api_speeches directory for previously fetched items
-        api_dir = Path("data/parquet/api_speeches")
+        api_dir = REPO_ROOT / "data" / "parquet" / "api_speeches"
         if api_dir.exists():
             for f in api_dir.glob("*.parquet"):
-                try:
-                    df = pd.read_parquet(f, columns=["id"])
-                    existing_ids.update(df["id"].astype(str).tolist())
-                except Exception as e:
-                    logger.warning("Could not read {}: {}", f, e)
+                for column in ("anforande_id", "id"):
+                    try:
+                        df = pd.read_parquet(f, columns=[column])
+                    except Exception:
+                        continue
+                    existing_ids.update(df[column].dropna().astype(str).tolist())
+                    break
+                else:
+                    logger.warning("Could not find a speech ID column in {}", f)
     
     return existing_ids
 
 
-def _doc_date(doc: dict[str, Any]) -> Optional[pd.Timestamp]:
+def _coerce_datetime(value: Any) -> datetime | None:
+    """Coerce a value into a timezone-naive datetime for consistent comparisons."""
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, pd.Timestamp):
+        return value.to_pydatetime()
+    try:
+        parsed = pd.to_datetime(value, errors="coerce")
+    except Exception:
+        return None
+    if pd.isna(parsed):
+        return None
+    return parsed.to_pydatetime()
+
+
+def _doc_date(doc: dict[str, Any]) -> datetime | None:
     """Extract and parse the date from an API document dict."""
     for key in ("date", "dok_datum", "datum"):
         val = doc.get(key)
         if val:
             try:
-                return pd.to_datetime(val).normalize()
+                parsed = _coerce_datetime(val)
+                if parsed is not None:
+                    return parsed.replace(hour=0, minute=0, second=0, microsecond=0)
             except Exception:
                 pass
     return None
@@ -1053,15 +1246,14 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
         if since_date is None:
             logger.warning("No latest date for {}; skipping live API fetch", label)
             continue
-        if isinstance(since_date, str):
-            since_date = pd.to_datetime(since_date)
-        if pd.isna(since_date):
+        since_date = _coerce_datetime(since_date)
+        if since_date is None:
             logger.warning("Latest date is NaN for {}; skipping live API fetch", label)
             continue
 
         # The cutoff: the latest date already present in our local parquet.
         # We page from the API (most-recent first) until we reach this date.
-        cutoff_date = since_date.normalize()
+        cutoff_date = since_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
         # Get existing IDs to avoid re-fetching
         existing_ids = _get_existing_ids(doktyp)
@@ -1142,17 +1334,35 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
 
         # Deduplicate against existing IDs
         df = pd.DataFrame(all_docs)
+        fetched_rows = len(df)
+        unique_api_items = fetched_rows
         if id_col in df.columns:
             df[id_col] = df[id_col].astype(str)
+            df = df.drop_duplicates(subset=[id_col], keep="first")
+            unique_api_items = len(df)
             new_docs = df[~df[id_col].isin(existing_ids)]
-            logger.info("Dedup: {} fetched -> {} new {} items ({} already exist, caught_up={})", len(df), len(new_docs), label, len(df) - len(new_docs), caught_up)
+            logger.info(
+                "Dedup: {} API rows -> {} unique {} IDs -> {} new items ({} already local, caught_up={})",
+                fetched_rows,
+                unique_api_items,
+                label,
+                len(new_docs),
+                unique_api_items - len(new_docs),
+                caught_up,
+            )
             df = new_docs
         else:
             logger.warning("ID column '{}' not found in fetched data for {}", id_col, label)
 
         if df.empty:
             logger.info("No new {} items after deduplication", label)
-            steps[label] = {"fetched": 0, "output": None, "caught_up": caught_up}
+            steps[label] = {
+                "fetched": 0,
+                "api_rows": fetched_rows,
+                "unique_api_items": unique_api_items,
+                "output": None,
+                "caught_up": caught_up,
+            }
             continue
 
         out_path = REPO_ROOT / "data" / "parquet" / f"api_{label}"
@@ -1162,7 +1372,13 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
 
         df.to_parquet(parquet_file, index=False, compression="zstd")
         logger.info("Wrote {} new {} items to {}", len(df), label, parquet_file)
-        steps[label] = {"fetched": len(df), "output": str(parquet_file), "caught_up": caught_up}
+        steps[label] = {
+            "fetched": len(df),
+            "api_rows": fetched_rows,
+            "unique_api_items": unique_api_items,
+            "output": str(parquet_file),
+            "caught_up": caught_up,
+        }
 
         # Update last fetch cache
         last_fetch_cache[doktyp] = to_date
@@ -1171,8 +1387,11 @@ def fetch_new_items_from_api(dry_run: bool) -> dict[str, Any]:
     return steps
 
 
-def render_manuscript(dry_run: bool) -> dict[str, Any]:
-    """Render manuscript sections and combine."""
+def render_manuscript(
+    dry_run: bool,
+    allow_partial: bool = False,
+) -> dict[str, Any]:
+    """Render manuscript sections, combine them, and verify journal readiness."""
     logger.info("Rendering manuscript...")
     if dry_run:
         return {"dry_run": True, "note": "Manuscript render skipped in dry-run"}
@@ -1182,18 +1401,77 @@ def render_manuscript(dry_run: bool) -> dict[str, Any]:
         ["make", "render"],
         "manuscript_render",
         cwd=REPO_ROOT / "manuscript",
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
     steps["combined"] = _run_step(
         ["make", "combined"],
         "manuscript_combined",
         cwd=REPO_ROOT / "manuscript",
-        allow_fail=True,
+        allow_fail=allow_partial,
     )
+
+    # Publication gate: a manuscript build is not considered complete until the
+    # journal-readiness report says the draft is ready.
+    steps["journal_requirements_check"] = _run_step(
+        [
+            sys.executable,
+            str(SCRIPT_DIR / "check_journal_requirements.py"),
+            "--repo-root",
+            str(REPO_ROOT),
+            "--manuscript-dir",
+            "manuscript",
+            "--journal-profile",
+            "manuscript/journal_profiles/plos_one.yaml",
+            "--out",
+            "manuscript/build/journal_requirements_report.json",
+        ],
+        "journal_requirements_check",
+        cwd=REPO_ROOT,
+        allow_fail=allow_partial,
+    )
+
+    steps["publication_bundle"] = _run_step(
+        [
+            sys.executable,
+            str(SCRIPT_DIR / "build_publication_bundle.py"),
+            "--root",
+            str(REPO_ROOT),
+            "--output-dir",
+            "output/publication_bundle",
+            "--tag",
+            f"submission-{_utc_now()}",
+            "--title",
+            "Publication bundle",
+            "--artifact-root",
+            "manuscript/build",
+            "--artifact-root",
+            "figures",
+            "--artifact-root",
+            "output/analysis",
+            "--artifact-root",
+            "output/manuscript",
+        ],
+        "publication_bundle",
+        cwd=REPO_ROOT,
+        allow_fail=allow_partial,
+    )
+
+    report_path = REPO_ROOT / "manuscript" / "build" / "journal_requirements_report.json"
+    if not report_path.exists():
+        raise RuntimeError(f"Journal requirements report was not generated at {report_path}")
+
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    status = str(report.get("status", "")).lower()
+    if status != "ready":
+        raise RuntimeError(
+            "Journal requirements check did not report ready status; got "
+            f"{status!r} from {report_path}"
+        )
+
     return steps
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(
         description="Check Riksdagen API for new data, download, and run full downstream pipeline."
     )
@@ -1210,6 +1488,14 @@ def main():
     parser.add_argument("--skip-betankande", action="store_true", help="Skip betankande normalization/classify steps")
     parser.add_argument("--skip-ip", action="store_true", help="Skip interpellation extraction/classify steps")
     parser.add_argument("--skip-prop-classify", action="store_true", help="Skip proposition classification (prop already classified in normalized_motions)")
+    parser.add_argument(
+        "--allow-partial",
+        action="store_true",
+        help=(
+            "Continue after failed core classification or analysis subprocesses. "
+            "Exploratory use only; publication runs are strict by default."
+        ),
+    )
     args = parser.parse_args()
 
     logger.add(sys.stderr, format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>", level="INFO")
@@ -1221,6 +1507,7 @@ def main():
         "run_ts": ts,
         "dry_run": args.dry_run,
         "cpu_fraction": args.cpu_fraction,
+        "allow_partial": args.allow_partial,
         "steps": {},
     }
 
@@ -1244,7 +1531,16 @@ def main():
     else:
         manifest["steps"]["extract_new_sources"] = {"skipped": True}
     if not args.skip_classify:
-        step_plan.append(("classify", lambda: classify_and_adjust(dry_run=args.dry_run, cpu_fraction=args.cpu_fraction)))
+        step_plan.append(
+            (
+                "classify",
+                lambda: classify_and_adjust(
+                    dry_run=args.dry_run,
+                    cpu_fraction=args.cpu_fraction,
+                    allow_partial=args.allow_partial,
+                ),
+            )
+        )
     else:
         manifest["steps"]["classify"] = {"skipped": True}
     if not args.skip_questions or not args.skip_betankande or not args.skip_ip:
@@ -1258,21 +1554,48 @@ def main():
         manifest["steps"]["link_prop_bet"] = {"skipped": True}
         manifest["steps"]["merge_prop_bet"] = {"skipped": True}
     if not args.skip_analysis:
-        step_plan.append(("analysis", lambda: rebuild_analysis(dry_run=args.dry_run, cpu_fraction=args.cpu_fraction)))
+        step_plan.append(
+            (
+                "analysis",
+                lambda: rebuild_analysis(
+                    dry_run=args.dry_run,
+                    cpu_fraction=args.cpu_fraction,
+                    allow_partial=args.allow_partial,
+                ),
+            )
+        )
     else:
         manifest["steps"]["analysis"] = {"skipped": True}
     if not args.skip_figures:
-        step_plan.append(("figures", lambda: regenerate_figures(dry_run=args.dry_run, cpu_fraction=args.cpu_fraction)))
+        step_plan.append(
+            (
+                "figures",
+                lambda: regenerate_figures(
+                    dry_run=args.dry_run,
+                    cpu_fraction=args.cpu_fraction,
+                    allow_partial=args.allow_partial,
+                ),
+            )
+        )
     else:
         manifest["steps"]["figures"] = {"skipped": True}
     if not args.skip_manuscript:
-        step_plan.append(("manuscript", lambda: render_manuscript(dry_run=args.dry_run)))
+        step_plan.append(
+            (
+                "manuscript",
+                lambda: render_manuscript(
+                    dry_run=args.dry_run,
+                    allow_partial=args.allow_partial,
+                ),
+            )
+        )
     else:
         manifest["steps"]["manuscript"] = {"skipped": True}
 
     total_steps = len(step_plan)
     logger.info("Pipeline plan: {} steps", total_steps)
 
+    exit_code = 0
     try:
         for idx, (name, fn) in enumerate(step_plan, start=1):
             logger.info("=== START: {}/{} {} ===", idx, total_steps, name)
@@ -1280,9 +1603,15 @@ def main():
             manifest["steps"][name] = fn()
             elapsed = _time.time() - step_start
             logger.info("=== DONE: {}/{} {} ({:.1f}s) ===", idx, total_steps, name, elapsed)
+    except KeyboardInterrupt:
+        logger.warning("Pipeline update interrupted by user")
+        manifest["interrupted"] = True
+        manifest["error"] = "Interrupted by user"
+        exit_code = 130
     except Exception as e:
         logger.exception("Pipeline failed: {}", e)
         manifest["error"] = str(e)
+        exit_code = 1
 
     manifest["completed_at"] = _utc_now()
 
@@ -1302,7 +1631,8 @@ def main():
     logger.info("Summary written to {}", summary_path)
 
     logger.info("=== Pipeline update completed at {} ===", manifest["completed_at"])
+    return exit_code
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

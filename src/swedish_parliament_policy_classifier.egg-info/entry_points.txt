@@ -1,0 +1,2 @@
+[console_scripts]
+plot-action-position-digest = swedish_parliament_policy_classifier.plot_action_position_digest:main

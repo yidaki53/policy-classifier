@@ -13,15 +13,10 @@ from jinja2 import Environment
 from swedish_parliament_policy_classifier.analysis.manuscript_exports import EXCLUDED_OVERLAY_PARTIES
 from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
 
-EXCLUDED_COMPARISON_PARTIES = set(EXCLUDED_OVERLAY_PARTIES)
-
 import numpy as np
 import pandas as pd
 import yaml
 from jinja2 import Environment
-
-from swedish_parliament_policy_classifier.analysis.manuscript_exports import EXCLUDED_OVERLAY_PARTIES
-
 
 EXCLUDED_COMPARISON_PARTIES = set(EXCLUDED_OVERLAY_PARTIES)
 
@@ -64,6 +59,82 @@ def _load_consistency_digest(analysis_dir: Path) -> dict:
     }
 
 
+def _build_action_position_table(analysis_dir: Path) -> str:
+    positions_path = analysis_dir / "party_supported_action_positions.parquet"
+    if not positions_path.exists():
+        return ""
+
+    try:
+        positions = pd.read_parquet(positions_path)
+    except Exception:
+        return ""
+
+    if positions.empty or "party" not in positions.columns:
+        return ""
+
+    work = positions[["party", "score_0_100", "supported_decision_n"]].copy()
+    work["party"] = work["party"].astype(str)
+    work["score_0_100"] = pd.to_numeric(work["score_0_100"], errors="coerce")
+    work["supported_decision_n"] = pd.to_numeric(work["supported_decision_n"], errors="coerce")
+    work = work.sort_values("score_0_100", ascending=False).reset_index(drop=True)
+
+    lines = [
+        "| party | score_0_100 | supported_decision_n |",
+        "| --- | ---: | ---: |",
+    ]
+    for _, row in work.iterrows():
+        lines.append(
+            f"| {row['party']} | {_fmt_float(row['score_0_100'])} | {_fmt_int(row['supported_decision_n'])} |"
+        )
+    return "\n".join(lines)
+
+
+def _load_action_position_digest(analysis_dir: Path) -> dict:
+    positions_path = analysis_dir / "party_supported_action_positions.parquet"
+    transitions_path = analysis_dir / "say_do_transitions.parquet"
+    summary_path = analysis_dir / "action_position_outputs_summary.json"
+
+    summary = _safe_load_json(summary_path)
+    digest: dict[str, Any] = {
+        "available": positions_path.exists() and transitions_path.exists(),
+        "positions_path": str(positions_path),
+        "transitions_path": str(transitions_path),
+        "summary_path": str(summary_path),
+        "positions_mtime_utc": _file_mtime_utc(positions_path) if positions_path.exists() else None,
+        "transitions_mtime_utc": _file_mtime_utc(transitions_path) if transitions_path.exists() else None,
+        "summary": summary,
+    }
+
+    if positions_path.exists():
+        try:
+            positions = pd.read_parquet(positions_path)
+        except Exception:
+            positions = None
+        if positions is not None and not positions.empty and "party" in positions.columns:
+            top = positions.sort_values("score_0_100", ascending=False).head(3)
+            digest["top_parties"] = [
+                {
+                    "party": str(row["party"]),
+                    "score_0_100": float(row.get("score_0_100", 0.0)) if pd.notna(row.get("score_0_100")) else None,
+                    "supported_decision_n": int(row.get("supported_decision_n", 0)) if pd.notna(row.get("supported_decision_n")) else None,
+                }
+                for _, row in top.iterrows()
+            ]
+
+    if transitions_path.exists():
+        try:
+            transitions = pd.read_parquet(transitions_path)
+        except Exception:
+            transitions = None
+        if transitions is not None and not transitions.empty and "say_do_transition" in transitions.columns:
+            counts = transitions["say_do_transition"].value_counts().sort_index()
+            digest["transition_counts"] = {
+                str(key): int(value) for key, value in counts.items()
+            }
+
+    return digest
+
+
 def _load_figures(repo_root: Path) -> list[dict]:
     catalog = [
         ("Consistency vs Fulfillment", "output/manuscript/figures/figure_consistency_vs_fulfillment.png", "core"),
@@ -79,6 +150,7 @@ def _load_figures(repo_root: Path) -> list[dict]:
         ("Voting Cohesion Time Series", "figures/voting/party_cohesion_timeseries.png", "appendix"),
         ("Three-way Divergence", "figures/three_way/divergence_speech_vs_combined_significance.png", "appendix"),
         ("Speech Profiles Heatmap", "figures/speeches/speech_profiles_heatmap.png", "appendix"),
+        ("Action-side Evidence Digest", "output/manuscript/figures/figure_action_position_digest.png", "appendix"),
     ]
     out = []
     for title, rel, scope in catalog:
@@ -465,6 +537,7 @@ def _consistency_example_paragraph(analysis_dir: Path) -> str:
 def _build_context(repo_root: Path, manuscript_dir: Path, analysis_dir: Path, journal_profile: Path, bib_path: Path) -> dict:
     figures = _load_figures(repo_root)
     consistency = _load_consistency_digest(analysis_dir)
+    action_positions = _load_action_position_digest(analysis_dir)
     journal = _load_journal_profile(journal_profile)
     bib_keys = _load_bibliography(bib_path)
     corpus = _load_corpus_stats(repo_root)
@@ -714,6 +787,30 @@ def _build_context(repo_root: Path, manuscript_dir: Path, analysis_dir: Path, jo
     promise_fulfillment_example_paragraph = _promise_fulfillment_example_paragraph(analysis_dir)
     consistency_example_paragraph = _consistency_example_paragraph(analysis_dir)
 
+    action_position_paragraph = ""
+    action_position_table = _build_action_position_table(analysis_dir)
+    if action_positions.get("available"):
+        top = action_positions.get("top_parties") or []
+        if top:
+            top_text = ", ".join(
+                f"{row['party']} (score={_fmt_float(row.get('score_0_100'))})" for row in top[:3]
+            )
+            action_position_paragraph = (
+                "Action-side party positioning is summarized from the latest supported-action evidence export. "
+                f"The current ranking includes {top_text}; these placements are derived from affirmative roll-call support rather than from inverted no-votes, "
+                "which keeps the analysis aligned with the original action semantics."
+            )
+        else:
+            action_position_paragraph = (
+                "Action-side party positioning is summarized from the latest supported-action evidence export. "
+                "The current artifact exists but did not yield a ranked party set in the available window."
+            )
+    else:
+        action_position_paragraph = (
+            "Action-side party positioning is summarized from the latest supported-action evidence export when available. "
+            "The current run did not yet materialize the action-position parquet artifacts."
+        )
+
     return {
         "generated_utc": _utc_now(),
         "main_figures_block": main_figures_block,
@@ -731,6 +828,8 @@ def _build_context(repo_root: Path, manuscript_dir: Path, analysis_dir: Path, jo
         "significance_accuracy_paragraph": significance_accuracy_paragraph,
         "promise_fulfillment_example_paragraph": promise_fulfillment_example_paragraph,
         "consistency_example_paragraph": consistency_example_paragraph,
+        "action_position_paragraph": action_position_paragraph,
+        "action_position_table": action_position_table,
         "runup_paragraph": runup_paragraph,
         "abstract_metrics_paragraph": abstract_metrics_paragraph,
         "corpus_counts_paragraph": corpus_counts_paragraph,

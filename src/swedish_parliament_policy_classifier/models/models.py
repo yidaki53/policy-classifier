@@ -3,14 +3,6 @@
 from pydantic import BaseModel
 from typing import Any, Dict, List, Optional
 from datetime import datetime, date
-from fractions import Fraction
-
-
-def _fraction_encoder(obj):
-    """JSON-compatible encoder for Fraction types."""
-    if isinstance(obj, Fraction):
-        return float(obj)
-    raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
 
 
 class RawMotion(BaseModel):
@@ -43,16 +35,12 @@ class ClassificationResult(BaseModel):
     matched_rules: List[str]
     classifier_version: str
     created_at: datetime
-    # Internal Fraction storage for exact arithmetic (not serialized by default)
-    _fractional_weight: Optional[Fraction] = None
 
 
 class PartyProfile(BaseModel):
     party: str
     totals: Dict[str, float]
     updated_at: datetime
-    # Internal exact totals stored as Fractions
-    _fractional_totals: Optional[Dict[str, Fraction]] = None
 
 
 __all__ = ["RawMotion", "NormalizedMotion", "CategoryDef", "ClassificationResult", "PartyProfile"]

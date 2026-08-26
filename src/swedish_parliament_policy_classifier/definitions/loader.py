@@ -21,18 +21,6 @@ from swedish_parliament_policy_classifier.models.models import CategoryDef
 _YAML_PATH = Path(__file__).resolve().parent / "political_spectrum.yaml"
 _CHECKSUM_PATTERN = re.compile(r'checksum:\s*"([^"]+)"')
 _PLACEHOLDER = "PLACEHOLDER"
-_AGENT_FRONTMATTER_TEMPLATE = (
-    "_agent_frontmatter:\n"
-    "  id: \"definitions.political_spectrum\"\n"
-    "  purpose: \"Canonical deterministic ideology taxonomy used by classifier/scoring pipelines.\"\n"
-    "  steward: \"definitions\"\n"
-    "  edit_policy: \"immutable_without_checksum_recheck\"\n"
-    "  consumers:\n"
-    "    - \"swedish_parliament_policy_classifier.definitions.loader\"\n"
-    "    - \"scripts/classify.py\"\n"
-    "    - \"scripts/classify_speeches.py\"\n"
-    "  notes: \"If categories or structure change, run: uv run python -m swedish_parliament_policy_classifier.definitions.loader --recheck --file src/swedish_parliament_policy_classifier/definitions/political_spectrum.yaml\"\n"
-)
 
 
 def _neutralise(content: str) -> str:
@@ -40,33 +28,34 @@ def _neutralise(content: str) -> str:
     return _CHECKSUM_PATTERN.sub(f'checksum: "{_PLACEHOLDER}"', content)
 
 
-def _ensure_agent_frontmatter(content: str) -> str:
-    """Inject canonical agent frontmatter block when missing.
-
-    The insertion point is right after the checksum line to preserve the
-    existing structure and comments.
-    """
-    if "\n_agent_frontmatter:" in content or content.startswith("_agent_frontmatter:"):
-        return content
-
-    m = _CHECKSUM_PATTERN.search(content)
-    if not m:
-        return _AGENT_FRONTMATTER_TEMPLATE + "\n" + content
-
-    insert_at = content.find("\n", m.end())
-    if insert_at == -1:
-        insert_at = len(content)
-        suffix = "\n\n"
-    else:
-        insert_at += 1
-        suffix = ""
-
-    return content[:insert_at] + _AGENT_FRONTMATTER_TEMPLATE + suffix + content[insert_at:]
-
-
 def _compute_checksum(path: Path) -> str:
     content = path.read_text(encoding="utf-8")
     return hashlib.sha256(_neutralise(content).encode("utf-8")).hexdigest()
+
+
+def _compute_checksum_from_content(content: str) -> str:
+    return hashlib.sha256(_neutralise(content).encode("utf-8")).hexdigest()
+
+
+def _ensure_agent_frontmatter(content: str) -> str:
+    if "_agent_frontmatter:" in content:
+        return content
+
+    block = """
+_agent_frontmatter:
+  id: \"definitions.political_spectrum\"
+  purpose: \"Canonical deterministic ideology taxonomy used by classifier/scoring pipelines.\"
+  steward: \"definitions\"
+  edit_policy: \"immutable_without_checksum_recheck\"
+  consumers:
+    - \"swedish_parliament_policy_classifier.definitions.loader\"
+    - \"scripts/classify.py\"
+    - \"scripts/classify_speeches.py\"
+  notes: \"If categories or structure change, run: uv run python -m swedish_parliament_policy_classifier.definitions.loader --recheck --file src/swedish_parliament_policy_classifier/definitions/political_spectrum.yaml\"
+"""
+    if "checksum:" in content:
+        return re.sub(r"(^checksum:\s*\"[^\"]*\"\s*)", r"\1" + block, content, count=1, flags=re.M)
+    return block + content
 
 
 def _read_stored_checksum(path: Path) -> str | None:
@@ -147,9 +136,7 @@ def _cmd_recheck(args) -> int:
     path = Path(args.file)
     content = path.read_text(encoding="utf-8")
     content = _ensure_agent_frontmatter(content)
-    path.write_text(content, encoding="utf-8")
-
-    new_checksum = _compute_checksum(path)
+    new_checksum = _compute_checksum_from_content(content)
     updated = _CHECKSUM_PATTERN.sub(f'checksum: "{new_checksum}"', content)
     path.write_text(updated, encoding="utf-8")
     print(f"Updated checksum in {path}")

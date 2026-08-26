@@ -126,7 +126,7 @@ def main():
     counts = aggregate_votes(args.votering_dir, votering_to_motion, motion_to_category)
     df_out = counts_to_frame(counts)
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
-    df_out.to_parquet(args.out, index=False, compression="zstd")
+    df_out.to_parquet(args.out, index=False)
     print(f"Wrote combined counts to {args.out} (rows={len(df_out)})")
 
 

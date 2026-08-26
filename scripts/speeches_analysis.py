@@ -21,31 +21,7 @@ import glob
 from swedish_parliament_policy_classifier.analysis.statistical_tests import run_paired_test, apply_bh_correction
 from swedish_parliament_policy_classifier.analysis.speech_visualizations import IDEOLOGY_ORDER
 
-
-DEFAULT_EXCLUDED_PARTIES = {"Unknown", "Moderaterna", "Vänsterpartiet", "X"}
-VOTE_YES_VALUES = {"ja", "j", "1", "yes", "y", "för", "for"}
-VOTE_NO_VALUES = {"nej", "no", "n", "0", "against", "emot"}
-
-
-def _parse_excluded_parties(raw: str | None) -> set[str]:
-    if not raw:
-        return set(DEFAULT_EXCLUDED_PARTIES)
-    return {p.strip() for p in raw.split(",") if p.strip()}
-
-
-def _filter_excluded_parties(df: pd.DataFrame, excluded: set[str], party_col: str = "party") -> pd.DataFrame:
-    if party_col not in df.columns:
-        return df
-    out = df.copy()
-    out[party_col] = out[party_col].fillna("Unknown").astype(str)
-    if not excluded:
-        return out
-    return out[~out[party_col].isin(excluded)].copy()
-
-
-def _finite_pairs(a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    mask = np.isfinite(a) & np.isfinite(b)
-    return a[mask], b[mask]
+DEFAULT_EXCLUDED_PARTIES = {"", "unknown", "x", "nyd", "none", "nan", "null", "-"}
 
 
 def load_profiles(parquet_path: str) -> pd.DataFrame:
@@ -62,50 +38,74 @@ def pivot_profiles(df: pd.DataFrame) -> pd.DataFrame:
     return pivot[IDEOLOGY_ORDER].reset_index()
 
 
+def vote_signal(val: object) -> float:
+    if val is None:
+        return np.nan
+    if not isinstance(val, str):
+        return np.nan
+    normalized = val.strip().lower()
+    if normalized in {"ja", "j", "1", "yes", "y", "för", "for", "for"}:
+        return 1.0
+    if normalized in {"nej", "nein", "n", "0", "no", "nope", "nej!"}:
+        return 0.0
+    return np.nan
+
+
+def _filter_excluded_parties(df: pd.DataFrame, excluded_parties: set | None = None) -> pd.DataFrame:
+    if excluded_parties is None:
+        excluded_parties = DEFAULT_EXCLUDED_PARTIES
+    excluded = {str(p).strip().lower() for p in excluded_parties if str(p).strip()}
+
+    def _keep(party: object) -> bool:
+        if party is None:
+            return False
+        text = str(party).strip()
+        if not text:
+            return False
+        if text.lower() in excluded:
+            return False
+        if any(ch.isdigit() for ch in text):
+            return False
+        return len(text) <= 4 and text.isalpha()
+
+    return df[df["party"].apply(_keep)].copy()
+
+
 def run_tests_on_profiles(pivot_df: pd.DataFrame) -> pd.DataFrame:
     rows = []
-    speech = pivot_df[pivot_df["modality"] == "speech"].copy()
-    motion = pivot_df[pivot_df["modality"] == "motion"].copy()
-    vote = pivot_df[pivot_df["modality"] == "vote"].copy()
-
-    for cat in IDEOLOGY_ORDER:
-        merged = speech[["party", cat]].rename(columns={cat: "speech"})
-        merged = merged.merge(motion[["party", cat]].rename(columns={cat: "motion"}), on="party", how="inner")
-        merged = merged.merge(vote[["party", cat]].rename(columns={cat: "vote"}), on="party", how="left")
-        if merged.empty:
+    for comparison, speech_key, compare_key in [
+        ("speech_vs_motion", "speech", "motion"),
+        ("speech_vs_vote", "speech", "vote"),
+        ("speech_vs_combined", "speech", "combined"),
+    ]:
+        speech_rows = pivot_df[(pivot_df["modality"] == speech_key)]
+        if speech_rows.empty:
             continue
+        motion_rows = pivot_df[(pivot_df["modality"] == "motion")]
+        vote_rows = pivot_df[(pivot_df["modality"] == "vote")]
 
-        merged["combined"] = (pd.to_numeric(merged["motion"], errors="coerce") + pd.to_numeric(merged["vote"], errors="coerce")) / 2.0
-        speech_vals, motion_vals = _finite_pairs(
-            pd.to_numeric(merged["speech"], errors="coerce").to_numpy(dtype=float),
-            pd.to_numeric(merged["motion"], errors="coerce").to_numpy(dtype=float),
-        )
-        speech_vote_vals, vote_vals = _finite_pairs(
-            pd.to_numeric(merged["speech"], errors="coerce").to_numpy(dtype=float),
-            pd.to_numeric(merged["vote"], errors="coerce").to_numpy(dtype=float),
-        )
-        speech_combined_vals, combined_vals = _finite_pairs(
-            pd.to_numeric(merged["speech"], errors="coerce").to_numpy(dtype=float),
-            pd.to_numeric(merged["combined"], errors="coerce").to_numpy(dtype=float),
-        )
+        speech_vals = speech_rows[IDEOLOGY_ORDER].to_numpy()
+        if compare_key == "combined":
+            motion_vals = motion_rows[IDEOLOGY_ORDER].to_numpy() if not motion_rows.empty else np.zeros_like(speech_vals)
+            vote_vals = vote_rows[IDEOLOGY_ORDER].to_numpy() if not vote_rows.empty else np.zeros_like(speech_vals)
+            compare_vals = (motion_vals + vote_vals) / 2.0
+        elif compare_key == "motion":
+            compare_vals = motion_rows[IDEOLOGY_ORDER].to_numpy() if not motion_rows.empty else np.zeros_like(speech_vals)
+        else:
+            compare_vals = vote_rows[IDEOLOGY_ORDER].to_numpy() if not vote_rows.empty else np.zeros_like(speech_vals)
 
-        rows.append({"party": "ALL_PARTIES", "category": cat, "comparison": "speech_vs_motion", **run_paired_test(speech_vals, motion_vals)})
-        rows.append({"party": "ALL_PARTIES", "category": cat, "comparison": "speech_vs_vote", **run_paired_test(speech_vote_vals, vote_vals)})
-        rows.append({"party": "ALL_PARTIES", "category": cat, "comparison": "speech_vs_combined", **run_paired_test(speech_combined_vals, combined_vals)})
+        for i, cat in enumerate(IDEOLOGY_ORDER):
+            res = run_paired_test(speech_vals[:, i], compare_vals[:, i])
+            rows.append({"party": "ALL_PARTIES", "category": cat, "comparison": comparison, **res})
 
     out = pd.DataFrame(rows)
     return out
 
 
-def vote_signal(val: str) -> float:
+def is_ja(val: str) -> bool:
     if not isinstance(val, str):
-        return float("nan")
-    norm = val.strip().lower()
-    if norm in VOTE_YES_VALUES:
-        return 1.0
-    if norm in VOTE_NO_VALUES:
-        return 0.0
-    return float("nan")
+        return False
+    return val.strip().lower() in {"ja", "j", "1", "yes", "y", "för", "for", "for"}
 
 
 def load_motion_votes_map(parquet_path: str) -> dict:
@@ -133,16 +133,10 @@ def load_votes_for_votering_ids(votering_dir: str, votering_ids: set) -> dict:
     return mapping
 
 
-def run_linked_pair_tests(
-    speech_motions_path: str,
-    motion_votes_parquet: str,
-    votering_dir: str,
-    excluded_parties: set[str] | None = None,
-) -> pd.DataFrame:
+def run_linked_pair_tests(speech_motions_path: str, motion_votes_parquet: str, votering_dir: str) -> pd.DataFrame:
     if not os.path.exists(speech_motions_path):
         return pd.DataFrame()
     sm = pd.read_parquet(speech_motions_path)
-    sm = _filter_excluded_parties(sm, excluded_parties or set(), party_col="party")
     if sm.empty:
         return pd.DataFrame()
 
@@ -165,16 +159,16 @@ def run_linked_pair_tests(
         for mid in g["motion_id"].astype(str):
             vid = motion_to_votering.get(mid)
             rost = votes_map.get((vid, party)) if vid else None
-            vote_vals.append(vote_signal(rost))
+            vote_vals.append(1.0 if is_ja(rost) else 0.0)
         vote_vals = np.array(vote_vals, dtype=float)
 
         # combined metric
-        combined = np.where(np.isfinite(motion_vals) & np.isfinite(vote_vals), (motion_vals + vote_vals) / 2.0, np.nan)
+        combined = (motion_vals + vote_vals) / 2.0
 
         # paired tests
-        res_sm = run_paired_test(*_finite_pairs(speech_vals, motion_vals))
-        res_sv = run_paired_test(*_finite_pairs(speech_vals, vote_vals))
-        res_sc = run_paired_test(*_finite_pairs(speech_vals, combined))
+        res_sm = run_paired_test(speech_vals, motion_vals)
+        res_sv = run_paired_test(speech_vals, vote_vals)
+        res_sc = run_paired_test(speech_vals, combined)
 
         rows.append({"party": party, "category": cat, "comparison": "speech_vs_motion", **res_sm})
         rows.append({"party": party, "category": cat, "comparison": "speech_vs_vote", **res_sv})
@@ -216,21 +210,16 @@ def plot_divergence_matrix(pivot_df: pd.DataFrame, out_dir: str):
         mat.append(np.abs(svec - combined))
 
     mat = np.vstack(mat)
-    mat = np.where(np.isfinite(mat), mat, np.nan)
-    fig, ax = plt.subplots(figsize=(12, max(6, 0.72 * len(parties))))
-    cmap = plt.get_cmap("RdBu_r").copy()
-    cmap.set_bad(color="#dddddd")
-    im = ax.imshow(np.ma.masked_invalid(mat), aspect="auto", cmap=cmap, vmin=0, vmax=1)
+    fig, ax = plt.subplots(figsize=(10, max(4, 0.4 * len(parties))))
+    im = ax.imshow(mat, aspect="auto", cmap="RdBu_r", vmin=0, vmax=1)
     ax.set_yticks(range(len(parties)))
-    ax.set_yticklabels(parties, fontsize=10)
+    ax.set_yticklabels(parties)
     ax.set_xticks(range(len(cats)))
-    ax.set_xticklabels(cats, rotation=45, ha="right", fontsize=10)
+    ax.set_xticklabels(cats, rotation=45, ha="right")
     fig.colorbar(im, ax=ax, fraction=0.03)
-    ax.set_title("Speech vs combined divergence by party and category", fontsize=12)
-    fig.tight_layout()
     os.makedirs(out_dir, exist_ok=True)
     outp = os.path.join(out_dir, "divergence_heatmap.png")
-    fig.savefig(outp, dpi=300, bbox_inches="tight", pad_inches=0.06)
+    fig.savefig(outp, dpi=200)
     plt.close(fig)
     return outp
 
@@ -242,32 +231,21 @@ def main():
     parser.add_argument("--speech-motions", default="data/parquet/speech_motions.parquet")
     parser.add_argument("--motion-votes", default="data/parquet/motion_votes.parquet")
     parser.add_argument("--votering-dir", default="data/votering/parquet")
-    parser.add_argument(
-        "--exclude-parties",
-        default=",".join(sorted(DEFAULT_EXCLUDED_PARTIES)),
-        help="Comma-separated party labels to exclude from divergence outputs.",
-    )
     args = parser.parse_args()
 
-    excluded_parties = _parse_excluded_parties(args.exclude_parties)
-    profiles = _filter_excluded_parties(load_profiles(args.profiles), excluded_parties)
+    profiles = load_profiles(args.profiles)
     pivot = pivot_profiles(profiles)
     tests = run_tests_on_profiles(pivot)
     tests = annotate_and_correct(tests)
 
     os.makedirs(args.out_dir, exist_ok=True)
-    tests.to_parquet(os.path.join(args.out_dir, "paired_tests.parquet"), index=False, compression="zstd")
+    tests.to_parquet(os.path.join(args.out_dir, "paired_tests.parquet"), index=False)
     tests.to_csv(os.path.join(args.out_dir, "paired_tests.csv"), index=False)
     hm = plot_divergence_matrix(pivot, args.out_dir)
     print(json.dumps({"paired_tests": os.path.join(args.out_dir, "paired_tests.parquet"), "heatmap": hm}))
 
     # If speech->motion links exist, run linked-pair tests and produce effect-size tables + annotated heatmaps
-    linked_tests = run_linked_pair_tests(
-        args.speech_motions,
-        args.motion_votes,
-        args.votering_dir,
-        excluded_parties=excluded_parties,
-    )
+    linked_tests = run_linked_pair_tests(args.speech_motions, args.motion_votes, args.votering_dir)
     if not linked_tests.empty:
         # apply BH per comparison group
         out_rows = []
@@ -294,7 +272,7 @@ def main():
         eff_df = pd.concat(out_rows, ignore_index=True)
         eff_out_parquet = os.path.join(args.out_dir, "effect_size_table.parquet")
         eff_out_csv = os.path.join(args.out_dir, "effect_size_table.csv")
-        eff_df.to_parquet(eff_out_parquet, index=False, compression="zstd")
+        eff_df.to_parquet(eff_out_parquet, index=False)
         eff_df.to_csv(eff_out_csv, index=False)
 
         # annotated heatmap for speech_vs_combined
@@ -337,24 +315,22 @@ def main():
                 stars.append(row_stars)
 
             mat = np.vstack(mat)
-            fig, ax = plt.subplots(figsize=(12, max(6, 0.72 * len(parties))))
+            fig, ax = plt.subplots(figsize=(10, max(4, 0.4 * len(parties))))
             im = ax.imshow(mat, aspect="auto", cmap="RdBu_r", vmin=0, vmax=1)
             ax.set_yticks(range(len(parties)))
-            ax.set_yticklabels(parties, fontsize=10)
+            ax.set_yticklabels(parties)
             ax.set_xticks(range(len(cats)))
-            ax.set_xticklabels(cats, rotation=45, ha="right", fontsize=10)
+            ax.set_xticklabels(cats, rotation=45, ha="right")
             # overlay stars
             for i in range(len(parties)):
                 for j in range(len(cats)):
                     txt = stars[i][j]
                     if txt:
-                        ax.text(j, i, txt, ha="center", va="center", color="black", fontsize=9)
+                        ax.text(j, i, txt, ha="center", va="center", color="black", fontsize=8)
             fig.colorbar(im, ax=ax, fraction=0.03)
-            ax.set_title("Speech vs combined divergence with significance markers", fontsize=12)
-            fig.tight_layout()
             os.makedirs(out_dir, exist_ok=True)
             outp = os.path.join(out_dir, f"divergence_{comparison}_significance.png")
-            fig.savefig(outp, dpi=300, bbox_inches="tight", pad_inches=0.06)
+            fig.savefig(outp, dpi=200)
             plt.close(fig)
             return outp
 

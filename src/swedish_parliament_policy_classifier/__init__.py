@@ -29,14 +29,11 @@ try:
 	if not os.environ.get("HUGGING_FACE_HUB_TOKEN"):
 		# 1) Try to load a repo `.env` file if python-dotenv is available.
 		try:
-			from dotenv import load_dotenv
-			import os as _os
+			from dotenv import find_dotenv, load_dotenv
 
-			# Only check the repo root for a local .env, not the whole filesystem.
-			_repo_root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
-			_env_path = _os.path.join(_repo_root, ".env")
-			if _os.path.isfile(_env_path):
-				load_dotenv(_env_path, override=False)
+			envpath = find_dotenv()
+			if envpath:
+				load_dotenv(envpath, override=False)
 		except Exception:
 			# dotenv is optional; don't fail imports if it's not installed.
 			pass

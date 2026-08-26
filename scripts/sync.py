@@ -21,7 +21,7 @@ def _append_lineage(lineage_out: str, table: str, subject_id: str, operation: st
     except Exception:
         out_df = pd.DataFrame([row])
     # write
-    out_df.to_parquet(out_p, index=False, compression="zstd")
+    out_df.to_parquet(out_p, index=False)
 
 
 def sync_parquet(out_path: str = "data/parquet/raw_motions.parquet", lineage_out: str = "data/parquet/lineage.parquet", limit: int = 100, dry_run: bool = False, query: Optional[str] = None):
@@ -59,7 +59,7 @@ def sync_parquet(out_path: str = "data/parquet/raw_motions.parquet", lineage_out
             out_df = pd.concat([prev, chunk], ignore_index=True)
         else:
             out_df = chunk
-        out_df.to_parquet(out_p, index=False, compression="zstd")
+        out_df.to_parquet(out_p, index=False)
         for r in rows:
             _append_lineage(lineage_out, "raw_motions", str(r["id"]), "sync")
 

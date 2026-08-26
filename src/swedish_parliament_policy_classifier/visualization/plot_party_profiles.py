@@ -11,6 +11,7 @@ from swedish_parliament_policy_classifier.exports import load_definitions
 from swedish_parliament_policy_classifier.analysis.aggregate import compute_party_profiles
 from swedish_parliament_policy_classifier.visualization.style_config import (
     add_figure_credits,
+    compute_ideology_score_from_proportions,
     query_summary_stats,
 )
 
@@ -42,13 +43,11 @@ def plot_party_profiles(conn, out_dir: str = "figures") -> Optional[Tuple[str, s
     if not ordered:
         ordered = all_defs
 
-    # Compute party ordering by weighted average on the categorical index
-    cat_index = {cat: i for i, cat in enumerate(ordered)}
+    # Compute party ordering by net left-right positioning with centre as neutral.
     party_avgs = {}
     for party, d in profiles.items():
         props = d.get("proportions", {})
-        avg = sum(props.get(cat, 0.0) * cat_index.get(cat, 0) for cat in ordered)
-        party_avgs[party] = avg
+        party_avgs[party] = compute_ideology_score_from_proportions(props)
 
     parties = sorted(profiles.keys(), key=lambda p: party_avgs[p])
 

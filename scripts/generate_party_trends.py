@@ -30,18 +30,13 @@ from swedish_parliament_policy_classifier.visualization.style_config import (
     PARTY_COLORS_PLOT,
     CATEGORY_ORDER,
     add_figure_credits,
+    compute_ideology_score_from_proportions,
 )
 
 
 def _ideology_score_from_proportions(proportions: dict) -> float:
     """Compute net left-right score [-1, 1] from category proportion dict."""
-    left_sum = sum(proportions.get(c, 0.0) for c in ["far_left", "left", "centre_left"])
-    right_sum = sum(proportions.get(c, 0.0) for c in ["centre_right", "right", "far_right"])
-    centre = proportions.get("centre", 0.0)
-    total = left_sum + right_sum + centre
-    if total <= 0:
-        return 0.0
-    return float((right_sum - left_sum) / total)
+    return compute_ideology_score_from_proportions(proportions)
 
 
 def plot_party_ideology_trends(

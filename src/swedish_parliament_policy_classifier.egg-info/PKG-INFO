@@ -13,13 +13,11 @@ Requires-Dist: PyYAML
 Requires-Dist: requests
 Requires-Dist: sentencepiece>=0.2.1
 Requires-Dist: seaborn>=0.12.0
-Requires-Dist: statsmodels>=0.14.0
 Requires-Dist: pytest-cov>=7.1.0
+Requires-Dist: transformers>=5.8.1
+Requires-Dist: accelerate>=1.13.0
+Requires-Dist: torch>=2.12.0
 Requires-Dist: pyarrow>=24.0.0
-Requires-Dist: zstandard>=0.25.0
-Requires-Dist: polars>=1.41.2
-Requires-Dist: loguru>=0.7.0
-Requires-Dist: lightgbm>=4.6.0
 Provides-Extra: dev
 Requires-Dist: pytest; extra == "dev"
 Requires-Dist: matplotlib; extra == "dev"
@@ -29,20 +27,7 @@ Requires-Dist: plotly; extra == "dev"
 Requires-Dist: bertopic>=0.16.0; extra == "dev"
 Requires-Dist: lightgbm>=4.0.0; extra == "dev"
 Requires-Dist: ollama>=0.1.0; extra == "dev"
-Provides-Extra: ml
-Requires-Dist: transformers>=5.8.1; extra == "ml"
-Requires-Dist: accelerate>=1.13.0; extra == "ml"
-Requires-Dist: torch>=2.12.0; extra == "ml"
-Requires-Dist: spacy>=3.8.14; extra == "ml"
 Dynamic: license-file
-
----
-_agent_frontmatter:
-  id: "README"
-  purpose: "Repository markdown document."
-  steward: "repo"
-  edit_policy: "manual"
----
 
 # policy-classifier
 
@@ -142,23 +127,6 @@ CI note: the project's GitHub Actions uses an editable install and a smoke
 import before running the test suite: `uv pip install -e .` then a smoke
 import and `uv run pytest -q`. Ensure an editable install succeeds locally
 before opening a PR.
-
-## Zenodo DOI Automation
-
-After publishing a submission release tag, you can automatically pull the minted
-Zenodo DOI and update manuscript submission files:
-
-```bash
-uv run python scripts/sync_zenodo_doi.py --tag submission-2026-06-06-r3 --repo yidaki53/policy-classifier
-```
-
-Optional mode if you already know the DOI:
-
-```bash
-uv run python scripts/sync_zenodo_doi.py --tag submission-2026-06-06-r3 --doi-url https://doi.org/10.5281/zenodo.20572644
-```
-
-Use `--dry-run` to preview changes before writing files.
 
 ## Project layout
 

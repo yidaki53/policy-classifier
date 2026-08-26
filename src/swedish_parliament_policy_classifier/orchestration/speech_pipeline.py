@@ -67,11 +67,7 @@ def export_active_learning_candidates(
             raise FileNotFoundError("No prediction CSV found in logs/")
         preds_csv = str(latest)
 
-    pred_path = Path(preds_csv)
-    if pred_path.suffix.lower() == ".parquet":
-        df = pd.read_parquet(pred_path)
-    else:
-        df = pd.read_csv(pred_path)
+    df = pd.read_csv(preds_csv)
 
     prob_cols = [c for c in df.columns if c.startswith("prob_")]
     if not prob_cols:
@@ -198,7 +194,7 @@ def prepare_speech_training_data(
     categories = load_verified_definitions()
     category_names = sorted(categories.keys())
 
-    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
+    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
 
     X_list = []
     y_list = []

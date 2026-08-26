@@ -47,7 +47,7 @@ def ingest_to_parquet(sample: bool = True, out_path: str | Path = "data/parquet/
     else:
         out_df = chunk
 
-    out_df.to_parquet(out, index=False, compression="zstd")
+    out_df.to_parquet(out, index=False)
     return len(out_df) if out_df is not None else 0
 
 

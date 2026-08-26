@@ -15,6 +15,7 @@ if False:
 from swedish_parliament_policy_classifier.analysis.aggregate import compute_party_profiles, load_party_profiles
 from swedish_parliament_policy_classifier.visualization.style_config import (
     add_figure_credits,
+    compute_ideology_score_from_proportions,
     query_summary_stats,
 )
 
@@ -65,33 +66,14 @@ def plot_final_profiles(conn, out_dir: str = "figures", basename: str = "party_p
     n = len(ordered)
     cat_index = {cat: i for i, cat in enumerate(ordered)}
 
-    from swedish_parliament_policy_classifier.visualization.style_config import CURRENT_PARTIES
-    # Filter to current Riksdag parties only
-    profiles = {p: d for p, d in profiles.items() if p in CURRENT_PARTIES}
+    # Exclude historical party NYD from visualisation
+    profiles = {p: d for p, d in profiles.items() if p != "NYD"}
 
-    # Compute net left-right ideological score in [-1, 1]
-    # Left categories: far_left, left, centre_left -> negative
-    # Centre: centre -> neutral
-    # Right categories: centre_right, right, far_right -> positive
+    # Compute a net left-right score in [-1, 1] with the centre category as neutral.
     party_scores = {}
     for party, d in profiles.items():
         props = d.get("proportions", {})
-        left_sum = sum(
-            props.get(cat, 0.0) for cat in ordered
-            if cat_index.get(cat, 0) in {0, 1, 2}  # far_left, left, centre_left
-        )
-        right_sum = sum(
-            props.get(cat, 0.0) for cat in ordered
-            if cat_index.get(cat, 0) in {4, 5, 6}  # centre_right, right, far_right
-        )
-        total = left_sum + right_sum + sum(
-            props.get(cat, 0.0) for cat in ordered
-            if cat_index.get(cat, 0) == 3  # centre
-        )
-        if total > 0:
-            party_scores[party] = float((right_sum - left_sum) / total)
-        else:
-            party_scores[party] = 0.0
+        party_scores[party] = float(compute_ideology_score_from_proportions(props))
 
     parties = sorted(list(profiles.keys()), key=lambda p: party_scores[p])
     data = np.array([[profiles[party].get("proportions", {}).get(cat, 0.0) for cat in ordered] for party in parties])
@@ -111,9 +93,9 @@ def plot_final_profiles(conn, out_dir: str = "figures", basename: str = "party_p
     ax_top.scatter(scores, y, c=colors, s=120, edgecolors="black")
     ax_top.set_yticks(y)
     ax_top.set_yticklabels(parties)
-    ax_top.set_xlim(-1.02, 1.02)
-    ax_top.set_xlabel("Ideological placement (Left → Right)")
-    ax_top.set_title("Party ideological placement — net left-right balance", pad=8)
+    ax_top.set_xlim(-0.02, 1.02)
+    ax_top.set_xlabel("Ideological placement (Left=0 → Right=1)")
+    ax_top.set_title("Party ideological placement — weighted average across categories", pad=8)
     # annotate numeric ideological score next to each point
     for i, s in enumerate(scores):
         ax_top.text(s + 0.02, y[i], f"{s:.2f}", va="center", fontsize=9)

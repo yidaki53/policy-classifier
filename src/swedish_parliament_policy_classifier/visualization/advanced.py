@@ -13,7 +13,6 @@ from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn.decomposition import PCA
 
 from swedish_parliament_policy_classifier.exports import load_definitions
-from swedish_parliament_policy_classifier.visualization.style_config import add_figure_credits
 
 if False:
     from swedish_parliament_policy_classifier.exports import load_definitions as _ld
@@ -163,20 +162,10 @@ def plot_clustered_heatmap(conn, out_dir: str = "figures", basename: str = "part
     ax_heat.set_yticklabels(ordered_parties)
     ax_heat.set_xticks(np.arange(len(ordered)))
     ax_heat.set_xticklabels(ordered, rotation=45, ha="right")
-    ax_heat.set_title("Clustered party-category heatmap (category share by party)")
-    ax_heat.set_xlabel("Ideology category")
-    ax_heat.set_ylabel("Party")
+    ax_heat.set_title("Clustered party-category heatmap")
 
     cbar = fig.colorbar(im, ax=ax_heat, orientation="vertical", fraction=0.04, pad=0.02)
-    cbar.set_label("Proportion (share, 0-1)")
-
-    add_figure_credits(
-        fig,
-        n_total=len(parties),
-        n_parties=len(parties),
-        source="party profiles (weighted aggregation)",
-        recency_weighted=True,
-    )
+    cbar.set_label("Proportion")
 
     png = os.path.join(out_dir, f"{basename}.png")
     pdf = os.path.join(out_dir, f"{basename}.pdf")
@@ -235,18 +224,9 @@ def plot_pca_biplot(conn, out_dir: str = "figures", basename: str = "party_pca")
         ax.arrow(0, 0, loadings[i, 0] * 2.0, loadings[i, 1] * 2.0, color="red", alpha=0.7, head_width=0.02)
         ax.text(loadings[i, 0] * 2.1, loadings[i, 1] * 2.1, cat, color="red", fontsize=9)
 
-    var = pca.explained_variance_ratio_
     ax.set_title("PCA biplot of party category distributions")
-    ax.set_xlabel(f"PC1 ({var[0] * 100:.1f}% variance)")
-    ax.set_ylabel(f"PC2 ({var[1] * 100:.1f}% variance)")
-
-    add_figure_credits(
-        fig,
-        n_total=len(parties),
-        n_parties=len(parties),
-        source="party profiles (weighted aggregation)",
-        recency_weighted=True,
-    )
+    ax.set_xlabel("PC1")
+    ax.set_ylabel("PC2")
 
     png = os.path.join(out_dir, f"{basename}.png")
     pdf = os.path.join(out_dir, f"{basename}.pdf")
