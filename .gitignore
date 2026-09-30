@@ -30,6 +30,15 @@ mlruns/
 # Logs
 *.log
 
+# Graphify generated caches (rebuildable via `graphify update .`)
+graphify-out/cache/
+graphify-out/.graphify_root
+
+# Editor/OS backup artifacts
+*.bak
+nohup.out
+__pycache__/
+
 # Keep oversized local optimizer checkpoints out of git/LFS
 models/mlm_adapted/checkpoint-2500/optimizer.pt
 models/mlm_adapted/checkpoint-5000/optimizer.pt
