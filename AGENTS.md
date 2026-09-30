@@ -19,9 +19,33 @@ stack:
 - Validate with `uv run pytest -q` before submitting.
   - CI runs `uv pip install -e .`, a smoke import test, and `uv run pytest -q`.
 - **For architecture questions, use the graphify skill (`/graphify`) FIRST.** Query `graphify-out/graph.json` via `graphify query`, `graphify explain`, or `graphify path` before reading source files directly. This saves tokens and provides cross-document context that file-by-file reading misses.
-- Use relative paths only. Never use absolute paths.
+- **NEVER commit absolute paths.** This repo is public; an absolute path leaks your username, home directory, and institution. See "Never commit absolute paths" below.
 - Update the graph after substantial edits with `graphify update .`.
 - Use local Ollama semantic extraction when available. This repository maintains a local Ollama model `qwen-32k` — agents should prefer the local model for semantic extraction (no external downloads) when `ollama list` shows `qwen-32k`. Enable Ollama-backed extraction via script flags (e.g., pass `--ollama` to `scripts/classify_speeches_parquet.py`). If the model is not present, fall back to `graphify update` and warn that semantic extraction was skipped.
+
+## Never commit absolute paths (non-negotiable)
+
+This repository is **public**. An absolute path in a tracked file leaks the
+author's username, home directory, and institution to the world, and it
+defeats manuscript anonymization. This is never acceptable, in any file, for
+any reason.
+
+1. Never hardcode an absolute path. Use paths relative to the repo root, or
+   resolve from a CLI argument or `Path.cwd()`.
+2. Never paste a terminal transcript, log excerpt, or traceback containing an
+   absolute path into a committed file.
+3. When a path must be recorded (logs, provenance, manifests), write it
+   repo-relative: `manuscript/sections/01_title.md`.
+4. CI, the pre-commit hook, and `tests/test_no_absolute_paths.py` all enforce
+   this. On failure run
+   `uv run python scripts/check_no_absolute_paths.py --fix`.
+5. Shell-escaped, truncated, and lower-cased spellings of the same path all
+   count as leaks. The checker handles all three, so simply run it.
+6. `/home/runner/`, `/usr/`, `/opt/`, and `/tmp/` are allowlisted: CI and
+   system paths, not the author's home.
+7. Note that generated tools can reintroduce paths. graphify in particular
+   records shell commands it observes, so run `graphify update .` from the
+   repo root and re-run the checker before committing graph output.
 
 ## Using graphify to save tokens (MANDATORY for architecture questions)
 

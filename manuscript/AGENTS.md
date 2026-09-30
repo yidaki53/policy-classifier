@@ -23,6 +23,7 @@ Non-negotiable manuscript rules:
 2. Never leave stale numbers in text after re-running analysis scripts.
 3. Every figure/table claim must include provenance: producing script, key inputs, output path, and UTC run timestamp.
 4. Methodology descriptions must reflect the current implemented pipeline (models, linkages, weighting, and forecasting), not a simplified or historical version.
+5. **Never write an absolute path into any manuscript file, build artifact, or log.** This repository is public and the manuscript is submitted for blind review, so absolute paths would deanonymize the author. Always record paths repo-relative (`manuscript/sections/01_title.md`). This applies to build logs and `build/manuscript_context.json` in particular, since the render step writes absolute paths into them. CI enforces this via `scripts/check_no_absolute_paths.py`.
 
 Frontmatter requirement (mandatory for every manuscript source file):
 1. Every markdown file under `manuscript/sections/` must start with YAML frontmatter.

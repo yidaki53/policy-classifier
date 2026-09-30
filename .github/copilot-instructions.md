@@ -17,6 +17,7 @@ Non-Negotiable Rules
 3. Deterministic rules live in `definitions/political_spectrum.yaml`. Changes must be versioned and reviewed.
 4. All code that transforms or normalizes motions must create lineage entries in `lineage`.
 5. Manuscript drafts must follow the TQRS structure (Title, Question, Results, Significance). See `manuscript/TQRS_GUIDELINES.md`.
+6. **Never write an absolute path into a committed file.** This repo is public; absolute paths leak the author's username, home directory, and institution, and defeat manuscript anonymization. Use repo-relative paths. CI enforces this via `scripts/check_no_absolute_paths.py`; fix failures with `uv run python scripts/check_no_absolute_paths.py --fix`.
 
 Default Task Workflow
 1. Edit or add code under `scripts/`, `classifier/`, or `analysis/`.
