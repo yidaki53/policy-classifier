@@ -22,8 +22,10 @@ import sys
 
 from swedish_parliament_policy_classifier.db import schema
 from swedish_parliament_policy_classifier.definitions.loader import load_verified_definitions
-from swedish_parliament_policy_classifier.classifier.ensemble import build_feature_vector, train_meta_classifier
+from swedish_parliament_policy_classifier.classifier.ensemble import build_feature_vector
+from swedish_parliament_policy_classifier.training.ensemble import train_meta_classifier
 from swedish_parliament_policy_classifier.io import loader
+from swedish_parliament_policy_classifier.io.speech_text import ParquetSpeechTextRepository
 
 LOG = logging.getLogger(__name__)
 
@@ -49,7 +51,7 @@ def export_active_learning_candidates(
     db_path: str = "data/swedish_parliament.db",
     preds_csv: Optional[str] = None,
     top_n: int = 500,
-    out_path: Optional[str] = None,
+    out_path: Optional[str | Path] = None,
     include_preview_chars: int = 600,
 ) -> Path:
     """Export top-`top_n` high-entropy speech examples for annotation.
@@ -92,32 +94,12 @@ def export_active_learning_candidates(
     df["second_prob"] = top2
     df["top_category_from_probs"] = topcat
 
-    # fetch short text preview: prefer speech parquet exports (load once),
-    # otherwise fall back to normalized_motions via DB reader
-    conn = schema.get_connection(db_path)
+    # Fetch previews through the shared cached speech-text boundary.
     previews = []
 
     speech_parquet_dir = Path("data") / "speeches" / "parquet"
-    speech_text_map: dict[str, str] = {}
-    if speech_parquet_dir.exists() and pd is not None:
-        for pf in sorted(speech_parquet_dir.glob("*.parquet")):
-            try:
-                # try to read only the ID/text columns where supported
-                try:
-                    sdf = pd.read_parquet(pf, columns=["anforande_id", "anforandetext"])
-                except Exception:
-                    sdf = pd.read_parquet(pf)
-
-                if "anforande_id" in sdf.columns and "anforandetext" in sdf.columns:
-                    for _, r in sdf.iterrows():
-                        sid_val = r["anforande_id"]
-                        if sid_val is None:
-                            continue
-                        sid_key = str(sid_val)
-                        if sid_key not in speech_text_map:
-                            speech_text_map[sid_key] = r["anforandetext"] or ""
-            except Exception as e:
-                LOG.warning("Failed to read speech parquet %s: %s", pf, e)
+    speech_text_repository = ParquetSpeechTextRepository(speech_parquet_dir)
+    speech_text_map = speech_text_repository.get_many(df["speech_id"].astype(str).tolist())
 
     for sid in df["speech_id"]:
         sid_key = str(sid)
@@ -130,15 +112,12 @@ def export_active_learning_candidates(
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_dir = Path("logs")
     out_dir.mkdir(exist_ok=True)
-    if out_path is None:
-        out_path = out_dir / f"active_learning_candidates_{ts}.parquet"
-    else:
-        out_path = Path(out_path)
-        if out_path.suffix.lower() == '.csv':
-            out_path = out_path.with_suffix('.parquet')
-    df_sorted.to_parquet(out_path, index=False, compression='zstd')
-    LOG.info("Wrote active-learning candidates to %s", out_path)
-    return out_path
+    output_path = Path(out_path) if out_path is not None else out_dir / f"active_learning_candidates_{ts}.parquet"
+    if output_path.suffix.lower() == ".csv":
+        output_path = output_path.with_suffix(".parquet")
+    df_sorted.to_parquet(output_path, index=False, compression="zstd")
+    LOG.info("Wrote active-learning candidates to %s", output_path)
+    return output_path
 
 
 def prepare_speech_training_data(
@@ -194,33 +173,17 @@ def prepare_speech_training_data(
     categories = load_verified_definitions()
     category_names = sorted(categories.keys())
 
-    from swedish_parliament_policy_classifier.classifier.pipeline import score_motion
+    from swedish_parliament_policy_classifier.classifier.scorer import score_motion
 
     X_list = []
     y_list = []
 
-    # Load speech texts from parquet exports (map anforande_id -> anforandetext).
-    # This avoids reading motions/parquet files which are unrelated to speech analysis.
+    # Load speech texts through the shared repository boundary.
     speech_parquet_dir = Path("data") / "speeches" / "parquet"
-    speech_text_map: dict[str, str] = {}
-    if speech_parquet_dir.exists() and pd is not None:
-        for pf in sorted(speech_parquet_dir.glob("*.parquet")):
-            try:
-                try:
-                    sdf = pd.read_parquet(pf, columns=["anforande_id", "anforandetext"])
-                except Exception:
-                    sdf = pd.read_parquet(pf)
-
-                if "anforande_id" in sdf.columns and "anforandetext" in sdf.columns:
-                    for _, r in sdf.iterrows():
-                        sid_val = r["anforande_id"]
-                        if sid_val is None:
-                            continue
-                        sid_key = str(sid_val)
-                        if sid_key not in speech_text_map:
-                            speech_text_map[sid_key] = r["anforandetext"] or ""
-            except Exception as e:
-                LOG.warning("Failed to read speech parquet %s: %s", pf, e)
+    speech_text_repository = ParquetSpeechTextRepository(speech_parquet_dir)
+    speech_text_map = speech_text_repository.get_many(
+        [str(sid) for sid, _ in rows]
+    )
 
     for sid, category in rows:
         # fetch speech text from parquet exports (do not use motions)
@@ -262,9 +225,9 @@ def prepare_speech_training_data(
         embedding_scores = {}
         if embedding_matcher is not None:
             try:
-                if not hasattr(embedding_matcher, "_cached_cat_embs"):
-                    embedding_matcher._cached_cat_embs = embedding_matcher.build_category_embeddings(categories)
-                emb_matches = embedding_matcher.match(text[:2500], embedding_matcher._cached_cat_embs, top_k=len(categories))
+                if embedding_matcher.cached_embeddings is None:
+                    embedding_matcher.cached_embeddings = embedding_matcher.build_category_embeddings(categories)
+                emb_matches = embedding_matcher.match(text[:2500], embedding_matcher.cached_embeddings, top_k=len(categories))
                 embedding_scores = {name: float(score) for name, score in emb_matches}
             except Exception as e:
                 LOG.warning("Embedding match failed for %s: %s", sid, e)

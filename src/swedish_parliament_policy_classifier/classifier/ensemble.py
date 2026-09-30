@@ -5,18 +5,19 @@ combines keyword matches, embedding similarities, topic distributions, and
 metadata into adaptive per-motion category weights.
 """
 
-import json
 import logging
-import pickle
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, List, Mapping, Optional, Tuple
 
 from swedish_parliament_policy_classifier.io import loader
 
 import numpy as np
 
 LOG = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 def _notna(val) -> bool:
@@ -152,7 +153,7 @@ def build_feature_vector(
 
     # 6. Doc type one-hot
     dt_map = {"mot": [1, 0, 0], "prop": [0, 1, 0], "votering": [0, 0, 1]}
-    features.extend(dt_map.get(doc_type, [0, 0, 0]))
+    features.extend(dt_map.get(doc_type or "", [0, 0, 0]))
 
     return pd.DataFrame([features], columns=names, dtype=np.float32)
 
@@ -160,7 +161,7 @@ def build_feature_vector(
 def prepare_training_data_from_gold_labels(
     conn,
     topic_distributions: Dict[str, List[float]],
-    categories: Dict[str, object],
+    categories: Mapping[str, object],
     scorer_func,
     embedding_matcher,
     split: str = "train",
@@ -172,8 +173,6 @@ def prepare_training_data_from_gold_labels(
     Uses the gold-label split (train/test/val) and computes base signals
     (keyword, embedding, topic, metadata) for each labeled motion.
     """
-    import sqlite3
-    cur = conn.cursor()
     from swedish_parliament_policy_classifier.db.readers import fetch_augmented_gold_label_rows
 
     # Use DB-backed reader which prefers parquet exports for normalized_motions
@@ -226,13 +225,13 @@ def prepare_training_data_from_gold_labels(
         embedding_scores = {}
         if embedding_matcher is not None:
             try:
-                if not hasattr(embedding_matcher, "_cached_cat_embs"):
-                    embedding_matcher._cached_cat_embs = (
+                if embedding_matcher.cached_embeddings is None:
+                    embedding_matcher.cached_embeddings = (
                         embedding_matcher.build_category_embeddings(categories)
                     )
                 emb_matches = embedding_matcher.match(
                     text[:2500],
-                    embedding_matcher._cached_cat_embs,
+                    embedding_matcher.cached_embeddings,
                     top_k=len(categories),
                 )
                 embedding_scores = {
@@ -436,7 +435,7 @@ def build_speech_feature_vector(
 def predict_with_meta_classifier(
     feature_vector,
     meta_clf: Dict,
-    categories: Dict[str, object],
+    categories: Mapping[str, object],
 ) -> Dict[str, float]:
     """Predict category probabilities using the ensemble or speech meta-classifier.
 

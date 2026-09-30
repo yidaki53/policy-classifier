@@ -5,16 +5,17 @@ Provides a stable programmatic way to generate feature names used by
 without duplicating string logic across the codebase.
 """
 from dataclasses import dataclass
-from typing import List
+from typing import Sequence
 
 
 @dataclass(frozen=True)
 class FeatureSpec:
-    category_names: List[str]
+    category_names: Sequence[str]
     max_topics: int = 100
+    schema_version: str = "features-v1"
 
-    def feature_names(self) -> List[str]:
-        names: List[str] = []
+    def feature_names(self) -> list[str]:
+        names: list[str] = []
         for cat in self.category_names:
             names.append(f"kw_{cat}")
         for cat in self.category_names:
@@ -29,6 +30,14 @@ class FeatureSpec:
         names.extend(["text_len_log", "recency_years", "doc_mot", "doc_prop", "doc_votering"])
         return names
 
+    def validate_feature_names(self, names: Sequence[str]) -> None:
+        expected = self.feature_names()
+        if list(names) != expected:
+            raise ValueError(
+                f"Feature schema mismatch for {self.schema_version}: "
+                f"expected {len(expected)} ordered features, received {len(names)}"
+            )
 
-def get_feature_names(category_names: List[str], max_topics: int = 100) -> List[str]:
+
+def get_feature_names(category_names: Sequence[str], max_topics: int = 100) -> list[str]:
     return FeatureSpec(category_names=category_names, max_topics=max_topics).feature_names()

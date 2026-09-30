@@ -18,6 +18,7 @@ from importlib import import_module
 
 # Use the packaged models directly (no top-level compatibility fallback)
 from swedish_parliament_policy_classifier.models import NormalizedMotion, ClassificationResult, CategoryDef
+from swedish_parliament_policy_classifier.classifier.core import ClassifierCore
 
 
 def _import_module_candidate(name: str):
@@ -35,7 +36,23 @@ def _get_scorer_module():
     raise ImportError("No scorer implementation found")
 
 
-def _get_persist_module():
+def _get_persist_module(backend: str = "auto"):
+    if backend == "parquet":
+        module = _import_module_candidate(
+            "swedish_parliament_policy_classifier.classifier.persist_parquet"
+        )
+        if module is None:
+            raise ImportError("Parquet persistence backend is unavailable")
+        return module
+    if backend == "sqlite":
+        module = _import_module_candidate(
+            "swedish_parliament_policy_classifier.classifier.persist"
+        )
+        if module is None:
+            raise ImportError("SQLite persistence backend is unavailable")
+        return module
+    if backend != "auto":
+        raise ValueError(f"Unsupported persistence backend: {backend!r}")
     # Prefer parquet-backed persist module if available
     for name in ("classifier.persist_parquet", "swedish_parliament_policy_classifier.classifier.persist_parquet", "classifier.persist", "swedish_parliament_policy_classifier.classifier.persist"):
         m = _import_module_candidate(name)
@@ -76,27 +93,20 @@ def classify_motion(
         loader = _get_defs_loader()
         categories = loader.load_verified_definitions()
 
-    scorer = _get_scorer_module()
-    # Filter kwargs to only those supported by the concrete scorer implementation
-    try:
-        import inspect
-
-        scorer_sig = inspect.signature(getattr(scorer, "score_motion"))
-        allowed = set(scorer_sig.parameters.keys())
-        call_kwargs = {k: v for k, v in kwargs.items() if k in allowed}
-        # include embedding_matcher if supported
-        if "embedding_matcher" in allowed:
-            call_kwargs["embedding_matcher"] = embedding_matcher
-        return scorer.score_motion(motion_id, text, categories, **call_kwargs)
-    except Exception:
-        # best-effort: fallback to original call
-        return scorer.score_motion(motion_id, text, categories, embedding_matcher=embedding_matcher, **kwargs)
+    return ClassifierCore().classify(
+        motion_id,
+        text,
+        categories,
+        embedding_matcher=embedding_matcher,
+        **kwargs,
+    )
 
 
 def classify_and_persist(
     normalized_motion: Union[NormalizedMotion, dict],
     db_conn: Optional[sqlite3.Connection] = None,
     embedding_matcher: Optional[Any] = None,
+    persistence_backend: str = "auto",
     **kwargs,
 ) -> List[ClassificationResult]:
     """Classify a `NormalizedMotion` (or dict) and persist classifications.
@@ -119,7 +129,7 @@ def classify_and_persist(
         conn = db_conn
 
     # ensure normalized motion present (upsert into parquet if we're using parquet persist)
-    persist_mod = _get_persist_module()
+    persist_mod = _get_persist_module(persistence_backend)
     try:
         # if persist module exposes upsert_normalized_motion_parquet, use it
         if hasattr(persist_mod, "upsert_normalized_motion_parquet"):
@@ -163,11 +173,16 @@ def classify_and_persist(
     # classification
     loader = _get_defs_loader()
     cats = loader.load_verified_definitions()
-    scorer = _get_scorer_module()
-    results = scorer.score_motion(nm.id, nm.text, cats, embedding_matcher=embedding_matcher, **kwargs)
+    results = ClassifierCore().classify(
+        nm.id,
+        nm.text,
+        cats,
+        embedding_matcher=embedding_matcher,
+        **kwargs,
+    )
 
     # persist classifications (creates lineage internally)
-    persist = _get_persist_module()
+    persist = _get_persist_module(persistence_backend)
     # call persist implementation; DB-backed persists expect (conn, results, ...)
     # parquet-backed persist accepts (conn, results, source_table, source_id)
     try:

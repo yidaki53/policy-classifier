@@ -69,10 +69,15 @@ CATEGORY_COLORS = {
 
 
 def compute_ideology_score_from_proportions(proportions: dict[str, float | int]) -> float:
-    """Compute a net left-right score in [-1, 1] with the centre category as neutral."""
+    """Compute a net left-right score in [-1, 1] with centre mass neutral.
+
+    Centre observations remain in the denominator so centre-heavy profiles are
+    not artificially pushed toward either ideological extreme.
+    """
     left_mass = sum(float(proportions.get(cat, 0.0)) for cat in ["far_left", "left", "centre_left"])
+    centre_mass = float(proportions.get("centre", 0.0))
     right_mass = sum(float(proportions.get(cat, 0.0)) for cat in ["centre_right", "right", "far_right"])
-    total = left_mass + right_mass
+    total = left_mass + centre_mass + right_mass
     if total <= 0:
         return 0.0
     return float((right_mass - left_mass) / total)

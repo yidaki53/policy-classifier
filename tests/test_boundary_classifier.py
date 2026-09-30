@@ -31,3 +31,21 @@ def test_classify_and_persist_roundtrip():
     cur.execute("SELECT COUNT(*) as c FROM lineage WHERE source_table = ? AND source_id = ?", ("normalized_motions", nm.id))
     lr = cur.fetchone()
     assert lr is not None
+
+
+def test_classify_and_persist_accepts_explicit_sqlite_backend():
+    conn = init_db(":memory:")
+    nm = NormalizedMotion(
+        id="m-boundary-sqlite",
+        title="Sänk skatter",
+        text="Vi vill sänka skatter.",
+        party="X",
+    )
+
+    results = exports.classify_and_persist(
+        nm,
+        db_conn=conn,
+        persistence_backend="sqlite",
+    )
+
+    assert results

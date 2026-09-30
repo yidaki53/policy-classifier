@@ -5,7 +5,7 @@ from swedish_parliament_policy_classifier.visualization.style_config import (
 )
 
 
-def test_center_is_treated_as_neutral_without_diluting_left_right_balance() -> None:
+def test_center_is_neutral_but_dilutes_extremity() -> None:
     proportions = {
         "far_left": 0.0,
         "left": 0.0,
@@ -18,4 +18,16 @@ def test_center_is_treated_as_neutral_without_diluting_left_right_balance() -> N
 
     score = compute_ideology_score_from_proportions(proportions)
 
-    assert isclose(score, -0.5, rel_tol=0.0, abs_tol=1e-9)
+    assert isclose(score, -0.2, rel_tol=0.0, abs_tol=1e-9)
+
+
+def test_left_right_inversion_is_symmetric() -> None:
+    left = {"left": 0.6, "centre": 0.2, "right": 0.2}
+    right = {"left": 0.2, "centre": 0.2, "right": 0.6}
+
+    assert isclose(
+        compute_ideology_score_from_proportions(left),
+        -compute_ideology_score_from_proportions(right),
+        rel_tol=0.0,
+        abs_tol=1e-9,
+    )

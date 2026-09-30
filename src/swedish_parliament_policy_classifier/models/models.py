@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 from typing import Any, Dict, List, Optional
-from datetime import datetime, date
+from datetime import date as Date, datetime
 
 
 class RawMotion(BaseModel):
@@ -15,7 +15,7 @@ class NormalizedMotion(BaseModel):
     id: str
     title: Optional[str] = None
     text: str
-    date: Optional[date] = None
+    date: Optional[Date] = None
     party: Optional[str] = None
     metadata: Optional[Dict[str, Any]] = None
 
@@ -27,6 +27,15 @@ class CategoryDef(BaseModel):
     regexes: List[str] = []
 
 
+class ClassificationProvenance(BaseModel):
+    pipeline_version: str
+    signals_requested: List[str] = []
+    signals_used: List[str] = []
+    signals_failed: List[str] = []
+    model_artifacts: Dict[str, str] = {}
+    degraded: bool = False
+
+
 class ClassificationResult(BaseModel):
     motion_id: str
     category: str
@@ -35,6 +44,7 @@ class ClassificationResult(BaseModel):
     matched_rules: List[str]
     classifier_version: str
     created_at: datetime
+    provenance: Optional[ClassificationProvenance] = None
 
 
 class PartyProfile(BaseModel):
@@ -43,4 +53,11 @@ class PartyProfile(BaseModel):
     updated_at: datetime
 
 
-__all__ = ["RawMotion", "NormalizedMotion", "CategoryDef", "ClassificationResult", "PartyProfile"]
+__all__ = [
+    "RawMotion",
+    "NormalizedMotion",
+    "CategoryDef",
+    "ClassificationProvenance",
+    "ClassificationResult",
+    "PartyProfile",
+]

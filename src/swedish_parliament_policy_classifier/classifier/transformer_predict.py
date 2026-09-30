@@ -11,6 +11,7 @@ process lifetime.
 
 import json
 import logging
+import os
 import numpy as np
 from pathlib import Path
 from typing import Dict, Optional
@@ -29,7 +30,7 @@ def _default_model_dir() -> Path:
         return Path("models/transformer_ideology_classifier/final")
 
 
-def _load(model_dir: Optional[Path] = None):
+def _load(model_dir: Optional[Path] = None, device_name: Optional[str] = None):
     global _model, _tokenizer, _id2label
     if _model is not None:
         return _model, _tokenizer, _id2label
@@ -48,10 +49,22 @@ def _load(model_dir: Optional[Path] = None):
     _model = AutoModelForSequenceClassification.from_pretrained(str(model_dir))
     _model.eval()
 
-    # Always use CPU to avoid GPU memory contention with the embedding
-    # and zero-shot models that benefit more from GPU acceleration.
-    _model = _model.to("cpu")
-    LOG.info("Transformer classifier loaded on CPU (to preserve GPU for zero-shot)")
+    requested_device = device_name or os.environ.get("CLASSIFIER_TRANSFORMER_DEVICE", "auto")
+    if requested_device == "auto":
+        requested_device = "cuda" if torch.cuda.is_available() else "cpu"
+    if requested_device.startswith("cuda") and not torch.cuda.is_available():
+        LOG.warning("CUDA requested for transformer classifier but unavailable; using CPU")
+        requested_device = "cpu"
+    try:
+        _model = _model.to(requested_device)
+    except RuntimeError as exc:
+        if requested_device.startswith("cuda"):
+            LOG.warning("CUDA transformer load failed (%s); falling back to CPU", exc)
+            _model = _model.to("cpu")
+            requested_device = "cpu"
+        else:
+            raise
+    LOG.info("Transformer classifier loaded on %s", requested_device.upper())
 
     # Read label mapping from parent config or model config
     parent_cfg = model_dir.parent / "config.json"
@@ -71,6 +84,7 @@ def predict_proba(
     window_strategy: str = "truncate",
     window_overlap: float = 0.1,
     aggregation: str = "mean",
+    device: Optional[str] = None,
 ) -> Dict[str, float]:
     """Return ``{category: probability}`` for the input text.
 
@@ -89,7 +103,7 @@ def predict_proba(
     """
     import torch
 
-    model, tokenizer, id2label = _load()
+    model, tokenizer, id2label = _load(device_name=device)
     device = next(model.parameters()).device
 
     # Tokenize to check length
