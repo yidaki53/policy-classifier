@@ -344,14 +344,14 @@
         "ok": false,
         "returncode": 1,
         "stdout_preview": "",
-        "stderr_preview": "Traceback (most recent call last):\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_overlay.py\", line 34, in <module>\n    main()\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/generate_manuscript_overlay.py\", line 29, in main\n    out_path = plot_modality_overlay_figure(profiles, Path(args.out))\n               ^^^^^^^^^^^^^^^^^^^^^"
+        "stderr_preview": "Traceback (most recent call last):\n  File \"<REPO_ROOT>/scripts/generate_manuscript_overlay.py\", line 34, in <module>\n    main()\n  File \"<REPO_ROOT>/scripts/generate_manuscript_overlay.py\", line 29, in main\n    out_path = plot_modality_overlay_figure(profiles, Path(args.out))\n               ^^^^^^^^^^^^^^^^^^^^^"
       },
       "three_way": {
         "step": "three_way",
         "ok": true,
         "returncode": 0,
         "stdout_preview": "{\"paired_tests\": \"figures/three_way/paired_tests.parquet\", \"heatmap\": \"figures/three_way/divergence_heatmap.png\"}\n{\"effect_table\": \"figures/three_way/effect_size_table.parquet\", \"annotated_heatmap\": \"figures/three_way/divergence_speech_vs_combined_significance.png\"}\n",
-        "stderr_preview": "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:592: UserWarning: scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate. Current N is 5262.\n  res = hypotest_fun_out(*samples, **kwds)\n/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:5"
+        "stderr_preview": "<REPO_ROOT>/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:592: UserWarning: scipy.stats.shapiro: For N > 5000, computed p-value may not be accurate. Current N is 5262.\n  res = hypotest_fun_out(*samples, **kwds)\n<REPO_ROOT>/.venv/lib/python3.12/site-packages/scipy/stats/_axis_nan_policy.py:5"
       }
     },
     "manuscript": {
@@ -359,14 +359,14 @@
         "step": "manuscript_render",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>",
         "stderr_preview": ""
       },
       "combined": {
         "step": "manuscript_combined",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>",
         "stderr_preview": ""
       }
     }

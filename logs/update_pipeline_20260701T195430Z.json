@@ -150,7 +150,7 @@
         "ok": false,
         "returncode": 1,
         "stdout_preview": "Warming up embedding model...\nEmbedding model warmup complete.\nSpeech meta-classifier loaded.\n[RESUME] Found existing output: 2976939 rows in data/parquet/speech_classifications.parquet\n[RESUME] Schema columns: ['speech_id', 'category', 'raw_score', 'normalized_weight', 'category_probability', 'all_category_probs_json', 'matched_rules', 'classifier_version', 'created_at', 'confidence', 'label_source']\n[RESUME] Loaded 425277 existing speech IDs from 2976939 rows\n[STATUS] 425277 already classified",
-        "stderr_preview": "\nLoading weights:   0%|          | 0/199 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 199/199 [00:00<00:00, 6547.23it/s]\nTraceback (most recent call last):\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/classify_speeches_parquet.py\", line 895, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_cla"
+        "stderr_preview": "\nLoading weights:   0%|          | 0/199 [00:00<?, ?it/s]\nLoading weights: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 199/199 [00:00<00:00, 6547.23it/s]\nTraceback (most recent call last):\n  File \"<REPO_ROOT>/scripts/classify_speeches_parquet.py\", line 895, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<REPO_ROOT>"
       },
       "classify_motions": {
         "step": "classify_motions",
@@ -353,14 +353,14 @@
         "step": "manuscript_render",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>",
         "stderr_preview": ""
       },
       "combined": {
         "step": "manuscript_combined",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and ",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nChecking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>",
         "stderr_preview": ""
       }
     }

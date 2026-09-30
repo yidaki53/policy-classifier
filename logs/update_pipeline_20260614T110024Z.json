@@ -244,14 +244,14 @@
         "step": "manuscript_render",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md\",\n      \"rendered\": \"/home/robin/OneDrive/Uni",
+        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>/manuscript/sections/01_title.md\",\n      \"rendered\": \"<REPO_ROOT>",
         "stderr_preview": ""
       },
       "combined": {
         "step": "manuscript_combined",
         "ok": true,
         "returncode": 0,
-        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript/sections/01_title.md\",\n      \"rendered\": \"/home/robin/OneDrive/Uni",
+        "stdout_preview": "Checking section frontmatter...\nFrontmatter check passed.\nuv run python ../scripts/render_manuscript_jinja.py --repo-root .. --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json\n{\n  \"rendered_count\": 9,\n  \"rendered\": [\n    {\n      \"source\": \"<REPO_ROOT>/manuscript/sections/01_title.md\",\n      \"rendered\": \"<REPO_ROOT>",
         "stderr_preview": ""
       }
     }

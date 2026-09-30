@@ -7,34 +7,34 @@ Test set: 670 samples
 [LightGBM] [Fatal] The number of features in data (137) is not the same as it was in training data (133).
 You can set ``predict_disable_shape_check=true`` to discard this error, but please be aware what you are doing.
 Traceback (most recent call last):
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/evaluate_ensemble.py", line 106, in <module>
+  File "<REPO_ROOT>/scripts/evaluate_ensemble.py", line 106, in <module>
     main()
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/evaluate_ensemble.py", line 102, in main
+  File "<REPO_ROOT>/scripts/evaluate_ensemble.py", line 102, in main
     evaluate(db_path=args.db)
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/scripts/evaluate_ensemble.py", line 77, in evaluate
+  File "<REPO_ROOT>/scripts/evaluate_ensemble.py", line 77, in evaluate
     y_pred = clf.predict(X_test)
              ^^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1597, in predict
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1597, in predict
     result = self.predict_proba(
              ^^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1627, in predict_proba
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1627, in predict_proba
     result = super().predict(
              ^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1144, in predict
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/sklearn.py", line 1144, in predict
     return self._Booster.predict(  # type: ignore[union-attr]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 4767, in predict
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 4767, in predict
     return predictor.predict(
            ^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1204, in predict
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1204, in predict
     preds, nrow = self.__pred_for_np2d(
                   ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1361, in __pred_for_np2d
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1361, in __pred_for_np2d
     return self.__inner_predict_np2d(
            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1307, in __inner_predict_np2d
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 1307, in __inner_predict_np2d
     _safe_call(
-  File "/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 313, in _safe_call
+  File "<REPO_ROOT>/.venv/lib/python3.12/site-packages/lightgbm/basic.py", line 313, in _safe_call
     raise LightGBMError(_LIB.LGBM_GetLastError().decode("utf-8"))
 lightgbm.basic.LightGBMError: The number of features in data (137) is not the same as it was in training data (133).
 You can set ``predict_disable_shape_check=true`` to discard this error, but please be aware what you are doing.

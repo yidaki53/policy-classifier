@@ -12,4 +12,4 @@ _agent_frontmatter:
 
 # Pipeline Update 20260701T195430Z
 
-See manifest: `/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/logs/update_pipeline_20260701T195430Z.json`
+See manifest: `<REPO_ROOT>/logs/update_pipeline_20260701T195430Z.json`

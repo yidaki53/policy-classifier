@@ -21,7 +21,7 @@ Use this checklist as the operational runbook from current state to submission.
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier
+cd <REPO_ROOT>
 git status --short
 git rev-parse --short HEAD
 git tag -a rc-2026-06-03-manuscript-baseline -m "Release candidate baseline for manuscript publication workflow"
@@ -52,7 +52,7 @@ Execution log:
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier
+cd <REPO_ROOT>
 uv run python scripts/evaluate_ensemble.py --db data/swedish_parliament.db
 uv run python3 scripts/run_calibration_checks.py
 ```
@@ -128,7 +128,7 @@ Execution log:
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier
+cd <REPO_ROOT>
 uv run python scripts/run_stratified_sample.py
 uv run python scripts/speeches_analysis.py
 ```
@@ -182,7 +182,7 @@ Updated Stage 3 status: `COMPLETE`.
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier
+cd <REPO_ROOT>
 uv run python scripts/train_hybrid_ensemble.py --db data/swedish_parliament.db
 uv run python scripts/evaluate_ensemble.py --db data/swedish_parliament.db
 ```
@@ -216,7 +216,7 @@ Execution log:
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier/manuscript
+cd <REPO_ROOT>/manuscript
 make render
 make combined
 make pdf
@@ -284,7 +284,7 @@ Execution log:
 Commands:
 
 ```bash
-cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Works\ in\ progress/swedish_parliament_policy_classifier
+cd <REPO_ROOT>
 git tag -a submission-2026-xx-xx -m "Submission snapshot"
 git push origin submission-2026-xx-xx
 ```

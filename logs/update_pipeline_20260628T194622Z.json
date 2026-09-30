@@ -344,14 +344,14 @@
         "step": "manuscript_render",
         "ok": false,
         "returncode": 2,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nmake[1]: Leaving directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\n",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nmake[1]: Leaving directory '<REPO_ROOT>/manuscript'\n",
         "stderr_preview": "Makefile:162: *** missing separator.  Stop.\n"
       },
       "combined": {
         "step": "manuscript_combined",
         "ok": false,
         "returncode": 2,
-        "stdout_preview": "make[1]: Entering directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\nmake[1]: Leaving directory '/home/robin/OneDrive/University and such/My Papers/Works in progress/swedish_parliament_policy_classifier/manuscript'\n",
+        "stdout_preview": "make[1]: Entering directory '<REPO_ROOT>/manuscript'\nmake[1]: Leaving directory '<REPO_ROOT>/manuscript'\n",
         "stderr_preview": "Makefile:162: *** missing separator.  Stop.\n"
       }
     }
