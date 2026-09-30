@@ -41,3 +41,17 @@ def test_fallback_speech_ids_only_selects_retired_scorer_rows() -> None:
     )
 
     assert _fallback_speech_ids(existing) == {"s1"}
+
+
+def test_flush_rows_preserves_classifier_versions(tmp_path) -> None:
+    output = tmp_path / "classifications.parquet"
+
+    row_count = _flush_rows(
+        output,
+        [
+            {"speech_id": "s1", "category": "left", "classifier_version": "v1", "normalized_weight": 0.4},
+            {"speech_id": "s1", "category": "left", "classifier_version": "v2", "normalized_weight": 0.6},
+        ],
+    )
+
+    assert row_count == 2
