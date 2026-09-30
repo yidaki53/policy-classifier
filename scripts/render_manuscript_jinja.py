@@ -843,7 +843,23 @@ def _build_context(repo_root: Path, manuscript_dir: Path, analysis_dir: Path, jo
     }
 
 
-def _render_sections(sections_dir: Path, out_dir: Path, context: dict) -> list[dict]:
+def _repo_relative(path: Path, repo_root: Path) -> str:
+    """Render a path relative to the repo root.
+
+    Absolute paths must never reach a committed file: this repository is
+    public, so they would leak the author's username, home directory, and
+    institution, and would deanonymize the manuscript. Falls back to the
+    basename if the path lies outside the repository.
+    """
+    try:
+        return str(path.relative_to(repo_root))
+    except ValueError:
+        return path.name
+
+
+def _render_sections(
+    sections_dir: Path, out_dir: Path, context: dict, repo_root: Path
+) -> list[dict]:
     env = Environment(autoescape=False, trim_blocks=False, lstrip_blocks=False)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -862,12 +878,17 @@ def _render_sections(sections_dir: Path, out_dir: Path, context: dict) -> list[d
                     "generator": "scripts/render_manuscript_jinja.py",
                 },
                 "generated_utc": context.get("generated_utc", _utc_now()),
-                "source_section": str(src),
+                "source_section": _repo_relative(src, repo_root),
             },
         )
         dst = out_dir / src.name
         dst.write_text(body, encoding="utf-8")
-        rendered.append({"source": str(src), "rendered": str(dst)})
+        rendered.append(
+            {
+                "source": _repo_relative(src, repo_root),
+                "rendered": _repo_relative(dst, repo_root),
+            }
+        )
     return rendered
 
 
@@ -900,7 +921,7 @@ def main() -> None:
         assert_manuscript_ready(manuscript_dir)
 
     context = _build_context(repo_root, manuscript_dir, analysis_dir, journal_profile, bibliography)
-    rendered = _render_sections(sections_dir, out_dir, context)
+    rendered = _render_sections(sections_dir, out_dir, context, repo_root)
 
     context_out.parent.mkdir(parents=True, exist_ok=True)
     context_out.write_text(json.dumps(context, indent=2), encoding="utf-8")

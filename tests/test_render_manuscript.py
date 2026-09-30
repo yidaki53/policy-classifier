@@ -33,13 +33,19 @@ def test_rendered_sections_have_no_unresolved_template_markers(tmp_path):
     )
 
     out_dir = tmp_path / "rendered_sections"
-    rendered = module._render_sections(sections_dir=sections_dir, out_dir=out_dir, context=context)
+    rendered = module._render_sections(
+        sections_dir=sections_dir,
+        out_dir=out_dir,
+        context=context,
+        repo_root=tmp_path,
+    )
     assert rendered, "Expected at least one rendered section"
 
     unresolved_re = re.compile(r"\{\{[^}]+\}\}|\{%[^%]+%\}")
     unresolved_hits = []
     for item in rendered:
-        rendered_path = Path(item["rendered"])
+        # Recorded paths are repo-relative; re-root them to read back.
+        rendered_path = tmp_path / item["rendered"]
         text = rendered_path.read_text(encoding="utf-8")
         if unresolved_re.search(text):
             unresolved_hits.append(str(rendered_path))
@@ -112,12 +118,54 @@ def test_render_sections_injects_frontmatter_when_source_missing(tmp_path):
     (sections_dir / "99_generated.md").write_text("# Example\n\nRendered body.\n", encoding="utf-8")
 
     out_dir = tmp_path / "rendered"
-    rendered = module._render_sections(sections_dir=sections_dir, out_dir=out_dir, context={"generated_utc": "2026-06-08T00:00:00Z"})
+    rendered = module._render_sections(
+        sections_dir=sections_dir,
+        out_dir=out_dir,
+        context={"generated_utc": "2026-06-08T00:00:00Z"},
+        repo_root=tmp_path,
+    )
 
     assert len(rendered) == 1
-    rendered_path = Path(rendered[0]["rendered"])
+    # The recorded path is repo-relative; re-root it to read the file back.
+    rendered_path = tmp_path / rendered[0]["rendered"]
     text = rendered_path.read_text(encoding="utf-8")
     assert text.startswith("---\n")
     assert "_agent_frontmatter:" in text
     assert "source_section:" in text
     assert "# Example" in text
+
+
+def test_render_sections_records_repo_relative_paths(tmp_path):
+    """Rendered output must not contain absolute paths.
+
+    The repository is public, so an absolute path in build output would leak
+    the author's home directory and deanonymize the manuscript.
+    """
+    module = _load_render_module()
+
+    sections_dir = tmp_path / "sections"
+    sections_dir.mkdir(parents=True)
+    (sections_dir / "01_intro.md").write_text("# Intro\n", encoding="utf-8")
+
+    rendered = module._render_sections(
+        sections_dir=sections_dir,
+        out_dir=tmp_path / "rendered",
+        context={"generated_utc": "2026-06-08T00:00:00Z"},
+        repo_root=tmp_path,
+    )
+
+    assert len(rendered) == 1
+    entry = rendered[0]
+    assert entry["source"] == "sections/01_intro.md"
+    assert entry["rendered"] == "rendered/01_intro.md"
+    assert not entry["source"].startswith("/")
+    assert not entry["rendered"].startswith("/")
+
+    frontmatter = (tmp_path / entry["rendered"]).read_text(encoding="utf-8")
+    assert str(tmp_path) not in frontmatter
+
+
+def test_repo_relative_falls_back_to_basename_outside_root(tmp_path):
+    module = _load_render_module()
+    outside = Path("/somewhere/else/section.md")
+    assert module._repo_relative(outside, tmp_path) == "section.md"
