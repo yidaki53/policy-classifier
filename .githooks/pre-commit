@@ -31,4 +31,23 @@ EOF
   exit 1
 fi
 
+# Block absolute paths: this repo is public and such paths leak the author's
+# username, home directory, and institution.
+ROOT=$(git rev-parse --show-toplevel)
+if ! python3 "$ROOT/scripts/check_no_absolute_paths.py" --check --repo-root "$ROOT" >/dev/null 2>&1; then
+  cat >&2 <<EOF
+Error: absolute filesystem paths detected in tracked files.
+
+This repository is public. An absolute path leaks your username, home
+directory, and institution, and it defeats manuscript anonymization.
+
+Fix automatically:
+  uv run python scripts/check_no_absolute_paths.py --fix
+
+To see what was found:
+  uv run python scripts/check_no_absolute_paths.py --check
+EOF
+  exit 1
+fi
+
 exit 0

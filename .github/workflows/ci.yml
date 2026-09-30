@@ -40,5 +40,8 @@ jobs:
       - name: Create stub figure files for tests
         run: python3 scripts/create_test_stubs.py
 
+      - name: Check for absolute path leaks
+        run: uv run python scripts/check_no_absolute_paths.py --check
+
       - name: Run tests
         run: uv run pytest -q
