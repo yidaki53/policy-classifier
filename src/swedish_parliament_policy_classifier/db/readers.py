@@ -8,7 +8,7 @@ AttributeError or silent wrong-type values.
 
 import json
 import sqlite3
-from typing import List, Optional
+from typing import List, Literal, Optional
 from pathlib import Path
 
 from swedish_parliament_policy_classifier.models.models import (
@@ -32,6 +32,30 @@ def _parquet_path(table: str) -> Path:
 
 def _has_parquet(table: str) -> bool:
     return _parquet_path(table).exists() and pd is not None
+
+
+def _use_parquet(
+    conn: sqlite3.Connection,
+    table: str,
+    source: Literal["auto", "parquet", "sqlite"],
+) -> bool:
+    if source == "sqlite":
+        return False
+    path = _parquet_path(table)
+    if not _has_parquet(table):
+        if source == "parquet":
+            raise FileNotFoundError(path)
+        return False
+    if source == "parquet":
+        return True
+
+    try:
+        database_path = conn.execute("PRAGMA database_list").fetchone()[2]
+        if database_path and database_path != ":memory:":
+            return Path(database_path).stat().st_mtime <= path.stat().st_mtime
+    except (OSError, sqlite3.Error, TypeError):
+        pass
+    return True
 
 
 def _load_parquet_as_dicts(table: str) -> list[dict]:
@@ -87,8 +111,12 @@ def _row_to_raw_motion(row) -> RawMotion:
 # NormalizedMotion
 # ---------------------------------------------------------------------------
 
-def fetch_normalized_motion(conn: sqlite3.Connection, motion_id: str) -> Optional[NormalizedMotion]:
-    if _has_parquet("normalized_motions"):
+def fetch_normalized_motion(
+    conn: sqlite3.Connection,
+    motion_id: str,
+    source: Literal["auto", "parquet", "sqlite"] = "auto",
+) -> Optional[NormalizedMotion]:
+    if _use_parquet(conn, "normalized_motions", source):
         rows = _load_parquet_as_dicts("normalized_motions")
         for r in rows:
             if r.get("id") == motion_id:
@@ -105,11 +133,14 @@ def fetch_normalized_motion(conn: sqlite3.Connection, motion_id: str) -> Optiona
     return _row_to_normalized_motion(row)
 
 
-def fetch_unclassified_motions(conn: sqlite3.Connection) -> List[NormalizedMotion]:
+def fetch_unclassified_motions(
+    conn: sqlite3.Connection,
+    source: Literal["auto", "parquet", "sqlite"] = "auto",
+) -> List[NormalizedMotion]:
     """Return normalized motions that have not yet been classified."""
     # Prefer a parquet export if available to avoid reading huge SQLite DB files.
     parquet_path = Path("data") / "parquet" / "normalized_motions.parquet"
-    if parquet_path.exists() and pd is not None:
+    if _use_parquet(conn, "normalized_motions", source):
         # load classifications to determine which motions are already classified
         cur = conn.cursor()
         cur.execute("SELECT DISTINCT motion_id FROM classifications")
@@ -155,7 +186,11 @@ def fetch_unclassified_motions(conn: sqlite3.Connection) -> List[NormalizedMotio
     return [_row_to_normalized_motion(r) for r in cur.fetchall()]
 
 
-def fetch_augmented_gold_label_rows(conn: sqlite3.Connection, split: str = "train"):
+def fetch_augmented_gold_label_rows(
+    conn: sqlite3.Connection,
+    split: str = "train",
+    source: Literal["auto", "parquet", "sqlite"] = "auto",
+):
     """Return rows for augmented_gold_labels left-joined with normalized_motions.
 
     Each row is a tuple: (motion_id, category, text, date, doc_type, party)
@@ -170,7 +205,7 @@ def fetch_augmented_gold_label_rows(conn: sqlite3.Connection, split: str = "trai
     )
     aug_rows = cur.fetchall()
 
-    if parquet_path.exists() and pd is not None:
+    if _use_parquet(conn, "normalized_motions", source):
         df_nm = loader.load_parquet(parquet_path)
         if not isinstance(df_nm, pd.DataFrame):
             df_nm = pd.DataFrame(df_nm)
@@ -216,8 +251,11 @@ def fetch_augmented_gold_label_rows(conn: sqlite3.Connection, split: str = "trai
     return cur.fetchall()
 
 
-def fetch_all_normalized_motions(conn: sqlite3.Connection) -> List[NormalizedMotion]:
-    if _has_parquet("normalized_motions"):
+def fetch_all_normalized_motions(
+    conn: sqlite3.Connection,
+    source: Literal["auto", "parquet", "sqlite"] = "auto",
+) -> List[NormalizedMotion]:
+    if _use_parquet(conn, "normalized_motions", source):
         rows = _load_parquet_as_dicts("normalized_motions")
         return [_row_to_normalized_motion(r) for r in rows]
     cur = conn.cursor()

@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable, List, Optional, Tuple, Union
@@ -17,18 +16,31 @@ from typing import Iterable, List, Optional, Tuple, Union
 import pandas as pd
 
 from swedish_parliament_policy_classifier.models import ClassificationResult, NormalizedMotion
+from swedish_parliament_policy_classifier.io.artifacts import ArtifactSpec, LocalParquetArtifactRepository
+
+
+def _write_artifact(
+    frame: pd.DataFrame,
+    out_path: Path,
+    *,
+    name: str,
+    required_columns: tuple[str, ...],
+    primary_keys: tuple[str, ...] = (),
+) -> None:
+    LocalParquetArtifactRepository(out_path.parent).write(
+        ArtifactSpec(name, out_path.name, required_columns, primary_keys),
+        frame,
+    )
 
 
 def _atomic_write_df(df: pd.DataFrame, out_path: Union[str, Path]):
     out_p = Path(out_path)
     out_p.parent.mkdir(parents=True, exist_ok=True)
     tmp = out_p.with_suffix(out_p.suffix + ".tmp")
-    # Prefer Parquet if engine is available; fall back to pickle for portability
     try:
         df.to_parquet(tmp, index=False)
-    except Exception:
-        # fallback: use pickle to avoid requiring pyarrow/fastparquet in tests
-        df.to_pickle(tmp)
+    except Exception as exc:
+        raise RuntimeError(f"Unable to write Parquet artifact: {out_p}") from exc
     os.replace(tmp, out_p)
 
 
@@ -68,8 +80,8 @@ def _to_row_from_classification(cl) -> dict:
 
     # ensure fields
     created = d.get("created_at")
-        if created is None:
-            created_iso = datetime.now(timezone.utc).isoformat()
+    if created is None:
+        created_iso = datetime.now(timezone.utc).isoformat()
     else:
         if isinstance(created, str):
             created_iso = created
@@ -86,6 +98,7 @@ def _to_row_from_classification(cl) -> dict:
         "normalized_weight": float(d.get("normalized_weight") or d.get("normalizedWeight") or 0.0),
         "matched_rules": json.dumps(d.get("matched_rules") or d.get("matchedRules") or [], ensure_ascii=False),
         "classifier_version": str(d.get("classifier_version") or d.get("classifierVersion") or ""),
+        "provenance": json.dumps(d.get("provenance") or {}, ensure_ascii=False, default=str),
         "created_at": created_iso,
     }
 
@@ -94,7 +107,7 @@ def upsert_normalized_motion_parquet(normalized_motion: Union[NormalizedMotion, 
     """Upsert a normalized motion into `normalized_motions.parquet` (no-op if exists)."""
     out_p = Path(out_parquet)
     nm = normalized_motion
-    if hasattr(nm, "model_dump"):
+    if isinstance(nm, NormalizedMotion):
         try:
             nm_d = nm.model_dump()
         except Exception:
@@ -125,7 +138,13 @@ def upsert_normalized_motion_parquet(normalized_motion: Union[NormalizedMotion, 
     else:
         out_df = pd.DataFrame([row])
 
-    _atomic_write_df(out_df, out_p)
+    _write_artifact(
+        out_df,
+        out_p,
+        name="normalized_motions",
+        required_columns=("id", "title", "text", "date", "party", "metadata"),
+        primary_keys=("id",),
+    )
 
 
 def persist_classifications_batch(
@@ -155,20 +174,39 @@ def persist_classifications_batch(
         try:
             prev = _read_table_compat(out_p)
             combined = pd.concat([prev, chunk], ignore_index=True)
-            # keep latest by created_at per (motion_id, category)
+            # Keep latest duplicate within one classifier version; preserve
+            # historical model versions for auditability.
             if "created_at" in combined.columns:
                 combined["_created_ts"] = pd.to_datetime(combined["created_at"], errors="coerce")
-                combined = combined.sort_values("_created_ts").drop_duplicates(subset=["motion_id", "category"], keep="last")
+                combined = combined.sort_values("_created_ts").drop_duplicates(
+                    subset=["motion_id", "category", "classifier_version"], keep="last"
+                )
                 combined = combined.drop(columns=["_created_ts"])
             else:
-                combined = combined.drop_duplicates(subset=["motion_id", "category"], keep="last")
+                combined = combined.drop_duplicates(
+                    subset=["motion_id", "category", "classifier_version"], keep="last"
+                )
             out_df = combined.reset_index(drop=True)
         except Exception:
             out_df = chunk
     else:
         out_df = chunk
 
-    _atomic_write_df(out_df, out_p)
+    _write_artifact(
+        out_df,
+        out_p,
+        name="classifications",
+        required_columns=(
+            "motion_id",
+            "category",
+            "raw_score",
+            "normalized_weight",
+            "matched_rules",
+            "classifier_version",
+            "created_at",
+        ),
+        primary_keys=("motion_id", "category", "classifier_version"),
+    )
 
     # record lineage row
     try:
@@ -191,7 +229,7 @@ def record_lineage_parquet(source_table: str, source_id: str, operation: str, li
         "source_table": source_table,
         "source_id": source_id,
         "operation": operation,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "checksum": checksum,
         "parent_lineage_id": parent_lineage_id,
         "notes": notes,
@@ -205,7 +243,12 @@ def record_lineage_parquet(source_table: str, source_id: str, operation: str, li
     else:
         out_df = pd.DataFrame([row])
 
-    _atomic_write_df(out_df, out_p)
+    _write_artifact(
+        out_df,
+        out_p,
+        name="lineage",
+        required_columns=("source_table", "source_id", "operation", "timestamp"),
+    )
     try:
         return int(out_df.index[-1])
     except Exception:
@@ -214,7 +257,7 @@ def record_lineage_parquet(source_table: str, source_id: str, operation: str, li
 
 def save_annotation(conn: Optional[object], motion_id: str, annotator: str, labels: List[dict], notes: Optional[str] = None, status: str = "annotated", annotations_out: Union[str, Path] = "data/parquet/annotations.parquet") -> int:
     out_p = Path(annotations_out)
-        now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     row = {
         "motion_id": motion_id,
         "annotator": annotator,
@@ -233,7 +276,12 @@ def save_annotation(conn: Optional[object], motion_id: str, annotator: str, labe
     else:
         out_df = pd.DataFrame([row])
 
-    _atomic_write_df(out_df, out_p)
+    _write_artifact(
+        out_df,
+        out_p,
+        name="annotations",
+        required_columns=("motion_id", "annotator", "labels", "status", "created_at", "updated_at"),
+    )
     try:
         return int(out_df.index[-1])
     except Exception:
