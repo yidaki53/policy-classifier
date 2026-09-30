@@ -70564,13 +70564,13 @@
       "norm_label": "stage 1 - lock release-candidate baseline"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L23",
       "id": "review_final_submission_checklist_codeblock_1",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Stage 2 - Final model quality and reliability pass",
@@ -70582,13 +70582,13 @@
       "norm_label": "stage 2 - final model quality and reliability pass"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L54",
       "id": "review_final_submission_checklist_codeblock_2",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Stage 3 - Error analysis and data quality hardening",
@@ -70600,13 +70600,13 @@
       "norm_label": "stage 3 - error analysis and data quality hardening"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L130",
       "id": "review_final_submission_checklist_codeblock_3",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Stage 4 - Optional final feature iteration (transformer + zero-shot)",
@@ -70618,13 +70618,13 @@
       "norm_label": "stage 4 - optional final feature iteration (transformer + zero-shot)"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L184",
       "id": "review_final_submission_checklist_codeblock_4",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Stage 5 - Regenerate manuscript assets and figures",
@@ -70636,13 +70636,13 @@
       "norm_label": "stage 5 - regenerate manuscript assets and figures"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L218",
       "id": "review_final_submission_checklist_codeblock_5",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Stage 6 - Claim reconciliation and provenance verification",
@@ -70663,13 +70663,13 @@
       "norm_label": "stage 7 - submission package and publication handoff"
     },
     {
-      "label": "code:bash (cd /home/robin/OneDrive/University\\ and\\ such/My\\ Papers/Wor)",
+      "label": "code:bash (cd <REPO_ROOT>\\ and\\ such/My\\ Papers/Wor)",
       "file_type": "document",
       "source_file": "manuscript/review/final_submission_checklist.md",
       "source_location": "L286",
       "id": "review_final_submission_checklist_codeblock_6",
       "community": 44,
-      "norm_label": "code:bash (cd /home/robin/onedrive/university\\ and\\ such/my\\ papers/wor)"
+      "norm_label": "code:bash (cd <REPO_ROOT>\\ and\\ such/my\\ papers/wor)"
     },
     {
       "label": "Build and compliance",

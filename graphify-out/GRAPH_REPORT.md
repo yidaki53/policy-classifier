@@ -1097,7 +1097,7 @@ Nodes (22): Acknowledgements, Citing & Authors, code:block1 (pip install -U sent
 
 ### Community 44 - "Community 44"
 Cohesion: 0.08
-Nodes (23): Build and compliance, code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), code:bash (cd /home/robin/OneDrive/University\ and\ such/My\ Papers/Wor), Commit scope recommendation (manuscript-only) (+15 more)
+Nodes (23): Build and compliance, code:bash (cd <REPO_ROOT>), code:bash (cd <REPO_ROOT>), code:bash (cd <REPO_ROOT>), code:bash (cd <REPO_ROOT>), code:bash (cd <REPO_ROOT>), code:bash (cd <REPO_ROOT>), Commit scope recommendation (manuscript-only) (+15 more)
 
 ### Community 45 - "Community 45"
 Cohesion: 0.12
