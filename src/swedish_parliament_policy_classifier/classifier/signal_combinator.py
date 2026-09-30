@@ -13,7 +13,7 @@ to avoid floating-point drift.
 
 import logging
 from fractions import Fraction
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Mapping, Optional, Union
 
 LOG = logging.getLogger(__name__)
 
@@ -105,7 +105,7 @@ def compute_weighted_combination(
 
 
 def apply_rhetorical_adjustments(
-    distribution: Dict[str, Fraction],
+    distribution: Mapping[str, Union[Fraction, float]],
     adjustments: Dict[str, float],
     boost_factor: float = 2.0,
 ) -> Dict[str, Fraction]:
@@ -125,15 +125,16 @@ def apply_rhetorical_adjustments(
     if not adjustments or all(v == 0.0 for v in adjustments.values()):
         return distribution
     
-    adjusted = {}
+    adjusted: Dict[str, Fraction] = {}
     for cat, prob in distribution.items():
+        probability = Fraction(prob).limit_denominator(1000000)
         adj = adjustments.get(cat, 0.0)
         if adj > 0:
             # Boost categories with rhetorical signals
             boost = Fraction(boost_factor).limit_denominator(100) + Fraction(adj).limit_denominator(100)
-            adjusted[cat] = prob * boost
+            adjusted[cat] = probability * boost
         else:
-            adjusted[cat] = prob
+            adjusted[cat] = probability
     
     # Re-normalize
     total = sum(adjusted.values())

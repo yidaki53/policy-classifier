@@ -6,14 +6,10 @@ the large legacy `scorer.py` implementation.
 """
 import re
 import logging
-import sys
-import json
-import pickle
 from pathlib import Path
-from typing import Dict, List, Optional, Union, Tuple, Any
+from typing import Dict, List, Mapping, Optional, Union, Tuple, cast
 from datetime import datetime, timezone
 from fractions import Fraction
-import decimal
 
 import joblib
 try:
@@ -24,6 +20,7 @@ except Exception:
 from swedish_parliament_policy_classifier.models.models import (
     CategoryDef,
     ClassificationResult,
+    ClassificationProvenance,
 )
 from swedish_parliament_policy_classifier.nlp.embedding_matcher import EmbeddingMatcher
 from swedish_parliament_policy_classifier.nlp.preprocess import init_spacy, preprocess_text
@@ -38,11 +35,19 @@ from swedish_parliament_policy_classifier.classifier.llm_judge import (
     should_use_llm_fallback,
 )
 from swedish_parliament_policy_classifier.classifier.signal_combinator import (
-    compute_weighted_combination,
+    SignalCombinator,
     apply_rhetorical_adjustments,
+)
+from swedish_parliament_policy_classifier.classifier.signals import extract_signal_output
+from swedish_parliament_policy_classifier.classifier.model_provider import ModelArtifactProvider
+from swedish_parliament_policy_classifier.classifier.signal_executor import (
+    CallableSignalProvider,
+    SignalContext,
+    SignalExecutor,
 )
 
 LOG = logging.getLogger(__name__)
+_MODEL_PROVIDER = ModelArtifactProvider()
 
 # Lazy-loaded spaCy pipeline
 _spacy_nlp = None
@@ -70,21 +75,6 @@ def _extract_party_policy_text(text: str, party: Optional[str] = None) -> str:
         "skall", "ska", "motion till riksdagen", "förslag till riksdagsbeslut",
         "riksdagen ställer sig bakom", "riksdagen avslår",
     ]
-    if party:
-        party_names = {
-            "V": "vänsterpartiet",
-            "S": "socialdemokraterna",
-            "MP": "miljöpartiet",
-            "C": "centerpartiet",
-            "L": "liberalerna",
-            "M": "moderaterna",
-            "KD": "kristdemokraterna",
-            "SD": "sverigedemokraterna",
-        }
-        pname = party_names.get(party, "")
-        if pname:
-            party_markers.append(pname)
-
     gov_markers = [
         "regeringen föreslår", "regeringen gör", "regeringen har",
         "regeringen vill", "regeringen avser", "regeringen bedömer",
@@ -199,11 +189,15 @@ _RHETORICAL_WEIGHTS = None
 
 # Cache the lemma keyword index so it is built only once per process
 _LEMMA_KW_INDEX: Optional[Dict[str, List[Tuple[str, str]]]] = None
+_LEMMA_KW_INDEX_KEY: Optional[Tuple[Tuple[str, Tuple[str, ...]], ...]] = None
 
 
 def _build_lemma_kw_index(categories: Dict[str, CategoryDef]) -> Dict[str, List[Tuple[str, str]]]:
-    global _LEMMA_KW_INDEX
-    if _LEMMA_KW_INDEX is not None:
+    global _LEMMA_KW_INDEX, _LEMMA_KW_INDEX_KEY
+    cache_key = tuple(
+        sorted((name, tuple(cat.keywords or [])) for name, cat in categories.items())
+    )
+    if _LEMMA_KW_INDEX is not None and _LEMMA_KW_INDEX_KEY == cache_key:
         return _LEMMA_KW_INDEX
     index: Dict[str, List[Tuple[str, str]]] = {}
     nlp = _get_spacy()
@@ -219,6 +213,7 @@ def _build_lemma_kw_index(categories: Dict[str, CategoryDef]) -> Dict[str, List[
                 lemma_key = kw.lower()
             index.setdefault(lemma_key, []).append((name, kw))
     _LEMMA_KW_INDEX = index
+    _LEMMA_KW_INDEX_KEY = cache_key
     return index
 
 
@@ -267,18 +262,16 @@ def score_motion(
         has_keywords = any(cat.keywords for cat in categories.values())
         if has_keywords:
             preproc = preprocess_text(proc_source, nlp=nlp, remove_stopwords=False, lemmatize=True, normalize=True)
-            lemma_text = " ".join(preproc["lemmas"])
-            lemma_tokens = preproc["lemmas"]
+            lemmas = cast(List[str], preproc.get("lemmas", []))
+            lemma_text = " ".join(lemmas)
         else:
             lemma_text = text_l[:MAX_SPA_CY]
-            lemma_tokens = lemma_text.split()
     elif nlp is not None:
         preproc = preprocess_text(proc_source, nlp=nlp, remove_stopwords=False, lemmatize=True, normalize=True)
-        lemma_text = " ".join(preproc["lemmas"])
-        lemma_tokens = preproc["lemmas"]
+        lemmas = cast(List[str], preproc.get("lemmas", []))
+        lemma_text = " ".join(lemmas)
     else:
         lemma_text = text_l[:MAX_SPA_CY]
-        lemma_tokens = lemma_text.split()
 
     scores: Dict[str, float] = {}
     matches: Dict[str, List[str]] = {}
@@ -299,96 +292,66 @@ def score_motion(
             except re.error:
                 continue
 
-    emb_map: Dict[str, float] = {}
+    failed_signals: List[str] = []
+    signal_providers = []
     if embedding_matcher is not None and embedding_weight > 0:
-        try:
-            if not hasattr(embedding_matcher, "_cached_cat_embs") or embedding_matcher._cached_cat_embs is None:
-                if categories is None:
-                    LOG.error("Cannot build category embeddings: categories is None")
-                    raise ValueError("categories is None when building embedding cache")
-                embedding_matcher._cached_cat_embs = embedding_matcher.build_category_embeddings(categories)
-            if embedding_matcher._cached_cat_embs is None:
-                LOG.error("Embedding cache is None after build_category_embeddings")
-                raise ValueError("embedding_matcher._cached_cat_embs is None")
-            emb_matches = embedding_matcher.match(policy_text, embedding_matcher._cached_cat_embs, top_k=len(categories))
+        def compute_embedding(context):
+            if embedding_matcher.cached_embeddings is None:
+                embedding_matcher.cached_embeddings = embedding_matcher.build_category_embeddings(categories)
+            if embedding_matcher.cached_embeddings is None:
+                raise ValueError("embedding_matcher.cached_embeddings is None")
+            emb_matches = embedding_matcher.match(context.text, embedding_matcher.cached_embeddings, top_k=len(categories))
             if emb_matches is None:
-                LOG.error("match() returned None for text: %s", policy_text[:100] if policy_text else "(empty)")
                 raise ValueError("embedding_matcher.match() returned None")
-            emb_map = {name: float(score) for name, score in emb_matches}
-            for name, score in emb_map.items():
-                if score >= embedding_threshold:
-                    matches.setdefault(name, []).append(f"embedding:{score:.3f}")
-        except Exception as e:
-            LOG.warning("Embedding matcher failed: %s", e)
-            import traceback
-            LOG.debug("Embedding matcher traceback:\n%s", traceback.format_exc())
+            return {name: float(score) for name, score in emb_matches}
 
-    zs_map: Dict[str, float] = {}
+        signal_providers.append(CallableSignalProvider("embedding", compute_embedding))
+
     if use_zero_shot and zero_shot_weight > 0:
-        try:
+        def compute_zero_shot(context):
             if use_speech_preprocessing:
                 from swedish_parliament_policy_classifier.nlp.zero_shot_values import zero_shot_score_speech_aware
-                zs_map = zero_shot_score_speech_aware(text, model_name=zero_shot_model)
+                return zero_shot_score_speech_aware(context.text, model_name=zero_shot_model)
             else:
                 from swedish_parliament_policy_classifier.nlp.zero_shot_values import zero_shot_score
-                zs_map = zero_shot_score(policy_text, model_name=zero_shot_model)
-            for name, score in zs_map.items():
-                if score > 0.01:
-                    matches.setdefault(name, []).append(f"zero_shot:{score:.3f}")
-        except Exception as e:
-            LOG.warning("Zero-shot classification failed: %s", e)
+                return zero_shot_score(context.text, model_name=zero_shot_model)
 
-    ollama_map: Dict[str, float] = {}
+        signal_providers.append(CallableSignalProvider("zero_shot", compute_zero_shot))
+
     if use_speech_preprocessing and use_ollama:
-        try:
+        def compute_ollama(context):
             from swedish_parliament_policy_classifier.nlp.ollama_classifier import classify_speech_with_cache
-            ollama_map = classify_speech_with_cache(text, speech_id=motion_id, cache=None) or {}
-            if ollama_map:
-                for name, score in ollama_map.items():
-                    matches.setdefault(name, []).append(f"ollama:{score:.3f}")
-        except Exception as e:
-            LOG.warning("Ollama classification failed: %s", e)
+            return classify_speech_with_cache(context.text, speech_id=context.item_id, cache=None) or {}
 
-    bert_cls_scores: Dict[str, float] = {}
-    try:
+        signal_providers.append(CallableSignalProvider("ollama", compute_ollama))
+
+    def compute_transformer(context):
         from swedish_parliament_policy_classifier.classifier.transformer_predict import predict_proba as _bert_predict
-        bert_cls_scores = _bert_predict(policy_text[:2500])
-    except Exception as e:
-        LOG.debug("Transformer predict unavailable for speech: %s", e)
+        return _bert_predict(context.text[:2500])
 
-    # Compute exact normalised weights using Fractions to avoid recurring decimals
-    keyword_norm = {}
-    keyword_sum = sum(scores.values())
-    if keyword_sum > 0:
-        keyword_norm = {k: Fraction(int(v), int(keyword_sum)) for k, v in scores.items()}
-    else:
-        keyword_norm = {k: Fraction(0, 1) for k in categories.keys()}
+    signal_providers.append(CallableSignalProvider("transformer", compute_transformer))
 
-    emb_norm = {}
-    emb_sum = sum(emb_map.values()) if emb_map else 0.0
-    if emb_sum > 1e-12:
-        _emb_sum_frac = Fraction(emb_sum)
-        emb_norm = {k: Fraction(emb_map.get(k, 0.0)) / _emb_sum_frac for k in categories.keys()}
-    else:
-        emb_norm = {k: Fraction(0, 1) for k in categories.keys()}
-
-    zs_norm = {}
-    zs_sum = sum(zs_map.values()) if zs_map else 0.0
-    if zs_sum > 1e-12:
-        _zs_sum_frac = Fraction(zs_sum)
-        zs_norm = {k: Fraction(zs_map.get(k, 0.0)) / _zs_sum_frac for k in categories.keys()}
-    else:
-        zs_norm = {k: Fraction(0, 1) for k in categories.keys()}
+    signal_run = SignalExecutor().run(
+        signal_providers,
+        SignalContext(motion_id, policy_text, categories),
+    )
+    failed_signals.extend(signal_run.failed.keys())
+    emb_map = dict(signal_run.scores.get("embedding", {}))
+    zs_map = dict(signal_run.scores.get("zero_shot", {}))
+    ollama_map = dict(signal_run.scores.get("ollama", {}))
+    bert_cls_scores = dict(signal_run.scores.get("transformer", {}))
+    for name, score in emb_map.items():
+        if score >= embedding_threshold:
+            matches.setdefault(name, []).append(f"embedding:{score:.3f}")
+    for name, score in zs_map.items():
+        if score > 0.01:
+            matches.setdefault(name, []).append(f"zero_shot:{score:.3f}")
+    for name, score in ollama_map.items():
+        matches.setdefault(name, []).append(f"ollama:{score:.3f}")
 
     rhetorical_applied = False
     if meta_clf is not None:
         topic_vec = get_topic_features(motion_id, topic_distributions=topic_distributions)
-        bert_cls_scores = {}
-        try:
-            from swedish_parliament_policy_classifier.classifier.transformer_predict import predict_proba as _bert_predict
-            bert_cls_scores = _bert_predict(policy_text[:2500])
-        except Exception as e:
-            LOG.warning("Transformer predict unavailable: %s", e)
 
         category_names = sorted(categories.keys())
         feature_df = build_feature_vector(
@@ -403,7 +366,7 @@ def score_motion(
             bert_cls_scores=bert_cls_scores,
         )
 
-        combined_norm = predict_with_meta_classifier(feature_df, meta_clf, categories)
+        combined_norm = predict_with_meta_classifier(feature_df, meta_clf, cast(Mapping[str, object], categories))
 
         if should_use_llm_fallback(combined_norm, threshold=llm_threshold):
             llm_result = llm_judge(text=policy_text[:llm_max_text_len], categories=list(categories.keys()))
@@ -431,22 +394,22 @@ def score_motion(
             oll_w = 0.0
             bert_w = 0.0
 
-        # Combine signals using module for exact arithmetic
-        ollama_norm = {k: Fraction(v).limit_denominator(1000) for k, v in ollama_map.items()} if ollama_map else None
-        bert_norm = {k: Fraction(v).limit_denominator(1000) for k, v in bert_cls_scores.items()} if bert_cls_scores else None
-        
-        combined_norm = compute_weighted_combination(
-            keyword_norm=keyword_norm,
-            embedding_norm=emb_norm,
-            zero_shot_norm=zs_norm,
-            ollama_norm=ollama_norm,
-            bert_norm=bert_norm,
-            kw_weight=kw_w,
-            emb_weight=emb_w,
-            zs_weight=zs_w,
-            oll_weight=oll_w,
-            bert_weight=bert_w,
-        )
+        signal_combinator = SignalCombinator()
+        signal_combinator.add_signal("keyword", scores, kw_w)
+        signal_combinator.add_signal("embedding", emb_map, emb_w)
+        signal_combinator.add_signal("zero_shot", zs_map, zs_w)
+        if ollama_map:
+            signal_combinator.add_signal("ollama", ollama_map, oll_w)
+        if bert_cls_scores:
+            signal_combinator.add_signal("bert", bert_cls_scores, bert_w)
+        combined_norm = signal_combinator.combine()
+
+    if not combined_norm or sum(combined_norm.values()) <= 0:
+        if not categories:
+            raise ValueError("Cannot classify without category definitions")
+        uniform_weight = Fraction(1, len(categories))
+        combined_norm = {name: uniform_weight for name in categories}
+        failed_signals.append("no_signal")
 
     # Apply rhetorical adjustments regardless of meta-classifier path
     if use_speech_preprocessing:
@@ -484,7 +447,22 @@ def score_motion(
         signals.append("ollama")
     if rhetorical_applied:
         signals.append("rhetorical")
+    if "no_signal" in failed_signals:
+        signals.append("degraded")
     classifier_version += "+" + "+".join(signals) if signals else ""
+
+    requested_signals = ["keyword", "embedding", "zero_shot", "transformer"]
+    if use_speech_preprocessing:
+        requested_signals.append("rhetorical")
+    if use_ollama:
+        requested_signals.append("ollama")
+    provenance = ClassificationProvenance(
+        pipeline_version=classifier_version,
+        signals_requested=requested_signals,
+        signals_used=signals,
+        signals_failed=sorted(set(failed_signals)),
+        degraded=bool(failed_signals),
+    )
 
     if use_supervised and meta_clf is None:
         try:
@@ -517,7 +495,7 @@ def score_motion(
                     except Exception:
                         labels = list(range(len(prob_vec)))  # classes_ unavailable
 
-                    sup_map = {str(l): float(p) for l, p in zip(labels, prob_vec)}
+                    sup_map = {str(label): float(probability) for label, probability in zip(labels, prob_vec)}
                     max_combined = max(combined_norm.values()) if combined_norm else 0.0
                     if max_combined < supervised_trigger:
                         selected = {k: v for k, v in sup_map.items() if v >= supervised_threshold}
@@ -551,7 +529,7 @@ def score_motion(
                 matched_rules=matches.get(name, []),
                 classifier_version=classifier_version,
                 created_at=datetime.now(timezone.utc),
-                _fractional_weight=frac_weight,
+                provenance=provenance,
             )
         )
     return results
@@ -572,24 +550,6 @@ def _load_speech_meta_classifier() -> Optional[Dict]:
     if _SPEECH_META_CLF is not None:
         return _SPEECH_META_CLF
 
-    from swedish_parliament_policy_classifier.io import loader
-    import zstandard
-
-    def _try_load(path: Path):
-        """Attempt to load a pickle from *path*, handling .zst compression."""
-        if not path.exists():
-            return None
-        try:
-            if path.suffix == ".zst":
-                with open(path, "rb") as fh:
-                    dctx = zstandard.ZstdDecompressor()
-                    with dctx.stream_reader(fh) as reader:
-                        return pickle.load(reader)
-            else:
-                return loader.load_pickle(path)
-        except Exception:
-            return None
-
     # 1. Try speech-specific models (both compressed and uncompressed)
     speech_candidates = [
         Path("models/speech_meta_clf.pkl.zst"),
@@ -598,25 +558,24 @@ def _load_speech_meta_classifier() -> Optional[Dict]:
         Path("models/speech_meta_clf_full.pkl.zst"),
         Path("models/speech_meta_clf_full.pkl"),
     ]
-    for cand in speech_candidates:
-        m = _try_load(cand)
-        if m is not None and ("model" in m or "clf" in m):
-            _SPEECH_META_CLF = m
-            LOG.info("Loaded speech meta-classifier from %s", cand)
-            return m
+    m = _MODEL_PROVIDER.first_mapping(speech_candidates)
+    if m is not None:
+        _SPEECH_META_CLF = m
+        LOG.info("Loaded speech meta-classifier from ordered candidates")
+        return m
 
     # 2. Fall back to tuned ensemble meta-classifier (49.4% val_accuracy)
     tuned_path = Path("models/ensemble_meta_clf_tuned.pkl.zst")
-    m = _try_load(tuned_path)
-    if m is not None and ("model" in m or "clf" in m):
+    m = _MODEL_PROVIDER.first_mapping([tuned_path])
+    if m is not None:
         _SPEECH_META_CLF = m
         LOG.info("Loaded tuned ensemble meta-classifier from %s (fallback)", tuned_path)
         return m
 
     # 3. Fall back to hybrid ensemble with BERT features
     hybrid_path = Path("models/hybrid_ensemble_meta_clf.pkl.zst")
-    m = _try_load(hybrid_path)
-    if m is not None and ("model" in m or "clf" in m):
+    m = _MODEL_PROVIDER.first_mapping([hybrid_path])
+    if m is not None:
         _SPEECH_META_CLF = m
         LOG.info("Loaded hybrid ensemble meta-classifier from %s (fallback)", hybrid_path)
         return m
@@ -645,32 +604,39 @@ def _load_hybrid_meta_classifier() -> Optional[Dict]:
     if _HYBRID_META_CLF is not None:
         return _HYBRID_META_CLF
 
-    from swedish_parliament_policy_classifier.io import loader
-    import zstandard
-
-    def _try_load(path: Path):
-        """Attempt to load a pickle from *path*, handling .zst compression."""
-        if not path.exists():
-            return None
-        try:
-            if path.suffix == ".zst":
-                with open(path, "rb") as fh:
-                    dctx = zstandard.ZstdDecompressor()
-                    with dctx.stream_reader(fh) as reader:
-                        return pickle.load(reader)
-            else:
-                return loader.load_pickle(path)
-        except Exception:
-            return None
-
     hybrid_path = Path("models/hybrid_ensemble_meta_clf.pkl.zst")
-    m = _try_load(hybrid_path)
-    if m is not None and ("model" in m or "clf" in m):
+    m = _MODEL_PROVIDER.first_mapping([hybrid_path])
+    if m is not None:
         _HYBRID_META_CLF = m
         LOG.info("Loaded hybrid ensemble meta-classifier from %s", hybrid_path)
         return m
 
     return None
+
+
+def _build_speech_results(
+    speech_id: str,
+    categories: Dict[str, CategoryDef],
+    base_results: List[ClassificationResult],
+    probabilities: Dict[str, float],
+    classifier_version: str,
+    provenance: Optional[ClassificationProvenance] = None,
+) -> List[ClassificationResult]:
+    """Apply a final probability distribution to the base speech evidence."""
+    base_by_category = {result.category: result for result in base_results}
+    return [
+        ClassificationResult(
+            motion_id=speech_id,
+            category=name,
+            raw_score=base_by_category[name].raw_score if name in base_by_category else 0.0,
+            normalized_weight=float(probabilities.get(name, 0.0)),
+            matched_rules=base_by_category[name].matched_rules if name in base_by_category else [],
+            classifier_version=classifier_version,
+            created_at=datetime.now(timezone.utc),
+            provenance=provenance,
+        )
+        for name in categories.keys()
+    ]
 
 
 def score_speech(
@@ -770,48 +736,15 @@ def score_speech(
         # Build keyword scores from base_results (extract from matched_rules)
         keyword_scores = {r.category: r.raw_score for r in base_results}
         
-        # Extract embedding scores from matched_rules in base_results
-        # Handle format "embedding:0.875" - split gives ['embedding', '0.875']
-        embedding_scores = {}
-        for r in base_results:
-            for rule in r.matched_rules or []:
-                if rule.startswith("embedding:"):
-                    try:
-                        # Format: "embedding:0.875" → take everything after the colon
-                        score_str = rule[11:]  # len("embedding:") == 11
-                        if score_str:
-                            score = float(score_str)
-                            embedding_scores[r.category] = score
-                    except (ValueError, IndexError):
-                        pass
-        
-        # Extract zero-shot scores from matched_rules in base_results
-        # Handle format "zero_shot:0.920" - take everything after the prefix
-        zero_shot_scores = {}
-        for r in base_results:
-            for rule in r.matched_rules or []:
-                if rule.startswith("zero_shot:"):
-                    try:
-                        score_str = rule[10:]  # len("zero_shot:") == 10
-                        if score_str:
-                            score = float(score_str)
-                            zero_shot_scores[r.category] = score
-                    except (ValueError, IndexError):
-                        pass
-        
-        # Extract BERT CLS scores from matched_rules in base_results
-        # Handle format "bert_cls:0.750" - take everything after the prefix
-        bert_cls_scores = {}
-        for r in base_results:
-            for rule in r.matched_rules or []:
-                if rule.startswith("bert_cls:"):
-                    try:
-                        score_str = rule[9:]  # len("bert_cls:") == 9
-                        if score_str:
-                            score = float(score_str)
-                            bert_cls_scores[r.category] = score
-                    except (ValueError, IndexError):
-                        pass
+        embedding_scores = extract_signal_output(
+            base_results, name="embedding", evidence_prefix="embedding"
+        ).score_map()
+        zero_shot_scores = extract_signal_output(
+            base_results, name="zero_shot", evidence_prefix="zero_shot"
+        ).score_map()
+        bert_cls_scores = extract_signal_output(
+            base_results, name="transformer", evidence_prefix="bert_cls"
+        ).score_map()
         
         # Use build_feature_vector with full feature set
         feature_df = build_feature_vector(
@@ -825,29 +758,20 @@ def score_speech(
             zero_shot_scores=zero_shot_scores,
             bert_cls_scores=bert_cls_scores,
         )
-        final_probs = predict_with_meta_classifier(feature_df, hybrid_clf, categories)
+        final_probs = predict_with_meta_classifier(feature_df, hybrid_clf, cast(Mapping[str, object], categories))
         
         # Build final results with hybrid version
         base_version = base_results[0].classifier_version if base_results else "0.8.0"
         speech_version = f"hybrid_ensemble+{base_version}"
         
-        final_results = []
-        for name in categories.keys():
-            base_result = next((r for r in base_results if r.category == name), None)
-            matched_rules = base_result.matched_rules if base_result else []
-            raw_score = base_result.raw_score if base_result else 0.0
-            final_results.append(
-                ClassificationResult(
-                    motion_id=speech_id,
-                    category=name,
-                    raw_score=raw_score,
-                    normalized_weight=final_probs.get(name, 0.0),
-                    matched_rules=matched_rules,
-                    classifier_version=speech_version,
-                    created_at=datetime.now(timezone.utc),
-                )
-            )
-        return final_results
+        return _build_speech_results(
+            speech_id,
+            categories,
+            base_results,
+            final_probs,
+            speech_version,
+            base_results[0].provenance if base_results else None,
+        )
 
     elif speech_clf is not None:
         from swedish_parliament_policy_classifier.classifier.ensemble import (
@@ -858,29 +782,20 @@ def score_speech(
         feature_df = build_speech_feature_vector(
             base_probs, rhetoric_scores, category_names=category_names
         )
-        final_probs = predict_with_meta_classifier(feature_df, speech_clf, categories)
+        final_probs = predict_with_meta_classifier(feature_df, speech_clf, cast(Mapping[str, object], categories))
 
         # Build final results with the speech meta-classifier probabilities
         base_version = base_results[0].classifier_version if base_results else "0.8.0"
         speech_version = f"speech_meta+{base_version}"
 
-        final_results = []
-        for name in categories.keys():
-            base_result = next((r for r in base_results if r.category == name), None)
-            matched_rules = base_result.matched_rules if base_result else []
-            raw_score = base_result.raw_score if base_result else 0.0
-            final_results.append(
-                ClassificationResult(
-                    motion_id=speech_id,
-                    category=name,
-                    raw_score=raw_score,
-                    normalized_weight=final_probs.get(name, 0.0),
-                    matched_rules=matched_rules,
-                    classifier_version=speech_version,
-                    created_at=datetime.now(timezone.utc),
-                )
-            )
-        return final_results
+        return _build_speech_results(
+            speech_id,
+            categories,
+            base_results,
+            final_probs,
+            speech_version,
+            base_results[0].provenance if base_results else None,
+        )
 
     # No meta-classifier available: return base pipeline results
     return base_results
