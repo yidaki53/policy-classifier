@@ -112,7 +112,10 @@ def _flush_rows(out_path: Path, rows: list[dict]) -> int:
         out_df = chunk_df
 
     if {"speech_id", "category"}.issubset(out_df.columns):
-        out_df = out_df.drop_duplicates(subset=["speech_id", "category"], keep="last")
+        dedupe_columns = ["speech_id", "category"]
+        if "classifier_version" in out_df.columns:
+            dedupe_columns.append("classifier_version")
+        out_df = out_df.drop_duplicates(subset=dedupe_columns, keep="last")
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_df.to_parquet(out_path, index=False)
@@ -202,6 +205,13 @@ def main():
     p.add_argument("--out", default="data/parquet/speech_classifications.parquet")
     p.add_argument("--rhetoric-parquet", default=None, help="Path to speech_rhetoric_labels.parquet to include rhetoric scores")
     p.add_argument("--limit", type=int, default=None)
+    p.add_argument(
+        "--reclassify",
+        action="store_true",
+        help="Reclassify every source speech and preserve classifier-version history",
+    )
+    p.add_argument("--pause-every", type=int, default=0, help="Pause after every N speeches")
+    p.add_argument("--pause-seconds", type=float, default=0.0, help="Seconds to pause after each pause interval")
     p.add_argument("--no-embeddings", dest="use_embeddings", action="store_false", help="Disable embedding matcher")
     p.add_argument("--no-zero-shot", dest="use_zero_shot", action="store_false", help="Disable zero-shot signal")
     p.add_argument("--ollama", dest="use_ollama", action="store_true", help="Enable Ollama LLM fallback for speech classification")
@@ -310,7 +320,11 @@ def main():
             existing_speech_ids = set()
 
     source_rows, input_speech_ids = _speech_inventory(files)
-    pending_speech_ids = (input_speech_ids - existing_speech_ids) | (input_speech_ids & fallback_speech_ids)
+    pending_speech_ids = (
+        input_speech_ids
+        if args.reclassify
+        else (input_speech_ids - existing_speech_ids) | (input_speech_ids & fallback_speech_ids)
+    )
     pending_total = len(pending_speech_ids)
     if args.limit is not None:
         pending_total = min(pending_total, args.limit)
@@ -325,7 +339,7 @@ def main():
     if not args.quiet:
         pbar = tqdm(total=pending_total, desc="speeches", unit="speech")
 
-    seen_speech_ids = existing_speech_ids - fallback_speech_ids
+    seen_speech_ids = set() if args.reclassify else existing_speech_ids - fallback_speech_ids
 
     torch_mod = None
     cuda_available = False
@@ -439,6 +453,9 @@ def main():
                     torch_mod.cuda.empty_cache()
                 except Exception:
                     pass
+
+            if args.pause_every > 0 and args.pause_seconds > 0 and processed % args.pause_every == 0:
+                time.sleep(args.pause_seconds)
 
             if args.limit and processed >= args.limit:
                 break

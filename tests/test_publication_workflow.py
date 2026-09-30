@@ -17,6 +17,7 @@ from swedish_parliament_policy_classifier.analysis.publication_workflow import (
     build_publication_release_package,
     build_publication_result_bundle,
     load_publication_contract_bundle,
+    validate_manuscript_inputs,
 )
 
 
@@ -161,3 +162,17 @@ def test_load_publication_contract_bundle_normalizes_action_first_artifacts(tmp_
     assert bundle.party_position.loc[0, "position"] == 50.0
     assert bundle.say_do.loc[0, "transition"] == "support_yes"
     assert set(bundle.evaluation["metric"]) >= {"accuracy", "macro_f1", "n_samples"}
+
+
+def test_publication_workflow_exposes_manuscript_preflight(tmp_path: Path) -> None:
+    sections = tmp_path / "sections"
+    sections.mkdir()
+    (sections / "results.md").write_text(
+        "---\nsection_id: results\nrequired_inputs:\n  - output/results.parquet\n---\n# Results\n",
+        encoding="utf-8",
+    )
+
+    report = validate_manuscript_inputs(tmp_path)
+
+    assert report[0].section_id == "results"
+    assert report[0].missing_inputs == ("output/results.parquet",)

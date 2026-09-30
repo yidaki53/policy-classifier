@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from swedish_parliament_policy_classifier.analysis.linkage_contracts import summarize_linkage
+
 
 def _source_confidence(link_source: str) -> float:
     s = str(link_source or "")
@@ -83,6 +85,7 @@ def score_contradiction_edges(
         "edge_confidence_raw",
     ]
     out = merged[out_cols].copy()
+    coverage = summarize_linkage(out, confidence_column="edge_confidence_raw")
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -91,6 +94,7 @@ def score_contradiction_edges(
     summary = {
         "output": str(out_path),
         "rows": int(len(out)),
+        "linkage_coverage": coverage.to_dict(),
         "mean_contradiction_score_raw": float(out["contradiction_score_raw"].mean()) if len(out) else None,
         "mean_edge_confidence_raw": float(out["edge_confidence_raw"].mean()) if len(out) else None,
     }

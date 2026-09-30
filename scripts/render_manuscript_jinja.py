@@ -12,6 +12,7 @@ from jinja2 import Environment
 
 from swedish_parliament_policy_classifier.analysis.manuscript_exports import EXCLUDED_OVERLAY_PARTIES
 from swedish_parliament_policy_classifier.io.markdown_frontmatter import ensure_frontmatter
+from swedish_parliament_policy_classifier.analysis.manuscript_preflight import assert_manuscript_ready
 
 import numpy as np
 import pandas as pd
@@ -879,6 +880,11 @@ def main() -> None:
     p.add_argument("--bibliography", default="manuscript/bibliography/references.bib")
     p.add_argument("--out-dir", default="manuscript/build/rendered_sections")
     p.add_argument("--context-out", default="manuscript/build/manuscript_context.json")
+    p.add_argument(
+        "--validate-inputs",
+        action="store_true",
+        help="Validate section-declared artifacts before rendering",
+    )
     args = p.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -889,6 +895,9 @@ def main() -> None:
     bibliography = (repo_root / args.bibliography).resolve()
     out_dir = (repo_root / args.out_dir).resolve()
     context_out = (repo_root / args.context_out).resolve()
+
+    if args.validate_inputs:
+        assert_manuscript_ready(manuscript_dir)
 
     context = _build_context(repo_root, manuscript_dir, analysis_dir, journal_profile, bibliography)
     rendered = _render_sections(sections_dir, out_dir, context)

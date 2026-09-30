@@ -28,6 +28,9 @@ all: figures manuscript
 $(OUTPUT_DIR):
 	mkdir -p $(OUTPUT_DIR)
 
+$(SCIREPS_OUTPUT_DIR):
+	mkdir -p $(SCIREPS_OUTPUT_DIR)
+
 figures:
 	cd $(ROOT) && uv run python scripts/visualize.py --profiles data/parquet/party_profiles_recency.parquet --out figures
 	cd $(ROOT) && uv run python scripts/visualize_voting.py --votering-parquet data/votering/parquet --out figures/voting
@@ -52,7 +55,7 @@ combined: render polish | $(OUTPUT_DIR)
 	@cp $(COMBINED) $(MANUSCRIPT_MD)
 
 render: check-frontmatter | $(OUTPUT_DIR)
-	uv run python $(ROOT)/scripts/render_manuscript_jinja.py --repo-root $(ROOT) --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json
+	uv run python $(ROOT)/scripts/render_manuscript_jinja.py --repo-root $(ROOT) --manuscript-dir manuscript --out-dir manuscript/build/rendered_sections --context-out manuscript/build/manuscript_context.json --validate-inputs
 
 journal-check: | $(OUTPUT_DIR)
 	uv run python $(ROOT)/scripts/check_journal_requirements.py --repo-root $(ROOT) --manuscript-dir manuscript --journal-profile manuscript/journal_profiles/plos_one.yaml --out manuscript/build/journal_requirements_report.json
@@ -120,7 +123,7 @@ incremental-update: polish
 	cd $(ROOT) && uv run python scripts/update_pipeline.py --cpu-fraction 0.25
 
 scireps-render: check-frontmatter | $(SCIREPS_OUTPUT_DIR)
-	uv run python $(ROOT)/scripts/render_manuscript_jinja.py --repo-root $(ROOT) --manuscript-dir manuscript --out-dir $(SCIREPS_RENDERED_DIR) --context-out $(SCIREPS_OUTPUT_DIR)/manuscript_context.json --journal-profile manuscript/journal_profiles/scientific_reports.yaml
+	uv run python $(ROOT)/scripts/render_manuscript_jinja.py --repo-root $(ROOT) --manuscript-dir manuscript --out-dir $(SCIREPS_RENDERED_DIR) --context-out $(SCIREPS_OUTPUT_DIR)/manuscript_context.json --journal-profile manuscript/journal_profiles/scientific_reports.yaml --validate-inputs
 
 scireps-combined: scireps-render | $(SCIREPS_OUTPUT_DIR)
 	@echo "Creating Scientific Reports combined manuscript file..."

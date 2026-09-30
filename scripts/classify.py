@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from pathlib import Path
 from typing import Optional
 
@@ -62,7 +63,14 @@ def _normalize_raw_to_parquet(raw_parquet: str | Path, normalized_out: str | Pat
     return len(combined)
 
 
-def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet", classifications_out: str | Path = "data/parquet/classifications.parquet", limit: Optional[int] = None) -> int:
+def classify_parquet(
+    normalized_parquet: str | Path = "data/parquet/normalized_motions.parquet",
+    classifications_out: str | Path = "data/parquet/classifications.parquet",
+    limit: Optional[int] = None,
+    reclassify: bool = False,
+    pause_every: int = 0,
+    pause_seconds: float = 0.0,
+) -> int:
     defs = load_definitions()
     nm_p = Path(normalized_parquet)
     out_p = Path(classifications_out)
@@ -78,7 +86,7 @@ def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_m
 
     # Determine already classified motions
     classified_ids = set()
-    if out_p.exists():
+    if out_p.exists() and not reclassify:
         try:
             prev = pd.read_parquet(out_p, columns=["motion_id"]) if out_p.exists() else pd.DataFrame()
             classified_ids = set(prev["motion_id"].astype(str).unique()) if not prev.empty else set()
@@ -90,7 +98,7 @@ def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_m
         to_classify = to_classify.head(limit)
 
     rows = []
-    for _, r in to_classify.iterrows():
+    for processed_index, (_, r) in enumerate(to_classify.iterrows(), start=1):
         mid = str(r.get("id"))
         text = (r.get("title") or "") + "\n" + (r.get("text") or "")
         try:
@@ -110,6 +118,9 @@ def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_m
                 "created_at": rr.created_at.isoformat(),
             })
 
+        if pause_every > 0 and pause_seconds > 0 and processed_index % pause_every == 0:
+            time.sleep(pause_seconds)
+
     if not rows:
         return 0
 
@@ -119,11 +130,16 @@ def classify_parquet(normalized_parquet: str | Path = "data/parquet/normalized_m
         try:
             prev = pd.read_parquet(out_p)
             out_df = pd.concat([prev, chunk], ignore_index=True)
-            # keep latest per (motion_id, category)
+            # Keep one row per item/category/model-version; historical model
+            # versions remain available for reproducibility.
             if "created_at" in out_df.columns:
-                out_df = out_df.sort_values("created_at").drop_duplicates(subset=["motion_id", "category"], keep="last")
+                out_df = out_df.sort_values("created_at").drop_duplicates(
+                    subset=["motion_id", "category", "classifier_version"], keep="last"
+                )
             else:
-                out_df = out_df.drop_duplicates(subset=["motion_id", "category"], keep="last")
+                out_df = out_df.drop_duplicates(
+                    subset=["motion_id", "category", "classifier_version"], keep="last"
+                )
         except Exception:
             out_df = chunk
     else:
@@ -139,11 +155,25 @@ def main():
     parser.add_argument("--normalized-out", default="data/parquet/normalized_motions.parquet", help="Normalized motions parquet (output)")
     parser.add_argument("--classifications-out", default="data/parquet/classifications.parquet", help="Classifications parquet (output)")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument(
+        "--reclassify",
+        action="store_true",
+        help="Reclassify all normalized motions and preserve model-version history",
+    )
+    parser.add_argument("--pause-every", type=int, default=0, help="Pause after every N motions")
+    parser.add_argument("--pause-seconds", type=float, default=0.0, help="Seconds to pause after each pause interval")
     args = parser.parse_args()
 
     written_nm = _normalize_raw_to_parquet(args.raw, args.normalized_out)
     print(f"Normalized motions (rows) now: {written_nm}")
-    classified = classify_parquet(args.normalized_out, args.classifications_out, limit=args.limit)
+    classified = classify_parquet(
+        args.normalized_out,
+        args.classifications_out,
+        limit=args.limit,
+        reclassify=args.reclassify,
+        pause_every=args.pause_every,
+        pause_seconds=args.pause_seconds,
+    )
     print(f"Appended {classified} classification rows to {args.classifications_out}")
 
 

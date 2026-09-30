@@ -33,6 +33,41 @@ def load_augmented_labels(conn: sqlite3.Connection) -> List[Tuple[str, str]]:
     return cur.fetchall()
 
 
+def _unique_motion_labels(rows: List[Tuple[str, str]]) -> Tuple[List[str], List[str]]:
+    labels_by_id: Dict[str, str] = {}
+    for motion_id, category in rows:
+        motion_id = str(motion_id)
+        category = str(category)
+        previous = labels_by_id.get(motion_id)
+        if previous is not None and previous != category:
+            raise ValueError(
+                f"Motion {motion_id!r} has conflicting labels: {previous!r}, {category!r}"
+            )
+        labels_by_id[motion_id] = category
+    ids = list(labels_by_id)
+    return ids, [labels_by_id[motion_id] for motion_id in ids]
+
+
+def validate_split_sets(
+    all_ids: set[str],
+    train_ids: set[str],
+    test_ids: set[str],
+    val_ids: set[str],
+) -> None:
+    partitions = {"train": train_ids, "test": test_ids, "val": val_ids}
+    if set.union(*partitions.values()) != all_ids:
+        raise ValueError("Train/test/val splits do not cover every labeled motion")
+    names = list(partitions)
+    for index, left_name in enumerate(names):
+        for right_name in names[index + 1 :]:
+            overlap = partitions[left_name] & partitions[right_name]
+            if overlap:
+                raise ValueError(
+                    f"Train/test/val splits overlap for {left_name}/{right_name}: "
+                    f"{sorted(overlap)[:5]}"
+                )
+
+
 def create_split(
     db_path: str = "data/swedish_parliament.db",
     train_ratio: float = 0.50,
@@ -46,8 +81,9 @@ def create_split(
     create_split_column(conn)
 
     rows = load_augmented_labels(conn)
-    ids = [r[0] for r in rows]
-    labels = [r[1] for r in rows]
+    ids, labels = _unique_motion_labels(rows)
+    if not ids:
+        raise ValueError("No augmented gold labels available for splitting")
 
     # First split: train vs temp (test+val)
     temp_ratio = test_ratio + val_ratio
@@ -64,6 +100,7 @@ def create_split(
     train_ids = {ids[i] for i in train_idx}
     test_ids = {temp_ids[i] for i in test_idx}
     val_ids = {temp_ids[i] for i in val_idx}
+    validate_split_sets(set(ids), train_ids, test_ids, val_ids)
 
     print(f"Split: train={len(train_ids)} test={len(test_ids)} val={len(val_ids)}", file=sys.stderr)
 

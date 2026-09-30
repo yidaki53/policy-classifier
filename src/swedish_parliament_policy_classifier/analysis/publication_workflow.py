@@ -10,6 +10,7 @@ import pandas as pd
 
 from .contracts import PublicationContractBundle, StudySpecification
 from .evaluation import summarize_classification_results
+from .manuscript_preflight import SectionPreflightResult, validate_manuscript_sections
 
 
 def load_publication_contract_bundle(
@@ -59,6 +60,13 @@ def load_publication_contract_bundle(
     )
     bundle.validate()
     return bundle
+
+
+def validate_manuscript_inputs(
+    manuscript_root: str | Path,
+) -> list[SectionPreflightResult]:
+    """Validate section-declared artifacts before publication rendering."""
+    return validate_manuscript_sections(manuscript_root)
 
 
 def build_publication_release_package(
