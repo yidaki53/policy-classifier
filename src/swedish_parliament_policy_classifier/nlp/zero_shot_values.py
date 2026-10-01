@@ -222,6 +222,7 @@ def _chunk_text(text: str, max_chars: int = 1500) -> List[str]:
 def zero_shot_score(
     text: str,
     model_name: str = "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+    flush_cache_per_chunk: bool = False,
 ) -> Dict[str, float]:
     """Return a mapping {category: entailment_score} for the given text.
 
@@ -252,11 +253,16 @@ def zero_shot_score(
 
     device = next(model.parameters()).device
 
-    # Accumulate scores across chunks — process one chunk at a time
-    # to minimise GPU memory pressure when other processes (e.g. Ollama)
-    # already occupy most of the VRAM.
+    # Accumulate scores across chunks. One chunk at a time keeps peak VRAM
+    # bounded, but the hypotheses for a chunk are all scored in a single
+    # batched forward pass.
     all_scores: Dict[str, List[float]] = {cat: [] for cat in CATEGORY_HYPOTHESES}
     BATCH_SIZE = 1
+
+    # empty_cache() is a synchronising, allocation-freeing call. Calling it
+    # per chunk costs more than it saves on this GPU, so only do it when the
+    # workload is actually tight on memory.
+    release_cache_per_chunk = bool(flush_cache_per_chunk) and device.type == "cuda"
 
     for batch_start in range(0, len(keepers), BATCH_SIZE):
         batch_chunks = keepers[batch_start:batch_start + BATCH_SIZE]
@@ -278,9 +284,9 @@ def zero_shot_score(
             return_tensors="pt",
         ).to(device)
 
-        with torch.no_grad():
+        with torch.inference_mode():
             logits = model(**inputs).logits  # shape: (batch, 3)
-            probs = torch.softmax(logits, dim=1).cpu().numpy()
+            probs = torch.softmax(logits, dim=1).float().cpu().numpy()
             entailment_probs = probs[:, 0]  # index 0 = entailment for this model
 
         # Aggregate back per chunk per category
@@ -291,8 +297,8 @@ def zero_shot_score(
             for (cat, _), ent_prob in zip(_FLAT_HYPOTHESES, entailment_probs[start:end]):
                 all_scores[cat].append(float(ent_prob))
 
-        # Free any fragmented allocations before the next chunk
-        if device.type == "cuda":
+        # Free fragmented allocations only when memory is genuinely tight.
+        if release_cache_per_chunk:
             torch.cuda.empty_cache()
 
     # Average across all chunks
