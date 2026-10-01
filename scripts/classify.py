@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Iterator, Optional
@@ -19,7 +20,13 @@ import polars as pl
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+# thermal_guard lives beside this script rather than in the package, so add the
+# script directory to the import path for direct `python scripts/classify.py`
+# invocations as well as package entry points.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 from swedish_parliament_policy_classifier.exports import load_definitions, classify_motion
+from thermal_guard import ThermalGuard
 
 # Rows per streaming batch when normalizing raw motions. Bounds peak memory:
 # the raw motions file expands to roughly 7 GB in pandas, which does not fit
@@ -221,6 +228,9 @@ def classify_parquet(
     pause_every: int = 0,
     pause_seconds: float = 0.0,
     flush_every: int = 10_000,
+    thermal_check_every: int = 250,
+    thermal_hot_c: float = 84.0,
+    thermal_cool_c: float = 72.0,
 ) -> int:
     defs = load_definitions()
     nm_p = Path(normalized_parquet)
@@ -253,6 +263,11 @@ def classify_parquet(
     columns = [
         name for name in ("id", "title", "text") if name in reader.schema_arrow.names
     ]
+    guard = ThermalGuard(
+        check_every=thermal_check_every,
+        cool_c=thermal_cool_c,
+        hot_c=thermal_hot_c,
+    )
     out_p.parent.mkdir(parents=True, exist_ok=True)
     staging = out_p.with_suffix(".partial.parquet")
     rows: list[dict] = []
@@ -310,6 +325,10 @@ def classify_parquet(
             if flush_every > 0 and len(rows) >= flush_every:
                 _flush()
 
+            # Pause when the chassis or CPU gets hot. This reacts to the real
+            # temperature, unlike a fixed --pause-every sleep.
+            guard.tick()
+
             # Honour --limit exactly rather than at batch granularity.
             if limit is not None and processed_index >= limit:
                 break
@@ -347,7 +366,12 @@ def classify_parquet(
 
     new_rows_path.unlink(missing_ok=True)
     staging.replace(out_p)
-    print(f"Processed {processed_index} motions; wrote {total_written} rows")
+    peak = guard.max_observed_c
+    peak_txt = f"{peak:.1f} C" if peak is not None else "no sensor"
+    print(
+        f"Processed {processed_index} motions; wrote {total_written} rows; "
+        f"{guard.pause_count} thermal pause(s); peak {peak_txt}"
+    )
     return total_written
 
 
@@ -369,6 +393,24 @@ def main():
         type=int,
         default=10_000,
         help="Flush buffered classifications to parquet every N rows (0 disables)",
+    )
+    parser.add_argument(
+        "--thermal-check-every",
+        type=int,
+        default=250,
+        help="Check temperature every N motions (0 disables thermal pausing)",
+    )
+    parser.add_argument(
+        "--thermal-hot-c",
+        type=float,
+        default=84.0,
+        help="Pause once any sensor reaches this temperature (Celsius)",
+    )
+    parser.add_argument(
+        "--thermal-cool-c",
+        type=float,
+        default=72.0,
+        help="Resume once every sensor falls to this temperature (Celsius)",
     )
     parser.add_argument(
         "--skip-normalize",
@@ -398,6 +440,9 @@ def main():
         pause_every=args.pause_every,
         pause_seconds=args.pause_seconds,
         flush_every=args.flush_every,
+        thermal_check_every=args.thermal_check_every,
+        thermal_hot_c=args.thermal_hot_c,
+        thermal_cool_c=args.thermal_cool_c,
     )
     print(f"Appended {classified} classification rows to {args.classifications_out}")
 
